@@ -1,0 +1,37 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: persistence-blis-rc-scripts
+spec:
+  severity: 5
+  selector:
+    matchLabels:
+      {}
+  process:
+    matchPaths:
+      - path: /etc/rc.local
+      - path: /lib/systemd/system/rc-local.service
+      - path: /lib/systemd/system/rc.service
+      - path: /usr/lib/systemd/system/rc-local.service
+      - path: /usr/lib/systemd/system/rc.service
+    matchDirectories:
+      - dir: /lib/systemd/system/rc-local.service.d/
+        recursive: true
+      - dir: /usr/lib/systemd/system/rc-local.service.d/
+        recursive: true
+  file:
+    matchPaths:
+      - path: /etc/rc.local
+      - path: /lib/systemd/system/rc-local.service
+      - path: /lib/systemd/system/rc.service
+      - path: /usr/lib/systemd/system/rc-local.service
+      - path: /usr/lib/systemd/system/rc.service
+    matchDirectories:
+      - dir: /lib/systemd/system/rc-local.service.d/
+        recursive: true
+        readOnly: false
+      - dir: /usr/lib/systemd/system/rc-local.service.d/
+        recursive: true
+        readOnly: false
+  action:
+    BlockWithAudit
