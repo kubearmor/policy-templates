@@ -1,0 +1,29 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: create-or-modify-system-process-systemd-service
+spec:
+  severity: 5
+  selector:
+    matchLabels:
+      {}
+  process:
+    matchDirectories:
+      - dir: /etc/systemd/system/
+        recursive: true
+      - dir: /usr/lib/systemd/
+        recursive: true
+      - dir: /lib/systemd/system/
+        recursive: true
+  file:
+    matchDirectories:
+      - dir: /etc/systemd/system/
+        recursive: true
+        readOnly: false
+      - dir: /usr/lib/systemd/
+        recursive: true
+        readOnly: false
+      - dir: /lib/systemd/system/
+        recursive: true
+        readOnly: false
+  action: BlockWithAudit
