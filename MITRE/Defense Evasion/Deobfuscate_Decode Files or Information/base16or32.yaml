@@ -4,9 +4,9 @@ kind: KubeArmorPolicy
 metadata:
   name: defense-evasion-deobfuscate
 spec:
-  selectorLabels:
-    nodeSelector:
-      hostname: {}
+  selector:
+    matchLabels:
+      {}
   process:
     matchPaths:
       - path: /usr/bin/base32
