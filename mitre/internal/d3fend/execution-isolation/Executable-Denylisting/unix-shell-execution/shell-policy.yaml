@@ -27,6 +27,7 @@ spec:
         recursive: true    
       severity: 2 # Higher severity for processes 
   file:
+    matchPaths:
     - path: /bin/bash
     - path: /bin/sh
     - path: /usr/bin/bash
