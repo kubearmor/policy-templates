@@ -1,0 +1,16 @@
+apiVersion: security.accuknox.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: mysql-conf-audit
+spec:
+  nodeSelector:
+    matchLabels:
+         {}  
+  process:
+    matchPaths:
+    - path: /etc/my.cnf         
+    - path: /etc/mysql/my.cnf 
+    - path: SYSCONFDIR/my.cnf 
+    - path: $MYSQL_HOME/my.cnf
+  action:
+    Audit
