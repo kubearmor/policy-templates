@@ -13,4 +13,4 @@ spec:
     - path: SYSCONFDIR/my.cnf 
     - path: $MYSQL_HOME/my.cnf
   action:
-    Audit
+      Audit
