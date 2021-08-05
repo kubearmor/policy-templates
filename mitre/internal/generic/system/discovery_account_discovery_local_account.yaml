@@ -1,0 +1,23 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: discovery-account-discovery-local-account
+  namespace: multiubuntu  #use your namespace name here
+spec:
+  severity: 5
+  selector:
+    matchLabels:
+      container: ubuntu-1  #use your labels name here
+  process:
+    matchPaths:
+      - path: /usr/bin/id
+      - path: /usr/bin/groups
+      - path: /usr/bin/net
+      - path: /usr/bin/finger
+      - path: /usr/bin/getent
+      - path: /usr/bin/lslogins
+      - path: /usr/bin/users
+      - path: /usr/bin/w
+      - path: /usr/bin/last
+      - path: /usr/bin/lastlog
+    action: Audit
