@@ -34,4 +34,4 @@ spec:
         recursive: true
         readOnly: false
   action:
-    BlockWithAudit
+    Audit
