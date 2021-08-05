@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: mitre-tactic-defense-evasion-system-log
+spec:
+  tags: ["MITRE", "Defense Evasion"]
+  message: defense-evasion-clear-linux-system-logs
+  selector:
+      matchLabels:
+          {}
+  file:
+    matchDirectories:
+    - dir: /var/log/
+      recursive: true
+      readOnly: true
+
+  action:
+    Audit
+  severity: 5
