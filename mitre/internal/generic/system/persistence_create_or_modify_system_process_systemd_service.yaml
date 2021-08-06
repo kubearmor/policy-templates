@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: create-or-modify-system-process-systemd-service
 spec:
-  tags: ["MITRE", "Persisrence"]
+  tags: ["MITRE", "Persistence"]
   severity: 5
   selector:
     matchLabels:
