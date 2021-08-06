@@ -3,6 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: persistence-blis-rc-scripts
 spec:
+  tags: ["MITRE", "Persistence"]
   severity: 5
   selector:
     matchLabels:
