@@ -3,6 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: discovery-process-discovery
 spec:
+  tags: ["MITRE", "Discovery"]
   severity: 5
   selector:
     matchLabels:
