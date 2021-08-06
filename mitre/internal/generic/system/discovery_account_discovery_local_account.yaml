@@ -3,6 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: discovery-account-discovery-local-account
 spec:
+  tags: ["MITRE", "Discovery"]
   severity: 5
   selector:
     matchLabels:
