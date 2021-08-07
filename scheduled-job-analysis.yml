@@ -1,0 +1,14 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: scheduled-job-analysis
+spec:
+  severity: 2
+  selector:
+    matchLabels:
+       {}
+  process: 
+        matchPaths: 
+        - path: /lib/systemd/system/*.timer
+   action:
+    Audit
