@@ -1,0 +1,15 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: mitre-tactic-rename-system-file-utilities
+spec:
+  severity: 5
+  selector:
+    matchLabels:
+       {}
+  process: 
+        matchPaths:
+          - path: /usr/bin
+          - path: /bin
+  action:
+    Audit
