@@ -10,5 +10,7 @@ spec:
  file:
    matchPaths:
     - path: /root/.bash_history
+    - path: /usr/bin/mv
+    - path: /usr/bin/mkdir
   action: 
   Audit
