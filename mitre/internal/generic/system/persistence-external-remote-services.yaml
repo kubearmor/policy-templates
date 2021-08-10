@@ -1,0 +1,20 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: mitre-tactic-persistence-external-remote-services
+spec:
+  severity: 3
+  selector:
+    matchLabels: 
+      {}
+  file:
+    matchPaths:
+    - path: /var/log/wtmp
+    - path: /var/run/utmp
+    - path: /var/log/auth.log
+    - path: /etc/passwd
+    - path: /etc/shadow
+    matchDirectories:
+    - dir: /etc/ssh/  
+  action:
+    Audit
