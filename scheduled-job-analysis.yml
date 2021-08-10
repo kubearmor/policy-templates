@@ -8,7 +8,7 @@ spec:
     matchLabels:
        {}
   process: 
-        matchPaths: 
-        - path: /lib/systemd/system/*.timer
-   action:
+      matchPaths: 
+       - path: /lib/systemd/system/*.timer
+  action:
     Audit
