@@ -1,0 +1,22 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "deny-external-communication-from-mysql-pod"
+spec:
+  endpointSelector:
+    matchLabels:
+      {}
+  ingressDeny:
+  - fromEntities:
+    - "world"
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        {}
+  egressDeny:
+  - toEntities:
+    - "world"
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        {}
