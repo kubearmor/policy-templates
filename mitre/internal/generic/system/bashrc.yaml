@@ -1,0 +1,20 @@
+---
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: mitre-persistence-bash-profile
+  namespace: {}
+spec:
+  severity: 4
+  selector:
+    matchLabels:
+      container: {}
+  file:
+    matchPaths:
+      - path: /root/.bash_profile
+        readOnly: true
+      - path: /root/.bashrc
+        readOnly: true
+      - path: /etc/profile
+        readOnly: true
+  action: Audit
