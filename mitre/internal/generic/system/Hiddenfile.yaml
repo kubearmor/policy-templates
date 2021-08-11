@@ -7,10 +7,20 @@ spec:
  selector: 
   matchLabels: 
     {}
+ process:
+    matchPaths: 
+    - path: /usr/bin/lastlog
  file:
    matchPaths:
-    - path: /root/.bash_history
-    - path: /usr/bin/mv
-    - path: /usr/bin/mkdir
+   - path: /var/log/boot.log
+   - path: /var/log/auth.log
+   - path: /var/log/httpd/
+   - path: /var/log/mysqld.log
+   - path: /var/log/debug
+   - path: /var/log/daemon.log
+   - path: /var/log/maillog
+   - path: /var/log/kern.log
+   - path: /var/log/yum.log: 
+   - path: /root/.bash_history
   action: 
   Audit
