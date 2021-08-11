@@ -9,7 +9,7 @@ spec:
       {}
   ingress:
     - fromCIDR:
-        - 10.52.0.0/32
+        {}
       toPorts:
       - ports:
         - port: "8095"
