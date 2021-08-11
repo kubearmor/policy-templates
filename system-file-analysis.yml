@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: system-file-analysis
 spec:
-  severity: 3
+  severity: 7
   selector:
     matchLabels:
        {}
