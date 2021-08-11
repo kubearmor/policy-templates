@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata: 
  name: mitre-tactic-defence-evasion-hidden-files-directories
 spec:
- severity: 3
+ severity: 6
  selector: 
   matchLabels: 
     {}
