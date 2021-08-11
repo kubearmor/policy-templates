@@ -3,12 +3,15 @@ kind: KubeArmorPolicy
 metadata:
   name: scheduled-job-analysis
 spec:
-  severity: 2
   selector:
     matchLabels:
-       {}
-  process: 
-      matchPaths: 
-       - path: /lib/systemd/system/*.timer
+      {}
+  process:
+    matchPaths:
+    - path: /var/spool/cron/atjobs
+    - path: /var/spool/cron/atspool
+    - path: /proc/loadavg
+    - path: /var/run/utmp
   action:
     Audit
+  severity: 7
