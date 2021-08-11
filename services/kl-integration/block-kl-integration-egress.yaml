@@ -1,0 +1,17 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "block-kl-integration-for-non-role-users"
+spec:
+  endpointSelector:
+    matchLabels:
+      role: {}		#role-name-here
+  egress:
+  - toCIDR:
+    - 10.52.0.0/24
+    toPorts:
+    - ports:
+      - port: "8090"
+        protocol: TCP
+      - port: "30605"
+        protocol: TCP
