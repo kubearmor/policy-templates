@@ -20,7 +20,7 @@ spec:
    - path: /var/log/daemon.log
    - path: /var/log/maillog
    - path: /var/log/kern.log
-   - path: /var/log/yum.log: 
+   - path: /var/log/yum.log
    - path: /root/.bash_history
   action: 
   Audit
