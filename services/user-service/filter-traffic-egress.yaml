@@ -1,0 +1,22 @@
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "user-service-cidr-rule"
+specs:
+  - endpointSelector:
+      matchLabels: {}
+    egress:
+      - toCIDR:
+          - 10.52.0.0/14
+        toPorts:
+          - ports:
+              - port: "8083"
+                protocol: TCP
+              - port: "31994"
+                protocol: TCP
+        rules:
+          dns:
+            - matchPattern: "*"
+      - toFQDNs:
+          - matchName: "kloudlearn.com"
