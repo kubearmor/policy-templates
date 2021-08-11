@@ -18,7 +18,7 @@ spec:
    - path: /var/log/mysqld.log
    - path: /var/log/debug
    - path: /var/log/daemon.log
-   - path: /var/log/maillog
+   - path: /var/log/mail.log
    - path: /var/log/kern.log
    - path: /var/log/yum.log
    - path: /root/.bash_history
