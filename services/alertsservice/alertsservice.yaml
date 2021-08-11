@@ -1,0 +1,16 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "alertsservice-port"
+spec:
+  description: "This will block alertsservice external access"
+  endpointSelector:
+    matchLabels:
+      {}
+  ingress:
+    - fromCIDR:
+        - 10.52.0.0/32
+      toPorts:
+      - ports:
+        - port: "8095"
+          protocol: TCP
