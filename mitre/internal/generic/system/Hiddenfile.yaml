@@ -14,7 +14,6 @@ spec:
    matchPaths:
    - path: /var/log/boot.log
    - path: /var/log/auth.log
-   - path: /var/log/httpd/
    - path: /var/log/mysqld.log
    - path: /var/log/debug
    - path: /var/log/daemon.log
