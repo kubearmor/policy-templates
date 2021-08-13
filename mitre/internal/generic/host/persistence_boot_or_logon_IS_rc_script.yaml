@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: persistence-blis-rc-scripts
+spec:
+  tags: ["MITRE", "Persistence"]
+  severity: 5
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-cluster-1-default-pool-2cf526a2-t7j3
+  file:
+    matchPaths:
+      - path: /etc/rc.local
+      - path: /lib/systemd/system/rc-local.service
+      - path: /usr/lib/systemd/system/rc-local.service
+      - path: /lib/systemd/system/rc-local.service.d/debian.conf
+      - path: /usr/lib/systemd/system/rc-local.service.d/debian.conf
+  action:
+    Block
