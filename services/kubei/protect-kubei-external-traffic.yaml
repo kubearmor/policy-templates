@@ -1,0 +1,17 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "protect-kubei-from-external-traffic"
+spec:
+  endpointSelector:
+    matchLabels:
+      role: {}
+  egress:
+  - toCIDR:
+    - 10.52.0.0/27
+    toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+      - port: "30762"
+        protocol: TCP
