@@ -7,7 +7,7 @@ spec:
   severity: 5
   nodeSelector:
     matchLabels:
-      kubernetes.io/hostname: gke-cluster-1-default-pool-2cf526a2-t7j3
+      {}
   file:
     matchPaths:
       - path: /etc/rc.local
