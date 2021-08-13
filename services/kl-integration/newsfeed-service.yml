@@ -1,0 +1,17 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "Pr"
+spec:
+  endpointSelector:
+    matchLabels:
+      role: {}		
+  egress:
+  - toCIDR:
+    - 10.52.0.0/32
+    toPorts:
+    - ports:
+      - port: "8092"
+        protocol: TCP
+      - port: "32066"
+        protocol: TCP 
