@@ -1,17 +1,15 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: "Pr"
+  name: "news-feed-service-rule"
 spec:
   endpointSelector:
     matchLabels:
-      role: {}		
-  egress:
-  - toCIDR:
-    - 10.52.0.0/32
+      role: {}
+  ingress:
+  - fromCIDR:
+    - {}
     toPorts:
     - ports:
-      - port: "8092"
+      - port: "8093"
         protocol: TCP
-      - port: "32066"
-        protocol: TCP 
