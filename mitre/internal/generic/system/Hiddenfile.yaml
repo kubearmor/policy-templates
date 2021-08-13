@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata: 
+ name: mitre-tactic-defence-evasion-hidden-files-directories
+ namespace: mitrepr
+spec:
+ severity: 3
+ selector: 
+  matchLabels: 
+   container: ubuntu-1 
+ file:
+   matchPaths:
+    - path: /root/.bash_history
+ 
+ action: 
+  Audit
