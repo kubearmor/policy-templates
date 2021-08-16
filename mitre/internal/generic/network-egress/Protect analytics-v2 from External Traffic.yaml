@@ -8,7 +8,7 @@ spec:
       role: {}		
   egress:
   - toCIDR:
-    - 10.52.0.0/32
+    - 10.52.11.196/32
     toPorts:
     - ports:
       - port: "8092"
