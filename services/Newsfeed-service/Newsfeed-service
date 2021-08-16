@@ -1,0 +1,15 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "news-feed-service-rule"
+spec:
+  endpointSelector:
+    matchLabels:
+      role: {}
+  ingress:
+    - fromCIDR:
+        - {}
+      toPorts:
+        - ports:
+            - port: "8093"
+              protocol: TCP
