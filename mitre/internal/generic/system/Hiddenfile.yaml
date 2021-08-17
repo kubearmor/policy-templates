@@ -1,16 +1,26 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
-metadata: 
- name: mitre-tactic-defence-evasion-hidden-files-directories
- namespace: mitrepr
-spec:
- severity: 3
- selector: 
-  matchLabels: 
-   container: ubuntu-1 
- file:
-   matchPaths:
-    - path: /root/.bash_history
+metadata:
+  name: ksp-group-1-proc-path-block
  
- action: 
-  Audit
+spec:
+  severity: 6
+  selector:
+    matchLabels:
+     {}
+  process:
+    matchPaths:
+    - path: /usr/bin/lastlog
+  file:
+   matchPaths:
+   - path: /var/log/boot.log
+   - path: /var/log/auth.log
+   - path: /var/log/mysqld.log
+   - path: /var/log/debug
+   - path: /var/log/daemon.log
+   - path: /var/log/mail.log
+   - path: /var/log/kern.log
+   - path: /var/log/yum.log
+   - path: /root/.bash_history
+  action:
+    Audit
