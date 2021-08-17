@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: protect-web-conference-from-external-traffic
+  name: protect-web-conference
 spec:
   endpointSelector:
     matchLabels: {}
