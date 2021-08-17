@@ -1,0 +1,44 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: mitre-tactic-scheduled-task-job-crontab
+spec:
+  nodeSelector:
+    matchLabels:
+       {}
+  process: 
+        matchPaths: 
+        - path: /etc/crontab 
+        - path: /usr/sbin/cron
+        - path: /etc/cron.d
+        - path: /etc/cron.d/cron.allow
+        - path: /etc/cron.d/cron.deny
+        - path: /etc/cron.daily
+        - path: /etc/cron.monthly
+        - path: /etc/cron.hourly
+        - path: /etc/cron.weekly
+          fromSource: # trigger an alert if the source
+           - dir: /etc/
+           - dir: /usr/sbin/
+             recursive: true
+          severity: 2 # Higher severity 
+  file:
+          matchPaths: 
+             - path: /etc/crontab 
+             - path: /usr/sbin/cron
+             - path: /etc/cron.d
+             - path: /etc/cron.d/cron.allow
+             - path: /etc/cron.d/cron.deny
+             - path: /etc/cron.daily
+             - path: /etc/cron.monthly
+             - path: /etc/cron.hourly
+             - path: /etc/cron.weekly
+               fromSource:  # trigger an alert if the source
+               - path: /etc
+               - path: /usr/sbin
+  action:
+           Audit
+  severity: 7 # lowest severity
+  tags : ["MITRE","D3fend"]     
+  
+  
