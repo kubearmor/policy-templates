@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: mitre-sudo-caching
+spec:
+  nodeSelector:
+    matchLabels:
+      {}
+  process:
+        matchPaths: 
+        - path: /var/db/sudo
+        - path: /etc/sudoers
+  action:
+    Audit
+  severity: 8
+  tags: ["MITRE", "Privilege Escalation", "Sudo", "Sudo-Caching"]
