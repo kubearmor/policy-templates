@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: mitre-tactic-defense-evasion-root-certificate
+spec:
+  severity: 6
+  selector:
+    matchLabels:
+      {}
+  file:
+    matchPaths:
+       - path: /etc/ca-certificates.conf
+    matchDirectories:
+       - dir: /usr/local/share/ca-certificates/
+         recursive: true
+  action: Audit

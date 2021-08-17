@@ -1,0 +1,17 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "block-external-access-to-jhipster-registry"
+spec:
+  endpointSelector:
+    matchLabels:
+      role: {}
+  egress:
+  - toCIDR:
+    {}
+    toPorts:
+    - ports:
+      - port: "8761"
+        protocol: TCP
+      - port: "30907"
+        protocol: TCP
