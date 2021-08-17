@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: protect-web-conference-from-external-traffic
+spec:
+  endpointSelector:
+    matchLabels: 
+      {}
+  ingress:
+    - fromCIDR: 
+        {}
+      toPorts:
+        - ports:
+            -  port: "8087"
+               protocol: tcp
+        
+ 
