@@ -1,0 +1,15 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: emulated-file-analysis
+spec:
+  selector:
+    nodeSelectorLabels:
+        key: value
+
+  file:
+    matchPatterns:
+    - pattern: (/bzip2* | /tar* | /zip*)
+  action:
+    Audit
+  severity: 5

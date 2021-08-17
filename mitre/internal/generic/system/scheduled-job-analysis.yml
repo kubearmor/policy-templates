@@ -1,0 +1,17 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: scheduled-job-analysis
+spec:
+  selector:
+    matchLabels:
+      {}
+  process:
+    matchPaths:
+    - path: /var/spool/cron/atjobs
+    - path: /var/spool/cron/atspool
+    - path: /proc/loadavg
+    - path: /var/run/utmp
+  action:
+    Audit
+  severity: 7

@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: discovery-process-discovery
+spec:
+  tags: ["MITRE", "Discovery"]
+  severity: 5
+  selector:
+    matchLabels:
+      {}
+  process:
+    matchPaths:
+      - path: /bin/ps
+      - path: /usr/bin/ps
+      - path: /usr/bin/pgrep
+      - path: /usr/bin/top
+      - path: /usr/bin/htop
+  action: 
+    Audit
