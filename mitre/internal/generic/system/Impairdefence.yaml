@@ -1,0 +1,17 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-group-1-proc-path-block
+  
+spec:
+  severity: 6
+  selector:
+    matchLabels:
+      {}
+  file:
+   matchPaths:
+   - path: /etc/selinux/*
+   - path: /etc/sysconfig/selinux
+   - path: /etc/apparmor.d/
+  action:
+    Audit
