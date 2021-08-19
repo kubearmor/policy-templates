@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-mitre-tactic-defense-evasion
+spec:
+  severity: 5
+  message: Modify the kernel to automatically execute programs on system boot
+  tags: ["MITRE"]
+  nodeSelector:
+    matchLabels:
+      {}
+  process:
+    matchPaths:
+    - path: /usr/bin/certutil
+  action:
+    Audit
