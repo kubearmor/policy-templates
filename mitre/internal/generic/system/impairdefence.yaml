@@ -12,6 +12,6 @@ spec:
    matchPaths:
    - path: /etc/selinux/*
    - path: /etc/sysconfig/selinux
-   - path: /etc/apparmor.d/
+   - path: /etc/apparmor.d
   action:
     Audit
