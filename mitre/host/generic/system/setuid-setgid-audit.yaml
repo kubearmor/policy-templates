@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-s-bit
 spec:
-  selector:
+  nodeSelector:
     matchLabels:
       {}
   process:
