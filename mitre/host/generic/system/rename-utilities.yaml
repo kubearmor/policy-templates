@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: rename-utilities
+spec:
+  nodeSelector:
+    matchLabels:
+      {}
+  severity: 9
+  process:
+    matchPaths:
+    - path: /usr/bin/mv
+    - path: /usr/bin/mmv
+    - path: /usr/bin/rename
+  action:
+    Audit
