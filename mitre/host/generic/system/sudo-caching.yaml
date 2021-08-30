@@ -10,7 +10,6 @@ spec:
         matchPaths: 
         - path: /var/db/sudo
         - path: /etc/sudoers
-  action:
-    Audit
-  severity: 8
+        action: Audit
+        severity: 8
   tags: ["MITRE", "Privilege Escalation", "Sudo", "Sudo-Caching"]

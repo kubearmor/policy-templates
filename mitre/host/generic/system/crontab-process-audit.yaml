@@ -21,7 +21,8 @@ spec:
            - dir: /etc/
            - dir: /usr/sbin/
              recursive: true
-          severity: 2 # Higher severity 
+        severity: 2 # Higher severity 
+        action: Audit
   file:
           matchPaths: 
              - path: /etc/crontab 
@@ -36,9 +37,8 @@ spec:
                fromSource:  # trigger an alert if the source
                - path: /etc
                - path: /usr/sbin
-  action:
-           Audit
-  severity: 7 # lowest severity
+          action: Audit
+          severity: 7 # lowest severity
   tags : ["MITRE","D3fend"]     
   
   

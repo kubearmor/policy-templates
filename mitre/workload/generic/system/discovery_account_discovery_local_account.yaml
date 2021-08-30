@@ -4,7 +4,6 @@ metadata:
   name: discovery-account-discovery-local-account
 spec:
   tags: ["MITRE", "Discovery"]
-  severity: 5
   selector:
     matchLabels:
       {}
@@ -21,3 +20,4 @@ spec:
       - path: /usr/bin/last
       - path: /usr/bin/lastlog
     action: Audit
+    severity: 5

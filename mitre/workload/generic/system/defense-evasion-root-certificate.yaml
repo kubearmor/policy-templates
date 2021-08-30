@@ -3,7 +3,6 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-defense-evasion-root-certificate
 spec:
-  severity: 6
   selector:
     matchLabels:
       {}
@@ -13,4 +12,5 @@ spec:
     matchDirectories:
        - dir: /usr/local/share/ca-certificates/
          recursive: true
-  action: Audit
+    action: Audit
+    severity: 6

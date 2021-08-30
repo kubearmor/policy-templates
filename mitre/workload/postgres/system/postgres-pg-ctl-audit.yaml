@@ -26,7 +26,6 @@ spec:
        - path: /usr
        - path: /lib
        - path: /var
-  action:
-    Audit
-  severity: 9 # lowest severity
+    action: Audit
+    severity: 9 # lowest severity
   tags : ["postgres","CVE-2016-1255"]

@@ -12,6 +12,5 @@ spec:
       - path: /usr/bin/base16
       - path: /usr/bin/base32plain
       - path: /usr/bin/base32hex
-  action:
-    Audit
-  severity: 3
+    action: Audit
+    severity: 3

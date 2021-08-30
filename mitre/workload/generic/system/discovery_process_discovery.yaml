@@ -4,7 +4,6 @@ metadata:
   name: discovery-process-discovery
 spec:
   tags: ["MITRE", "Discovery"]
-  severity: 5
   selector:
     matchLabels:
       {}
@@ -15,5 +14,5 @@ spec:
       - path: /usr/bin/pgrep
       - path: /usr/bin/top
       - path: /usr/bin/htop
-  action: 
-    Audit
+    action: Audit
+    severity: 5

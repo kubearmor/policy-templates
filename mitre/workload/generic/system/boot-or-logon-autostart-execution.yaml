@@ -3,7 +3,6 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-persistence-boot-or-logon-autostart-execution-kernel-modules-and-extensions
 spec:
-  severity: 4
   selector:
     matchLabels:
       {}
@@ -13,5 +12,5 @@ spec:
       - path: /usr/sbin/insmod 
       - path: /usr/sbin/modinfo
       - path: /usr/sbin/lsmod
-  action: 
-    Audit
+    action: Audit
+    severity: 4

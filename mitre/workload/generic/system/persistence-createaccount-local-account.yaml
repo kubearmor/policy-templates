@@ -3,7 +3,6 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-persistence-createaccount-localaccount
 spec:
-  severity: 4
   selector:
     matchLabels: 
       {}
@@ -11,9 +10,11 @@ spec:
     matchPaths:
       - path: /usr/sbin/adduser
       - path: /usr/sbin/useradd
+    severity: 4
+    action: Audit
   file:
     matchPaths:
       - path: /etc/passwd
       - path: /etc/shadow
-  action: 
-    Audit
+    action: Audit
+    severity: 4

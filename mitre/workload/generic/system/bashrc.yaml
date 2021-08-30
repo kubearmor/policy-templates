@@ -4,7 +4,6 @@ metadata:
   name: mitre-persistence-bash-profile
   namespace: {}
 spec:
-  severity: 4
   selector:
     matchLabels:
       container: {}
@@ -16,4 +15,5 @@ spec:
         readOnly: true
       - path: /etc/profile
         readOnly: true
-  action: Audit
+    action: Audit
+    severity: 4

@@ -19,6 +19,7 @@ spec:
         - dir: /usr/lib/
           recursive: true  
     severity: 5 # Higher severity 
+    action:  Audit
   file:
     matchPaths: 
     - path: /usr/bin/pg_dump
@@ -30,7 +31,6 @@ spec:
       fromSource: # trigger an alert if the source
        - path: /usr
        - path: /lib
-  action:
-    Audit
-  severity: 9 # lowest severity
+    action: Audit
+    severity: 9 # lowest severity
   tags : ["postgresql","CVE-2018-16850"]

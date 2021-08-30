@@ -3,13 +3,12 @@ kind: KubeArmorPolicy
 metadata:
   name: system-file-analysis
 spec:
-  severity: 7
   selector:
     matchLabels:
        {}
   process: 
-        matchPaths: 
-        - path: /etc/passwd
-        - path: /etc/shadow
-  action:
-      Audit
+      matchPaths: 
+      - path: /etc/passwd
+      - path: /etc/shadow
+      action: Audit
+      severity: 7 # lowest severity

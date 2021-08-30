@@ -3,7 +3,6 @@ kind: KubeArmorPolicy
 metadata:
   name: defense-evasion-modify-system-image
 spec:
-  severity: 6
   selector:
     matchLabels:
       {}
@@ -14,4 +13,5 @@ spec:
       - path: /etc/hosts
       - path: /etc/lsb-release
       - path: /etc/networks
-  action: Audit
+    action: Audit
+    severity: 6

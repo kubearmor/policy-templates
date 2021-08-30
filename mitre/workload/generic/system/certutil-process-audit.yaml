@@ -3,12 +3,11 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-defense-evasion
 spec:
-  severity: 5
   selector:
     matchLabels:
          {}
   process:
     matchPaths:
     - path: /usr/bin/certutil
-  action:
-    Audit
+    action: Audit
+    severity: 5
