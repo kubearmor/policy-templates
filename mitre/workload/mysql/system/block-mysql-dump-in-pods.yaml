@@ -9,6 +9,5 @@ spec:
   process:      
     matchPaths:      
     - path: /usr/bin/mysqldump    
-  action:      
-    BlockWithAudit    
-  severity: 6
+    action: BlockWithAudit    
+    severity: 6

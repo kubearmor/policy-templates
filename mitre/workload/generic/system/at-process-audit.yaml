@@ -3,14 +3,13 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-scheduled-task-job-at
 spec:
-  severity: 2
   selector:
     matchLabels:
        {}
   process: 
-        matchPaths: 
-        - path: /etc/at.allow
-        - path: /etc/at.deny
-        - path: /usr/bin/at      
-  action:
-    Audit
+      matchPaths: 
+      - path: /etc/at.allow
+      - path: /etc/at.deny
+      - path: /usr/bin/at      
+      action: Audit
+      severity: 2

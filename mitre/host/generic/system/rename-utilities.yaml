@@ -12,5 +12,4 @@ spec:
     - path: /usr/bin/mv
     - path: /usr/bin/mmv
     - path: /usr/bin/rename
-  action:
-    Audit
+    action: Audit

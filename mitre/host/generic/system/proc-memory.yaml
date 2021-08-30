@@ -10,7 +10,6 @@ spec:
     matchPatterns: 
     - pattern: ^/proc/\*/maps$
     - pattern: ^/proc/\*/mem$
-  action:
-    Block
-  severity: 4
+    action: Block
+    severity: 4
   tags : ["MITRE","Privilege Escalation","Proc-Memory"]

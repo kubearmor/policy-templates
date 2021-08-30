@@ -25,7 +25,8 @@ spec:
       - dir: /home/
       - dir: /usr/
         recursive: true    
-      severity: 2 # Higher severity for processes 
+    severity: 2 # Higher severity for processes 
+    action: Audit
   file:
     matchPaths:
     - path: /bin/bash
@@ -41,7 +42,6 @@ spec:
     - path: /bin/csh
       fromSource:
       - path: /bin/bash
-      severity: 10  # lowest severity for processes invoked as child process of bash
-  action:
-    Audit
+    severity: 10  # lowest severity for processes invoked as child process of bash
+    action: Audit
   tags : ["MITRE","D3fend","Execution","Unix Shell"]

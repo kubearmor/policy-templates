@@ -10,5 +10,5 @@ spec:
   file:
     matchPaths:
       - path: /etc/ld.so.preload
-  action: Audit
-  severity: 6
+    action: Audit
+    severity: 6

@@ -4,7 +4,6 @@ metadata:
   name: create-or-modify-system-process-systemd-service
 spec:
   tags: ["MITRE", "Persistence"]
-  severity: 5
   selector:
     matchLabels:
       {}
@@ -16,6 +15,8 @@ spec:
         recursive: true
       - dir: /lib/systemd/system/
         recursive: true
+    action: Audit
+    severity: 5
   file:
     matchDirectories:
       - dir: /etc/systemd/system/
@@ -27,4 +28,5 @@ spec:
       - dir: /lib/systemd/system/
         recursive: true
         readOnly: false
-  action: Audit
+    action: Audit
+    severity: 5

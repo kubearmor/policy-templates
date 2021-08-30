@@ -4,7 +4,6 @@ metadata:
   name: persistence-blis-rc-scripts
 spec:
   tags: ["MITRE", "Persistence"]
-  severity: 5
   selector:
     matchLabels:
       {}
@@ -20,6 +19,8 @@ spec:
         recursive: true
       - dir: /usr/lib/systemd/system/rc-local.service.d/
         recursive: true
+    severity: 5
+    action: Audit
   file:
     matchPaths:
       - path: /etc/rc.local
@@ -34,5 +35,6 @@ spec:
       - dir: /usr/lib/systemd/system/rc-local.service.d/
         recursive: true
         readOnly: false
-  action:
-    Audit
+    severity: 5
+    action: Audit
+

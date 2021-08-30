@@ -2,9 +2,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-execution-remote-code-exec-in-container
-
 spec:
-  severity: 6
   message: Netcat runs inside a container that allows remote code execution
   tags: ["MITRE"]
   selector:
@@ -14,5 +12,5 @@ spec:
     matchPaths: 
     - path: /usr/bin/nc
     - path: /usr/bin/ncat
-  action:
-    Audit
+    severity: 6
+    action: Audit

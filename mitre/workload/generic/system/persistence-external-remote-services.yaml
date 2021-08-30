@@ -3,7 +3,6 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-persistence-external-remote-services
 spec:
-  severity: 3
   selector:
     matchLabels: 
       {}
@@ -16,5 +15,5 @@ spec:
     - path: /etc/shadow
     matchDirectories:
     - dir: /etc/ssh/  
-  action:
-    Audit
+    severity: 3
+    action: Audit

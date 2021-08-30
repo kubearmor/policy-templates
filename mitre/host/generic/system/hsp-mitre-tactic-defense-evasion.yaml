@@ -3,7 +3,6 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-mitre-tactic-defense-evasion
 spec:
-  severity: 5
   message: Modify the kernel to automatically execute programs on system boot
   tags: ["MITRE"]
   nodeSelector:
@@ -12,5 +11,5 @@ spec:
   process:
     matchPaths:
     - path: /usr/bin/certutil
-  action:
-    Audit
+    action: Audit
+    severity: 5

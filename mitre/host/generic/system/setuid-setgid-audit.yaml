@@ -22,7 +22,6 @@ spec:
       - dir: /home/
       - dir: /usr/
         recursive: true    
-      severity: 2 # Higher severity for processes 
-  action:
-    Audit
+    severity: 2 # Higher severity for processes 
+    action: Audit
   tags : ["MITRE","Privilege Escalation","S-Bit"]
