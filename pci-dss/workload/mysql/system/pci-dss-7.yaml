@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: restrict-access-to-cardholder-data
+  namespace: {}
+spec:
+  severity: 5
+  tags: ["PCI-DSS"]
+  selector:
+    matchLabels:
+      {}
+  file:
+    matchDirectories:
+    - dir: /var/lib/mysql/mysql/
+      recursive: true
+      readOnly: false
+  action:
+    Block
