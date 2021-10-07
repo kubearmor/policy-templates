@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: restrict-access-mysql-config
+  namespace: {}
+spec:
+  severity: 5
+  message: "block access to dir /etc/mysql/"
+  selector:
+    matchLabels: {}
+  file:
+    matchDirectories:
+    - dir: /etc/mysql/  # <--- mysql directory
+      recursive: true
+  process:
+    matchPaths:
+      - path: /bin/cd
+  action:
+    Block
