@@ -1,0 +1,21 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: default-system-passwords
+spec:
+  selector:
+    matchLabels: {}
+  process:
+    matchPaths:
+      - path: /bin/mount
+  file:
+    matchPaths:
+      - path: /etc/passwd
+        readOnly: false
+    matchDirectories:
+      - dir: /etc/snmp/
+        recursive: true
+        readOnly: false
+    severity: 3
+  action: Block
+  tags: ["PCI-DSS"]
