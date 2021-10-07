@@ -5,6 +5,7 @@ metadata:
   namespace: {}
 spec:
   severity: 5
+  tags: ["PCI-DSS"]
   selector:
     matchLabels:
       {}
