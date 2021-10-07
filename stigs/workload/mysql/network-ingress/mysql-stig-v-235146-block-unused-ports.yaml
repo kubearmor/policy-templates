@@ -1,0 +1,16 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: mysql-stig-v-235146-block-unused-ports
+spec:
+  endpointSelector:
+    matchLabels:
+      {}
+  ingress:
+    - fromEndpoints:
+        - {}
+      toPorts:
+        - ports:
+            - port: "3306"
+        - ports:
+            - port: "33060"
