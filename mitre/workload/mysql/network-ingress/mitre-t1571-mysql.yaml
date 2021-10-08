@@ -1,0 +1,16 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: mitre-t1571-mysql
+spec:
+  description: Blocking non-standard ports of MySQL
+  endpointSelector:
+    matchLabels:
+      {}
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "3306"
+        protocol: TCP
+      - port: "33060"
+        protocol: TCP
