@@ -1,0 +1,59 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: mitre-t1571-generic
+spec:
+  description: Adversaries may communicate using a protocol and port paring that are
+    typically not associated. This Policy will only allow standard port and protocols.
+  endpointSelector:
+    matchLabels:
+      {}
+  egress:
+  - toPorts:
+    - ports:
+      - port: "20"
+        protocol: TCP
+      - port: "21"
+        protocol: TCP
+      - port: "22"
+        protocol: TCP
+      - port: "23"
+        protocol: TCP
+      - port: "25"
+        protocol: TCP
+      - port: "53"
+        protocol: ANY
+      - port: "67"
+        protocol: UDP
+      - port: "68"
+        protocol: UDP
+      - port: "80"
+        protocol: TCP
+      - port: "137"
+        protocol: ANY
+      - port: "162"
+        protocol: ANY
+      - port: "389"
+        protocol: ANY
+      - port: "143"
+        protocol: TCP
+      - port: "636"
+        protocol: ANY
+      - port: "989"
+        protocol: TCP
+      - port: "110"
+        protocol: TCP
+      - port: "123"
+        protocol: UDP
+      - port: "139"
+        protocol: ANY
+      - port: "179"
+        protocol: TCP
+      - port: "138"
+        protocol: ANY
+      - port: "161"
+        protocol: ANY
+      - port: "443"
+        protocol: TCP
+      - port: "990"
+        protocol: TCP
