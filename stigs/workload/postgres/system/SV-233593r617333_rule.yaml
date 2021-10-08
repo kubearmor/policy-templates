@@ -12,6 +12,7 @@ spec:
         recursive: true
       - dir: /usr/lib/postgresql/
         recursive: true
+    action: Block     
   process:
     severity: 2
     matchPaths:
