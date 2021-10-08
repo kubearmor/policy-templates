@@ -1,0 +1,20 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: pgsql-stig-disable-external-executables
+spec:
+  selector:
+    matchLabels:
+      {}
+  process:
+    matchPaths:
+      - path: /usr/bin
+  file:
+    matchDirectories:
+      - dir: /var/lib/postgresql/
+        recursive: true
+      - dir: /usr/lib/postgresql/
+        recursive: true
+  severity: 3    
+    action: 
+      Block
