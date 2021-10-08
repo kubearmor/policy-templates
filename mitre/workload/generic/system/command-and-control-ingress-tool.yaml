@@ -1,0 +1,19 @@
+apiVersion: security.accuknox.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: command-and-control-ingress-tool
+spec:
+  severity: 4                     
+  tags: ["mitre", "command-and-control"]                       
+  message: Files can also be copied over on Mac and Linux with native tools like scp, rsync, and sftp
+  selector:
+    matchLabels:
+      {}
+  process:
+    matchPaths:
+       - path: /usr/bin/sftp 
+       - path: /usr/bin/rsync
+       - path: /usr/bin/scp
+       - path: /usr/bin/whois
+  action:
+    Audit
