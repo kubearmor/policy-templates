@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: postgres
+       {}
   process:
   action: Audit
   severity: 6
