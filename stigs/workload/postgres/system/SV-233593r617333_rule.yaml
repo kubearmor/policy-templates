@@ -3,13 +3,8 @@ kind: KubeArmorPolicy
 metadata:
   name: pgsql-stig-disable-external-executables
 spec:
-  action: Block
   selector:
     matchLabels: {}
-  process:
-    severity: 2
-    matchPaths:
-      - path: /usr/bin
   file:
     severity: 3
     matchDirectories:
@@ -17,3 +12,8 @@ spec:
         recursive: true
       - dir: /usr/lib/postgresql/
         recursive: true
+  process:
+    severity: 2
+    matchPaths:
+      - path: /usr/bin
+    action: Block  
