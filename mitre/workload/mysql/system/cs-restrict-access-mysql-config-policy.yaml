@@ -2,7 +2,6 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: restrict-access-mysql-config
-  namespace: {}
 spec:
   message: "block access to dir /etc/mysql/"
   selector:
@@ -12,9 +11,10 @@ spec:
     matchDirectories:
     - dir: /etc/mysql/  # <--- mysql directory
       recursive: true
+    action: Block
   process:
     severity: 5
     matchPaths:
       - path: /bin/cd
-  action:
-    Block
+    action: Block
+
