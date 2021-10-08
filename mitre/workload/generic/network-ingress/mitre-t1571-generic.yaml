@@ -8,7 +8,7 @@ spec:
   endpointSelector:
     matchLabels:
       {}
-  egress:
+  ingress:
   - toPorts:
     - ports:
       - port: "20"
