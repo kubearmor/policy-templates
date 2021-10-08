@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: mysql
+      {}
   file:
     severity: 5
     matchPaths:
