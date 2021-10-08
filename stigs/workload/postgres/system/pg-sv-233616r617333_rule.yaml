@@ -1,0 +1,22 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: pgsql-stig-audit-non-pgsql
+spec:
+  action: Audit
+  selector:
+    matchLabels:
+      app: postgres
+  process:
+    matchPaths:
+      - path: /bin/mv
+      - path: /bin/cp
+      - path: /bin/rm
+      - path: /bin/rmdir
+      - path: /bin/ls
+    matchDirectories:
+      - dir: /var/lib/postgresql/data/
+        fromSource:
+          - path: /usr/lib/postgresql/14/bin/postgres
+            recursive: true
+        recursive: true
