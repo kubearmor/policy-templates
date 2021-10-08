@@ -3,11 +3,12 @@ kind: KubeArmorPolicy
 metadata:
   name: pgsql-stig-audit-non-pgsql
 spec:
-  action: Audit
   selector:
     matchLabels:
       app: postgres
   process:
+  action: Audit
+  severity: 6
     matchPaths:
       - path: /bin/mv
       - path: /bin/cp
