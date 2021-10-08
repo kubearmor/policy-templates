@@ -1,0 +1,20 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: mysql-v-235149-audit-mysql-logs
+spec:
+  tags: ["MySQL", "STIG"]
+  message: "audit mysql access via network and process"
+  selector:
+    matchLabels:
+      {}
+  network:
+    matchProtocols:
+    - protocol: TCP
+    severity: 5
+    action: Audit
+  process:
+    matchPatterns:      
+    - pattern: \/usr\/local\/mysql[a-z,_]* 
+    severity: 5
+    action: Audit
