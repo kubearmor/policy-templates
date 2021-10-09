@@ -7,9 +7,9 @@ spec:
     matchLabels:
        {}
   process:
-    matchPaths:
     action: Audit
     severity: 6
+    matchPaths:
       - path: /bin/mv
       - path: /bin/cp
       - path: /bin/rm
