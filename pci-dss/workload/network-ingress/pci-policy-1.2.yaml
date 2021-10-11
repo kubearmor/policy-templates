@@ -1,0 +1,24 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: firewall policy
+spec:
+  endpointSelector: {}
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+             {}
+      toPorts:
+        - ports:
+            - port: "443"
+        - ports:
+            - port: "80"
+  egress:
+    - toEndpoints:
+        - matchLabels:
+              {}
+      toPorts:
+        - ports:
+            - port: "443"
+        - ports:
+            - port: "80"
