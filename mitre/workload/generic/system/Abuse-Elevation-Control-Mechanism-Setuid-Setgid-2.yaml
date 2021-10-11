@@ -1,0 +1,27 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: mitre-tactic-s-bit
+spec:
+  selector:
+    matchLabels:
+          {}
+  process:
+    matchPaths: 
+    - path: /usr/sbin/groupdel
+    - path: /usr/sbin/userdel
+    - path: /usr/sbin/chgpasswd
+    - path: /usr/sbin/groupmod0o
+    - path: /usr/sbin/groupadd
+    - path: /usr/sbin/newusers
+    - path: /usr/sbin/chpasswd
+    - path: /usr/sbin/usermod
+      fromSource:  # trigger an alert if the source
+      - dir: /tmp/
+      - dir: /var/
+      - dir: /home/
+      - dir: /usr/
+        recursive: true    
+    severity: 2 # Higher severity for processes 
+    action: Audit
+  tags : ["MITRE","Privilege Escalation","S-Bit"]
