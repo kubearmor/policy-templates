@@ -1,0 +1,22 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-create-account-create-local-account
+spec:
+  message: Create account or local account audit
+  tags: ["MITRE"]
+  nodeSelector:
+    matchLabels:
+      {}
+  file:
+    severity: 3
+    matchPaths:
+    - path: /etc/passwd
+    - path: /etc/shadow
+    action: Audit
+  process:
+    severity: 3
+    matchPaths:
+    - path: /bin/useradd
+    - path: /bin/adduser
+    action: Audit
