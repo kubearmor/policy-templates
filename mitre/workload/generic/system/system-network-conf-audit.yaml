@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: system-network-config-discovery
+spec:
+  severity: 5
+  selector:
+    matchLabels:
+      {}
+  process:
+    matchPaths:
+    - path: /sbin/ifconfig # try ifconfig (permission denied)
+    - path: /usr/bin/traceroute
+    - path: /sbin/route
+    - path: /usr/sbin/arp
+    - path: /bin/netstat
+  action:
+    Block
