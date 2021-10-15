@@ -15,4 +15,4 @@ spec:
     - path: /usr/sbin/arp
     - path: /bin/netstat
   action:
-    Block
+    Audit
