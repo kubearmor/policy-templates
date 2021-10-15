@@ -1,0 +1,14 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: non-application-layer-protocol
+spec:
+  severity: 5
+  selector:
+    matchLabels:
+      {}
+  process:
+    matchPaths:
+    - path: /bin/ping 
+  action:
+    Audit
