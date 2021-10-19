@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: ac-6-10-block-certificate-generation
+spec:
+  tags: ["NIST", "AC-6"]
+  message: "Certificate updation and creation functions invoked"
+  nodeSelector:
+    matchLabels:
+      {}
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/openssl
+    - path: /usr/sbin/update-ca-certificates
+    action: Block
