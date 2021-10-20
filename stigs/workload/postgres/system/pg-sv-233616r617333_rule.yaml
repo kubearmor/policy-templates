@@ -19,5 +19,4 @@ spec:
       - dir: /var/lib/postgresql/data/
         fromSource:
           - path: /usr/lib/postgresql/14/bin/postgres
-            recursive: true
         recursive: true
