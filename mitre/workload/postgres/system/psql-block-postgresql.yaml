@@ -1,9 +1,8 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: sep-ubuntu-3-file-allow
+  name: psql-block
 spec:
-  severity: 5
   selector:
     matchLabels:
       {}
@@ -15,4 +14,5 @@ spec:
       ownerOnly: true
     - path: /usr/share/postgresql-common/pg_wrapper
       ownerOnly: true
-  action: Block
+    severity: 5
+    action: Block
