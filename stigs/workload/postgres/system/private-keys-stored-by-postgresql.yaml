@@ -3,11 +3,11 @@ kind: KubeArmorPolicy
 metadata:
   name: postgresql-private-keys
 spec:
-  severity: 5
   selector:
     matchLabels:
       {}
   process:
+    severity: 5
     matchPaths:
     - path: /etc/ssl/private/ssl-cert-snakeoil.key
       ownerOnly: true
@@ -17,5 +17,4 @@ spec:
       ownerOnly: true
     - path: /var/run/postgresql/13-main.pid
       ownerOnly: true
-  action:
-    Block
+    action: Block
