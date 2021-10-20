@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-mitre-persistence-bash-profile-audit
+spec:
+  message: Event-Triggered Execution/bash_profile and bashrc
+  tags: ["MITRE"]
+  nodeSelector:
+    matchLabels:
+      {}
+  file:
+    severity: 2
+    matchPaths:
+    - path: /etc/profile
+    - path: /etc/bash.bashrc
+    - path: /etc/.bash_profile
+    action: Audit
+
