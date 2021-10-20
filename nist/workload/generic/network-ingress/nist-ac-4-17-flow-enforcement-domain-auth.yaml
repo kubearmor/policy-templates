@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nist-ac-4-17-flow-enforcement-domain-auth
+  namespace: {}               # chooses namespace
+spec:
+  podSelector:
+    matchLabels:
+      app: {}
+  ingress:
+    - from:
+      - namespaceSelector:     # chooses all pods in namespaces labelled with (label_name)
+          matchLabels:
+            {}
+        podSelector:           # chooses pods with (pod_name)
+          matchLabels:
+            {}
