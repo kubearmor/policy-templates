@@ -1,0 +1,16 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "web-protocols"
+spec:
+  endpointSelector:
+    matchLabels:
+      {}
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        {}
+    toPorts:
+    - ports:
+      - port: {}
+        protocol: ANY
