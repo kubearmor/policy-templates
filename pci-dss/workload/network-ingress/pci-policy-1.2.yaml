@@ -11,8 +11,10 @@ spec:
       toPorts:
         - ports:
             - port: "443"
+              protocol: any
         - ports:
             - port: "80"
+              protocol: any
   egress:
     - toEndpoints:
         - matchLabels:
@@ -20,5 +22,7 @@ spec:
       toPorts:
         - ports:
             - port: "443"
+              protocol: any
         - ports:
             - port: "80"
+              protocol: any
