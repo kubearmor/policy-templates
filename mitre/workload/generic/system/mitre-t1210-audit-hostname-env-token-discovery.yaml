@@ -1,0 +1,27 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: mitre-t1210-audit-hostname-env-token-discovery
+spec:
+  tags: ["MITRE", "T1210"]
+  message: "Hostname, env or k8s token accessed by unknown -- possible lateral movement "
+  selector:
+    matchLabels:
+      {}
+  process:
+    severity: 5
+    matchPaths:
+    - path: /bin/hostname
+      ownerOnly: true
+    - path: /usr/bin/env
+      ownerOnly: true
+    action: Audit
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/hostname
+      ownerOnly: true
+    matchDirectories:
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      ownerOnly: true
+    action: Audit
