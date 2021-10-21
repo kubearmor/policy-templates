@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels: 
-      app: postgres
+      {}
   file:
     severity: 3
     matchDirectories:
