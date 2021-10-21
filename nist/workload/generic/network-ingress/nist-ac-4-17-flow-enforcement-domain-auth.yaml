@@ -1,17 +1,27 @@
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
 metadata:
   name: nist-ac-4-17-flow-enforcement-domain-auth
-  namespace: {}               # chooses namespace
-spec:
-  podSelector:
-    matchLabels:
-      app: {}
-  ingress:
-    - from:
-      - namespaceSelector:     # chooses all pods in namespaces labelled with (label_name)
-          matchLabels:
-            {}
-        podSelector:           # chooses pods with (pod_name)
-          matchLabels:
-            {}
+  namespace: {}
+specs:
+  - endpointSelector:
+      matchLabels:
+        {}
+    ingress:
+    - fromEndpoints:
+      - matchLabels:
+          {}
+      toPorts:
+      - ports:
+        - port: "9898"   
+          protocol: TCP
+  - endpointSelector:
+      matchLabels:
+        {}
+    ingress:
+    - fromEndpoints:
+      - matchLabels:
+         {}
+# The server { ex: sanctioned pods} can accept traffic from workloads labelled 
+# with { your_label: your_app }  only on port 9898. All other ports are blocked.
+# Workloads from the { default }  namespace can communicate with the server.
