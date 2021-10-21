@@ -3,12 +3,11 @@ kind: KubeArmorPolicy
 metadata:
   name: non-application-layer-protocol
 spec:
-  severity: 5
   selector:
     matchLabels:
       {}
   process:
+    severity: 5
     matchPaths:
     - path: /bin/ping 
-  action:
-    Audit
+    action: Audit
