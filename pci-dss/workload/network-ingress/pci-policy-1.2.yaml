@@ -15,14 +15,3 @@ spec:
         - ports:
             - port: "80"
               protocol: any
-  egress:
-    - toEndpoints:
-        - matchLabels:
-              {}
-      toPorts:
-        - ports:
-            - port: "443"
-              protocol: any
-        - ports:
-            - port: "80"
-              protocol: any
