@@ -1,0 +1,19 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "FTP-rule"
+spec:
+  endpointSelector:
+    matchLabels:
+      app: postgres
+  ingress:
+    - toPorts:
+        - ports:
+            - port: "20"
+              protocol: TCP
+            - port: "21"
+              protocol: TCP
+            - port: "990"
+              protocol: TCP
+            - port: "69"
+              protocol: UDP
