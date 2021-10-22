@@ -1,0 +1,22 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: monitor-network-resources
+spec:
+  endpointSelector: {}
+  ingress:
+    - fromEndpoints:
+        - matchLabels: {}
+      toPorts:
+        - ports:
+            - port: "514 "
+              protocol: TCP
+        - ports:
+            - port: "3306"
+              protocol: TCP
+        - ports:
+            - port: "1433"
+              protocol: TCP
+        - ports:
+            - port: "23"
+              protocol: TCP
