@@ -1,0 +1,32 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: au-10-non-repudiation1
+spec:
+  selector:
+    matchLabels:
+      {}
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/chsh
+    - path: /bin/chmod
+    - path: /bin/chown
+    - path: /bin/chgrp
+    action: Audit
+  file:
+    severity: 1
+    matchDirectories:
+    - dir: /bin/
+      fromSource:
+      - path: /bin/rm
+    - dir: /root/
+      fromSource:
+      - path: /bin/rm
+    - dir: /home/
+      fromSource:
+      - path: /bin/rm
+    - dir: /etc/
+      fromSource:
+      - path: /bin/rm
+    action: Block
