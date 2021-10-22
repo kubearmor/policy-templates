@@ -3,10 +3,10 @@ kind: CiliumNetworkPolicy
 metadata:
   name: monitor-network-resources
 spec:
+  matchLabels: {}
   endpointSelector: {}
   ingress:
     - fromEndpoints:
-        - matchLabels: {}
       toPorts:
         - ports:
             - port: "514 "
@@ -19,4 +19,4 @@ spec:
               protocol: TCP
         - ports:
             - port: "23"
-              protocol: TCP
+              protocol: TCP  
