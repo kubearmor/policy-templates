@@ -4,7 +4,7 @@ metadata:
   name: monitor-network-resources
 spec:
   matchLabels: {}
-  endpointSelector: {}
+  endpointSelector: 
   ingress:
     - fromEndpoints:
       toPorts:
