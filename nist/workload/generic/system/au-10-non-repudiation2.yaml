@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: au-10-non-repudiation2
+spec:
+  selector:
+    matchLabels:
+      {} 
+  file:
+    severity: 1
+    matchPaths:
+    - path: /etc/profile
+    - path: /root/.bashrc
+    - path: /root/.bash_login
+    - path: /root/.bash_logout
+    action: Audit
