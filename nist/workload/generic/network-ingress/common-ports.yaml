@@ -1,0 +1,29 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "nist-web-protocols"
+spec:
+  endpointSelector:
+    matchLabels:
+      {}
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        {}
+    toPorts:
+    - ports:
+      - port: 22
+        protocol: ANY
+      - port: 53
+        protocol: ANY
+      - port: 80
+        protocol: ANY
+      - port: 443
+        protocol: ANY
+      - port: 3306
+        protocol: ANY
+      - port: 5432
+        protocol: ANY
+      - port: 8080
+        protocol: ANY
+
