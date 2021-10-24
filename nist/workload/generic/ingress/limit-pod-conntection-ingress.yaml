@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: limit-pod
+  name: limit-pod-ingress
 spec:
   endpointSelector:
     matchLabels:
