@@ -1,0 +1,28 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: ac-2-12-account-management
+spec:
+  severity: 5
+  tags: ["NIST", "AC-2"]
+  message: "To monitor creation or deletion of user accounts"
+  nodeSelector:
+    matchLabels:
+     {}
+  process:
+    matchPaths:
+    - path: /usr/sbin/useradd
+    - path: /sbin/useradd
+    - path: /usr/bin/passwd
+    - path: /bin/passwd
+    - path: /usr/sbin/usermod
+    - path: /sbin/usermod
+    - path: /usr/sbin/userdel
+    - path: /sbin/userdel
+    - path: /usr/bin/chage
+    - path: /bin/chage
+  file:
+    matchPaths:
+    - path: /etc/sudoers
+      readOnly: true
+  action: Audit
