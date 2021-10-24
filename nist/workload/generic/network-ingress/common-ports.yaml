@@ -26,4 +26,3 @@ spec:
         protocol: ANY
       - port: 8080
         protocol: ANY
-
