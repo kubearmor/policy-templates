@@ -3,13 +3,13 @@ kind: KubeArmorHostPolicy
 metadata:
   name: ac-2-12-account-management
 spec:
-  severity: 5
   tags: ["NIST", "AC-2"]
   message: "To monitor creation or deletion of user accounts"
   nodeSelector:
     matchLabels:
      {}
   process:
+    severity: 5
     matchPaths:
     - path: /usr/sbin/useradd
     - path: /sbin/useradd
@@ -21,8 +21,10 @@ spec:
     - path: /sbin/userdel
     - path: /usr/bin/chage
     - path: /bin/chage
+    action: Block
   file:
+    severity: 4
     matchPaths:
     - path: /etc/sudoers
       readOnly: true
-  action: Audit
+    action: Audit
