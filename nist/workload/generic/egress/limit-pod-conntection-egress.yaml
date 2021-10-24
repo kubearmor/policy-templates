@@ -1,0 +1,12 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: limit-pod-egress
+spec:
+  endpointSelector:
+    matchLabels:
+      {}
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            {}
