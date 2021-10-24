@@ -3,13 +3,13 @@ kind: KubeArmorPolicy
 metadata:
   name: network-service-scanning
 spec:
-  severity: 5
   tags: ["MITRE"]
   message: "listing of services running on remote hosts, including those that may be vulnerable to remote software"
   selector:
     matchLabels:
       {}
   process:
+    severity: 5
     matchPaths:
     - path: /usr/bin/netstat
     - path: /bin/netstat
@@ -27,4 +27,4 @@ spec:
     - path: /sbin/arp
     - path: /usr/sbin/iwconfig
     - path: /sbin/iwconfig
-  action: Audit
+    action: Audit
