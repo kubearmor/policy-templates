@@ -1,0 +1,25 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: block-package-manager-and-remote-copy
+spec:
+  tags: ["NIST", "CM-7"] 
+  message: "Package Manager and Remote File Copy is now blocked "
+  selector:
+    matchLabels:
+      {}
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/apt
+    matchPaths:
+    - path: /usr/bin/wget
+    matchPaths:
+    - path: /usr/bin/curl
+    matchPaths:
+    - path: /usr/bin/http
+    matchPaths:
+    - path: /usr/bin/zypp
+    matchPaths:
+    - path: /usr/bin/yum
+    action: Block
