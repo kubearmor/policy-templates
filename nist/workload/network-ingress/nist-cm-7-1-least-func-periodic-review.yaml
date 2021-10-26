@@ -1,0 +1,22 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: "nist-cm-7-1-least-func-periodic-review"
+spec:
+  description: Prohibit or restrict the use of the default ports open in containers.
+  endpointSelector:
+    matchLabels:
+      app: myService
+  ingressDeny:
+  - toPorts:
+    - ports:
+      - port: "21"
+        protocol: ANY
+      - port: "53"
+        protocol: ANY
+      - port: "80"
+        protocol: ANY
+      - port: "110"
+        protocol: ANY
+      - port: "23"
+        protocol: ANY
