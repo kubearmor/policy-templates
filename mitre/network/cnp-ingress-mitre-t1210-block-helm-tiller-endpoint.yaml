@@ -1,0 +1,14 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "cnp-ingress-mitre-t1210-block-helm-tiller-endpoint"
+spec:
+  description: "Policy to Deny Access to tiller endpoint on port 44134"
+  endpointSelector:
+    matchLabels:
+      app: test      #change app: test to match your label
+  ingressDeny:
+  - toPorts:
+    - ports:
+      - port: "44134"
+        protocol: ANY
