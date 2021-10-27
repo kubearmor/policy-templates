@@ -1,0 +1,15 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata: 
+ name: ksp-mitre-tactic-defence-evasion-hidden-files-directories
+spec:
+ tags: ["MITRE"]
+ message: "To prevent normal users from accidentally changing special files on a system"
+ selector: 
+  matchLabels: 
+   app: testpod
+ file:
+   severity: 3
+   matchPaths:
+    - path: /root/.bash_history
+   action: Audit
