@@ -1,4 +1,4 @@
-piVersion: security.kubearmor.com/v1
+apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: au-10-non-repudiation-1
