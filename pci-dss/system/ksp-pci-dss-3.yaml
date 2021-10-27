@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-pci-dss-3
+spec:
+  severity: 5
+  tags: ["PCI-DSS", "MYSQL"]
+  message: "Someone Tried to Access MySQL files"
+  selector:
+    matchLabels:
+      pod: testpod
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /var/lib/mysql/
+      recursive: true
+      readOnly: false  
+    action: Block
