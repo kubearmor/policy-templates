@@ -3,18 +3,20 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-persistence-createaccount-localaccount
 spec:
+  tags: ["MITRE", "AccountCreation"]
+  message: "System owner discovery command is blocked"
   selector:
     matchLabels: 
-      {}
+      app: ubuntu           #change your labels here
   process:
+    severity: 2
     matchPaths:
       - path: /usr/sbin/adduser
       - path: /usr/sbin/useradd
-    severity: 4
     action: Audit
   file:
+    severity: 4
     matchPaths:
       - path: /etc/passwd
       - path: /etc/shadow
     action: Audit
-    severity: 4
