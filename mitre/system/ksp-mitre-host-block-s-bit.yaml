@@ -1,11 +1,13 @@
 apiVersion: security.kubearmor.com/v1
-kind: KubeArmorPolicy
+kind: KubeArmorHostPolicy
 metadata:
-  name: mitre-tactic-s-bit
+  name: ksp-mitre-T1548.001-setuid-setgid
 spec:
+  message: Blocked the setuid or setgid flag files
+  tags : ["MITRE","Privilege Escalation","S-Bit"]
   nodeSelector:
     matchLabels:
-      {}
+        kubernetes.io/hostname: ubuntu  # use your own label here
   process:
     matchPaths: 
     - path: /usr/sbin/groupdel
@@ -23,5 +25,5 @@ spec:
       - dir: /usr/
         recursive: true    
     severity: 2 # Higher severity for processes 
-    action: Audit
-  tags : ["MITRE","Privilege Escalation","S-Bit"]
+    action: Block
+  
