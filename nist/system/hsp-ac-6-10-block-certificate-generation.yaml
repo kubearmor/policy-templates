@@ -1,13 +1,13 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: ac-6-10-block-certificate-generation
+  name: hsp-ac-6-10-block-certificate-generation
 spec:
   tags: ["NIST", "AC-6"]
   message: "Certificate updation and creation functions invoked"
   nodeSelector:
     matchLabels:
-      {}
+      app: test      #change app: test to match your label
   process:
     severity: 5
     matchPaths:
