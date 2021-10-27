@@ -1,0 +1,16 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-postgresql-port-external-access
+spec:
+  endpointSelector:
+    matchLabels:
+      pod: test
+  ingress:
+    - fromEntities:
+        - cluster
+    - fromCIDRSet:
+        - {}
+      toPorts:
+        - ports:
+            - port: "5432"
