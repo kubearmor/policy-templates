@@ -3,12 +3,13 @@ kind: CiliumNetworkPolicy
 metadata:
   name: "news-feed-service-rule"
 spec:
+  description: "The port 8093 is blocked"
   endpointSelector:
     matchLabels:
-      role: {}
+      role: frontend     #change your role here
   ingress:
     - fromCIDR:
-        - {}
+        - {}       
       toPorts:
         - ports:
             - port: "8093"
