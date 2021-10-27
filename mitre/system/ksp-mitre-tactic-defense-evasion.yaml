@@ -1,0 +1,15 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-tactic-defense-evasion
+spec:
+  tags: ["MITRE"]
+  message: "command-line utility that can be used to obtain certificate authority information and configure Certificate Services"
+  selector:
+    matchLabels:
+         app: testpod
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/certutil
+  	action: Audit
