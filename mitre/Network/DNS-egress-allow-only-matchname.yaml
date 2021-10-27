@@ -3,12 +3,13 @@ kind: CiliumNetworkPolicy
 metadata:
   name: "fqdn"
 spec:
+  description: "dns-egress allow only matchnames"
   endpointSelector:
     matchLabels:
-       {}
+       class: mediabot  # use your own labels
   egress:
   - toFQDNs:
-    - matchName: "{}"  
+    - matchName: "api.twitter.com"  
   - toEndpoints:
     - matchLabels:
         "k8s:io.kubernetes.pod.namespace": kube-system
