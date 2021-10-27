@@ -9,7 +9,7 @@ spec:
        class: mediabot  # use your own labels
   egress:
   - toFQDNs:
-    - matchName: "api.twitter.com"  
+    - matchName: "api.twitter.com"  #use your own matchnames
   - toEndpoints:
     - matchLabels:
         "k8s:io.kubernetes.pod.namespace": kube-system
