@@ -3,9 +3,11 @@ kind: KubeArmorPolicy
 metadata:
   name: restrict-access-mysql-config
 spec:
-  message: "block access to dir /etc/mysql/"
+  tag: ["mysql"]
+  message: "This will block access to the mysql config files (/etc/mysql/)"
   selector:
-    matchLabels: {}
+    matchLabels:
+      container: mysql # <--- add your own match labels
   file:
     severity: 5
     matchDirectories:
