@@ -1,10 +1,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: au-10-non-repudiation-1
+  name: ksp-au-10-non-repudiation-1
 spec:
   tags: ["NIST", "AU-10", "binary", "system", "logs", "File-Permissions"]                       
-  message: [blocked deletion of system binaries/logs/configuration files and audited the File Permissions commands] 
+  message: [Blocked deletion of system binaries/logs/configuration files and Audited the File Permissions commands] 
   selector:
     matchLabels:
       pod: test                             #Replace pod: test with your own labels
