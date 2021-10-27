@@ -3,8 +3,11 @@ kind: KubeArmorPolicy
 metadata:
   name: default-system-passwords
 spec:
+  tags: ["PCI-DSS"]
+  message: "Password File is Blocked"
   selector:
-    matchLabels: {}
+    matchLabels: 
+      app: ubuntu                    #change your labels here
   process:
     severity: 2
     matchPaths:
@@ -20,4 +23,3 @@ spec:
         recursive: true
         readOnly: false
     action: Block
-  tags: ["PCI-DSS"]
