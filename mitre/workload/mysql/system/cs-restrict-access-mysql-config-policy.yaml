@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: restrict-access-mysql-config
 spec:
-  tag: ["mysql"]
+  tags: ["mysql"]
   message: "This will block access to the mysql config files (/etc/mysql/)"
   selector:
     matchLabels:
