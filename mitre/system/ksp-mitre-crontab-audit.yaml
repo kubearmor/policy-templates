@@ -3,9 +3,11 @@ kind: KubeArmorHostPolicy
 metadata:
   name: mitre-tactic-scheduled-task-job-crontab
 spec:
+  message: Adversaries is abused the cron utility to perform task scheduling for initial or recurring execution of malicious code.
+  tag: ["MITRE","Execution","crontab"]
   nodeSelector:
     matchLabels:
-       {}
+       pod: system #change the labels 
   process: 
         matchPaths: 
         - path: /etc/crontab 
@@ -39,6 +41,6 @@ spec:
                - path: /usr/sbin
           action: Audit
           severity: 7 # lowest severity
-  tags : ["MITRE","D3fend"]     
+      
   
   
