@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-mitre-ptrace-syscall
+spec:
+  tags : ["MITRE","Privilege Escalation","P-trace"]
+  message: "Blocking the kernel procees of ptrace"
+  nodeSelector:
+    matchLabels:
+      app: testpod
+  file:
+    severity: 6
+    matchPaths:
+    - path: /proc/sys/kernel/yama/ptrace_scope 
+    - path: /etc/sysctl.d/10-ptrace.conf      
+ 	action: Block 
