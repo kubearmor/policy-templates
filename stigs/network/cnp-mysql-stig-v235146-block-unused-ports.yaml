@@ -3,9 +3,10 @@ kind: CiliumNetworkPolicy
 metadata:
   name: mysql-stig-v-235146-block-unused-ports
 spec:
+  description: "To block all unused ports on MySQL pod"
   endpointSelector:
     matchLabels:
-      {}
+      app: mysql      #change app: mysql to match your label
   ingress:
     - fromEndpoints:
         - {}
