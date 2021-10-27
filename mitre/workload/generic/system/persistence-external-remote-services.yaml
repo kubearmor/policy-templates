@@ -3,17 +3,20 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-persistence-external-remote-services
 spec:
+  tags: ["MITRE"]
+  message: "Password File and ssh Sensitive Files is Audited"
   selector:
     matchLabels: 
-      {}
+      app: ubuntu           #change your labels here
   file:
-    matchPaths:
-    - path: /var/log/wtmp
-    - path: /var/run/utmp
-    - path: /var/log/auth.log
-    - path: /etc/passwd
-    - path: /etc/shadow
-    matchDirectories:
-    - dir: /etc/ssh/  
     severity: 3
-    action: Audit
+    matchPaths:
+      - path: /var/log/wtmp
+      - path: /var/run/utmp
+      - path: /var/log/auth.log
+      - path: /etc/passwd
+      - path: /etc/shadow
+    matchDirectories:
+      - dir: /etc/ssh/  
+    action: 
+      Audit
