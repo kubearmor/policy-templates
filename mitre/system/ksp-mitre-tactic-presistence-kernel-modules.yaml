@@ -1,17 +1,17 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: mitre-tactic-presistence-kernel-modules
+  name: ksp-mitre-tactic-presistence-kernel-modules
 spec:
-  message: Modify the kernel to automatically execute programs on system boot
   tags: ["MITRE"]
+  message: "Modify the kernel to automatically execute programs on system boot"
   selector:
       matchLabels:
-          {}
+          app: testpod 
   process:
+    severity: 6
     matchPaths: 
     - path: /usr/sbin/insmod
     - path: /usr/sbin/modprobe   
     - path: /usr/sbin/rmmod   
-    action: Audit     
-    severity: 6   
+  	action: Audit
