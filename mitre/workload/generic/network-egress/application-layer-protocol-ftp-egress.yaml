@@ -3,8 +3,10 @@ kind: CiliumNetworkPolicy
 metadata:
   name: "FTP-rule"
 spec:
+  description: "This policy will block FTP outgoing traffic"
   endpointSelector:
-    matchLabels: {}
+    matchLabels: 
+      app: myService               #change your labels here
   egress:
     - toPorts:
         - ports:
