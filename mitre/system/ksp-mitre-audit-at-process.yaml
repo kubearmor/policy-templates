@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-t1053-scheduled-task-job-at
+spec:
+  severity: 5
+  message: "An adversary used at to execute programs at system startup or on a scheduled basis for persistence"
+  tag: ["MITRE","Execution","at"]
+  selector:
+    matchLabels:
+       app: ubuntu # use your own labels
+  process: 
+        matchPaths: 
+        - path: /etc/at.allow
+        - path: /etc/at.deny
+        - path: /usr/bin/at      
+  action:
+    Audit
