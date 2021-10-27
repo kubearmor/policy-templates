@@ -1,12 +1,12 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: mitre-t1571-mysql
+  name: cnp-mitre-t1571-mysql-ingress
 spec:
-  description: Blocking non-standard ports of MySQL
+  description: "Allow standard ports of MySQL pods"
   endpointSelector:
     matchLabels:
-      {}
+      app: mysql              # Change label with your own labels
   ingress:
   - toPorts:
     - ports:
