@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: mysql-stig-v-235146-block-unused-ports
+  name: cnp-ingress-mysql-stig-v-235146-block-unused-ports
 spec:
   description: "To block all unused ports on MySQL pod"
   endpointSelector:
