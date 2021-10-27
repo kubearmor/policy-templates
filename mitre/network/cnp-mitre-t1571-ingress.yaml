@@ -1,13 +1,12 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: mitre-t1571
+  name: cnp-mitre-t1571-ingress
 spec:
-  description: Adversaries may communicate using a protocol and port paring that are
-    typically not associated. Block all non-standard ports and protocol. 
+  description: "Adversaries may communicate using a protocol and port paring that are typically not associated. Block all non-standard ports and protocol." 
   endpointSelector:
     matchLabels:
-      {}
+      app: test
   ingress:
   - toPorts:
     - ports:
