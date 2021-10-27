@@ -3,14 +3,17 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-discovery-system-owner-user-discovery
 spec:
+  tags: ["MITRE", "Discovery"]
+  message: "System owner discovery command is blocked"
   selector:
-    matchLabels: {}
+    matchLabels: 
+      app: ubuntu
   process:
+    severity: 3
     matchPaths:
       - path: /usr/bin/who
       - path: /usr/bin/w
       - path: /usr/bin/id
       - path: /usr/bin/whoami
-    action: Block
-    severity: 3
-  tags: ["MITRE", "Discovery"]
+  action: 
+    Block
