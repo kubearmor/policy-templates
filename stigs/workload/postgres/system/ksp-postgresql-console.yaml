@@ -1,0 +1,20 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-postgresql-console
+spec:
+  tags: ["POSTGRESQL"]
+  message: "Someone Tried to Access PostgreSQL Database"
+  selector:
+    matchLabels:
+      pod: testpod
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/psql
+      ownerOnly: true
+    - path: /bin/psql
+      ownerOnly: true
+    - path: /usr/share/postgresql-common/pg_wrapper
+      ownerOnly: true
+    action: Block
