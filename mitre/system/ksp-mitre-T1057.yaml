@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-T1057
+spec:
+  tags: ["MITRE", "Discovery"]
+  message: "Someone Tried to Access Running Process Details"
+  selector:
+    matchLabels:
+      pod: testpod
+  process:
+    severity: 5
+    matchPaths:
+      - path: /bin/ps
+      - path: /usr/bin/ps
+      - path: /usr/bin/pgrep
+      - path: /usr/bin/top
+      - path: /usr/bin/htop
+    action: Audit
