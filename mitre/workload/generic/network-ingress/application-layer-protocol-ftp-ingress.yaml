@@ -3,7 +3,7 @@ kind: CiliumNetworkPolicy
 metadata:
   name: "FTP-rule"
 spec:
-  message: "FTP Incoming Traffic is Denyed"
+  description: "This policy will block FTP incoming traffic"
   endpointSelector:
     matchLabels:
       app: myService        #change your labels here
