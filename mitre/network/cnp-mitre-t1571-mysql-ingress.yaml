@@ -3,7 +3,7 @@ kind: CiliumNetworkPolicy
 metadata:
   name: cnp-mitre-t1571-mysql-ingress
 spec:
-  description: "Allow standard ports of MySQL pods"
+  description: "Allow ingress communication only through standard ports of MySQL pods"
   endpointSelector:
     matchLabels:
       app: mysql              # Change label with your own labels
