@@ -1,13 +1,13 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: mitre-t1210-audit-kubernetes-manifest
+  name: ksp-mitre-t1210-audit-kubernetes-manifest
 spec:
   tags: ["MITRE", "T1210"] 
   message: "Kubernetes folder accessed by unknown process -- possible lateral movement "
   nodeSelector:
     matchLabels:
-      {}
+      app: test  #change app: test to match your label
   file:
     severity: 5
     matchDirectories:
