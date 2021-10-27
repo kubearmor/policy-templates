@@ -3,14 +3,17 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-persistence-boot-or-logon-autostart-execution-kernel-modules-and-extensions
 spec:
+  tags: ["MITRE"]
+  message: "Kernel Modules and Extensions is Audited"
   selector:
     matchLabels:
-      {}
+      container: ubuntu     #change your labels here
   process:
+    severity: 2
     matchPaths:
       - path: /usr/sbin/modprobe 
       - path: /usr/sbin/insmod 
       - path: /usr/sbin/modinfo
       - path: /usr/sbin/lsmod
-    action: Audit
-    severity: 4
+    action: 
+      Audit
