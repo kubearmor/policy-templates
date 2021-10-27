@@ -1,0 +1,14 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-mitre-t1571-postgresql-ingress
+spec:
+  description: "Allow ingress communication only using standard ports of PostgresSQL" 
+  endpointSelector:
+    matchLabels:
+      app: postgres          #Replace label app: postgres with your own labels.
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "5432"
+        protocol: TCP
