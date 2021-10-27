@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-au-10-non-repudiation-2  
+spec:
+  tags: ["NIST", "AU-10", "bash", "system"]                       
+  message: "Bash shell configuration files accessed"                      
+  selector:
+    matchLabels:
+      pod: test                       # change to your own labels
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/profile
+    - path: /root/.bashrc
+    - path: /root/.bash_login
+    - path: /root/.bash_logout
+    action: Audit
