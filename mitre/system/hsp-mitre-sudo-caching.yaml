@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-mitre-sudo-caching
+spec:
+  tags: ["MITRE"]
+  message: "the suoders file to elevate privileges"
+  nodeSelector:
+    matchLabels:
+      app: testpod
+  process:
+  severity: 8
+   matchPaths: 
+   - path: /var/db/sudo
+   - path: /etc/sudoers
+   action: Audit
