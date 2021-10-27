@@ -1,12 +1,15 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: block-untrusted-shell-execution
+  name: ksp-block-untrusted-shell-execution
 spec:
+  tags : ["MITRE","D3fend","Execution","Unix Shell"] 
+  message: "Deploy a container into an environment to facilitate execution or evade defenses"
   selector:
     matchLabels:
-      {}
+      app: testpod 
   process:
+    severity: 2 # Higher severity for processes 
     matchPaths:
     - path: /bin/bash
     - path: /bin/sh
@@ -24,10 +27,11 @@ spec:
       - dir: /var/
       - dir: /home/
       - dir: /usr/
-        recursive: true    
-    severity: 2 # Higher severity for processes 
-    action: Audit
+        recursive: true 
+    action: Audit   
+      
   file:
+    severity: 10  # lowest severity for processes invoked as child process of bash
     matchPaths:
     - path: /bin/bash
     - path: /bin/sh
@@ -42,6 +46,4 @@ spec:
     - path: /bin/csh
       fromSource:
       - path: /bin/bash
-    severity: 10  # lowest severity for processes invoked as child process of bash
-    action: Audit
-  tags : ["MITRE","D3fend","Execution","Unix Shell"]
+  	action: Audit
