@@ -4,7 +4,7 @@ metadata:
   name: ksp-mitre-T1543-002
 spec:
   tags: ["HOST", "MITRE", "PERSISTENCE"]
-  message: "someone tried to access system process files"
+  message: "Someone Tried to Access System Process Files"
   nodeSelector:
     matchLabels:
       pod: testpod
