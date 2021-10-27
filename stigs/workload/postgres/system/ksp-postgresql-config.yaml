@@ -1,0 +1,20 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-postgresql-config
+spec:
+  tags: ["POSTGRESQL"]
+  message: "Someone Tried to Access PostgreSQL Config Files"
+  selector:
+    matchLabels:
+      pod: testpod
+  file:
+    severity: 5
+    matchDirectories:
+      - dir: /etc/postgresql/
+        recursive: true
+        readOnly: false
+      - dir: /etc/postgresql-common/
+        recursive: true
+        readOnly: false
+    action: Audit
