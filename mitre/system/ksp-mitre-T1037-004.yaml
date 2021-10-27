@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: ksp-mitre-T1037-004
+spec:
+  tags: ["HOST", "MITRE", "PERSISTENCE", "RC"]
+  message: "Someone Tried to Access System RC Files"
+  nodeSelector:
+    matchLabels:
+      pod: testpod
+  file:
+    severity: 5
+    matchPaths:
+      - path: /etc/rc.local
+      - path: /lib/systemd/system/rc-local.service
+      - path: /usr/lib/systemd/system/rc-local.service
+      - path: /lib/systemd/system/rc-local.service.d/debian.conf
+      - path: /usr/lib/systemd/system/rc-local.service.d/debian.conf
+    action: Block
