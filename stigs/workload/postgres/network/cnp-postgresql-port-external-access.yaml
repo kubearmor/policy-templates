@@ -3,6 +3,7 @@ kind: CiliumNetworkPolicy
 metadata:
   name: cnp-postgresql-port-external-access
 spec:
+  description: "This will Block PostgreSQL External Access"
   endpointSelector:
     matchLabels:
       pod: test
