@@ -13,4 +13,4 @@ spec:
     matchPaths:
     - path: /proc/sys/kernel/yama/ptrace_scope 
     - path: /etc/sysctl.d/10-ptrace.conf      
- 	action: Block 
+ 	  action: Block 
