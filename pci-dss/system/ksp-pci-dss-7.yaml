@@ -4,7 +4,7 @@ metadata:
   name: ksp-pci-dss-7
 spec:
   tags: ["PCI-DSS", "MYSQL"]
-  message: "Someone Tried to Access MySQL Files"
+  message: "Access to MySQL Files is Denied"
   selector:
     matchLabels:
       pod: testpod
