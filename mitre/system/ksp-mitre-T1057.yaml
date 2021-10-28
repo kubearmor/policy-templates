@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-mitre-T1057
+  name: ksp-mitre-t1057
 spec:
   tags: ["MITRE", "Discovery"]
   message: "Someone Tried to Access Running Process Details"
