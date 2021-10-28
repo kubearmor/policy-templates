@@ -17,8 +17,7 @@ spec:
     - path: /usr/sbin/groupadd
     - path: /usr/sbin/newusers
     - path: /usr/sbin/chpasswd
-    - path: /usr/sbin/usermod
-      recursive: true    
+    - path: /usr/sbin/usermod    
     severity: 2 # Higher severity for processes 
     action: Block
   
