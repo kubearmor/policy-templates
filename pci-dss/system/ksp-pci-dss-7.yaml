@@ -1,0 +1,17 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-pci-dss-7
+spec:
+  tags: ["PCI-DSS", "MYSQL"]
+  message: "Access to MySQL Files is Denied"
+  selector:
+    matchLabels:
+      pod: testpod
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /var/lib/mysql/mysql/
+      recursive: true
+      readOnly: false
+    action: Block
