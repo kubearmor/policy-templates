@@ -1,0 +1,40 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-pam-files
+spec:
+  tags: ["NIST","PAM"]
+  message: "someone tried to access PAM files"
+  selector:
+    matchLabels:
+      pad: testpad
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/pamfile
+    action: Block
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/pam.conf
+      readOnly: false
+    matchDirectories:
+    - dir: /etc/pam.d/
+      recursive: false
+      readOnly: false
+    - dir: /var/lib/pam/
+      recursive: false
+      readOnly: false
+    - dir: /usr/lib/pam.d/
+      recursive: false
+      readOnly: false
+    - dir: /usr/lib/x86_64-linux-gnu/security/
+      recursive: false
+      readOnly: false
+    - dir: /usr/share/pam/
+      recursive: false
+      readOnly: false
+    - dir: /usr/share/pam-configs/
+      recursive: false
+      readOnly: false
+    action: Block
