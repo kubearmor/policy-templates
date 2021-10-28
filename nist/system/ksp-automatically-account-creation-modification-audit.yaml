@@ -3,8 +3,8 @@ kind: KubeArmorPolicy
 metadata:
   name: automatically-audit-account-creation-modification
 spec:
-  tags: ["NIST"]
-  message: "Automatically audit account creation, modification"
+  tags: ["NIST","system","account","Block","ksp"]
+  message: "Accessed account credential files and or used  account create/edit commands"
   selector:
     matchLabels:
       app: test
