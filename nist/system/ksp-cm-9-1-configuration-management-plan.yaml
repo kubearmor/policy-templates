@@ -1,0 +1,29 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: configuration-management
+spec:
+  tags: ["NIST", "CM-9-1"]
+  message: "Important configurations files is Blocked"
+  selector:
+    matchLabels:
+      pod: ubuntu              #Replace pod: ubuntu with your own labels
+  file:
+    severity: 5
+    matchDirectories:
+      - dir: /etc/network/
+        recursive: true
+      - dir: /etc/dhcp/
+        recursive: true
+    matchPaths:
+      - path: /etc/resolv.conf
+      - path: /etc/named.conf
+      - path: /etc/proftpd.conf
+      - path: /etc/exim.conf
+      - path: /etc/pure-ftpd.conf
+      - path: /etc/ca-certificates.conf
+      - path: /etc/host.conf
+      - path: /etc/nsswitch.conf
+      - path: /etc/adduser.conf
+      - path: /etc/sysctl.conf
+    action: Block
