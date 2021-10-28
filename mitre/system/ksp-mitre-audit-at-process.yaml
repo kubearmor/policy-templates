@@ -13,6 +13,5 @@ spec:
         matchPaths: 
         - path: /etc/at.allow
         - path: /etc/at.deny
-        - path: /usr/bin/at      
-  action:
-    Audit
+        - path: /usr/bin/at
+        action: Audit
