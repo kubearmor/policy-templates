@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: newstartup-automated-script-detected
+spec:
+ tags: ["Incidents"] 
+  message: "New Startup Automated Script detected
+  selector:
+    matchLabels:
+      container: test #change app: test to match your label
+  process:
+    severity: 5
+    matchPaths:
+    - path: /etc/rc0.d
+    - path: /etc/rc1.d
+    - path: /etc/rc2.d
+    - path: /etc/rcS.d
+    action: Audit
