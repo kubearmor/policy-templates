@@ -1,0 +1,11 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: deny-direct-traffic-to-cardholder
+spec:
+  description: "deny egress direct communication between cardholder and internet"
+  endpointSelector:
+    matchLabels:
+      app: cardholder # use your own cardholder app label name
+  egress:
+    - {}
