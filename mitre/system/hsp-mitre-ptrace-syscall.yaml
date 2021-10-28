@@ -12,5 +12,5 @@ spec:
     severity: 6
     matchPaths:
     - path: /proc/sys/kernel/yama/ptrace_scope 
-    - path: /etc/sysctl.d/10-ptrace.conf      
- 	  action: Block 
+    - path: /etc/sysctl.d/10-ptrace.conf
+    action: Block
