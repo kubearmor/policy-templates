@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-system-file-analysis
+spec:
+  tags: ["mitre","system","mitre"]
+  message: “This will audit the system file for analysis”
+  Selector:
+    matchLabels:
+       pod: ubuntu      #change the labels
+  process: 
+        severity: 7         #high severity
+        matchPaths: 
+        - path: /etc/passwd
+        - path: /etc/shadow
+        action:  Audit
