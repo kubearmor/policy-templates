@@ -5,7 +5,7 @@ metadata:
 spec:
   severity: 5
   tags: ["PCI-DSS", "MYSQL"]
-  message: "Someone Tried to Access MySQL files"
+  message: "Access to MySQL Files is Denied"
   selector:
     matchLabels:
       pod: testpod
