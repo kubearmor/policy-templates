@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: ksp-mitre-T1548.001-setuid-setgid
+  name: hsp-mitre-T1548.001-setuid-setgid
 spec:
   message: Blocked the setuid or setgid flag files
   tags : ["MITRE","Privilege Escalation","S-Bit"]
