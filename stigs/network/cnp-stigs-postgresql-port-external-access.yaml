@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: cnp-postgresql-port-external-access
+  name: cnp-stigs-postgresql-port-external-access
 spec:
   description: "This will Block PostgreSQL External Access"
   endpointSelector:
