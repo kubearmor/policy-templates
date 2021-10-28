@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: ksp-mysql-files-access-limit
 spec:
-  tags: ["MYSQL"]
+  tags: ["STIGS", "MYSQL"]
   message: "Someone Tried to Access MySQL Files"
   selector:
     matchLabels:
