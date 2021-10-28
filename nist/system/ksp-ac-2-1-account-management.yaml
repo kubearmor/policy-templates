@@ -1,0 +1,25 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: AUTOMATED-SYSTEM-ACCOUNT-MANAGEMENT
+spec:
+ tags: ["NIST", "AC-2"] 
+  message: "Auditing changes, deletion and addition in Users Account "
+  selector:
+    matchLabels:
+      pod: test #change app: test to match your label
+  process:
+    severity: 5
+    matchPaths:
+    - path: /etc/passwd
+    - path: /usr/sbin/useradd
+    - path: /sbin/useradd
+    - path: /usr/bin/passwd
+    - path: /bin/passwd
+    - path: /usr/sbin/usermod
+    - path: /sbin/usermod
+    - path: /usr/sbin/userdel
+    - path: /sbin/userdel
+    - path: /usr/bin/chage
+    - path: /bin/chage
+    action: Audit
