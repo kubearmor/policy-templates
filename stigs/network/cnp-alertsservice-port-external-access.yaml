@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-alertsservice-port-external-access
+spec:
+  description: "This will Block Alertsservice External Access"
+  endpointSelector:
+    matchLabels:
+      pod: test
+  ingress:
+    - fromEntities:
+        - cluster
+    - fromCIDRSet:
+        - {}
+      toPorts:
+        - ports:
+            - port: "8095"
