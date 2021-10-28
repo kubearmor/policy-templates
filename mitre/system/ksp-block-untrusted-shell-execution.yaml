@@ -46,4 +46,4 @@ spec:
     - path: /bin/csh
       fromSource:
       - path: /bin/bash
-  	action: Audit
+    action: Audit
