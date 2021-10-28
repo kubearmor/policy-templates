@@ -20,4 +20,3 @@ spec:
     - path: /usr/sbin/usermod    
     severity: 2 # Higher severity for processes 
     action: Block
-  
