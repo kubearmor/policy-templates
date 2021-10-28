@@ -1,9 +1,9 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-postgresql-console
+  name: ksp-stigs-postgresql-console
 spec:
-  tags: ["POSTGRESQL"]
+  tags: ["STIGS", "POSTGRESQL"]
   message: "Someone Tried to Access PostgreSQL Database"
   selector:
     matchLabels:
