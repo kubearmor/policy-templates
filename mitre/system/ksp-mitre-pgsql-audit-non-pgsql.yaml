@@ -1,0 +1,23 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-pgsql-audit-non-pgsql
+spec:
+  tags: ["postgres","system","mitre"]
+  message: "This will audit the data transfer from postgresql data directory to other directory"
+  selector:
+    matchLabels:
+       pod: ubuntu      #change the labels
+  process:
+    severity: 6         #high severity
+    matchPaths:
+    - path: /bin/mv
+    - path: /bin/cp
+    - path: /bin/rm
+    - path: /bin/rmdir
+    - path: /bin/ls
+    action: Audit
+    matchDirectories:
+    - dir: /var/lib/postgresql/data/
+       fromSource:
+        - path: /usr/lib/postgresql/14/bin/postgres   # trigger an alert if the source
