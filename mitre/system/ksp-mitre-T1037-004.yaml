@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: ksp-mitre-T1037-004
+  name: ksp-mitre-t1037-004
 spec:
   tags: ["HOST", "MITRE", "PERSISTENCE", "RC"]
   message: "Access to System RC Files is Denied"
