@@ -1,9 +1,9 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-postgresql-private-keys
+  name: ksp-stigs-postgresql-private-keys
 spec:
-  tags: ["POSTGRESQL"]
+  tags: ["STIGS", "POSTGRESQL"]
   message: "Someone Tried to Access Private Keys"
   selector:
     matchLabels:
