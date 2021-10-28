@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-mitre-t1548.001-setuid-setgid
+  name: ksp-mitre-t1548-001-setuid-setgid
 spec:
   message: Blocked the setuid or setgid flag
   tags : ["MITRE","Privilege Escalation","S-Bit"]
@@ -18,12 +18,7 @@ spec:
     - path: /usr/sbin/newusers
     - path: /usr/sbin/chpasswd
     - path: /usr/sbin/usermod
-      fromSource:  # trigger an alert if the source
-      - dir: /tmp/
-      - dir: /var/
-      - dir: /home/
-      - dir: /usr/
-        recursive: true    
+      recursive: true    
     severity: 2 # Higher severity for processes 
     action: Block
   
