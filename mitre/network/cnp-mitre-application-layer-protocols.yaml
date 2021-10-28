@@ -1,0 +1,39 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "cnp-mitre-application-layer-protocols"
+spec:
+  description: "This will Restrict Application Layer Protocols Access"
+  endpointSelector:
+    matchLabels:
+      pod: testpod
+  ingress:
+    - fromEntities:
+        - cluster
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "21"
+        - ports:
+            - port: "25"
+        - ports:
+            - port: "110"
+        - ports:
+            - port: "143"
+        - ports:
+            - port: "8080"
+        - ports:
+            - port: "666"
+        - ports:
+            - port: "989"
+        - ports:
+            - port: "23"
+        - ports:
+            - port: "25565"
+        - ports:
+            - port: "27015"
+        - ports:
+            - port: "80"
+        - ports:
+            - port: "443"
