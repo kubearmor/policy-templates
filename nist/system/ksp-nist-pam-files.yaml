@@ -1,13 +1,13 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: privileged-access-pam
+  name: ksp-nist-pam-files
 spec:
   tags: ["NIST","PAM"]
   message: "someone tried to access PAM files"
   selector:
     matchLabels:
-      {}
+      pad: testpad
   process:
     severity: 5
     matchPaths:
