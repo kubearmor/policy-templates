@@ -4,10 +4,10 @@ metadata:
   name: mitre-tactic-scheduled-task-job-crontab
 spec:
   message: Adversaries is abused the cron utility to perform task scheduling for initial or recurring execution of malicious code.
-  tag: ["MITRE","Execution","crontab"]
-  nodeSelector:
+  tags: ["MITRE","Execution","crontab"]
+  selector:
     matchLabels:
-       pod: system #change the labels 
+       pod: ubuntu #change the labels 
   process: 
         matchPaths: 
         - path: /etc/crontab 
