@@ -1,9 +1,9 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-postgresql-config
+  name: ksp-stigs-postgresql-config
 spec:
-  tags: ["POSTGRESQL"]
+  tags: ["STIGS", "POSTGRESQL"]
   message: "Someone Tried to Access PostgreSQL Config Files"
   selector:
     matchLabels:
