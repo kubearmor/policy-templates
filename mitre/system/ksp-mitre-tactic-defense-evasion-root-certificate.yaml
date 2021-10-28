@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: mitre-tactic-defense-evasion-root-certificate
+spec:
+  tags: ["MITRE"]
+  message: "Audit modifications in root certificates"
+  selector:
+    matchLabels:
+      container: ubuntu # Change your own match labels
+  file:
+    severity: 6
+    matchPaths:
+    - path: /etc/ca-certificates.conf
+    matchDirectories:
+    - dir: /usr/local/share/ca-certificates/
+      recursive: true
+    action: Audit
