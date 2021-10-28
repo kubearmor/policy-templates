@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: mitre-defense-evasion-modify-system-image
+spec:
+  tags: ["MITRE"]
+  message: "This policy will audit the modification of sys-images"
+  selector:
+    matchLabels:
+      container: ubuntu # Change your own labels
+  file:
+    severity: 6
+    matchPaths:       
+      - path: /etc/hostname
+      - path: /etc/hosts.allow
+      - path: /etc/hosts
+      - path: /etc/lsb-release
+      - path: /etc/networks
+    action: Audit
