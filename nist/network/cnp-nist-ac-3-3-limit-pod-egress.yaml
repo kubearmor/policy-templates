@@ -6,7 +6,7 @@ spec:
   description: "This Policy will Restrict Pod to Pod Communication within the Namespace"
   endpointSelector:
     matchLabels:
-      pod: testpod
+      pod: testpod   #change this label with your label
   egress:
     - toEndpoints:
         - {}
