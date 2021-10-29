@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1610-tactic-execution-blocking-docker
 spec:
-  tags: ["MITRE"]
+  tags: ["MITRE","T1610"]
   message: "Blocking the docker execution in the k8s environment"
   selector:
       matchLabels:
