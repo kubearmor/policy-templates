@@ -1,0 +1,17 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: cm-9-1-configuration-management
+spec:
+  tags: ["NIST", "CM-9-1"]
+  message: "Important libraries is Audited"
+  selector:
+    matchLabels:
+      pod: ubuntu #Replace pod: ubuntu with your own labels
+  file:
+    severity: 5
+    matchPaths:
+      - path: /usr/lib/x86_64-linux-gnu/libcrypt.so
+      - path: /usr/lib/x86_64-linux-gnu/libc.so
+      - path: /usr/lib/x86_64-linux-gnu/libcurl.so
+    action: Audit
