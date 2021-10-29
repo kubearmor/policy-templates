@@ -6,7 +6,7 @@ spec:
   description: "This will Block PostgreSQL External Access"
   endpointSelector:
     matchLabels:
-      pod: testpod
+      pod: testpod   #change this label with your label
   ingress:
     - fromEntities:
         - cluster
