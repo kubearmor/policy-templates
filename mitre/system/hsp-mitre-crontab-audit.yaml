@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: mitre-t1053-003-scheduled-task-job-crontab
+  name: hsp-mitre-t1053-003-scheduled-task-job-crontab
 spec:
   message: "Adversaries is abused the cron utility to perform task scheduling for initial or recurring execution of malicious code"
   tags: ["MITRE","Execution","crontab"]
