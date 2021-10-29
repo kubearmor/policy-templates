@@ -3,8 +3,8 @@ kind: KubeArmorPolicy
 metadata:
   name: new-startup-automated-script-detected
 spec:
- tags: ["MITRE", "EXECUTION"] 
-  message: "New Startup Automated Script detected
+ tags: ["MITRE", "T1059"] 
+  message: "New Startup Automated Script detected -- possibly the adversary is trying to run malicious code"
   selector:
     matchLabels:
       container: test #change app: test to match your label
