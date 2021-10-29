@@ -1,0 +1,30 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-cm-7-5-software-install
+spec:
+  tags: ["NIST"]
+  message: "Non Root User Tried to Install Something"
+  selector:
+    matchLabels:
+      pod: testpod    #change this label with your label
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/apt
+      ownerOnly: true
+    - path: /bin/apt
+      ownerOnly: true
+    - path: /usr/bin/dpkg
+      ownerOnly: true
+    - path: /bin/dpkg
+      ownerOnly: true
+    - path: /usr/bin/gdebi
+      ownerOnly: true
+    - path: /bin/gdebi
+      ownerOnly: true
+    - path: /usr/bin/make
+      ownerOnly: true
+    - path: /bin/make
+      ownerOnly: true
+    action: Block
