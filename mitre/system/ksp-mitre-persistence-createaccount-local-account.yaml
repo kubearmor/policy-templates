@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: mitre-tactic-persistence-create-account-local-account
+  name: ksp-mitre-T1053-tactic-persistence-create-account-local-account
 spec:
   tags: ["MITRE", "T1053"]
   message: "System owner discovery command is blocked"
