@@ -1,9 +1,9 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: newstartup-automated-script-detected
+  name: new-startup-automated-script-detected
 spec:
- tags: ["Incidents"] 
+ tags: ["MITRE", "EXECUTION"] 
   message: "New Startup Automated Script detected
   selector:
     matchLabels:
