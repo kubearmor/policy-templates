@@ -4,7 +4,7 @@ metadata:
   name: ksp-nist-cp-2-8-critical-system-files
 spec:
   tags: ["NIST", "CP-2-8"]
-  message: "Someone Tried Open Critical System Files"
+  message: "Someone Tried to Open Critical System Files"
   selector:
     matchLabels:
       pod: testpod   #change this label with your label
