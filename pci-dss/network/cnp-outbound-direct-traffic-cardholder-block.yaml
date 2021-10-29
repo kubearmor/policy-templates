@@ -1,11 +1,21 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: deny-direct-traffic-to-cardholder
+  name: untitled-policy
 spec:
-  description: "deny ingress direct communication between cardholder and internet"
-  endpointSelector:
-    matchLabels:
-      app: cardholder   # use your own cardholder app label name
-  ingress:
-    - {}
+  description: "do not allow direct connection outbound between cardholder to internet"
+  endpointSelector: {}
+  egress:
+    - toEntities:
+        - cluster
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+          rules:
+            dns:
+              - matchPattern: "*"
