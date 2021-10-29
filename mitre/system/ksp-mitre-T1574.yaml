@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: potential-overriding-of-common-file
 spec:
- tags: ["MITRE", "PERSISTENCE"] 
+ tags: ["MITRE", "T1574"] 
   message: "Common files were overwritten as a way to obfuscate their actions or for persistence"
   selector:
     matchLabels:
