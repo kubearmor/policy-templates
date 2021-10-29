@@ -4,7 +4,7 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-defense-evasion-system-log
 spec:
-  tags: ["MITRE", "Defense Evasion"]
+  tags: ["MITRE", "T1055"]
   message: "Defense evasion clear linux system logs"
   selector:
     matchLabels:
