@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-defense-evasion-modify-system-image
 spec:
-  tags: ["MITRE"]
+  tags: ["MITRE", "T1055"]
   message: "This policy will audit the modification of sys-images"
   selector:
     matchLabels:
