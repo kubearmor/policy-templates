@@ -4,7 +4,7 @@ metadata:
   name: ksp-mitre-pgsql-audit-non-pgsql
 spec:
   tags: ["postgres","system","mitre"]
-  message: "This will audit the data transfer from postgresql data directory to other directory"
+  message: "Warning! someone has transferred data from the Postgres data directory"
   selector:
     matchLabels:
        pod: ubuntu      #change the labels
