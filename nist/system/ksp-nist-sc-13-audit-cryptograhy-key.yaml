@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-sc-13-block-cryptograhy-key
+spec:
+  message: "cryptography key files was accessed"
+  tags: ["NIST"]
+  selector:
+    matchLabels:
+      container: ubuntu  # place your own labels
+  file:
+    severity: 3
+    matchPatterns:
+      - pattern: /[a-z]+\Wssh/gm
+      - pattern: /[a-z]+\W[a-z]+\Wssh/gm
+    action: Audit
