@@ -11,7 +11,7 @@ spec:
     - fromEntities:
         - cluster
     - fromCIDRSet:
-        - {}
+        - cidr: 10.10.10.1/16    #change with your ip address
       toPorts:
         - ports:
             - port: "5432"
