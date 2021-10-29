@@ -1,12 +1,12 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: cnp-nist-limit-pod-ingress
+  name: cnp-nist-ac-3-3-limit-pod-ingress
 spec:
   description: "This Policy will Restrict Pod to Pod Communication within the Namespace"
   endpointSelector:
     matchLabels:
-      pad: test
+      pod: testpod  #change this label with your label
   ingress:
     - fromEndpoints:
         - {}
