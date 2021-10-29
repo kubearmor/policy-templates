@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: mitre-tactic-discovery-system-owner-user-discovery
+  name: ksp-mitreT1082-tactic-discovery-system-owner-user-discovery
 spec:
   tags: ["MITRE", "T1082"]
   message: "System owner discovery command is blocked"
