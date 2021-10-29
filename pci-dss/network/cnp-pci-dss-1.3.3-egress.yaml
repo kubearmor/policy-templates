@@ -3,10 +3,9 @@ kind: CiliumNetworkPolicy
 metadata:
   name: cnp-pci-dss-1.3.3-egress
 spec:
-  description: "This will Block direct outbound connection"
   endpointSelector:
     matchLabels:
-      pod: testpod
+      pod: testpod  #change this label with your label
   egress:
     - toEntities:
         - cluster
@@ -21,3 +20,5 @@ spec:
           rules:
             dns:
               - matchPattern: "*"
+    - toCIDRSet:
+        - cidr: 10.10.10.1/16  #change with your ip address
