@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-pgsql-audit-non-pgsql
 spec:
-  tags: ["postgres","system","mitre"]
+  tags: ["postgres","system","mitre","T1588"]
   message: "Warning! someone has transferred data from the Postgres data directory"
   selector:
     matchLabels:
