@@ -4,10 +4,7 @@ metadata:
   name: changes-additions-or-deletions-to-accounts-with-root-administrative
 spec:
  tags: ["PCI-DSS"] 
-  message: "Use of and changes to identification and authentication mechanisms\u2014\
-    including but not limited to creation of new accounts and elevation of privileges\u2014\
-    and all changes, additions, or deletions to accounts with root or administrative\
-    \ privileges"
+  message: "Use of and changes to identification and authentication mechanism including but not limited to creation of new accounts and elevation of privileges and all changes, additions, or deletions to accounts with root or administrative privileges"
   selector:
     matchLabels:
       container: test #change app: test to match your label
