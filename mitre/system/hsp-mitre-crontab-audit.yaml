@@ -7,7 +7,7 @@ spec:
   tags: ["MITRE","Execution","crontab"]
   nodeSelector:
     matchLabels:
-       pod: ubuntu #change the labels 
+        kubernetes.io/hostname: gke-ubuntu # use your labels here
   process: 
         matchPaths: 
         - path: /etc/crontab 
