@@ -1,0 +1,22 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "cnp-mitre-t1496-crypto-miner-ip-blocking"
+spec:
+  description: "The policy will block crypto-miner hijacking"
+  endpointSelector:
+    matchLabels:
+      app: testpod   #change app: testpod to match your label
+  egress:
+  - toCIDRSet:
+    - cidr: 0.0.0.0/0
+      except:
+      - 51.222.149.99/32
+      - 51.159.95.151/32
+      - 172.65.215.159/32
+      - 49.12.80.38/32
+      - 163.172.226.137/32
+      - 45.32.71.82/32
+      - 192.99.69.170/32 
+      - 139.162.81.90/32
+      - 51.222.193.76/32 
