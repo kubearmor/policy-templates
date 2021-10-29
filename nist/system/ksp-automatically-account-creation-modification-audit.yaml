@@ -1,0 +1,23 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: automatically-audit-account-creation-modification
+spec:
+  tags: ["NIST","system","account","Block","ksp"]
+  message: "Accessed account credential files and or used  account create/edit commands"
+  selector:
+    matchLabels:
+      app: test
+  file:
+    severity: 3
+    matchPaths:
+    - path: /etc/passwd
+    - path: /etc/shadow
+    - path: /etc/group
+    action: Block
+  process:
+    severity: 3
+    matchPaths:
+    - path: /bin/useradd
+    - path: /bin/adduser
+    action: Block
