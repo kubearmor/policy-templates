@@ -5,7 +5,7 @@ metadata:
 spec:
   message: "Adversaries is abused the cron utility to perform task scheduling for initial or recurring execution of malicious code"
   tags: ["MITRE","Execution","crontab"]
-  selector:
+  nodeSelector:
     matchLabels:
        pod: ubuntu #change the labels 
   process: 
