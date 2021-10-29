@@ -1,0 +1,14 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: deny direct traffic outside to cardholder
+spec:
+  description: "do not allow direct connection between outside to cardholder"
+  endpointSelector:
+    matchLabels:
+      app: cardholder
+  ingress:
+    - fromEndpoints:
+        - {}
+    - fromEntities:
+        - cluster
