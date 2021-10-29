@@ -1,0 +1,66 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-cp-2-8-critical-system-files
+spec:
+  tags: ["STIGS", "MYSQL"]
+  message: "Someone Tried to Access MySQL Files"
+  selector:
+    matchLabels:
+      pod: testpod
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/fstab
+      ownerOnly: true
+    - path: /etc/crontab
+      ownerOnly: true
+    - path: /etc/group
+      ownerOnly: true
+    - path: /etc/hosts
+      ownerOnly: true
+    - path: /etc/hosts.allow
+      ownerOnly: true
+    - path: /etc/hosts.deny
+      ownerOnly: true
+    - path: /etc/issue
+      ownerOnly: true
+    - path: /etc/motd
+      ownerOnly: true
+    - path: /etc/mtab
+      ownerOnly: true
+    - path: /etc/passwd
+      ownerOnly: true
+    - path: /etc/profile
+      ownerOnly: true
+    - path: /etc/resolv.conf
+      ownerOnly: true
+    - path: /proc/cpuinfo
+      ownerOnly: true
+    - path: /proc/filesystems
+      ownerOnly: true
+    - path: /proc/interrupts
+      ownerOnly: true
+    - path: /proc/ioports
+      ownerOnly: true
+    - path: /proc/meminfo
+      ownerOnly: true
+    - path: /proc/modules
+      ownerOnly: true
+    - path: /proc/mounts
+      ownerOnly: true
+    - path: /proc/stat
+      ownerOnly: true
+    - path: /proc/swaps
+      ownerOnly: true
+    - path: /var/log/lastlog
+      ownerOnly: true
+    - path: /var/log/messages
+      ownerOnly: true
+    - path: /var/log/wtmp
+      ownerOnly: true
+    - path: /etc/services
+      ownerOnly: true
+    - path: /etc/shadow
+      ownerOnly: true
+    action: Block
