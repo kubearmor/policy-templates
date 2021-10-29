@@ -1,0 +1,15 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-t1210-blocking-tiller-misconfiguration
+spec:
+  tags: ["MITRE","T1210"]
+  message: "Blocking the tiller for RBAC Least Privileges Misconfiguration "
+  selector:
+      matchLabels:
+          app: testpod #change app: testpod to match your label
+  process:
+    severity: 6
+    matchPaths: 
+    - path: /usr/local/bin/tiller
+    action: Block 
