@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-non-application-layer-protocol
 spec:
-  tags: ["mitre","system","ksp"]
+  tags: ["mitre","system","ksp","T1016"]
   message: “Alert! audited the non-application layer protocol communication”
   selector:
     matchLabels:
