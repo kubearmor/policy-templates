@@ -4,7 +4,7 @@ metadata:
   Name: ksp-mitre-tactic-scheduled-job-analysis
 spec:
   tags: ["mitre","system","cron"]
-  message: “Audit the scheduled job analysis”
+  message: “Someone tried to access scheduled job”
   selector:
     matchLabels:
       pod: ubuntu #change the labels 
