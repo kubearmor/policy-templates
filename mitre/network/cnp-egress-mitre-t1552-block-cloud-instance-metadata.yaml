@@ -1,0 +1,15 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "cnp-mitre-t1552-block-cloud-instance-metadata-access-from-pods"
+spec:
+  description: "The policy will block access to cloud metadata ips from containers"
+  endpointSelector:
+    matchLabels:
+      app: testpod # change app: testpod to match your label
+  egress:
+  - toCIDRSet:
+    - cidr: 0.0.0.0/0
+      except:
+      - 169.254.169.254/32
+      - 169.254.170.2/32
