@@ -4,9 +4,7 @@ metadata:
   name: "cnp-egress-mitre-t1496-crypto-miner-ip-blocking"
 spec:
   description: "The policy will block crypto-miner hijacking"
-  endpointSelector:
-    matchLabels:
-      app: testpod   #change app: testpod to match your label
+  endpointSelector: {}
   egress:
   - toCIDRSet:
     - cidr: 0.0.0.0/0
@@ -19,4 +17,4 @@ spec:
       - 45.32.71.82/32
       - 192.99.69.170/32 
       - 139.162.81.90/32
-      - 51.222.193.76/32 
+      - 51.222.193.76/32
