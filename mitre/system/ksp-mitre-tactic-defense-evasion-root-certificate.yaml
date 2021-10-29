@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-defense-evasion-root-certificate
 spec:
-  tags: ["MITRE"]
+  tags: ["MITRE", "T1055"]
   message: "Audit modifications in root certificates"
   selector:
     matchLabels:
