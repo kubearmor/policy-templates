@@ -3,7 +3,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-mitre-t1046-network-service-scanning
 spec:
-  tags: ["MITRE"]
+  tags: ["MITRE","T1046"]
   message: "listing of services running on remote hosts, including those that may be vulnerable to remote software"
   nodeSelector:
     matchLabels:
