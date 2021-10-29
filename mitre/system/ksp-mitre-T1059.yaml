@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: new-startup-automated-script-audit
+spec:
+ tags: ["MITRE", "T1059"] 
+  message: "New Startup Automated Script detected -- possibly the adversary is trying to run malicious code"
+  selector:
+    matchLabels:
+      container: test #change app: test to match your label
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /etc/rc0.d/
+    - dir: /etc/rc1.d/
+    - dir: /etc/rc2.d/
+    - dir: /etc/rcS.d/
+    action: Audit
