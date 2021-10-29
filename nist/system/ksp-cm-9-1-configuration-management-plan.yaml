@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: configuration-management
+  name: cm-9-1-configuration-management
 spec:
   tags: ["NIST", "CM-9-1"]
   message: "Important configurations files is Blocked"
