@@ -1,0 +1,53 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: potential-overriding-of-common-file-audit
+spec:
+ tags: ["MITRE", "T1574"] 
+  message: "Common files were overwritten as a way to obfuscate their actions or for persistence"
+  selector:
+    matchLabels:
+      container: test #change app: test to match your label
+  file:
+    severity: 5
+    matchPaths:
+    - path: /boot/vmlinuz
+    - path: /dev/hda
+    - path: /dev/hdc
+    - path: /dev/null
+    - path: /etc/aliases
+    - path: /etc/bashrc
+    - path: /etc/crontab
+    - path: /etc/exports
+    - path: /etc/fstab
+    - path: /etc/group
+    - path: /etc/grub.conf
+    - path: /etc/hosts
+    - path: /etc/hosts.allow
+    - path: /etc/hosts.deny
+    - path: /etc/inittab
+    - path: /etc/issue
+    - path: /etc/lilo.conf
+    - path: /etc/modules.conf
+    - path: /etc/motd
+    - path: /etc/mtab
+    - path: /etc/passwd
+    - path: /etc/printcap
+    - path: /etc/profile
+    - path: /etc/resolv.conf
+    - path: /etc/securetty
+    - path: /etc/termcap
+    - path: /proc/cpuinfo
+    - path: /proc/filesystems
+    - path: /proc/interrupts
+    - path: /proc/ioports
+    - path: /proc/meminfo
+    - path: /proc/modules
+    - path: /proc/mounts
+    - path: /proc/stat
+    - path: /proc/swaps
+    - path: /proc/version
+    - path: /var/log/lastlog
+    - path: /var/log/messages
+    - path: /var/log/wtmp
+    action: Audit
