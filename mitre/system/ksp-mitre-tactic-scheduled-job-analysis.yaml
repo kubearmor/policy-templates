@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   Name: ksp-mitre-tactic-scheduled-job-analysis
 spec:
-  tags: ["mitre","system","cron"]
+  tags: ["mitre","system","cron","T1053"]
   message: “Someone tried to access scheduled job”
   selector:
     matchLabels:
