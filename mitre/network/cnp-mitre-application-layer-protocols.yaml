@@ -10,8 +10,8 @@ spec:
   ingress:
     - fromEntities:
         - cluster
-    - fromEntities:
-        - world
+    - fromCIDRSet:
+        - cidr: 10.10.10.1/16  #change with your id address
       toPorts:
         - ports:
             - port: "21"
