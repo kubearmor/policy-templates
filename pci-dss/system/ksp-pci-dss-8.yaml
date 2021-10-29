@@ -18,7 +18,7 @@ spec:
     matchPaths:
     - path: /var/log/mysql.log
       fromSource:
-      - path: /bin/rm
+      - path: /usr/bin/rm
       - path: /usr/bin/touch
       - path: /usr/bin/cat
       - path: /usr/bin/nano
