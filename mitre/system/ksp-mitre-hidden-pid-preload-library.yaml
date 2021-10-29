@@ -1,0 +1,28 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-hidden-pid-preload-library
+spec:
+  tags: ["MITRE","T1574.006"]
+  message: "Audit the hidden process in system and linked library"
+  selector:
+    matchLabels:
+      container: ubuntu # Change your own labels
+  file:
+    severity: 2
+    matchDirectories:
+    - dir: /proc/
+    - dir: /usr/local/lib/
+    matchPaths:
+    - path: /etc/ld.so.preload
+    action: Audit
+  process:
+    severity: 2
+    matchPaths:
+    - path: /etc/ld.so.preload
+    - path: /proc/1/cmdline
+    - path: /proc/1/status
+    - path: /proc/1/stat
+    action: Audit
+
+
