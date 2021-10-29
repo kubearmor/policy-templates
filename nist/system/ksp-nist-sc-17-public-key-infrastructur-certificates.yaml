@@ -1,0 +1,20 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-sc-17-public-key-infrastructure-certificates
+spec:
+  tags: ["NIST", "SC-17"]
+  message: "Pki Certificates is Blocked"
+  selector:
+    matchLabels:
+      app: ubuntu        #change your labels here
+  file:
+    severity: 5
+    matchDirectories:
+      - dir: /etc/pki/
+        recursive: true
+      - dir: /etc/ssl/certs/
+        recursive: true
+      - dir: /usr/local/share/ca-certificates/
+        recursive: true
+    action: Block
