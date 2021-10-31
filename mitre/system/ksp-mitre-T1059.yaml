@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: new-startup-automated-script-audit
 spec:
- tags: ["MITRE", "T1059"] 
+  tags: ["MITRE", "T1059"] 
   message: "New Startup Automated Script detected -- possibly the adversary is trying to run malicious code"
   selector:
     matchLabels:
