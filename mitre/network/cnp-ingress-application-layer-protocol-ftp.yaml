@@ -1,0 +1,20 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "cnp-ingress-t1071-ftp-rule"
+spec:
+  description: "Policy to Deny FTP Incoming Traffic"
+  endpointSelector:
+    matchLabels:
+      app: test        #change app: test to match your label
+  ingress:
+    - toPorts:
+        - ports:
+            - port: "20"
+              protocol: TCP
+            - port: "21"
+              protocol: TCP
+            - port: "990"
+              protocol: TCP
+            - port: "69"
+              protocol: UDP
