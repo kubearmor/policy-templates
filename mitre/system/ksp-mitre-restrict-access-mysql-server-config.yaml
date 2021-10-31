@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-restrict-access-mysql-server-config
+spec:
+  tags: ["mysql","mitre","system"]
+  message: "Warning! someone tried access the MySQL server config file"
+  selector:
+    matchLabels:
+      pod: ubuntu      #change the labels
+  file:
+    severity: 5      # medium severity
+    matchPaths:
+    - path: /etc/mysql/my.cnf
+      ownerOnly: true
+    action: Block

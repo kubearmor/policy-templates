@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  Name: ksp-mitre-tactic-scheduled-job-analysis
+spec:
+  tags: ["mitre","system","cron","T1053"]
+  message: “Someone tried to access scheduled job”
+  selector:
+    matchLabels:
+      pod: ubuntu #change the labels 
+  process:
+    severity: 7 # lower severity
+    matchPaths:
+    - path: /var/spool/cron/atjobs
+    - path: /var/spool/cron/atspool
+    - path: /proc/loadavg
+    - path: /var/run/utmp
+    action: Audit

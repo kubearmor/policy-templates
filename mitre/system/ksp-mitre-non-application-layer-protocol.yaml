@@ -1,0 +1,15 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-non-application-layer-protocol
+spec:
+  tags: ["mitre","system","ksp","T1016"]
+  message: “Alert! audited the non-application layer protocol communication”
+  selector:
+    matchLabels:
+      pod: ubuntu      #change the labels 
+  process:
+    severity: 5       # medium severity
+    matchPaths:
+    - path: /bin/ping 
+    action: Audit
