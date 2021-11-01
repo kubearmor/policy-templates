@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: firewall policy
+spec:
+  endpointSelector: {}
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+             app: test #use your own pod name
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: any
+        - ports:
+            - port: "80"
+              protocol: any
