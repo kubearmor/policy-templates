@@ -20,9 +20,4 @@ spec:
     severity: 2
     matchPaths:
     - path: /etc/ld.so.preload
-    - path: /proc/1/cmdline
-    - path: /proc/1/status
-    - path: /proc/1/stat
     action: Audit
-
-
