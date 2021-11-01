@@ -3,6 +3,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-defense-evasion-system-log
+  namespace: default
 spec:
   tags: ["MITRE", "T1055"]
   message: "Defense evasion clear linux system logs"
