@@ -2,6 +2,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: mitre-tactic-defense-evasion-root-certificate
+  namespace: default
 spec:
   tags: ["MITRE", "T1055"]
   message: "Audit modifications in root certificates"
