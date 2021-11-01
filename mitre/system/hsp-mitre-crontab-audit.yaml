@@ -1,13 +1,13 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: mitre-tactic-scheduled-task-job-crontab
+  name: hsp-mitre-t1053-003-scheduled-task-job-crontab
 spec:
-  message: Adversaries is abused the cron utility to perform task scheduling for initial or recurring execution of malicious code.
+  message: "Adversaries is abused the cron utility to perform task scheduling for initial or recurring execution of malicious code"
   tags: ["MITRE","Execution","crontab"]
-  selector:
+  nodeSelector:
     matchLabels:
-       pod: ubuntu #change the labels 
+        kubernetes.io/hostname: gke-ubuntu # use your labels here
   process: 
         matchPaths: 
         - path: /etc/crontab 
@@ -19,10 +19,6 @@ spec:
         - path: /etc/cron.monthly
         - path: /etc/cron.hourly
         - path: /etc/cron.weekly
-          fromSource: # trigger an alert if the source
-           - dir: /etc/
-           - dir: /usr/sbin/
-             recursive: true
         severity: 2 # Higher severity 
         action: Audit
   file:
@@ -41,6 +37,3 @@ spec:
                - path: /usr/sbin
           action: Audit
           severity: 7 # lowest severity
-      
-  
-  

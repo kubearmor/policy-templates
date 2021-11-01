@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: sa-10-5-developer-configuration-management
+spec:
+  tags: ["NIST", "sa-10-5"]
+  message: "Package Manager is Audited "
+  selector:
+    matchLabels:
+      container: ubuntu       # use your own matchLabels
+  process:
+    severity: 2
+    matchPaths:
+      - path: /usr/bin/apt
+      - path: /usr/local/bin/apt-get
+      - path: /usr/bin/dpkg
+      - path: /usr/bin/snap
+  action: Audit

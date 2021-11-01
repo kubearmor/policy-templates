@@ -30,6 +30,13 @@ Please follow the hierarchy while contribution
 │   ├── system
 │   │   └── ksp-remote-file-copy-block.yaml
 │   │   └── ksp-active-directory-audit.yaml
+├── cves
+│   ├── network
+│   │   └── cnp-CVE-2009-0932.yaml
+│   ├── system
+│   │   └── ksp-CVE-2021-29156.yaml
+│   │   └── ksp-CVE-2021-29442.yaml
+...
 ```
 
 📖 Documentation

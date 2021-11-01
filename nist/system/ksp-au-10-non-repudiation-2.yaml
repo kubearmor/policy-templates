@@ -14,5 +14,4 @@ spec:
     - path: /etc/profile
     - path: /root/.bashrc
     - path: /root/.bash_login
-    - path: /root/.bash_logout
     action: Audit

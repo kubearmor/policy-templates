@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-t1082-tactic-discovery-system-owner-user-discovery
+spec:
+  tags: ["MITRE", "T1082"]
+  message: "System owner discovery command is blocked"
+  selector:
+    matchLabels:
+      app: ubuntu                 # use your own label here
+  process:
+    severity: 3
+    matchPaths:
+      - path: /usr/bin/who
+      - path: /usr/bin/w
+      - path: /usr/bin/id
+      - path: /usr/bin/whoami
+  action: Block

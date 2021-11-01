@@ -22,14 +22,7 @@ spec:
     - path: /bin/zsh
     - path: /bin/tcsh
     - path: /bin/csh
-      fromSource:  # trigger an alert if the source
-      - dir: /tmp/
-      - dir: /var/
-      - dir: /home/
-      - dir: /usr/
-        recursive: true 
     action: Audit   
-      
   file:
     severity: 10  # lowest severity for processes invoked as child process of bash
     matchPaths:

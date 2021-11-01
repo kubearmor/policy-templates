@@ -1,0 +1,53 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mysql-files-access-limit
+spec:
+  tags: ["STIGS", "MYSQL"]
+  message: "Someone Tried to Access MySQL Files"
+  selector:
+    matchLabels:
+      pod: testpod
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/mysql/my.cnf
+      ownerOnly: true
+    - path: /etc/mysql/mariadb.conf.d
+      ownerOnly: true
+    - path: /etc/mysql/conf.d
+      ownerOnly: true
+    - path: /etc/mysql/debian-start
+      ownerOnly: true
+    - path: /etc/mysql/debian.cnf
+      ownerOnly: true
+    - path: /etc/mysql/mariadb.cnf
+      ownerOnly: true
+    - path: /mysqld.pid
+      ownerOnly: true
+    - path: /tmp/mysql.sock
+      ownerOnly: true
+    - path: /usr/lib/systemd/system/mysql.service
+      ownerOnly: true
+    - path: /usr/lib/systemd/system/mysqld.service
+      ownerOnly: true
+    matchDirectories:
+    - dir: /etc/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /usr/lib/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /usr/share/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /var/lib/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /var/log/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /usr/local/mysql/
+      recursive: true
+      ownerOnly: true
+    action: Block

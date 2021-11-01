@@ -1,0 +1,26 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: database-log-cannot-be-modified
+spec:
+  tags: ["PCI-DSS"] 
+  message: "Database log cannot be modified or removed"
+  selector:
+    matchLabels:
+      pod: test  #change app: test to match your label
+  file:
+    severity: 5
+    matchPaths:
+    - path: /var/log/utmp
+    action: Audit
+  file:
+    severity: 7
+    matchPaths:
+    - path: /var/log/mysql.log
+      fromSource:
+      - path: /usr/bin/rm
+      - path: /usr/bin/touch
+      - path: /usr/bin/cat
+      - path: /usr/bin/nano
+      - path: /usr/bin/vi
+      action: Block

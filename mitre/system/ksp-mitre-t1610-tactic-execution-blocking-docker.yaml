@@ -1,0 +1,15 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-t1610-tactic-execution-blocking-docker
+spec:
+  tags: ["MITRE","T1610"]
+  message: "Blocking the docker execution in the k8s environment"
+  selector:
+      matchLabels:
+          app: testpod #change app: testpod to match your label 
+  process:
+    severity: 5
+    matchPaths: 
+    - path: /usr/bin/docker
+    action: Block

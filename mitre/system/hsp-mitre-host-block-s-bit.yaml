@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: hsp-mitre-T1548.001-setuid-setgid
+  name: hsp-mitre-t1548-setuid-setgid
 spec:
   message: Blocked the setuid or setgid flag files
   tags : ["MITRE","Privilege Escalation","S-Bit"]
@@ -17,13 +17,6 @@ spec:
     - path: /usr/sbin/groupadd
     - path: /usr/sbin/newusers
     - path: /usr/sbin/chpasswd
-    - path: /usr/sbin/usermod
-      fromSource:  # trigger an alert if the source
-      - dir: /tmp/
-      - dir: /var/
-      - dir: /home/
-      - dir: /usr/
-        recursive: true    
+    - path: /usr/sbin/usermod   
     severity: 2 # Higher severity for processes 
     action: Block
-  

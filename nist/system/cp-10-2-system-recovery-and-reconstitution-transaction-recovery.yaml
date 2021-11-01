@@ -1,0 +1,27 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: cp-10-2-system-recovery-and-reconstitution
+spec:
+  tags: ["NIST", "Cp-10-2"]
+  message: "Database Manager System Paths is Audited"
+  selector:
+    matchLabels:
+      pod: test           #change pod: test to match your label          
+  file:
+    severity: 5
+    matchDirectories:
+      - dir: /var/lib/mysql/
+        recursive: true
+      - dir: /var/lib/postgresql/
+        recursive: true   
+      - dir: /etc/mysql/
+        recursive: true
+      - dir: /etc/postgres/
+        recursive: true   
+      - dir: /var/log/mysql/
+        recursive: true   
+      - dir: /var/log/postgresql/
+        recursive: true           
+    action: 
+      Audit

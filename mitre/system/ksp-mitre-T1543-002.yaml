@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: ksp-mitre-T1543-002
+  name: ksp-mitre-t1543-002
 spec:
   tags: ["HOST", "MITRE", "PERSISTENCE"]
   message: "Someone Tried to Access System Process Files"
