@@ -2,6 +2,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-hidden-pid-preload-library
+  namespace: default
 spec:
   tags: ["MITRE","T1574.006"]
   message: "Audit the hidden process in system and linked library"
