@@ -2,8 +2,9 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-nist-ac-3-3-limit-pod-egress
+  namespace: default   #change with your namespace
 spec:
-  description: "This Policy will Restrict Pod to Pod Communication within the Namespace"
+  description: "This Policy will only allow all Pods in the same namespace"
   endpointSelector:
     matchLabels:
       pod: testpod   #change this label with your label
