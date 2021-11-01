@@ -1,0 +1,70 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-cm-7-5-software-install
+spec:
+  tags: ["NIST"]
+  message: "Non Root User Tried to Install Something"
+  selector:
+    matchLabels:
+      pod: testpod    #change this label with your label
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/apt
+      ownerOnly: true
+    - path: /bin/apt
+      ownerOnly: true
+    - path: /usr/bin/dpkg
+      ownerOnly: true
+    - path: /bin/dpkg
+      ownerOnly: true
+    - path: /usr/bin/gdebi
+      ownerOnly: true
+    - path: /bin/gdebi
+      ownerOnly: true
+    - path: /usr/bin/make
+      ownerOnly: true
+    - path: /bin/make
+      ownerOnly: true
+    - path: /usr/bin/yum
+      ownerOnly: true
+    - path: /bin/yum
+      ownerOnly: true
+    - path: /usr/bin/rpm
+      ownerOnly: true
+    - path: /bin/rpm
+      ownerOnly: true
+    - path: /usr/bin/dnf
+      ownerOnly: true
+    - path: /bin/dnf
+      ownerOnly: true
+    - path: /usr/bin/pacman
+      ownerOnly: true
+    - path: /usr/sbin/pacman
+      ownerOnly: true
+    - path: /bin/pacman
+      ownerOnly: true
+    - path: /sbin/pacman
+      ownerOnly: true
+    - path: /usr/bin/makepkg
+      ownerOnly: true
+    - path: /usr/sbin/makepkg
+      ownerOnly: true
+    - path: /bin/makepkg
+      ownerOnly: true
+    - path: /sbin/makepkg
+      ownerOnly: true
+    - path: /usr/bin/yaourt
+      ownerOnly: true
+    - path: /usr/sbin/yaourt
+      ownerOnly: true
+    - path: /bin/yaourt
+      ownerOnly: true
+    - path: /sbin/yaourt
+      ownerOnly: true
+    - path: /usr/bin/zypper
+      ownerOnly: true
+    - path: /bin/zypper
+      ownerOnly: true
+    action: Block
