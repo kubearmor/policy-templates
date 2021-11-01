@@ -27,4 +27,44 @@ spec:
       ownerOnly: true
     - path: /bin/make
       ownerOnly: true
+    - path: /usr/bin/yum
+      ownerOnly: true
+    - path: /bin/yum
+      ownerOnly: true
+    - path: /usr/bin/rpm
+      ownerOnly: true
+    - path: /bin/rpm
+      ownerOnly: true
+    - path: /usr/bin/dnf
+      ownerOnly: true
+    - path: /bin/dnf
+      ownerOnly: true
+    - path: /usr/bin/pacman
+      ownerOnly: true
+    - path: /usr/sbin/pacman
+      ownerOnly: true
+    - path: /bin/pacman
+      ownerOnly: true
+    - path: /sbin/pacman
+      ownerOnly: true
+    - path: /usr/bin/makepkg
+      ownerOnly: true
+    - path: /usr/sbin/makepkg
+      ownerOnly: true
+    - path: /bin/makepkg
+      ownerOnly: true
+    - path: /sbin/makepkg
+      ownerOnly: true
+    - path: /usr/bin/yaourt
+      ownerOnly: true
+    - path: /usr/sbin/yaourt
+      ownerOnly: true
+    - path: /bin/yaourt
+      ownerOnly: true
+    - path: /sbin/yaourt
+      ownerOnly: true
+    - path: /usr/bin/zypper
+      ownerOnly: true
+    - path: /bin/zypper
+      ownerOnly: true
     action: Block
