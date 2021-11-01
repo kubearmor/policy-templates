@@ -1,0 +1,31 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: changes-additions-or-deletions-to-accounts-with-root-administrative-audit
+spec:
+ tags: ["PCI-DSS"] 
+  message: "Use of and changes to identification and authentication mechanism including but not limited to creation of new accounts and elevation of privileges and all changes, additions, or deletions to accounts with root or administrative privileges"
+  selector:
+    matchLabels:
+      container: test #change app: test to match your label
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/sbin/useradd
+    - path: /sbin/useradd
+    - path: /usr/sbin/usermod
+    - path: /sbin/usermod
+    - path: /usr/sbin/userdel
+    - path: /sbin/userdel 
+    - path: /usr/bin/chage
+    - path: /usr/bin/passwd
+    - path: /usr/bin/chage
+    - path: /bin/passwd
+    action: Audit
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/passwd
+    - path: /var/log/utmw
+    - path: /var/log/btmp
+    action: Audit
