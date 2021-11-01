@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: untitled-policy
+  name: deny-outbound-direct-traffic-to-cardholder
 spec:
   description: "do not allow direct connection outbound between cardholder to internet"
   endpointSelector: {}
