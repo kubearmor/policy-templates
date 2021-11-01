@@ -86,4 +86,8 @@ spec:
       ownerOnly: true
     - path: /sbin/dmidecode
       ownerOnly: true
+    - path: /usr/bin/wget
+      ownerOnly: true
+    - path: /bin/wget
+      ownerOnly: true
     action: Block
