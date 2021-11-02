@@ -1,0 +1,43 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-ac-17-3-ra-man-acc-ctl-ssh-block
+  namespace: default # Change namespace
+spec:
+  tags: ["NIST", "AC-17(3)"]
+  message: "This policy will block remote connections to the pods (ssh)."
+  selector:
+    matchLabels:
+      container: ubuntu # Change your match labels
+  file:
+    severity: 2
+    matchPaths:
+    - path: /etc/ssh/moduli
+    - path: /etc/ssh/ssh_host_ecdsa_key 
+    - path: /etc/ssh/ssh_host_ed25519_key
+    - path: /etc/ssh/ssh_host_rsa_key
+    - path: /etc/ssh/ssh_import_id
+    - path: /etc/ssh/ssh_config 
+    - path: /etc/ssh/ssh_host_ecdsa_key.pub 
+    - path: /etc/ssh/ssh_host_ed25519_key.pub 
+    - path: /etc/ssh/ssh_host_rsa_key.pub  
+    - path: /etc/ssh/sshd_config
+    - path: /usr/lib/openssh/agent-launch
+    - path: /usr/lib/openssh/ssh-session-cleanup
+    action: Block
+  process:
+    severity: 2
+    matchPaths:
+    - path: /usr/bin/ssh
+    - path: /usr/bin/ssh-add
+    - path: /usr/bin/ssh-argv0
+    - path: /usr/bin/ssh-copy-id
+    - path: /usr/bin/ssh-import-id
+    - path: /usr/bin/ssh-import-id-gh
+    - path: /usr/bin/ssh-import-id-lp
+    - path: /usr/bin/ssh-keygen
+    - path: /usr/bin/ssh-keyscan
+    - path: /usr/lib/openssh/ssh-keysign
+    - path: /usr/lib/openssh/sftp-server
+    - path: /usr/lib/openssh/ssh-pkcs11-helper
+    action: Block
