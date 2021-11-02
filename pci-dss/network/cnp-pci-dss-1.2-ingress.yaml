@@ -3,7 +3,9 @@ kind: CiliumNetworkPolicy
 metadata:
   name: firewall policy
 spec:
-  endpointSelector: {}
+  endpointSelector:
+    matchLabels:
+      pod: testpod  #change this label with your label
   ingress:
     - fromEndpoints:
         - matchLabels:
