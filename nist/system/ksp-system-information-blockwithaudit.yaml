@@ -1,0 +1,27 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: audit-the-system-level-information
+  namespace: default
+spec:
+  tags: ["NIST","system","ksp","CP-9(4)"]
+  message: "Suspicious! someone tried to know your system information"
+  selector:
+    matchLabels:
+      pod: ubuntu    #change the labels
+  file:
+    severity: 3
+    matchDirectories:
+    - dir: /proc/
+      recursive: true
+    action: Audit
+  process:
+    severity: 4       
+    matchPaths:
+    - path: /bin/uname
+    - path: /usr/bin/lshw
+    - path: /usr/bin/lscpu
+    - path: /bin/lsblk
+    - path: /usr/bin/lspci
+    - path: /sbin/fdisk
+    action: Block
