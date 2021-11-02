@@ -1,0 +1,29 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-cm-8-7-system-component-inventory-audit
+spec:
+  tags: ["NIST","CM-8-7"] 
+  message: "Auditing system component inventory and package logs"
+  selector:
+    matchLabels:
+      pod: test #change this label with your label
+  file:
+    severity: 7
+    matchPaths:
+    - path: /etc/apt/sources.list
+    - path: /etc/yum.conf
+    - path: /var/log/dpkg.log
+      readOnly: true
+    - path: /var/log/yum.log
+      readOnly: true
+      - path: /var/log/zypper.log
+      readOnly: true
+    matchDirectories:
+    - dir: /etc/apt/sources.list.d/
+      recursive: true
+    - dir: /etc/yum.repos.d/
+      recursive: true
+    - dir: /etc/zypp/repos.d/
+      recursive: true
+    action: Audit
