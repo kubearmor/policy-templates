@@ -1,0 +1,17 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-1-1-5-scheduler-pod-block
+spec:
+  tags: ["CIS", "1.1.5","K8", "V1.20"]
+  message: "This policy will block kube-scheduler.yaml access"
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-cluster-1-default-pool-a0926cb0-2sw2 # Change your node
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/kubernetes/manifests/kube-scheduler.yaml
+      readOnly: false
+      ownerOnly: true
+    action: Block
