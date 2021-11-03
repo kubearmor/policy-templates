@@ -1,0 +1,29 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: restrict-external-media-device-access
+spec:
+ tags: ["NIST", "MP5"] 
+  message: "Restrict the activities associated with the transport of information system media "
+  selector:
+    matchLabels:
+      pod: test #change app: test to match your label
+  path:
+    severity: 5
+    matchPaths:
+    - path: /dev/bus/usb 
+    - path: /dev/fd0     
+    - path: /dev/fd1     
+    - path: /dev/scd0    
+    - path: /dev/scd0     
+    - path: /dev/sr0    
+    - path: /dev/sr1
+    action: Block
+  process:
+    severity: 5
+    matchPaths: 
+    - path: /dev/ttyUSB0  
+    - path: /dev/ttyUSB1
+    - path: /dev/ttyACM0  
+    - path: /dev/ttyS0    
+    action: Block
