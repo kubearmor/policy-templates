@@ -1,0 +1,26 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: sc-24-fail-in-known-state
+  namespace: testns ##use your own namespace
+spec:
+  tags: ["NIST", "sc-24"]
+  message: "The Reboot Logs is Audited "
+  selector:
+    matchLabels:
+      container: ubuntu-1 #use your own matchLabels
+  process:
+    severity: 2
+    matchPaths:
+      - path: /usr/bin/dpkg
+    action: Block
+  file:
+    severity: 6
+    matchPaths:
+      - path: /var/adm/wtmp
+      - path: /var/adm/pacct
+      - path: /var/adm/sulog
+      - path: /var/log/wtmp
+      - path: /var/log/btmp
+      - path: /var/run/utmp
+    action: Audit
