@@ -2,13 +2,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: sc-24-fail-in-known-state
-  namespace: testns ##use your own namespace
+  namespace: testns                    #use your own namespace
 spec:
   tags: ["NIST", "sc-24"]
   message: "The Reboot Logs is Audited "
   selector:
     matchLabels:
-      container: ubuntu-1 #use your own matchLabels
+      container: ubuntu-1            #use your own matchLabels
   process:
     severity: 2
     matchPaths:
