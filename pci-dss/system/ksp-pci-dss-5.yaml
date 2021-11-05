@@ -3,7 +3,7 @@ kind: KubeArmorPolicy
 metadata:
   name: changes-additions-or-deletions-to-accounts-with-root-administrative-audit
 spec:
- tags: ["PCI-DSS"] 
+ tags: ["PCI-DSS-10.2.5"] 
   message: "Use of and changes to identification and authentication mechanism including but not limited to creation of new accounts and elevation of privileges and all changes, additions, or deletions to accounts with root or administrative privileges"
   selector:
     matchLabels:
