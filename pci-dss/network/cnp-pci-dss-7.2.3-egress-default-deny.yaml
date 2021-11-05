@@ -1,0 +1,15 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: deny-all-egress
+spec:
+  description: "Egress default deny communicate through port the only 443"
+  endpointSelector:
+    matchLabels:
+      role: restricted
+  egress:
+    - toEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "443"
