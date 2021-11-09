@@ -1,0 +1,17 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-1.1.13-admin-conf-block
+spec:
+  tags: ["CIS", "1.1.13","K8", "V1.20"]
+  message: "This policy will block admin.conf access"
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-cluster-1-default-pool-f03ca967-10jc # Change your node
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/kubernetes/admin.conf
+      readOnly: true
+      ownerOnly: true
+    action: Block
