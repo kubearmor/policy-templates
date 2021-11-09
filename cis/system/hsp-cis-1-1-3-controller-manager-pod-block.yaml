@@ -1,0 +1,17 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-1-1-3-controller-manager-pod-block
+spec:
+  tags: ["CIS", "1.1.3","K8"]
+  message: "This policy will block kube-controller-manager.yaml access"
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-sample-cluster-on-bo-default-pool-5131fc21-1957 # Change your node
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/kubernetes/manifests/kube-controller-manager.yaml
+      readOnly: false
+      ownerOnly: true
+    action: Block
