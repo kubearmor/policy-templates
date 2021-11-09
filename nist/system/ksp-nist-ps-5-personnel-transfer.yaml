@@ -1,0 +1,28 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-ps-5-personnel-transfer
+spec:
+  tags: ["NIST", "PS-5", "SP 800-53"] 
+  message: "Auditing user account management activites and privileged commands"
+  selector:
+    matchLabels:
+      pod: test #change this label with your label
+  process:
+    severity: 7
+    matchPaths:
+    - path: /usr/bin/chmod
+    - path: /usr/sbin/useradd
+    - path: /usr/bin/chown
+    - path: /usr/sbin/userdel
+    - path: /usr/bin/kill
+    - path: /usr/sbin/usermod
+    - path: /usr/bin/passwd
+    - path: /usr/bin/chsh
+    action: Audit
+    file:
+    severity: 7
+    matchDirectories:
+    - dir: /etc/skel/
+      recursive: true
+    action: Audit
