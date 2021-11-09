@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: protection-of-information-at-rest
+spec:
+ tags: ["NIST" , "SC-28(1)" , "SYSTEM-AND-COMMUNICATION" , "PCF"] 
+  message: "This control addresses the confidentiality and integrity of information at rest and covers user information and system information."
+  selector:
+    matchLabels:
+      container: test #change app: test to match your label
+  file:
+    severity: 7
+    matchPaths:
+    - path: /proc/meminfo
+    - path: /proc/mounts
+    action: Audit
