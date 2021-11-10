@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: persistence-blis-rc-scripts
+  name: ksp-persistence-blis-rc-scripts
 spec:
   tags: ["MITRE", "Persistence"]
   selector:
