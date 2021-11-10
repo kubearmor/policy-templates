@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: mitre-tactic-persistence-boot-or-logon-autostart-execution-kernel-modules-and-extensions
+  name: ksp-mitre-tactic-persistence-boot-or-logon-autostart-execution-kernel-modules-and-extensions
 spec:
   selector:
     matchLabels:
