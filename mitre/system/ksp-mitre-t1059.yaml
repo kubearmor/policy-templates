@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: new-startup-automated-script-audit
+  name: ksp-mitre-t1059.yaml
 spec:
   tags: ["MITRE", "T1059"] 
   message: "New Startup Automated Script detected -- possibly the adversary is trying to run malicious code"
