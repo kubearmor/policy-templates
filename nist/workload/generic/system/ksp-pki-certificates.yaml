@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: sc-17-public-key-infrastructure-certificates
+  name: ksp-sc-17-public-key-infrastructure-certificates
 spec:
   selector:
     matchLabels:
