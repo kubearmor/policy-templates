@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: psql-block
+  name: ksp-psql-block
 spec:
   selector:
     matchLabels:
