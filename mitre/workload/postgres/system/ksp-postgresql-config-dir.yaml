@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: postgresql-config-directory
+  name: ksp-postgresql-config-directory
 spec:
   tags: ["PostgreSQL"]
   selector:
