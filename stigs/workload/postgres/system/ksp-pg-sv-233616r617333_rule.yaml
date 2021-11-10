@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: pgsql-stig-audit-non-pgsql
+  name: ksp-pgsql-stig-audit-non-pgsql
 spec:
   selector:
     matchLabels:
