@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: discovery-account-discovery-local-account
+  name: ksp-discovery-account-discovery-local-account
 spec:
   tags: ["MITRE", "Discovery"]
   selector:
