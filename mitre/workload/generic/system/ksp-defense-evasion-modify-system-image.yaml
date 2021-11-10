@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: defense-evasion-modify-system-image
+  name: ksp-defense-evasion-modify-system-image
 spec:
   selector:
     matchLabels:
