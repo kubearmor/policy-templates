@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: non-application-layer-protocol
+  name: ksp-non-application-layer-protocol
 spec:
   selector:
     matchLabels:
