@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: discovery-process-discovery
+  name: ksp-discovery-process-discovery
 spec:
   tags: ["MITRE", "Discovery"]
   selector:
