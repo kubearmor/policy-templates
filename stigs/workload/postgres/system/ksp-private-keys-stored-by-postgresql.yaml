@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: postgresql-private-keys
+  name: ksp-postgresql-private-keys
 spec:
   selector:
     matchLabels:
