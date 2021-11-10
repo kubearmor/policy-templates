@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: mitre-tactic-persistence-external-remote-services
+  name: ksp-mitre-tactic-persistence-external-remote-services
 spec:
   selector:
     matchLabels: 
