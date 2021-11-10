@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: mitre-tactic-postgres-pg-dump
+  name: ksp-mitre-tactic-postgres-pg-dump
 spec:
   selector:
       matchLabels:
