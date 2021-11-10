@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: cp-10-2-system-recovery-and-reconstitution
+  name: ksp-cp-10-2-system-recovery-and-reconstitution
 spec:
   tags: ["NIST", "Cp-10-2"]
   message: "Database Manager System Paths is Audited"
