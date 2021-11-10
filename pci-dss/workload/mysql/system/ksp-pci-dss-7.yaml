@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: restrict-access-to-cardholder-data
+  name: ksp-restrict-access-to-cardholder-data
 spec:
   tags: ["pci-dss"]
   selector:
