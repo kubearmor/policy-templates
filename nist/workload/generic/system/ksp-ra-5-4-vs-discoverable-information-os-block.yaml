@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ra-5-4-vs-discoverable-information-os-block
+  name: ksp-ra-5-4-vs-discoverable-information-os-block
   namespace: {}
 spec:
   tags: ["NIST", "RA-5(4)"]
