@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: protect-stored-cardholder-data
+  name: ksp-protect-stored-cardholder-data
 spec:
   severity: 5
   tags: ["pci-dss"]
