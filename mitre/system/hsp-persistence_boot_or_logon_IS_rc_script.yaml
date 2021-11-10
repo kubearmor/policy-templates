@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: persistence-blis-rc-scripts
+  name: hsp-persistence-blis-rc-scripts
 spec:
   tags: ["MITRE", "Persistence"]
   nodeSelector:
