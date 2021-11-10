@@ -1,7 +1,7 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: "postgresql-port"
+  name: "cnp-postgresql-port"
 spec:
   description: "This will block postgresql external access"
   endpointSelector:
