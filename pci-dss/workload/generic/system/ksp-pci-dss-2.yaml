@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: default-system-passwords
+  name: ksp-default-system-passwords
 spec:
   selector:
     matchLabels: {}
