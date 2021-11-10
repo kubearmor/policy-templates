@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: mitre-tactic-discovery-system-owner-user-discovery
+  name: ksp-mitre-tactic-discovery-system-owner-user-discovery
 spec:
   selector:
     matchLabels: {}
