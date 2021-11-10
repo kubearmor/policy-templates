@@ -3,7 +3,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-cis-1.1.13-admin-conf-block
 spec:
-  tags: ["CIS", "1.1.13","K8", "V1.20"]
+  tags: ["CIS", "1.1.13","k8s", "V1.20"]
   message: "This policy will block admin.conf access"
   nodeSelector:
     matchLabels:
