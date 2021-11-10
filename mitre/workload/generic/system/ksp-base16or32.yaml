@@ -1,7 +1,7 @@
 apiVersion: security.accuknox.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: defense-evasion-deobfuscate
+  name: ksp-defense-evasion-deobfuscate
 spec:
   selector:
     matchLabels:
