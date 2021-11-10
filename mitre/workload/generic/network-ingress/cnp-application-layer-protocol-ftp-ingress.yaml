@@ -1,7 +1,7 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: "FTP-rule"
+  name: "cnp-ftp-rule"
 spec:
   endpointSelector:
     matchLabels:
