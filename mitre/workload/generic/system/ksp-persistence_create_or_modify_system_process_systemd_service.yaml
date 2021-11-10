@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: create-or-modify-system-process-systemd-service
+  name: ksp-create-or-modify-system-process-systemd-service
 spec:
   tags: ["MITRE", "Persistence"]
   selector:
