@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: mitre-tactic-persistence-createaccount-localaccount
+  name: ksp-mitre-tactic-persistence-createaccount-localaccount
 spec:
   selector:
     matchLabels: 
