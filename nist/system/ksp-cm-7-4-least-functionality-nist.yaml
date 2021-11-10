@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-package-manager-and-remote-copy
+  name: ksp-cm-7-4-least-functionality-nist
 spec:
   tags: ["NIST", "CM-7"] 
   message: "Package Manager and Remote File Copy is now blocked "
