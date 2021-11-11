@@ -7,7 +7,7 @@ spec:
   message: "This policy will restrict PKI certificates"
   nodeSelector:
     matchLabels:
-      kubernetes.io/hostname: gke-cluster-1-default-pool-a0926cb0-2sw2 #change this label with your label
+      kubernetes.io/hostname: gke-cluster-1-default-pool-a0926cb0-2sw2  # Change your node
   file:
     severity: 5
     matchPattern:  
