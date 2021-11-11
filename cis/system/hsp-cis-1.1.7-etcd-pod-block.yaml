@@ -3,7 +3,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-cis-1-1-7-etcd-pod-block
 spec:
-  tags: ["CIS", "1.1.7", "K8s"]
+  tags: ["CIS", "1.1.7", "k8s"]
   message: "etcd pod specification file permissions are set to 644"
   nodeSelector:
     matchLabels:
