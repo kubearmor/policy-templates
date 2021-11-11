@@ -4,7 +4,7 @@ metadata:
   name: hsp-cis-1-1-7-etcd-pod-block
 spec:
   tags: ["CIS", "1.1.7", "k8s"]
-  message: "etcd pod specification file permissions are set to 644"
+  message: "This policy will block etcd.yaml access"
   nodeSelector:
     matchLabels:
       kubernetes.io/hostname: gke-cluster-1-default-pool-a0926cb0-2sw2 #change this label with your label
