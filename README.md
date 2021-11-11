@@ -36,6 +36,9 @@ Please follow the hierarchy while contribution
 │   ├── system
 │   │   └── ksp-CVE-2021-29156.yaml
 │   │   └── ksp-CVE-2021-29442.yaml
+├── cis
+│   ├── system
+│   │   └── hsp-scheduler-pod-block.yaml
 ...
 ```
 
