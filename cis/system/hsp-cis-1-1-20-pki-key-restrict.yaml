@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-1-1-20-pki-key-restrict
+spec:
+  tags: ["CIS", "1.1.21", "K8s", "compliance"]
+  message: "This policy will restrict Kubernetes PKI keys"
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-cluster-1-default-pool-a0926cb0-2sw2 #change this label with your label
+  file:
+    severity: 5
+    matchPattern:
+    - pattern: /etc/kubernetes/pki/**/*.key
+      fromSource:
+      - path: /usr/bin/chmod
+      ownerOnly: true
+    action: Block
