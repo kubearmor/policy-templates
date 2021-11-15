@@ -1,0 +1,56 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-nist-pl-4-1-social-media-egress-block
+spec:
+  description: "This policy will block the access to the major social media websites."
+  endpointSelector: {}
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: "UDP"
+            - port: "443"
+              protocol: "TCP"
+          rules:
+            dns:
+              - matchPattern: "*"
+    - toFQDNs:
+        - matchPattern: "*.facebook.com"
+      toPorts:
+        - ports:
+            - port: "443"
+    - toFQDNs:
+        - matchPattern: "*.instagram.com"
+      toPorts:
+        - ports:
+            - port: "443"
+    - toFQDNs:
+        - matchPattern: "*.pinterest.com"
+      toPorts:
+        - ports:
+            - port: "443"
+    - toFQDNs:
+        - matchPattern: "*.reddit.com"
+      toPorts:
+        - ports:
+            - port: "443"
+    - toFQDNs:
+        - matchPattern: "*.tiktok.com"
+      toPorts:
+        - ports:
+            - port: "443"
+    - toFQDNs:
+        - matchPattern: "*.twitter.com"
+      toPorts:
+        - ports:
+            - port: "443"
+    - toFQDNs:
+        - matchPattern: "*.youtube.com"
+      toPorts:
+        - ports:
+            - port: "443"
