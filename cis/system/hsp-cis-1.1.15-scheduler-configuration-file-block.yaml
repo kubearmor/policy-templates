@@ -1,0 +1,17 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-1.1.15-scheduler-configuration-file-block
+spec:
+  tags: ["CIS", "1.1.15", "configuration file", "host"]
+  message: "This policy will block Scheduler.conf acess"
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-cluster-1-default-pool-318479ef-fgqr # Change your node
+  file:
+    severity: 5
+    matchPaths:
+      - path: /etc/srv/kubernetes/scheduler.conf
+        readOnly: false
+        ownerOnly: true
+    action: Block
