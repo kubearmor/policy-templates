@@ -1,0 +1,16 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mysql-credentials-from-files-block
+spec:
+  tags: ["mysql", "system","K8s"]
+  message: "Warning! someone tried to access This sensitive file"
+  selector:
+    matchLabels:
+      app: mysql    #change the labels
+  file:
+    severity: 7
+    matchPaths:
+    - path: /etc/mysql/debian.cnf   
+      ownerOnly: true
+    action: Block
