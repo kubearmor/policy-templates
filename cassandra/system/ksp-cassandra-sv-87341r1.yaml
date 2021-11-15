@@ -5,10 +5,10 @@ metadata:
   namespace: default
 spec:
   tags: ["Cassandra", "configuration", "SV-87341r1_rule"]
-  message: "Configuration Files permissions is blocked "
+  message: "Configuration Files permissions is Audited "
   selector:
     matchLabels:
-      app: cassandra # #change app: cassandra to match your label
+      app: cassandra  #change app: cassandra to match your label
   file:
     severity: 4
     matchDirectories:
