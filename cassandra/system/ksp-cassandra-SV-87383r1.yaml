@@ -1,0 +1,22 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-cassandra-sv-87383r1-database-log-deletion
+spec:
+  tags: ["Cassandra", "logs", "SV-87383r1_rule"]
+  message: "Database log file deletion is blocked "
+  selector:
+    matchLabels:
+      app: cassandra #change app: cassandra to match your label
+  file:
+    severity: 4
+    matchDirectories:
+      - dir: /var/log/cassandra/
+        recursive: true
+        readOnly: false
+        fromSource:
+          - path: /usr/bin/rm
+          - path: /usr/bin/rmdir
+          - path: /usr/bin/cp
+          - path: /usr/bin/mv
+    action: Block
