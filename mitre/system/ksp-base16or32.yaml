@@ -2,7 +2,7 @@
 # To learn more about KubeArmor visit: 
 # https://www.accuknox.com/kubearmor/ 
 
-apiVersion: security.accuknox.com/v1
+apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-defense-evasion-deobfuscate
