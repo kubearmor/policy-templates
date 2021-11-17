@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1059.yaml
+  namespace: default # Change your namespace
 spec:
   tags: ["MITRE", "T1059"] 
   message: "New Startup Automated Script detected -- possibly the adversary is trying to run malicious code"
