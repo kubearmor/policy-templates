@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1053-persistence-boot-or-logon-autostart-execution-kernel-modules-and-extensions
+  namespace: default # Change your namespace
 spec:
   tags: ["MITRE", "T1053"]
   message: "Kernel Modules and Extensions is Audited"
