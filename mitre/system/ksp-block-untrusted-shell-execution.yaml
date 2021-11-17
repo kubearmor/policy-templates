@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-block-untrusted-shell-execution
+  namespace: default # Change your namespace
 spec:
   tags : ["MITRE","D3fend","Execution","Unix Shell"] 
   message: "Bash shells have been accessed"
