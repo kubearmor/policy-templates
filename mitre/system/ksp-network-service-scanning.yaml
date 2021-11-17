@@ -6,12 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-network-service-scanning
+  namespace: default # Change your namespace
 spec:
-  tags: ["MITRE"]
-  message: "listing of services running on remote hosts, including those that may be vulnerable to remote software"
+  tags: ["MITRE", "T1046"]
+  message: "Network service has been scanned!"
   selector:
     matchLabels:
-      {}
+      container: ubuntu-1 # Change your matchLabels
   process:
     severity: 5
     matchPaths:
