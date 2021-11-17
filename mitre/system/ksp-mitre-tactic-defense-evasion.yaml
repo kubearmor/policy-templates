@@ -6,9 +6,10 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-tactic-defense-evasion
+  namespace: default # Change your namespace
 spec:
-  tags: ["MITRE"]
-  message: "command-line utility that can be used to obtain certificate authority information and configure Certificate Services"
+  tags: ["MITRE","T1218"]
+  message: "Certificates files have been accessed!"
   selector:
     matchLabels:
          app: testpod
