@@ -7,7 +7,7 @@ kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1548-001-setuid-setgid
 spec:
-  message: Blocked the setuid or setgid flag
+  message: "Blocked the setuid or setgid flag"
   tags : ["MITRE","Privilege Escalation","S-Bit"]
   selector:
     matchLabels:
