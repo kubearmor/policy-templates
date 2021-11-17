@@ -12,7 +12,7 @@ spec:
   message: "Modify the kernel to automatically execute programs on system boot"
   selector:
       matchLabels:
-          app: testpod 
+          app: testpod # Change your matchLabels
   process:
     severity: 6
     matchPaths: 
