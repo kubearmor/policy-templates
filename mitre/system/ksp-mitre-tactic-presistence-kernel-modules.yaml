@@ -6,8 +6,9 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-tactic-presistence-kernel-modules
+  namespace: default # Change your namespace
 spec:
-  tags: ["MITRE"]
+  tags: ["MITRE", "T1547.006"]
   message: "Modify the kernel to automatically execute programs on system boot"
   selector:
       matchLabels:
