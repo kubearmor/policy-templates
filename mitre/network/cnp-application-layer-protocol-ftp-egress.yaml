@@ -3,8 +3,10 @@ kind: CiliumNetworkPolicy
 metadata:
   name: "cnp-ftp-rule"
 spec:
+  description: "This policy will block the FTP connections"
   endpointSelector:
-    matchLabels: {}
+    matchLabels: 
+      app: file-pod
   egress:
     - toPorts:
         - ports:
