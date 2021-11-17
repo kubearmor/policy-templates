@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-restrict-access-mysql-server-config
+  namespace: default # Change your namespace
 spec:
   tags: ["mysql","mitre","system"]
   message: "Warning! someone tried access the MySQL server config file"
