@@ -7,11 +7,11 @@ kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1087-001
 spec:
-  tags: ["MITRE", "DISCOVERY"]
+  tags: ["MITRE","T1057.001", "DISCOVERY"]
   message: "Someone Tried to Access Local User Account Details"
   selector:
     matchLabels:
-      pod: testpod
+      pod: testpod # Change your matchLabels
   process:
     severity: 5
     matchPaths:
