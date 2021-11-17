@@ -7,11 +7,11 @@ kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1057
 spec:
-  tags: ["MITRE", "Discovery"]
+  tags: ["MITRE", "T1057","Discovery"]
   message: "Someone Tried to Access Running Process Details"
   selector:
     matchLabels:
-      pod: testpod
+      pod: testpod # Change your matchLabels
   process:
     severity: 5
     matchPaths:
