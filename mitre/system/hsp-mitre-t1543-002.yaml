@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
   name: hsp-mitre-t1543-002
+  namespace: default # Change your namespace
 spec:
   tags: ["HOST", "T1543.002","MITRE", "PERSISTENCE"]
   message: "Someone Tried to Access System Process Files"
