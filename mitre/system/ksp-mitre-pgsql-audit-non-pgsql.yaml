@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-pgsql-audit-non-pgsql
+  namespace: default # Change your namespace
 spec:
   tags: ["postgres","system","mitre","T1588"]
   message: "Warning! someone has transferred data from the Postgres data directory"
