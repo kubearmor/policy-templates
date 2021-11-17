@@ -5,13 +5,13 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: ksp-mitre-t1543-002
+  name: hsp-mitre-t1543-002
 spec:
-  tags: ["HOST", "MITRE", "PERSISTENCE"]
+  tags: ["HOST", "T1543.002","MITRE", "PERSISTENCE"]
   message: "Someone Tried to Access System Process Files"
   nodeSelector:
     matchLabels:
-      pod: testpod
+      pod: testpod # Change your matchLabels
   file:
     severity: 5
     matchDirectories:
