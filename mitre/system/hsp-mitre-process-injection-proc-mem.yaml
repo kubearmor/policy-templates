@@ -7,11 +7,11 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-mitre-process-injection-proc-mem
 spec:
-  tags: ["MITRE"]
+  tags: ["MITRE", "T1055.009"]
   message: "Another process may allow access to the process's memory"
   nodeSelector:
     matchLabels:
-    	app: testpod
+    	kubernetes.io/hostname: gke-cluster # Change your matchLabels
   process:
     severity: 4
     matchPatterns: 
