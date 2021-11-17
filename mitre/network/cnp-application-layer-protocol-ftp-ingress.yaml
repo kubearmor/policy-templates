@@ -6,7 +6,7 @@ spec:
   description: "This policy will block the inbound FTP connection"
   endpointSelector:
     matchLabels:
-      app: ftp-pod
+      app: ftp-pod # Change your matchLabels
   ingress:
     - toPorts:
         - ports:
