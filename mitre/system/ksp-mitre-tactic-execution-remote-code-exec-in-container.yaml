@@ -6,12 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-tactic-execution-remote-code-exec-in-container
+  namespace: default # Change your namespace
 spec:
-  tags: ["MITRE"]
+  tags: ["MITRE", "T1210"]
   message: "Netcat runs inside a container that allows remote code execution"
   selector:
       matchLabels:
-          app: testpod
+          app: testpod # Change your matchLabels
   process:
     severity: 6
     matchPaths: 
