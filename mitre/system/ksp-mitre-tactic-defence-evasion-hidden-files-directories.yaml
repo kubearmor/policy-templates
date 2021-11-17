@@ -7,11 +7,11 @@ kind: KubeArmorPolicy
 metadata: 
  name: ksp-mitre-tactic-defence-evasion-hidden-files-directories
 spec:
- tags: ["MITRE"]
- message: "To prevent normal users from accidentally changing special files on a system"
+ tags: ["MITRE","T1564.001"]
+ message: "Bash history accessed"
  selector: 
   matchLabels: 
-   app: testpod
+   app: testpod # Change your matchLabels
  file:
    severity: 3
    matchPaths:
