@@ -5,7 +5,8 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  Name: ksp-mitre-tactic-scheduled-job-analysis
+  name: ksp-mitre-tactic-scheduled-job-analysis
+  namespace: default # Change your namespace
 spec:
   tags: ["mitre","system","cron","T1053"]
   message: “Someone tried to access scheduled job”
