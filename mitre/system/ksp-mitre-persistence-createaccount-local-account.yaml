@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1053-tactic-persistence-create-account-local-account
+  namespace: default # Change your namespace
 spec:
   tags: ["MITRE", "T1053"]
   message: "System owner discovery command is blocked"
