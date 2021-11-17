@@ -1,0 +1,45 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-1-1-9-api-cni-files
+spec:
+  tags: ["CIS", "1.1.9", "CNI"]
+  message: "Someone Tried to Access Container Network Interface files"
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-cluster-1-default-pool-e47c8217-beuk      # Change with your node label
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/netconfig
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/networks
+      readOnly: false
+      ownerOnly: true
+    matchDirectories:
+    - dir: /etc/cni/
+      recursive: true
+      readOnly: false
+      ownerOnly: true
+    - dir: /etc/NetworkManager/
+      recursive: true
+      readOnly: false
+      ownerOnly: true
+    - dir: /etc/netplan/
+      recursive: true
+      readOnly: false
+      ownerOnly: true
+    - dir: /etc/network/
+      recursive: true
+      readOnly: false
+      ownerOnly: true
+    - dir: /etc/networkd-dispatcher/
+      recursive: true
+      readOnly: false
+      ownerOnly: true
+    action: Block
