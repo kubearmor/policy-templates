@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1087-001
+  namespace: default # Change your namespace
 spec:
   tags: ["MITRE","T1087.001", "DISCOVERY"]
   message: "Someone Tried to Access Local User Account Details"
