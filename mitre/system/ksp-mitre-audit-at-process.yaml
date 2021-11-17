@@ -6,14 +6,15 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1053-scheduled-task-job-at
+  namespace: default
 spec:
-  severity: 5
-  message: "An adversary used at to execute programs at system startup or on a scheduled basis for persistence"
-  tag: ["MITRE","Execution","at"]
+  tags: ["MITRE","T1053","Execution","at"]
+  message: "Task job has been accessed"
   selector:
     matchLabels:
        app: ubuntu # use your own labels
   process: 
+        severity: 5
         matchPaths: 
         - path: /etc/at.allow
         - path: /etc/at.deny
