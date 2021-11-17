@@ -8,7 +8,7 @@ metadata:
   name: hsp-mitre-t1053-003-scheduled-task-job-crontab
 spec:
   message: "Cronjob/Crontab has been accessed"
-  tags: ["MITRE","Execution","crontab"]
+  tags: ["MITRE","T1053-003","Execution","crontab"]
   nodeSelector:
     matchLabels:
         kubernetes.io/hostname: gke-ubuntu # use your labels here
