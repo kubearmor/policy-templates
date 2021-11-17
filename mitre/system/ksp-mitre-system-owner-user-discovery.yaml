@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1082-tactic-discovery-system-owner-user-discovery
+  namespace: default # Change your namespace
 spec:
   tags: ["MITRE", "T1082"]
   message: "System owner discovery command is blocked"
