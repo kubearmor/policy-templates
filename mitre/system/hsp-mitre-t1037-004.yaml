@@ -5,13 +5,13 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: ksp-mitre-t1037-004
+  name: hsp-mitre-t1037-004
 spec:
   tags: ["HOST", "MITRE", "PERSISTENCE", "RC"]
   message: "Access to System RC Files is Denied"
   nodeSelector:
     matchLabels:
-      pod: testpod
+      pod: testpod # Change your matchLabels
   file:
     severity: 5
     matchPaths:
