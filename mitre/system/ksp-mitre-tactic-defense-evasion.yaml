@@ -12,7 +12,7 @@ spec:
   message: "Certificates files have been accessed!"
   selector:
     matchLabels:
-         app: testpod
+         app: testpod # Change your match labels
   process:
     severity: 5
     matchPaths:
