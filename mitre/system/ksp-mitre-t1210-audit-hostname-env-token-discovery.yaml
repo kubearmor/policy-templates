@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1210-audit-hostname-env-token-discovery
+  namespace: default
 spec:
   tags: ["MITRE", "T1210"]
   message: "Hostname, env or k8s token accessed by unknown -- possible lateral movement "
