@@ -6,7 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1053-scheduled-task-job-at
-  namespace: default
+  namespace: default # Change your namespace
 spec:
   tags: ["MITRE","T1053","Execution","at"]
   message: "Task job has been accessed"
