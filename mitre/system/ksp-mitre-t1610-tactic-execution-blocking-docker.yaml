@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-t1610-tactic-execution-blocking-docker
+  namespace: default # Change your namespace
 spec:
   tags: ["MITRE","T1610"]
   message: "Blocking the docker execution in the k8s environment"
