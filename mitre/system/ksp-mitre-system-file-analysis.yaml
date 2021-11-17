@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-system-file-analysis
+  namespace: default # Change your namespace
 spec:
   tags: ["mitre","system","mitre","T1003"]
   message: “suspicious! someone user tried to access the system user file”
