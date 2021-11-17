@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-non-application-layer-protocol
+  namespace: default # Change your namespace
 spec:
   tags: ["mitre","system","ksp","T1016"]
   message: “Alert! audited the non-application layer protocol communication”
