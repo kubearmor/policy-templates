@@ -6,7 +6,7 @@ spec:
   description: "This policy will block the outbound FTP connections"
   endpointSelector:
     matchLabels: 
-      app: file-pod
+      app: file-pod # Change your matchLabels
   egress:
     - toPorts:
         - ports:
