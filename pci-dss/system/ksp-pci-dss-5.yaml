@@ -6,9 +6,10 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: changes-additions-or-deletions-to-accounts-with-root-administrative-audit
+  namespace: default # Change your namespace
 spec:
  tags: ["PCI-DSS-10.2.5"] 
-  message: "Use of and changes to identification and authentication mechanism including but not limited to creation of new accounts and elevation of privileges and all changes, additions, or deletions to accounts with root or administrative privileges"
+  message: "Notification! User accounts and passwords are modified"
   selector:
     matchLabels:
       container: test #change app: test to match your label
