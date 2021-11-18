@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-nist-sc-13-block-cryptograhy-key
+  namespace: default # Change your namespace
 spec:
   message: "cryptography key files was accessed"
   tags: ["NIST"]
