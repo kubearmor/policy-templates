@@ -1,11 +1,18 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-sc-17-public-key-infrastructure-certificates
+  namespace: default # Change your namespace
 spec:
+  tags: ["NIST","SC(17)"]
+  message: "Alert! Certificate keys access has been denied"
   selector:
     matchLabels:
-      {}
+      container: ubuntu-1 # Change your match labels
   file:
     severity: 5
     matchDirectories:
