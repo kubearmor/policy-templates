@@ -6,9 +6,10 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: protection-of-information-at-rest
+  namespace: default # Change your namespace
 spec:
  tags: ["NIST" , "SC-28(1)" , "SYSTEM-AND-COMMUNICATION" , "PCF"] 
-  message: "This control addresses the confidentiality and integrity of information at rest and covers user information and system information."
+  message: "Alert! Memory info access has been denied"
   selector:
     matchLabels:
       container: test #change app: test to match your label
