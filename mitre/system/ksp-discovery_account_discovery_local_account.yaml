@@ -6,11 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-discovery-account-discovery-local-account
+  namespace: default  #change with your namespace
 spec:
   tags: ["MITRE", "Discovery"]
+  message: "Local accounts accessed by unknown process"
   selector:
     matchLabels:
-      {}
+      app: testpod #change with your match label
   process:
     matchPaths:
       - path: /usr/bin/id
