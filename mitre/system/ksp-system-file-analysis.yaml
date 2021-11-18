@@ -6,10 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-system-file-analysis
+  namespace: default  #change with your namespace
 spec:
+  tags: ["MITRE"]
+  message: "passwd or shadow file accessed by unknown process"
   selector:
     matchLabels:
-       {}
+       app: testpod #change with your match label
   process: 
       matchPaths: 
       - path: /etc/passwd
