@@ -6,12 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-stig-sv-233531r617333-postgres-block-deletion
+  namespace: default # Change your namespace
 spec:
   message: "Caution! Someone tried deleting a postgres data file(s)"
-  tags: ["postgres", "STIGS"]
+  tags: ["PSQL", "STIGS"]
   selector:
     matchLabels:
-      app: postgres
+      app: postgres # Change your match labels
   file:
     severity: 2
     matchDirectories:
