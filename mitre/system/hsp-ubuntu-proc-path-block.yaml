@@ -7,11 +7,11 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-ubuntu-proc-path-block
 spec:
-  message: Modify the kernel to automatically execute programs on system boot
-  tags: ["MITRE"]
+  message: " (Notification) Modify the kernel to automatically execute programs on system boot " 
+  tags: ["MITRE","T1547.006"]
   nodeSelector:
     matchLabels:
-      {}
+       kubernetes.io/hostname: gke-cluster # Change your matchLabels
   process:
     matchPaths:
       - path: /usr/sbin/insmod
@@ -21,4 +21,3 @@ spec:
       - path: /usr/sbin/rmmod   
     action: Audit
     severity: 6
-
