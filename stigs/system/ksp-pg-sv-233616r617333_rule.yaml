@@ -6,10 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-pgsql-stig-audit-non-pgsql
+  namespace: default # Change your namespace
 spec:
+  tags: ["STIGS", "MYSQL"]
+  message: "Notification! postgresql data has been accessed"
   selector:
     matchLabels:
-       {}
+       container: postgresql-1 # Change your match labels
   process:
     action: Audit
     severity: 6
