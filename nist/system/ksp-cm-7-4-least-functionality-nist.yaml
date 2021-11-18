@@ -6,12 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-cm-7-4-least-functionality-nist
+  namespace: default # Change your namespace
 spec:
   tags: ["NIST", "CM-7"] 
   message: "Package Manager and Remote File Copy is now blocked "
   selector:
     matchLabels:
-      {}
+      container: ubuntu-1 # Change your match labels
   process:
     severity: 5
     matchPaths:
