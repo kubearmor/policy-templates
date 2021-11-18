@@ -6,11 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-postgresql-config-directory
+  namespace: default  #change with your namespace
 spec:
   tags: ["PostgreSQL"]
+  message: "PostgreSQL files accessed by unknown process"
   selector:
     matchLabels:
-      {}
+      app: testpod #change with your match label
   file:
     matchDirectories:
       - dir: /etc/postgresql/
