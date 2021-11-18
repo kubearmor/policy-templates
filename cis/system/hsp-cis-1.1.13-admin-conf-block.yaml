@@ -8,7 +8,7 @@ metadata:
   name: hsp-cis-1.1.13-admin-conf-block
 spec:
   tags: ["CIS", "1.1.13","k8s", "V1.20"]
-  message: "This policy will block admin.conf access"
+  message: "Alert! Access to admin.conf has been denied"
   nodeSelector:
     matchLabels:
       kubernetes.io/hostname: gke-cluster-1-default-pool-f03ca967-10jc # Change your node
