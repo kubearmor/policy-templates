@@ -6,9 +6,10 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-ac-2-12-account-management
+  namespace: default # Change your namespace 
 spec:
   tags: ["NIST", "AC-2"]
-  message: "To monitor creation or deletion of user accounts"
+  message: "Notification! user accounts and password has been created/changed/added"
   selector:
     matchLabels:
       app: testpod #change app: testpod to match your label 
