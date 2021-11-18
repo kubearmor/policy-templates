@@ -12,7 +12,7 @@ spec:
   message: "Alert! Database configuration files access has been denied"
   selector:
     matchLabels:
-      container: ubuntu-1 # Change your match labels
+      container: mysql-1 # Change your match labels
   file:
     severity: 5
     matchPaths:
