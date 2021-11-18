@@ -3,6 +3,7 @@ kind: CiliumNetworkPolicy
 metadata:
   name: cnp-pci-dss-1.3.3-ingress
 spec:
+  description: "This policy will allow the inbound connection"
   endpointSelector:
     matchLabels:
       pod: testpod  #change this label with your label
