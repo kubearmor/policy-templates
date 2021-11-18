@@ -5,13 +5,13 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: hsp-mitre-tactic-defense-evasion
+  name: hsp-mitre-tactic-defense-evasion 
 spec:
-  message: Modify the kernel to automatically execute programs on system boot
-  tags: ["MITRE"]
+  message: "(Notification) Certificate files has been accessed"
+  tags: ["MITRE","T1140"]
   nodeSelector:
     matchLabels:
-      {}
+       kubernetes.io/hostname: gke-cluster # Change your matchLabels
   process:
     matchPaths:
     - path: /usr/bin/certutil
