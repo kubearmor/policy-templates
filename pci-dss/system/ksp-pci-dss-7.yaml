@@ -6,12 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-pci-dss-7
+  namespace: default # Change your namespace
 spec:
   tags: ["PCI-DSS", "MYSQL"]
   message: "Access to MySQL Files is Denied"
   selector:
     matchLabels:
-      pod: testpod
+      pod: testpod # Change your match Labels
   file:
     severity: 5
     matchDirectories:
