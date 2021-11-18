@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-pci-dss-2
+  namespace: default # Change your namespace
 spec:
   tags: ["PCI-DSS"]
   message: "Password File is Blocked"
