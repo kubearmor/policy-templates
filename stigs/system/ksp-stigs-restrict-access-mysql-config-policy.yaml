@@ -6,9 +6,10 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-stigs-restrict-access-mysql-config
+  namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "MYSQL"]
-  message: "This will block the access to the mysql config files (/etc/mysql/)"
+  message: "Alert! Access to the mysql config files (/etc/mysql/) has been denied"
   selector:
     matchLabels:
       container: mysql # <--- add your own match labels
