@@ -6,11 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-discovery-process-discovery
+  namespace: default  #change with your namespace
 spec:
   tags: ["MITRE", "Discovery"]
+  message: "Someone accessed running process"
   selector:
     matchLabels:
-      {}
+      app: testpod #change with your match label
   process:
     matchPaths:
       - path: /bin/ps
