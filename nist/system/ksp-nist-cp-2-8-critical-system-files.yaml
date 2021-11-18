@@ -6,9 +6,10 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-nist-cp-2-8-critical-system-files
+  namespace: default # Change your namespace
 spec:
   tags: ["NIST", "CP-2-8"]
-  message: "Someone Tried to Open Critical System Files"
+  message: "Alert! Access denied to Open Critical System Files"
   selector:
     matchLabels:
       pod: testpod   #change this label with your label
