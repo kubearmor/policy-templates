@@ -7,11 +7,11 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-network-service-scanning
 spec:
-  tags: ["MITRE"]
-  message: "listing of services running on remote hosts, including those that may be vulnerable to remote software"
+  tags: ["MITRE","T1049"]
+  message: "(Notification) listing of services running on remote hosts, including those that may be vulnerable to remote software"
   nodeSelector:
     matchLabels:
-      {}
+       kubernetes.io/hostname: gke-cluster # Change your matchLabels
   process:
     severity: 5
     matchPaths:
