@@ -7,11 +7,11 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-mitre-ptrace-syscall
 spec:
-  tags : ["MITRE","Privilege Escalation","P-trace"]
-  message: "Blocking the kernel procees of ptrace"
+  tags : ["MITRE","T1055.008","Privilege Escalation","P-trace"]
+  message: "Alert! ptrace access denied"
   nodeSelector:
     matchLabels:
-      app: testpod
+      kubernetes.io/hostname: gke-ubuntu # Change your match labels
   file:
     severity: 6
     matchPaths:
