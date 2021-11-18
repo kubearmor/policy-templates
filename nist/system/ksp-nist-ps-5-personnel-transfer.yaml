@@ -6,9 +6,10 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-nist-ps-5-personnel-transfer
+  namespace: default # Change your namespace
 spec:
   tags: ["NIST", "PS-5", "SP 800-53"] 
-  message: "Auditing user account management activites and privileged commands"
+  message: "Notifications! User account management activites and privileged commands has been accessed"
   selector:
     matchLabels:
       pod: test #change this label with your label
