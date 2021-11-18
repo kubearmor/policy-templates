@@ -7,11 +7,11 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-mitre-persistence-bash-profile-audit
 spec:
-  message: Event-Triggered Execution/bash_profile and bashrc
-  tags: ["MITRE"]
+  message: "Notification! Bash history and Bash profile files has been accessed"
+  tags: ["MITRE","T1552.003"]
   nodeSelector:
     matchLabels:
-      {}
+      kubernetes.io/hostname: gke-ubuntu # Change your match labels
   file:
     severity: 2
     matchPaths:
