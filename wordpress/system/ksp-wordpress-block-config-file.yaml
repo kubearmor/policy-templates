@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-wordpress-block-config-file
+spec:
+  severity: 2
+  message: "(Alert) someone tried to access wp-config file"
+  tags: ["Wordpress","CVE-2021-24227"]
+  selector:
+    matchLabels:
+      app: wordpress # use your labels here
+  file:
+    matchPaths:
+    - path: /var/www/html/wp-config.php
+      fromSource:
+      - path: /bin/cat
+  action: Block
