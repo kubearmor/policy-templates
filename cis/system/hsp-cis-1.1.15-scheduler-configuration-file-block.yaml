@@ -8,7 +8,7 @@ metadata:
   name: hsp-cis-1.1.15-scheduler-configuration-file-block
 spec:
   tags: ["CIS", "1.1.15", "configuration file", "host"]
-  message: "This policy will block Scheduler.conf acess"
+  message: "Alert! Access to scheduler.conf has been denied"
   nodeSelector:
     matchLabels:
       kubernetes.io/hostname: gke-cluster-1-default-pool-318479ef-fgqr # Change your node
