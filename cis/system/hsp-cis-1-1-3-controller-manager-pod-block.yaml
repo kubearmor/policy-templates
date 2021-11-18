@@ -8,7 +8,7 @@ metadata:
   name: hsp-cis-1-1-3-controller-manager-pod-block
 spec:
   tags: ["CIS", "1.1.3", "K8s"]
-  message: "This policy will block kube-controller-manager.yaml access"
+  message: "Alert! Access to kube-controller-manager.yaml has been blocked"
   nodeSelector:
     matchLabels:
       kubernetes.io/hostname: gke-sample-cluster-on-bo-default-pool-5131fc21-1957 # Change your node
