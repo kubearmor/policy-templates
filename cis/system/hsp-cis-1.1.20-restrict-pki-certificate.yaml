@@ -1,0 +1,47 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-1-1-20-pki-crt-restrict
+spec:
+  tags: ["CIS", "1.1.20", "k8s", "compliance"]
+  message: "This policy will restrict PKI certificates"
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-cluster-1-default-pool-a0926cb0-2sw2 # Change your node
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/kubernetes/pki/ca.crt
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/kubernetes/pki/etcd/ca.crt
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/kubernetes/pki/front-proxy-ca.crt
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/kubernetes/pki/apiserver-etcd-client.crt
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/kubernetes/pki/apiserver.crt
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/kubernetes/pki/apiserver-kubelet-client.crt
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/kubernetes/pki/front-proxy-ca.crt
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/kubernetes/pki/front-proxy-client.crt
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/kubernetes/pki/etcd/server.crt
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/kubernetes/pki/etcd/peer.crt
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/kubernetes/pki/etcd/healthcheck-client.crt
+      readOnly: false
+      ownerOnly: true
+    action: Block
