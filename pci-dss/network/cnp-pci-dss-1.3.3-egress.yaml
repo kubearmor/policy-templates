@@ -3,7 +3,7 @@ kind: CiliumNetworkPolicy
 metadata:
   name: cnp-pci-dss-1.3.3-egress
 spec:
-  description: "This policy will block egress connection using kube-dns in port 53"
+  description: "This policy will allow outbound connection using kube-dns in port 53"
   endpointSelector:
     matchLabels:
       pod: testpod  #change this label with your label
