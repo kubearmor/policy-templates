@@ -8,10 +8,10 @@ metadata:
   name: hsp-create-account-create-local-account
 spec:
   message: Create account or local account audit
-  tags: ["MITRE"]
+  tags: ["MITRE","T1136.001"]
   nodeSelector:
     matchLabels:
-      {}
+      kubernetes.io/hostname: gke-ubuntu # Change your match labels
   file:
     severity: 3
     matchPaths:
