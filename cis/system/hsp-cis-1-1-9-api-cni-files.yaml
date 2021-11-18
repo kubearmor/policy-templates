@@ -8,7 +8,7 @@ metadata:
   name: hsp-cis-1-1-9-api-cni-files
 spec:
   tags: ["CIS", "1.1.9", "CNI"]
-  message: "Someone Tried to Access Container Network Interface files"
+  message: "Alert! Access to Container Network Interface files has been denied"
   nodeSelector:
     matchLabels:
       kubernetes.io/hostname: gke-cluster-1-default-pool-e47c8217-beuk      # Change with your node label
