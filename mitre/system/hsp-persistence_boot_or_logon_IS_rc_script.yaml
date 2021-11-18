@@ -7,10 +7,11 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-persistence-blis-rc-scripts
 spec:
-  tags: ["MITRE", "Persistence"]
+  tags: ["MITRE", "Persistence","T1037.004"]
+  message: " (Alert) Adversaries trying to establish persistence by modifying RC scripts "
   nodeSelector:
     matchLabels:
-      {}
+       kubernetes.io/hostname: gke-cluster # Change your matchLabels
   file:
     severity: 5
     matchPaths:
