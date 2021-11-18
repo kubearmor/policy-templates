@@ -8,7 +8,7 @@ metadata:
   name: ksp-limit-access-to-database-files
   namespace: default # Change your namespace
 spec:
-  tags:["STIGS", "MYSQL, "MARIADB"]
+  tags: ["STIGS", "MYSQL, "MARIADB"]
   message: "Alert! Database configuration files access has been denied"
   selector:
     matchLabels:
