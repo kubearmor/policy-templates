@@ -7,11 +7,11 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-mitre-create-or-modify-system-process-systemd-service
 spec:
-  message: Create or modify system process and systemd service 
-  tags: ["MITRE"]
+  message: "Notification! Systemd process has been accessed"
+  tags: ["MITRE", "T1543.002"]
   nodeSelector:
     matchLabels:
-      {}
+      kubernetes.io/hostname: gke-ubuntu # Change your match labels
   process:
     severity: 3
     matchDirectories:
