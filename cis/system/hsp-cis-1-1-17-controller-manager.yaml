@@ -8,7 +8,7 @@ metadata:
   name: hsp-cis-1-1-17-controller-manager
 spec:
   tags: ["CIS", "1.1.17"]
-  message: "Someone Tried to Access Controller Manager files"
+  message: "Alert! Access to Controller Manager files has been blocked"
   nodeSelector:
     matchLabels:
       kubernetes.io/hostname: gke-cluster-1-default-pool-e47c8217-beuk      # Change with your node label
