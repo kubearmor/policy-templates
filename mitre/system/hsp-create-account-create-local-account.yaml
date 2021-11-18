@@ -7,7 +7,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-create-account-create-local-account
 spec:
-  message: Create account or local account audit
+  message: "Notification! User and password added/modified"
   tags: ["MITRE","T1136.001"]
   nodeSelector:
     matchLabels:
