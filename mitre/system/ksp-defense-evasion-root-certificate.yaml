@@ -6,7 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-tactic-defense-evasion-root-certificate
-  namespace: default  #change with your match label 
+  namespace: default  #change with your namespace
 spec:
   tags: ["MITRE"] 
   message: "AUDITING SHARED AND GROUP ACCOUNT CREDENTIALS CHANGE "
