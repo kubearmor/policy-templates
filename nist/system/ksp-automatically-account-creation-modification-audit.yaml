@@ -9,7 +9,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["NIST","system","account","Block","ksp"]
-  message: "Alert! account credential files and or used  account create/edit commands"
+  message: "Alert! account credential files and user account create/edit commands denied"
   selector:
     matchLabels:
       app: test # Change your match labels
