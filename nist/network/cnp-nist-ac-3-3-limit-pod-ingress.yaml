@@ -10,4 +10,5 @@ spec:
       pod: testpod  #change this label with your label
   ingress:
     - fromEndpoints:
-        - {}
+        - matchLabels:
+          role: backend # Change your match Labels
