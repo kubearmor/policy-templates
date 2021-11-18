@@ -6,12 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mysql-files-access-limit
+  namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "MYSQL"]
   message: "Someone Tried to Access MySQL Files"
   selector:
     matchLabels:
-      pod: testpod
+      pod: mysql-1 # Change your match labels
   file:
     severity: 5
     matchPaths:
