@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: database-log-cannot-be-modified
+  namespace: default # Change your namespace
 spec:
   tags: ["PCI-DSS"] 
   message: "Database log cannot be modified or removed"
