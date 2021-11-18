@@ -9,7 +9,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "MYSQL"]
-  message: "Someone Tried to Access MySQL Files"
+  message: "Alert! Access to mysql conf files has been denied"
   selector:
     matchLabels:
       pod: mysql-1 # Change your match labels
