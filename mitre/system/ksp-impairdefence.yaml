@@ -6,10 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-group-1-proc-path-block
+  namespace: default  #change with your namespace
 spec:
+  tags: ["MITRE"]
+  message: "selinux files accessed by unknown process"
   selector:
     matchLabels:
-      {}
+      app: testpod #change with your match label
   file:
     matchPaths:
       - path: /etc/selinux/*
