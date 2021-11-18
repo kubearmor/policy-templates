@@ -6,7 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-nist-cm-7-2-least-func-prevent-auto-exec-block
-  namespace: multiubuntu # add your own namespace
+  namespace: default # add your own namespace
 spec:
   tags: ["NIST", "CM-7(2)"]
   message: "This policy will block auto-execution programs (ex:crontab)" 
