@@ -6,12 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-stigs-postgresql-config
+  namespace: default # Change your namespace
 spec:
-  tags: ["STIGS", "POSTGRESQL"]
-  message: "Someone Tried to Access PostgreSQL Config Files"
+  tags: ["STIGS", "PSQL"]
+  message: "Notification! PostgreSQL Config Files has been accessed"
   selector:
     matchLabels:
-      pod: testpod
+      pod: postgresql-1 # Change your match labels
   file:
     severity: 5
     matchDirectories:
