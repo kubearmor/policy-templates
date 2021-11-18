@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-nist-cm-7-5-software-install
+  namespace: default # Change your namespace
 spec:
   tags: ["NIST"]
   message: "Non Root User Tried to Install Something"
