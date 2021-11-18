@@ -6,12 +6,12 @@ spec:
   description: "This will Block Alertsservice External Access"
   endpointSelector:
     matchLabels:
-      pod: test
+      pod: test  # Change your match labels
   ingress:
     - fromEntities:
         - cluster
     - fromCIDRSet:
-        - {}
+        - - cidr: 0.0.0.0/0 # Change your CIDR set
       toPorts:
         - ports:
             - port: "8095"
