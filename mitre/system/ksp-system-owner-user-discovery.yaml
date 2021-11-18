@@ -6,9 +6,12 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-tactic-discovery-system-owner-user-discovery
+  namespace: default  #change with your namespace
 spec:
+  tags: ["MITRE", "Discovery"]
+  message: "Someone tried to access user details"
   selector:
-    matchLabels: {}
+    app: testpod #change with your match label
   process:
     matchPaths:
       - path: /usr/bin/who
@@ -17,4 +20,3 @@ spec:
       - path: /usr/bin/whoami
     action: Block
     severity: 3
-  tags: ["MITRE", "Discovery"]
