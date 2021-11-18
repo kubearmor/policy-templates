@@ -6,12 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: automatically-audit-account-creation-modification
+  namespace: default # Change your namespace
 spec:
   tags: ["NIST","system","account","Block","ksp"]
-  message: "Accessed account credential files and or used  account create/edit commands"
+  message: "Alert! account credential files and or used  account create/edit commands"
   selector:
     matchLabels:
-      app: test
+      app: test # Change your match labels
   file:
     severity: 3
     matchPaths:
