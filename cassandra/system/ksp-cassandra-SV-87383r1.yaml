@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-cassandra-sv-87383r1-database-log-deletion
+  namespace: default # Change your namespace
 spec:
   tags: ["Cassandra", "logs", "SV-87383r1_rule"]
   message: "Database log file deletion is blocked "
