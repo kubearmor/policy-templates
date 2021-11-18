@@ -6,9 +6,10 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-nist-cm-8-7-system-component-inventory-audit
+  namespace: default # Change your namespace
 spec:
   tags: ["NIST","CM-8-7"] 
-  message: "Auditing system component inventory and package logs"
+  message: "Notification! System component inventory and package logs has been accessed"
   selector:
     matchLabels:
       pod: test #change this label with your label
