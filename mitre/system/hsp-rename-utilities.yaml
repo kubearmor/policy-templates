@@ -7,9 +7,11 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-rename-utilities
 spec:
+  tags: ["MITRE", "T1055.009"]
+  message: " (Notification) Adversaries tried to move/re-name the files  "
   nodeSelector:
     matchLabels:
-      {}
+      kubernetes.io/hostname: gke-cluster # Change your matchLabels
   severity: 9
   process:
     matchPaths:
