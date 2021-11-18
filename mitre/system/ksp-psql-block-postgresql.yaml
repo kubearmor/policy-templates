@@ -6,10 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-psql-block
+  namespace: default  #change with your namespace
 spec:
+  tags: ["MITRE","PostgreSQL"]
+  message: "Someone tried to access PostgreSQL Command Line Interface"
   selector:
     matchLabels:
-      {}
+      app: testpod #change with your match label
   process:
     matchPaths:
     - path: /usr/bin/psql
