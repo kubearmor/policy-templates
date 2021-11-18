@@ -7,11 +7,11 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-mitre-sudo-caching
 spec:
-  tags: ["MITRE"]
-  message: "the suoders file to elevate privileges"
+  tags: ["MITRE","T1548.003"]
+  message: "Notification! suoders file has been accessed"
   nodeSelector:
     matchLabels:
-      app: testpod
+      kubernetes.io/hostname: gke-ubuntu # Change your match labels
   process:
   severity: 8
    matchPaths: 
