@@ -6,11 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-tactic-privilege-escalation-shared-object
-  namespace: {}
+  namespace: default  #change with your namespace
 spec:
+  tags: ["MITRE"]
+  message: "ld.so.preload file accessed by unknown process"
   selector:
     matchLabels:
-      container: {}
+      app: testpod #change with your match label
   file:
     matchPaths:
       - path: /etc/ld.so.preload
