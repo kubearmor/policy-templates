@@ -6,13 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-ra-5-4-vs-discoverable-information-os-block
-  namespace: {}
+  namespace: default # Change your namespace
 spec:
   tags: ["NIST", "RA-5(4)"]
-  message: "block the os informtion"
+  message: "Alert! OS information access has been denied"
   selector:
     matchLabels:
-      {}
+      container: ubuntu-1
   file:
     severity: 5
     matchPaths:
