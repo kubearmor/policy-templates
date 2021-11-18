@@ -6,9 +6,10 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: restrict-external-media-device-access
+  namespace: default # Change your namespace
 spec:
  tags: ["NIST", "MP5"] 
-  message: "Restrict the activities associated with the transport of information system media "
+  message: "Alert! Access denied activities associated with the transport of information system media "
   selector:
     matchLabels:
       pod: test #change app: test to match your label
