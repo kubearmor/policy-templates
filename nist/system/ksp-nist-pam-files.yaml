@@ -6,12 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-nist-pam-files
+  namespace: default # Change your namespace
 spec:
   tags: ["NIST","PAM"]
-  message: "someone tried to access PAM files"
+  message: "Alert! Access denied to PAM files"
   selector:
     matchLabels:
-      pad: testpad
+      pad: testpad # Change your match labels
   process:
     severity: 5
     matchPaths:
