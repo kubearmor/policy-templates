@@ -6,10 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-non-application-layer-protocol
+  namespace: default    # Change your namespace
 spec:
+  tags: ["mysql","system","K8s"]
+  message: "Warning! someone used a non-application-layer-protocol to communicate"
   selector:
     matchLabels:
-      {}
+      app: testpod    #change with your own label
   process:
     severity: 5
     matchPaths:
