@@ -6,10 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-tactic-persistence-boot-or-logon-autostart-execution-kernel-modules-and-extensions
+  namespace: default    # Change your namespace
 spec:
+  tags: ["system","K8s","T1547","MITRE"]
+  message: "Alert! something has been executed related the system boot"
   selector:
     matchLabels:
-      {}
+      app: testpod    #change with your own label
   process:
     matchPaths:
       - path: /usr/sbin/modprobe 
