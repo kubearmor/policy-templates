@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-wordpress-packages-process-block
+spec:  
+  message: "(Alert) someone tried to install packages"
+  tags: ["Wordpress"]
+  selector:
+    matchLabels:
+      app: wordpress # use your labels here
+  process:
+    severity: 2
+    matchPaths:
+    - path: /usr/bin/apt
+    - path: /usr/bin/apt-get
+    action: Block
