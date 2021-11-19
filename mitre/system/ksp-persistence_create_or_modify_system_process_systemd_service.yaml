@@ -6,11 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-create-or-modify-system-process-systemd-service
+  namespace: default    # Change your namespace
 spec:
-  tags: ["MITRE", "Persistence"]
+  tags: ["MITRE","system","K8s","T1543"]
+  message: "Warning! someone created or Modified the system process"
   selector:
     matchLabels:
-      {}
+      app: testpod    #change with your own label
   process:
     matchDirectories:
       - dir: /etc/systemd/system/
