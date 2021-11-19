@@ -6,11 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-persistence-bash-profile
-  namespace: {}
+  namespace: default # Change your namespace
 spec:
+  tags: ["MITRE","Persistence","K8s"]
+  message: "Warning! someone tried to access profile details"
   selector:
     matchLabels:
-      container: {}
+      app: testpod #change with your own label
   file:
     matchPaths:
       - path: /root/.bash_profile
