@@ -5,11 +5,14 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:    
-  name: ksp-block-mysql-dump-in-pods  
-spec:    
+  name: ksp-block-mysql-dump-in-pods
+  namespace: default        # Change your namespace
+spec:
+  tags: ["mysql","system","K8s"]
+  message: "Warning! MySQLdump is blocked"
   selector:      
     matchLabels:        
-      {}    
+      app: testpod    #change with your own label    
   process:      
     matchPaths:      
     - path: /usr/bin/mysqldump    
