@@ -13,7 +13,7 @@ spec:
     matchLabels:
       kubernetes.io/hostname: gke-ubuntu # Change your match labels
   process:
-  severity: 8
+   severity: 8
    matchPaths: 
    - path: /var/db/sudo
    - path: /etc/sudoers
