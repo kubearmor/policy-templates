@@ -12,8 +12,8 @@ spec:
   nodeSelector:
     matchLabels:
       kubernetes.io/hostname: gke-cluster # Change your matchLabels
-  severity: 9
   process:
+    severity: 9
     matchPaths:
     - path: /usr/bin/mv
     - path: /usr/bin/mmv
