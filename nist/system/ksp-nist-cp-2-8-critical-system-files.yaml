@@ -1,0 +1,97 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-cp-2-8-critical-system-files
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST", "CP-2-8"]
+  message: "Alert! Access denied to Open Critical System Files"
+  selector:
+    matchLabels:
+      pod: testpod   #change this label with your label
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/fstab
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/crontab
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/group
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/hosts
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/hosts.allow
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/hosts.deny
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/issue
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/motd
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/mtab
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/passwd
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/profile
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/resolv.conf
+      readOnly: false
+      ownerOnly: true
+    - path: /proc/cpuinfo
+      readOnly: false
+      ownerOnly: true
+    - path: /proc/filesystems
+      readOnly: false
+      ownerOnly: true
+    - path: /proc/interrupts
+      readOnly: false
+      ownerOnly: true
+    - path: /proc/ioports
+      readOnly: false
+      ownerOnly: true
+    - path: /proc/meminfo
+      readOnly: false
+      ownerOnly: true
+    - path: /proc/modules
+      readOnly: false
+      ownerOnly: true
+    - path: /proc/mounts
+      readOnly: false
+      ownerOnly: true
+    - path: /proc/stat
+      readOnly: false
+      ownerOnly: true
+    - path: /proc/swaps
+      readOnly: false
+      ownerOnly: true
+    - path: /var/log/lastlog
+      readOnly: false
+      ownerOnly: true
+    - path: /var/log/messages
+      readOnly: false
+      ownerOnly: true
+    - path: /var/log/wtmp
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/services
+      readOnly: false
+      ownerOnly: true
+    - path: /etc/shadow
+      readOnly: false
+      ownerOnly: true
+    action: Block

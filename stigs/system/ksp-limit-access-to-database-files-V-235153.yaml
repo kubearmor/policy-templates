@@ -1,0 +1,58 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-limit-access-to-database-files
+  namespace: default # Change your namespace
+spec:
+  tags: ["STIGS", "MYSQL, "MARIADB"]
+  message: "Alert! Database configuration files access has been denied"
+  selector:
+    matchLabels:
+      container: mysql-1 # Change your match labels
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/mysql/my.cnf
+      ownerOnly: true
+    - path: /etc/mysql/mariadb.conf.d
+      ownerOnly: true
+    - path: /etc/mysql/conf.d
+      ownerOnly: true
+    - path: /etc/mysql/debian-start
+      ownerOnly: true
+    - path: /etc/mysql/debian.cnf
+      ownerOnly: true
+    - path: /etc/mysql/mariadb.cnf
+      ownerOnly: true
+    - path: /mysqld.pid
+      ownerOnly: true
+    - path: /tmp/mysql.sock
+      ownerOnly: true
+    - path: /usr/lib/systemd/system/mysql.service
+      ownerOnly: true
+    - path: /usr/lib/systemd/system/mysqld.service
+      ownerOnly: true
+    matchDirectories:
+    - dir: /etc/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /usr/lib/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /usr/share/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /var/lib/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /var/log/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /usr/local/mysql/
+      recursive: true
+      ownerOnly: true
+    action: Block

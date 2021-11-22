@@ -1,0 +1,36 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: changes-additions-or-deletions-to-accounts-with-root-administrative-audit
+  namespace: default # Change your namespace
+spec:
+ tags: ["PCI-DSS-10.2.5"] 
+  message: "Notification! User accounts and passwords are modified"
+  selector:
+    matchLabels:
+      container: test #change app: test to match your label
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/sbin/useradd
+    - path: /sbin/useradd
+    - path: /usr/sbin/usermod
+    - path: /sbin/usermod
+    - path: /usr/sbin/userdel
+    - path: /sbin/userdel 
+    - path: /usr/bin/chage
+    - path: /usr/bin/passwd
+    - path: /usr/bin/chage
+    - path: /bin/passwd
+    action: Audit
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/passwd
+    - path: /var/log/utmw
+    - path: /var/log/btmp
+    action: Audit

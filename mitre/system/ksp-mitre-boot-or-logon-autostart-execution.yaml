@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-t1053-persistence-boot-or-logon-autostart-execution-kernel-modules-and-extensions
+  namespace: default # Change your namespace
+spec:
+  tags: ["MITRE", "T1053"]
+  message: "Kernel Modules and Extensions is Audited"
+  selector:
+    matchLabels:
+      container: ubuntu          #change your labels here
+  process:
+    severity: 2
+    matchPaths:
+      - path: /usr/sbin/modprobe
+      - path: /usr/sbin/insmod
+      - path: /usr/sbin/modinfo
+      - path: /usr/sbin/lsmod
+    action: Audit

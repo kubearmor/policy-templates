@@ -1,0 +1,36 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-create-or-modify-system-process-systemd-service
+spec:
+  tags: ["MITRE", "Persistence"]
+  selector:
+    matchLabels:
+      {}
+  process:
+    matchDirectories:
+      - dir: /etc/systemd/system/
+        recursive: true
+      - dir: /usr/lib/systemd/
+        recursive: true
+      - dir: /lib/systemd/system/
+        recursive: true
+    action: Audit
+    severity: 5
+  file:
+    matchDirectories:
+      - dir: /etc/systemd/system/
+        recursive: true
+        readOnly: false
+      - dir: /usr/lib/systemd/
+        recursive: true
+        readOnly: false
+      - dir: /lib/systemd/system/
+        recursive: true
+        readOnly: false
+    action: Audit
+    severity: 5

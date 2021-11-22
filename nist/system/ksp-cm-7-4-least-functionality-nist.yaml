@@ -1,0 +1,30 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-cm-7-4-least-functionality-nist
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST", "CM-7"] 
+  message: "Package Manager and Remote File Copy is now blocked "
+  selector:
+    matchLabels:
+      container: ubuntu-1 # Change your match labels
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/apt
+    matchPaths:
+    - path: /usr/bin/wget
+    matchPaths:
+    - path: /usr/bin/curl
+    matchPaths:
+    - path: /usr/bin/http
+    matchPaths:
+    - path: /usr/bin/zypp
+    matchPaths:
+    - path: /usr/bin/yum
+    action: Block

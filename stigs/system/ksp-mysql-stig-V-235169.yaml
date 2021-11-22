@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-restrict-access-mysql-server-config
+  namespace: default # Change your namespace
+spec:
+  tags: ["STIGS", "MYSQL"]
+  message: "Alert! mysql configuration files access has been denied"
+  selector:
+    matchLabels:
+      container: mysql-1 # Change your match labels
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/mysql/my.cnf
+      ownerOnly: true
+    matchDirectories:
+    - dir: /etc/mysql/
+      recursive: true
+      ownerOnly: true
+    action: Block

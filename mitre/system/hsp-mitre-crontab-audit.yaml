@@ -1,13 +1,17 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
   name: hsp-mitre-t1053-003-scheduled-task-job-crontab
 spec:
-  message: "Adversaries is abused the cron utility to perform task scheduling for initial or recurring execution of malicious code"
-  tags: ["MITRE","Execution","crontab"]
+  message: "Cronjob/Crontab has been accessed"
+  tags: ["MITRE","T1053-003","Execution","crontab"]
   nodeSelector:
     matchLabels:
-       pod: ubuntu #change the labels 
+        kubernetes.io/hostname: gke-ubuntu # use your labels here
   process: 
         matchPaths: 
         - path: /etc/crontab 

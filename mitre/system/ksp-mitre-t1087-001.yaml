@@ -1,0 +1,29 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-t1087-001
+  namespace: default # Change your namespace
+spec:
+  tags: ["MITRE","T1087.001", "DISCOVERY"]
+  message: "Someone Tried to Access Local User Account Details"
+  selector:
+    matchLabels:
+      pod: testpod # Change your matchLabels
+  process:
+    severity: 5
+    matchPaths:
+      - path: /usr/bin/id
+      - path: /usr/bin/groups
+      - path: /usr/bin/net
+      - path: /usr/bin/finger
+      - path: /usr/bin/getent
+      - path: /usr/bin/lslogins
+      - path: /usr/bin/users
+      - path: /usr/bin/w
+      - path: /usr/bin/last
+      - path: /usr/bin/lastlog
+    action: Audit

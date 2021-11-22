@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-defense-evasion-modify-system-image
+spec:
+  selector:
+    matchLabels:
+      {}
+  file:
+    matchPaths:       
+      - path: /etc/hostname
+      - path: /etc/hosts.allow
+      - path: /etc/hosts
+      - path: /etc/lsb-release
+      - path: /etc/networks
+    action: Audit
+    severity: 6

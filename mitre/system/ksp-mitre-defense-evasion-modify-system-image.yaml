@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: mitre-defense-evasion-modify-system-image
+  namespace: default # Change your namespace
+spec:
+  tags: ["MITRE", "T1055"]
+  message: "This policy will audit the modification of sys-images"
+  selector:
+    matchLabels:
+      container: ubuntu # Change your own labels
+  file:
+    severity: 6
+    matchPaths:       
+      - path: /etc/hostname
+      - path: /etc/hosts.allow
+      - path: /etc/hosts
+      - path: /etc/lsb-release
+      - path: /etc/networks
+    action: Audit

@@ -1,0 +1,26 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-stig-sv-233531r617333-postgres-block-deletion
+  namespace: default # Change your namespace
+spec:
+  message: "Caution! Someone tried deleting a postgres data file(s)"
+  tags: ["PSQL", "STIGS"]
+  selector:
+    matchLabels:
+      app: postgres # Change your match labels
+  file:
+    severity: 2
+    matchDirectories:
+      - dir: /var/lib/postgresql/data/
+        recursive: true
+        readOnly: false
+        fromSource:
+        - path: /bin/rm
+        - path: /bin/rmdir
+        - path: /bin/mv
+    action: Block

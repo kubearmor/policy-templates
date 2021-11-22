@@ -1,10 +1,15 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-au-10-non-repudiation-1
+  namespace: default # Change the namespace
 spec:
   tags: ["NIST", "AU-10", "binary", "system", "logs", "File-Permissions", "ksp"]
-  message: "Blocked deletion of system binaries/logs/configuration files or/and accessed the File Permissions commands"
+  message: "Access denied to run that command"
   selector:
     matchLabels:
       app: test                     #Replace app: test with your own labels.

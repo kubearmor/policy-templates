@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-rename-utilities
+spec:
+  tags: ["MITRE", "T1055.009"]
+  message: " (Notification) Adversaries tried to move/re-name the files  "
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-cluster # Change your matchLabels
+  process:
+    severity: 9
+    matchPaths:
+    - path: /usr/bin/mv
+    - path: /usr/bin/mmv
+    - path: /usr/bin/rename
+    action: Audit

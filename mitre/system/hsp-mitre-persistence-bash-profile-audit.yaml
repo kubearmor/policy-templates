@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-mitre-persistence-bash-profile-audit
+spec:
+  message: "Notification! Bash history and Bash profile files has been accessed"
+  tags: ["MITRE","T1552.003"]
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-ubuntu # Change your match labels
+  file:
+    severity: 2
+    matchPaths:
+    - path: /etc/profile
+    - path: /etc/bash.bashrc
+    - path: /etc/.bash_profile
+    action: Audit
+

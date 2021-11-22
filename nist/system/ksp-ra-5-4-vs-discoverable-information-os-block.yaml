@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-ra-5-4-vs-discoverable-information-os-block
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST", "RA-5(4)"]
+  message: "Alert! OS information access has been denied"
+  selector:
+    matchLabels:
+      container: ubuntu-1
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/os-release # try cat (permission denied)
+    - path: /proc/version
+    - path: /usr/lib/os-release
+    - path: /etc/lsb-release
+    action: Block  

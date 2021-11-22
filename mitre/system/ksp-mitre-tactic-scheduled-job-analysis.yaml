@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-tactic-scheduled-job-analysis
+  namespace: default # Change your namespace
+spec:
+  tags: ["mitre","system","cron","T1053"]
+  message: “Someone tried to access scheduled job”
+  selector:
+    matchLabels:
+      pod: ubuntu #change the labels 
+  process:
+    severity: 7 # lower severity
+    matchPaths:
+    - path: /var/spool/cron/atjobs
+    - path: /var/spool/cron/atspool
+    - path: /proc/loadavg
+    - path: /var/run/utmp
+    action: Audit

@@ -9,7 +9,8 @@ spec:
       app: mysql      #change app: mysql to match your label
   ingress:
     - fromEndpoints:
-        - {}
+        - matchLabels:
+          role: frontend # Change your match labels
       toPorts:
         - ports:
             - port: "3306"

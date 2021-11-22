@@ -1,0 +1,34 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-cm-8-7-system-component-inventory-audit
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST","CM-8-7"] 
+  message: "Notification! System component inventory and package logs has been accessed"
+  selector:
+    matchLabels:
+      pod: test #change this label with your label
+  file:
+    severity: 7
+    matchPaths:
+    - path: /etc/apt/sources.list
+    - path: /etc/yum.conf
+    - path: /var/log/dpkg.log
+      readOnly: true
+    - path: /var/log/yum.log
+      readOnly: true
+      - path: /var/log/zypper.log
+      readOnly: true
+    matchDirectories:
+    - dir: /etc/apt/sources.list.d/
+      recursive: true
+    - dir: /etc/yum.repos.d/
+      recursive: true
+    - dir: /etc/zypp/repos.d/
+      recursive: true
+    action: Audit

@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-49362-cassandra-web-0.5.0-remote-file-read
+  namepsace: default
+spec:
+  tags: ["Cassandra", "Exploit-DB", "49362_rule"]
+  message: "Acessing Sensitive Files is Blocked "
+  selector:
+    matchLabels:
+      app: cassandra #change app: cassandra to match your label
+  file:
+    severity: 3
+    matchPaths:
+      - path: /etc/passwd
+      - path: /etc/shadow
+    action: Block
+  process:
+    severity: 3
+    matchPatterns:
+      - pattern: /proc/**/cmdline
+      - pattern: /proc/**/sched_debug
+    action: Audit

@@ -1,0 +1,28 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-cassandra-sv-87271r1-unauthorized-modication-log-file
+  namespace: default
+spec:
+  tags: ["Cassandra", "logs", "SV-87271r1_rule"]
+  message: "Database log file is modified "
+  selector:
+    matchLabels:
+      app: cassandra
+  file:
+    severity: 4
+    matchDirectories:
+      - dir: /var/log/cassandra/
+        recursive: true
+        readOnly: false
+        fromSource:
+          - path: /usr/bin/touch
+          - path: /usr/bin/chmod
+          - path: /usr/bin/nano
+          - path: /usr/bin/cat
+          - path: /usr/bin/vi
+    action: Block

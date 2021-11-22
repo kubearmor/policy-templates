@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-psql-block
+  namespace: default  #change with your namespace
+spec:
+  tags: ["MITRE","PostgreSQL"]
+  message: "Someone tried to access PostgreSQL Command Line Interface"
+  selector:
+    matchLabels:
+      app: testpod #change with your match label
+  process:
+    matchPaths:
+    - path: /usr/bin/psql
+      ownerOnly: true
+    - path: /bin/psql
+      ownerOnly: true
+    - path: /usr/share/postgresql-common/pg_wrapper
+      ownerOnly: true
+    severity: 5
+    action: Block

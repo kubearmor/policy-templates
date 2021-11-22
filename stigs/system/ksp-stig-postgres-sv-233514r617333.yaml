@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-stig-sv-233514r617333-postgress-unauthorized-modification
+  namespace: default           # use your own namespace
+spec:
+  message: "Postgres Log File is Blocked"
+  tags: ["postgres", "STIGS"]
+  selector:
+    matchLabels:
+      app: postgres            # use your own matchLabels
+  file:
+    severity: 4
+    matchDirectories:
+      - dir: /var/log/postgresql/
+        recursive: true
+        readOnly: false
+        ownerOnly: true
+  action: Block

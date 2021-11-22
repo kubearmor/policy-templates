@@ -6,7 +6,7 @@ spec:
   description: "Adversaries may communicate using a protocol and port paring that are typically not associated. Block all non-standard ports and protocol." 
   endpointSelector:
     matchLabels:
-      app: test
+      app: test # Change your matchLabels
   ingress:
   - toPorts:
     - ports:

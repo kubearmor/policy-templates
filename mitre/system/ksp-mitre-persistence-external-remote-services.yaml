@@ -1,0 +1,26 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-t1053-persistence-external-remote-services
+  namespace: default # Change your namespace
+spec:
+  tags: ["MITRE", "T1053"]
+  message: "Password File and ssh Sensitive Files is Audited"
+  selector:
+    matchLabels:
+      app: ubuntu           #change your labels here
+  file:
+    severity: 3
+    matchPaths:
+      - path: /var/log/wtmp
+      - path: /var/run/utmp
+      - path: /var/log/auth.log
+      - path: /etc/passwd
+      - path: /etc/shadow
+    matchDirectories:
+      - dir: /etc/ssh/
+    action: Audit

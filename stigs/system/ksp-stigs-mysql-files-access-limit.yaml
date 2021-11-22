@@ -1,13 +1,18 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mysql-files-access-limit
+  namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "MYSQL"]
-  message: "Someone Tried to Access MySQL Files"
+  message: "Alert! Access to mysql conf files has been denied"
   selector:
     matchLabels:
-      pod: testpod
+      pod: mysql-1 # Change your match labels
   file:
     severity: 5
     matchPaths:

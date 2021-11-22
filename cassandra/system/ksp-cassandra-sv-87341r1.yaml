@@ -1,0 +1,26 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-cassandra-sv-87341r1-permission-change-in-cassandra-configuration-files
+  namespace: default
+spec:
+  tags: ["Cassandra", "configuration", "SV-87341r1_rule"]
+  message: "Configuration Files permissions is Audited "
+  selector:
+    matchLabels:
+      app: cassandra  #change app: cassandra to match your label
+  file:
+    severity: 4
+    matchDirectories:
+      - dir: /etc/cassandra/
+        recursive: true
+        readOnly: false
+        fromSource:
+          - path: /usr/bin/chown
+          - path: /usr/bin/chmod
+          - path: /usr/bin/chgrp
+    action: Audit

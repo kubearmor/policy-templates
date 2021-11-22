@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: mitre-tactic-defense-evasion-root-certificate
+  namespace: default # Change your namespace
+spec:
+  tags: ["MITRE", "T1055"]
+  message: "Audit modifications in root certificates"
+  selector:
+    matchLabels:
+      container: ubuntu # Change your own match labels
+  file:
+    severity: 6
+    matchPaths:
+    - path: /etc/ca-certificates.conf
+    matchDirectories:
+    - dir: /usr/local/share/ca-certificates/
+      recursive: true
+    action: Audit

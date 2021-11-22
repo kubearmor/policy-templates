@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-stigs-postgresql-port-external-access
+spec:
+  description: "This will Block PostgreSQL External Access"
+  endpointSelector:
+    matchLabels:
+      pod: testpod   #change this label with your label
+  ingress:
+    - fromEntities:
+        - cluster
+    - fromCIDRSet:
+        - cidr: 10.10.10.1/16    #change with your ip address
+      toPorts:
+        - ports:
+            - port: "5432"

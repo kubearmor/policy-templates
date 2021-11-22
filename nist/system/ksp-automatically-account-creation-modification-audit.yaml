@@ -1,0 +1,28 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: automatically-audit-account-creation-modification
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST","system","account","Block","ksp"]
+  message: "Alert! account credential files and user account create/edit commands denied"
+  selector:
+    matchLabels:
+      app: test # Change your match labels
+  file:
+    severity: 3
+    matchPaths:
+    - path: /etc/passwd
+    - path: /etc/shadow
+    - path: /etc/group
+    action: Block
+  process:
+    severity: 3
+    matchPaths:
+    - path: /bin/useradd
+    - path: /bin/adduser
+    action: Block

@@ -1,7 +1,12 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-nist-sc-13-block-cryptograhy-key
+  namespace: default # Change your namespace
 spec:
   message: "cryptography key files was accessed"
   tags: ["NIST"]

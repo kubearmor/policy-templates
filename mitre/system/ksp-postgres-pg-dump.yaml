@@ -1,0 +1,42 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-tactic-postgres-pg-dump
+  namespace: default  #change with your namespace
+spec:
+  tags : ["postgresql","CVE-2018-16850"]
+  message: "PostgreSQL data accessed by unknown process"
+  selector:
+      matchLabels:
+          app: testpod #change with your match label
+  process:
+    matchPaths:
+    - path: /usr/bin/pg_dump
+    - path: /usr/bin/pg_dumpall
+    - path: /usr/bin/pg_upgradecluster
+    - path: /usr/bin/pg_upgrade
+    - path: /usr/lib/postgresql/13/bin/pg_dump
+    - path: /usr/lib/postgresql/13/bin/pg_upgrade
+      fromSource: # trigger an alert if the source
+        - dir: /usr/
+        - dir: /usr/lib/
+          recursive: true  
+    severity: 5 # Higher severity 
+    action:  Audit
+  file:
+    matchPaths: 
+    - path: /usr/bin/pg_dump
+    - path: /usr/bin/pg_upgrade
+    - path: /usr/bin/pg_dumpall
+    - path: /usr/bin/pg_upgradecluster
+    - path: /usr/lib/postgresql/13/bin/pg_dump
+    - path: /usr/lib/postgresql/13/bin/pg_upgrade
+      fromSource: # trigger an alert if the source
+       - path: /usr
+       - path: /lib
+    action: Audit
+    severity: 9 # lowest severity

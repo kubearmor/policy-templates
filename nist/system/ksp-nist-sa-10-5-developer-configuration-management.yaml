@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: sa-10-5-developer-configuration-management
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST", "sa-10-5"]
+  message: "Package Manager is Accessed"
+  selector:
+    matchLabels:
+      container: ubuntu       # use your own matchLabels
+  process:
+    severity: 2
+    matchPaths:
+      - path: /usr/bin/apt
+      - path: /usr/local/bin/apt-get
+      - path: /usr/bin/dpkg
+      - path: /usr/bin/snap
+  action: Audit

@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-tactic-persistence-boot-or-logon-autostart-execution-kernel-modules-and-extensions
+spec:
+  selector:
+    matchLabels:
+      {}
+  process:
+    matchPaths:
+      - path: /usr/sbin/modprobe 
+      - path: /usr/sbin/insmod 
+      - path: /usr/sbin/modinfo
+      - path: /usr/sbin/lsmod
+    action: Audit
+    severity: 4

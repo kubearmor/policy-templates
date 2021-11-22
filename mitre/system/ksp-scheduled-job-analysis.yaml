@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-scheduled-job-analysis
+  namespace: default  #change with your namespace
+spec:
+  tags: ["MITRE"]
+  message: "Jobs accessed by unknown process"
+  selector:
+    matchLabels:
+      app: testpod #change with your match label
+  process:
+    matchPaths:
+    - path: /var/spool/cron/atjobs
+    - path: /var/spool/cron/atspool
+    - path: /proc/loadavg
+    - path: /var/run/utmp
+    action: Audit
+    severity: 7

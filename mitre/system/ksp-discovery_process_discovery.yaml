@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-discovery-process-discovery
+  namespace: default  #change with your namespace
+spec:
+  tags: ["MITRE", "Discovery"]
+  message: "Someone accessed running process"
+  selector:
+    matchLabels:
+      app: testpod #change with your match label
+  process:
+    matchPaths:
+      - path: /bin/ps
+      - path: /usr/bin/ps
+      - path: /usr/bin/pgrep
+      - path: /usr/bin/top
+      - path: /usr/bin/htop
+    action: Audit
+    severity: 5

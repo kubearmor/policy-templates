@@ -1,0 +1,31 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-1-1-17-controller-manager
+spec:
+  tags: ["CIS", "1.1.17"]
+  message: "Alert! Access to Controller Manager files has been blocked"
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-cluster-1-default-pool-e47c8217-beuk      # Change with your node label
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/systemd/system/kube-controller-manager.service
+      readOnly: false
+      ownerOnly: true
+    matchDirectories:
+    - dir: /var/lib/kube-controller-manager/
+      readOnly: false
+      ownerOnly: true
+    - dir: /etc/kubernetes/manifests/
+      readOnly: false
+      ownerOnly: true
+    - dir: /etc/kubernetes/secrets/
+      readOnly: false
+      ownerOnly: true
+    action: Block

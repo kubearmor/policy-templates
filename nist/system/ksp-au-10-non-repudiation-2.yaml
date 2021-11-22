@@ -1,13 +1,18 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-au-10-non-repudiation-2
+  namespace: default # Change your namespace
 spec:
   tags: ["NIST", "AU-10", "bash", "system", "ksp"]
-  message: "Accessed bash shell configuration files"
+  message: "Notification! Bash shell configuration files accessed"
   selector:
     matchLabels:
-      app: test 
+      app: test  # Change your match labels
   file:
     severity: 6
     matchPaths:

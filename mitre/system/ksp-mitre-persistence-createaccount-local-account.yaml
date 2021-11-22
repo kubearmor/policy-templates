@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-t1053-tactic-persistence-create-account-local-account
+  namespace: default # Change your namespace
+spec:
+  tags: ["MITRE", "T1053"]
+  message: "System owner discovery command is blocked"
+  selector:
+    matchLabels:
+      app: ubuntu       #change your labels here
+  process:
+    severity: 2
+    matchPaths:
+      - path: /usr/sbin/adduser
+      - path: /usr/sbin/useradd
+    action: Audit
+  file:
+    severity: 4
+    matchPaths:
+      - path: /etc/passwd
+      - path: /etc/shadow
+    action: Audit

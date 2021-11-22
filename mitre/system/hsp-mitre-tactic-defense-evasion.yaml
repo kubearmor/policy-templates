@@ -1,0 +1,19 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-mitre-tactic-defense-evasion 
+spec:
+  message: "(Notification) Certificate files has been accessed"
+  tags: ["MITRE","T1140"]
+  nodeSelector:
+    matchLabels:
+       kubernetes.io/hostname: gke-cluster # Change your matchLabels
+  process:
+    matchPaths:
+    - path: /usr/bin/certutil
+    action: Audit
+    severity: 5

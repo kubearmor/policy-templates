@@ -1,10 +1,15 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-block-untrusted-shell-execution
+  namespace: default # Change your namespace
 spec:
   tags : ["MITRE","D3fend","Execution","Unix Shell"] 
-  message: "Deploy a container into an environment to facilitate execution or evade defenses"
+  message: "Bash shells have been accessed"
   selector:
     matchLabels:
       app: testpod 
@@ -22,14 +27,7 @@ spec:
     - path: /bin/zsh
     - path: /bin/tcsh
     - path: /bin/csh
-      fromSource:  # trigger an alert if the source
-      - dir: /tmp/
-      - dir: /var/
-      - dir: /home/
-      - dir: /usr/
-        recursive: true 
     action: Audit   
-      
   file:
     severity: 10  # lowest severity for processes invoked as child process of bash
     matchPaths:

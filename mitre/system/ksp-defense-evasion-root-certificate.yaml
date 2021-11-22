@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-tactic-defense-evasion-root-certificate
+  namespace: default  #change with your namespace
+spec:
+  tags: ["MITRE"] 
+  message: "AUDITING SHARED AND GROUP ACCOUNT CREDENTIALS CHANGE "
+  selector:
+    matchLabels:
+      app: testpod #change with your match label
+  file:
+    matchPaths:
+       - path: /etc/ca-certificates.conf
+    matchDirectories:
+       - dir: /usr/local/share/ca-certificates/
+         recursive: true
+    action: Audit
+    severity: 6

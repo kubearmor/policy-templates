@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-ia-3-3-dynamic-address-allocation-audit
+  namespace: default  #change namespace: default to match your namespace
+spec:
+  tags: ["NIST", "IA-3(3)"]
+  message: "To monitor the use of tcpdump and DHCP access"
+  selector:
+    matchLabels:
+      app: testpod  #change app: testpod to match your label
+  process:
+    matchPatterns:      
+    - pattern: /**/tcpdump
+    severity: 5
+    action: Audit
+  network:
+    matchProtocols:
+    - protocol: UDP
+    severity: 5
+    action: Audit
