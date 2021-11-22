@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-wordpress-wp-cli-block-users
+  namespace: default # use your own namespace
+spec:
+  message: "(Alert) wp command line is denied for user"
+  tags: ["Wordpress","wp-cli"]
+  selector:
+    matchLabels:
+      app: wordpress # use your own labels here
+  process: 
+      severity: 5
+      matchPaths:
+         - path: /usr/local/bin/wp
+           ownerOnly: true
+      action: Block
