@@ -7,13 +7,13 @@ kind: KubeArmorPolicy
 metadata:
   name: ksp-wordpress-packages-process-block
 spec:  
-  message: "(Alert) someone tried to install packages"
+  message: "(Alert) Package Manager triggered! unexpected behaviour"
   tags: ["Wordpress"]
   selector:
     matchLabels:
       app: wordpress # use your labels here
   process:
-    severity: 2
+    severity: 5
     matchPaths:
     - path: /usr/bin/apt
     - path: /usr/bin/apt-get
