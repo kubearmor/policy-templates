@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-best-practice-cassandra-server-audit-log-data-cache-directory
+  namespace: default # Change your namespace
+spec:
+  tags: ["CASSANDRA", "BEST PRACTICE"]
+  message: "Cassandra server directories have been accessed"
+  selector:
+    matchLabels:
+      app: cass-server #change app: cass-server to match your label
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /var/lib/cassandra/data/
+      recursive: true
+    - dir: /var/lib/cassandra/commitlog/
+      recursive: true
+    - dir: /var/lib/cassandra/saved_caches/
+      recursive: true
+    action: Audit
