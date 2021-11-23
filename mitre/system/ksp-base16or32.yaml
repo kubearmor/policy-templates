@@ -9,7 +9,7 @@ metadata:
   namespace: default  #change with your namespace
 spec:
   tags: ["MITRE","system","K8s","base32"]
-  message: "someone tried to decode file information"
+  message: "Someone decoded file information"
   selector:
     matchLabels:
       app: testpod #change with your own label
