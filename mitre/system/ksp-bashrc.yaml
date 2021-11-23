@@ -9,7 +9,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["MITRE","Persistence","K8s"]
-  message: "Warning! someone tried to access profile details"
+  message: "Warning! Someone accessed profile details"
   selector:
     matchLabels:
       app: testpod #change with your own label
