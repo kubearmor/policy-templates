@@ -9,7 +9,7 @@ metadata:
   namespace: default    # Change your namespace
 spec:
   tags: ["MITRE","system","K8s","T1601"]
-  message: "Warning! someone tried to modify to system image file"
+  message: "Warning! someone modified system image file"
   selector:
     matchLabels:
       app: testpod    #change with your own label
