@@ -9,7 +9,7 @@ metadata:
   namespace: default    # Change your namespace
 spec:
   tags: ["MITRE","system","K8s","T1136"]
-  message: "Alert! someone tried to create new user"
+  message: "Alert! Someone created new user or Accessed user details."
   selector:
     matchLabels: 
       app: testpod    #change with your own label
