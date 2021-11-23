@@ -2,6 +2,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-egress-pci-dss-1.2.3-block-cardholder-data-over-internet
+  namespace: default    # Change your namespace
 spec:
   description: "do not allow direct connection outbound between cardholder to internet"
   endpointSelector: 
