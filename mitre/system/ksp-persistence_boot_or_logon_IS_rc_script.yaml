@@ -9,7 +9,7 @@ metadata:
   namespace: default    # Change your namespace
 spec:
   tags: ["MITRE","system","K8s","T1037"]
-  message: "Warning! someone tried to access This sensitive process and files"
+  message: "Warning! someone accessed sensitive process or files"
   tags: ["MITRE", "Persistence"]
   selector:
     matchLabels:
