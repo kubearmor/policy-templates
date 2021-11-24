@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-1-1-1-api-server-pod
+spec:
+  tags: ["CIS", "1.1.1", "API-Server-Pod", "V1.20"]
+  message: "This policy will block kubeapi access configuration"
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-cluster-1-default-pool-f146d476-q392 # Change your node
+  file:
+    severity: 6
+    matchPaths:
+      - path: /etc/kubernetes/manifests/kubeapiserver.yaml
+        readOnly: true
+        ownerOnly: true
+      - path: /etc/kubernetes/manifests/kube-apiserver.manifest
+        readOnly: true
+        ownerOnly: true
+    action: Block
