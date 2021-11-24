@@ -1,0 +1,23 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: "cnp-pci-dss-10-track-and-monitor-all-access-to-network-resources-and-cardholder-data"
+spec:
+  description: "Monitor Network Resources"
+  endpointSelector:
+    matchLabels:
+      app: testpod #change app: testpod to match your label
+  ingress:
+    - toPorts:
+        - ports:
+            - port: "514 "
+              protocol: TCP
+        - ports:
+            - port: "3306"
+              protocol: TCP
+        - ports:
+            - port: "1433"
+              protocol: TCP
+        - ports:
+            - port: "23"
+              protocol: TCP
