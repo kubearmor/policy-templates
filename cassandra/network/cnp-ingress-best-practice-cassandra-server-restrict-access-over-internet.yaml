@@ -1,0 +1,31 @@
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "cnp-ingress-best-practice-cassandra-server-restrict-access-over-internet"
+  namespace: default        #change default namespace to match your namespace
+spec:
+  description: "Deny exposure of Cassandra cluster on the public internet. Enforce Least Privilege"
+  endpointSelector:
+    matchLabels:
+      app: cass-server      #change app: cassandra to match your label
+  ingressDeny:
+  - fromEntities:
+    - "world"
+    toPorts:
+    - ports:
+      - port: "7199"
+        protocol: "TCP"
+      - port: "7000"
+        protocol: "TCP"
+      - port: "7001"
+        protocol: "TCP"
+      - port: "9160"
+        protocol: "TCP"
+      - port: "9142"
+        protocol: "TCP"
+      - port: "9042"
+        protocol: "TCP"
+  ingress:
+  - fromEntities:
+    - "all"

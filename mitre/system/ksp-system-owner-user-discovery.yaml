@@ -11,7 +11,8 @@ spec:
   tags: ["MITRE", "Discovery"]
   message: "Someone tried to access user details"
   selector:
-    app: testpod #change with your match label
+    matchLabels:
+      app: test-app  #change with your match label
   process:
     matchPaths:
       - path: /usr/bin/who

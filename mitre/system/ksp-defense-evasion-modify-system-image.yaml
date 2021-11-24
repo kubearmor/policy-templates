@@ -6,10 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-defense-evasion-modify-system-image
+  namespace: default    # Change your namespace
 spec:
+  tags: ["MITRE","system","K8s","T1601"]
+  message: "Warning! someone modified system image file"
   selector:
     matchLabels:
-      {}
+      app: testpod    #change with your own label
   file:
     matchPaths:       
       - path: /etc/hostname

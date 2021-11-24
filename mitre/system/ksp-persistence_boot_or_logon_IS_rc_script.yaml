@@ -6,11 +6,14 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-persistence-blis-rc-scripts
+  namespace: default    # Change your namespace
 spec:
+  tags: ["MITRE","system","K8s","T1037"]
+  message: "Warning! someone accessed sensitive process or files"
   tags: ["MITRE", "Persistence"]
   selector:
     matchLabels:
-      {}
+      app: testpod    #change with your own label
   process:
     matchPaths:
       - path: /etc/rc.local

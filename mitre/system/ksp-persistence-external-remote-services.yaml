@@ -6,10 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-mitre-tactic-persistence-external-remote-services
+  namespace: default    # Change your namespace
 spec:
+  tags: ["MITRE","system","K8s","T1133"]
+  message: "Warning! someone tried to access This sensitive file"
   selector:
     matchLabels: 
-      {}
+      app: testpod    #change with your own label
   file:
     matchPaths:
     - path: /var/log/wtmp

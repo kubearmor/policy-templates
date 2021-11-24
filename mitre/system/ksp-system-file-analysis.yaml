@@ -9,7 +9,7 @@ metadata:
   namespace: default  #change with your namespace
 spec:
   tags: ["MITRE"]
-  message: "passwd or shadow file accessed by unknown process"
+  message: "passwd or shadow file accessed"
   selector:
     matchLabels:
        app: testpod #change with your match label

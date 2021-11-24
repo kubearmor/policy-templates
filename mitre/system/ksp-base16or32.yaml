@@ -6,10 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-defense-evasion-deobfuscate
+  namespace: default  #change with your namespace
 spec:
+  tags: ["MITRE","system","K8s","base32"]
+  message: "Someone decoded file information"
   selector:
     matchLabels:
-      {}
+      app: testpod #change with your own label
   process:
     matchPaths:
       - path: /usr/bin/base32
