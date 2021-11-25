@@ -1,0 +1,37 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-pci-dss-10.2.3-access-to-all-audit-log-paths
+  namespace: default # Change your namespace
+spec:
+  tags: ["PCI-DSS", "Logs", "10.2.3"]
+  message: "Alert! someone tried to modify log files "
+  selector:
+    matchLabels:
+      pod: test #change pod: test to match your label
+  process:
+    severity: 3
+    matchPaths:
+      - path: /bin/dmesg
+    action: Block
+  file:
+    severity: 4
+    matchDirectories:
+      - dir: /var/log/
+        recursive: true
+        readOnly: false
+        fromSource:
+          - path: /bin/cat
+          - path: /bin/rm
+          - path: /bin/rmdir
+          - path: /bin/ls
+          - path: /bin/cp
+          - path: /bin/mv
+          - path: /bin/nano
+          - path: /usr/bin/touch
+          - path: /usr/bin/vi
+    action: Block
