@@ -8,30 +8,15 @@ metadata:
   name: ksp-pci-dss-10.2.3-access-to-all-audit-log-paths
   namespace: default # Change your namespace
 spec:
-  tags: ["PCI-DSS", "Logs", "10.2.3"]
+  tags: ["PCI-DSS", "logs", "10.2.3"]
   message: "Alert! someone tried to modify log files "
   selector:
     matchLabels:
-      pod: test #change pod: test to match your label
-  process:
-    severity: 3
-    matchPaths:
-      - path: /bin/dmesg
-    action: Block
+      pod: test #change pod: test to match your label   
   file:
     severity: 4
     matchDirectories:
       - dir: /var/log/
         recursive: true
         readOnly: false
-        fromSource:
-          - path: /bin/cat
-          - path: /bin/rm
-          - path: /bin/rmdir
-          - path: /bin/ls
-          - path: /bin/cp
-          - path: /bin/mv
-          - path: /bin/nano
-          - path: /usr/bin/touch
-          - path: /usr/bin/vi
     action: Block
