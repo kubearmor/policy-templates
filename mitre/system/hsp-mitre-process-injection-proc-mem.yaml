@@ -11,7 +11,7 @@ spec:
   message: "Another process may allow access to the process's memory"
   nodeSelector:
     matchLabels:
-    	kubernetes.io/hostname: gke-cluster # Change your matchLabels
+       kubernetes.io/hostname: gke-cluster # Change your matchLabels
   process:
     severity: 4
     matchPatterns: 
