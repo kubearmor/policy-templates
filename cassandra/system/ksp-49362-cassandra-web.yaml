@@ -6,7 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-49362-cassandra-web-0.5.0-remote-file-read
-  namepsace: default
+  namespace: default
 spec:
   tags: ["Cassandra", "Exploit-DB", "49362_rule"]
   message: "Acessing Sensitive Files is Blocked "
