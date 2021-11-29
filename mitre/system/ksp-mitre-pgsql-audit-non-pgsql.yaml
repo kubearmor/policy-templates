@@ -23,6 +23,6 @@ spec:
     - path: /bin/ls
     matchDirectories:
     - dir: /var/lib/postgresql/data/
-       fromSource:
-        - path: /usr/lib/postgresql/14/bin/postgres   # trigger an alert if the source
+      fromSource:
+      - path: /usr/lib/postgresql/14/bin/postgres   # trigger an alert if the source
     action: Audit
