@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mysql-credentials-from-files-block
+spec:
+  tags: ["mysql", "system","K8s"]
+  message: "Warning! someone tried to access This sensitive file"
+  selector:
+    matchLabels:
+      app: mysql    #change the labels
+  file:
+    severity: 7
+    matchPaths:
+    - path: /etc/mysql/mysql.conf.d/mysqld.cnf 
+      readOnly: false
+      ownerOnly: true  
+    action: Block
