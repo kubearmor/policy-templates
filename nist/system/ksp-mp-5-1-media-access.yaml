@@ -5,15 +5,15 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: restrict-external-media-device-access
-  namespace: default # Change your namespace
+  name: ksp-nist-mp-5-1-media-access
+  namespace: default   #change with your namespace
 spec:
- tags: ["NIST", "MP5"] 
-  message: "Alert! Access denied activities associated with the transport of information system media "
+  tags: ["NIST", "MP5"] 
+  message: "Alert! Unauthorized user tried to access media devices "
   selector:
     matchLabels:
-      pod: test #change app: test to match your label
-  path:
+      pod: testpod    #change with your match label
+  file:
     severity: 5
     matchPaths:
     - path: /dev/bus/usb 
