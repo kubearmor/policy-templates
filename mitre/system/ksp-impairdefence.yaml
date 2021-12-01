@@ -5,18 +5,18 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-group-1-proc-path-block
+  name: ksp-mitre-tactic-impair-defence
   namespace: default  #change with your namespace
 spec:
-  tags: ["MITRE"]
-  message: "selinux files accessed by unknown process"
+  tags: ["MITRE","T1562"]
+  message: "Selinux Files Accessed by Unknown Process"
   selector:
     matchLabels:
       app: testpod #change with your match label
   file:
-    matchPaths:
-      - path: /etc/selinux/*
-      - path: /etc/sysconfig/selinux
-      - path: /etc/apparmor.d
-    action: Audit
     severity: 6
+    matchPaths:
+    - path: /etc/selinux/semanage.conf
+    - path: /etc/sysconfig/selinux
+    - path: /etc/apparmor.d
+    action: Audit
