@@ -6,13 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-nist-cm-8-7-system-component-inventory-audit
-  namespace: default # Change your namespace
+  namespace: default   #change with your namespace
 spec:
   tags: ["NIST","CM-8-7"] 
   message: "Notification! System component inventory and package logs has been accessed"
   selector:
     matchLabels:
-      pod: test #change this label with your label
+      pod: testpod   #change with your match label
   file:
     severity: 7
     matchPaths:
@@ -22,7 +22,7 @@ spec:
       readOnly: true
     - path: /var/log/yum.log
       readOnly: true
-      - path: /var/log/zypper.log
+    - path: /var/log/zypper.log
       readOnly: true
     matchDirectories:
     - dir: /etc/apt/sources.list.d/
