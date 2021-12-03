@@ -8,13 +8,13 @@ metadata:
   name: hsp-mitre-sudo-caching
 spec:
   tags: ["MITRE","T1548.003"]
-  message: "Notification! suoders file has been accessed"
+  message: "Notification! sudoers File Has Been Accessed"
   nodeSelector:
     matchLabels:
       kubernetes.io/hostname: gke-ubuntu # Change your match labels
   process:
-  severity: 8
-   matchPaths: 
-   - path: /var/db/sudo
-   - path: /etc/sudoers
-   action: Audit
+    severity: 8
+    matchPaths: 
+    - path: /var/db/sudo
+    - path: /etc/sudoers
+    action: Audit
