@@ -5,14 +5,14 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: protection-of-information-at-rest
-  namespace: default # Change your namespace
+  name: ksp-sc-28-1-information-at-rest
+  namespace: default   #change with your namespace
 spec:
- tags: ["NIST" , "SC-28(1)" , "SYSTEM-AND-COMMUNICATION" , "PCF"] 
-  message: "Alert! Memory info access has been denied"
+  tags: ["NIST","SC-28-1-","SYSTEM-AND-COMMUNICATION","PCF"] 
+  message: "Alert! Memory info accessed by unknown user"
   selector:
     matchLabels:
-      container: test #change app: test to match your label
+      container: test   #change with your match label
   file:
     severity: 7
     matchPaths:
