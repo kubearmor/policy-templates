@@ -5,14 +5,14 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: changes-additions-or-deletions-to-accounts-with-root-administrative-audit
-  namespace: default # Change your namespace
+  name: ksp-pci-dss-10-2-5
+  namespace: default   #change with your namespace
 spec:
- tags: ["PCI-DSS-10.2.5"] 
+  tags: ["PCI-DSS-10.2.5"] 
   message: "Notification! User accounts and passwords are modified"
   selector:
     matchLabels:
-      container: test #change app: test to match your label
+      pod: testpod   #change with your match label
   process:
     severity: 5
     matchPaths:
