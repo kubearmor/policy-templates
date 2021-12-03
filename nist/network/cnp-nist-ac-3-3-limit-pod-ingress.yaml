@@ -2,13 +2,12 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-nist-ac-3-3-limit-pod-ingress
-  namespace: default   #change with your namespace
+  namespace: default  #change with your namespace
 spec:
-  description: "This Policy will only allow all Pods in the same namespace"
+  description: "After applying the policy, This pod only allow connections from inside Namespace"
   endpointSelector:
     matchLabels:
-      pod: testpod  #change this label with your label
+      pod: testpod   #change this label with your label
   ingress:
     - fromEndpoints:
-        - matchLabels:
-          role: backend # Change your match Labels
+        - {}
