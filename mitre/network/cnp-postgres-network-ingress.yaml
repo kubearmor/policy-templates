@@ -1,16 +1,17 @@
-apiVersion: "cilium.io/v2"
+apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: "cnp-postgresql-port"
+  name: cnp-postgresql-port
+  namespace: default  #change with your namespace
 spec:
-  description: "This will block postgresql external access"
+  description: "This Policy will Protect PostgreSQL External Access from unknown IP's"
   endpointSelector:
     matchLabels:
-      app: postgres-pod # Change your matchLabels
+      app: postgres-pod   #change this label with your label
   ingress:
-    - fromCIDR:
-        0.0.0.0/0 # Change your CIDR set
+    - fromCIDRSet:
+        - cidr: 0.0.0.0/0  # Change this to your CIDR set
       toPorts:
-      - ports:
-        - port: "5432"
-          protocol: ANY
+        - ports:
+            - port: "5432"
+              protocol: ANY
