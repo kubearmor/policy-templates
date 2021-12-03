@@ -9,14 +9,14 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["MITRE", "T1547.006"]
-  message: "Modify the kernel to automatically execute programs on system boot"
+  message: "Modify the Kernel to Automatically Execute Programs on System Boot"
   selector:
-      matchLabels:
-          app: testpod # Change your matchLabels
+    matchLabels:
+      app: testpod # Change your matchLabels
   process:
     severity: 6
     matchPaths: 
     - path: /usr/sbin/insmod
     - path: /usr/sbin/modprobe   
     - path: /usr/sbin/rmmod   
-  	action: Audit
+    action: Audit
