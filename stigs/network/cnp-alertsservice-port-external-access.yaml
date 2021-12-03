@@ -2,16 +2,17 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-alertsservice-port-external-access
+  namespace: default  #change with your namespace
 spec:
-  description: "This will Block Alertsservice External Access"
+  description: "This Policy will Protect Alertsservice External Access from unknown IP's"
   endpointSelector:
     matchLabels:
-      pod: test  # Change your match labels
+      pod: testpod    #change this label with your label
   ingress:
     - fromEntities:
         - cluster
     - fromCIDRSet:
-        - - cidr: 0.0.0.0/0 # Change your CIDR set
+        - cidr: 0.0.0.0/0  # Change this CIDR with your CIDR
       toPorts:
         - ports:
             - port: "8095"
