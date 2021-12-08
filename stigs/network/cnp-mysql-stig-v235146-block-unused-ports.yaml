@@ -2,6 +2,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-ingress-mysql-stig-v-235146-block-unused-ports
+  namespace: default
 spec:
   description: "To block all unused ports on MySQL pod"
   endpointSelector:
@@ -9,7 +10,7 @@ spec:
       app: mysql      #change app: mysql to match your label
   ingress:
     - fromEndpoints:
-        - matchLabels:
+      - matchLabels:
           role: frontend # Change your match labels
       toPorts:
         - ports:
