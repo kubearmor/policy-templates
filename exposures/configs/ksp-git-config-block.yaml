@@ -14,7 +14,7 @@ spec:
     matchLabels:
       app: frontend # use your own label here
    file:
-    matchPattern:
+    matchPatterns:
     - pattern: /**/.git/
     - pattern: /**/.git/config
     severity: 5
