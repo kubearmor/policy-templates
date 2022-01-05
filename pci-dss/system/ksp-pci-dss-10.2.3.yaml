@@ -18,5 +18,4 @@ spec:
     matchDirectories:
       - dir: /var/log/
         recursive: true
-        readOnly: false
-    action: Block
+    action: Audit
