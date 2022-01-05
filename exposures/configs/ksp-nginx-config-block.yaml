@@ -2,14 +2,13 @@
 # To learn more about KubeArmor visit: 
 # https://www.accuknox.com/kubearmor/ 
 
-
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-nginx-config-block
   namespace: default # use your own labels here
 spec:
-  message: Access deined for nginx.conf file to users
+  message: Access denied for nginx.conf file to users
   tags : ["config","exposure","nginx"]
   selector:
     matchLabels:
@@ -19,4 +18,4 @@ spec:
      - path: /etc/nginx/nginx.conf
        ownerOnly: true  
     severity: 5 
-  action: Block
+    action: Block
