@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-httpd-config-file-block
+  namespace: default   #Change with your namespace
+spec:
+   message: "Access blocked for configuration file"
+   tags : ["config","exposure","httpd"]
+   selector:
+    matchLabels:
+      pod: testpod   #Change with your label
+   file:
+    matchPatterns:
+    - pattern: /**/httpd.conf
+      readOnly: false
+    - pattern: /**/apache2.conf
+      readOnly: false
+    severity: 5
+    action: Block
