@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-svnserve-config-file-block
+  namespace: testns # use your own label here
+spec:
+   message: "Alert!, Access denied for svnserve-config file"
+   tags : ["config","exposure","svnserve","subversion"]
+   selector:
+    matchLabels:
+      container: ubuntu-1 # use your own label here
+   file:
+    severity: 5
+    matchPatterns:
+    - pattern: /**/subversion/
+    - pattern: /**/subversion/config
+    - pattern: /**/svnserve.conf
+    - pattern: /**/subversion/*
+   action: Block
