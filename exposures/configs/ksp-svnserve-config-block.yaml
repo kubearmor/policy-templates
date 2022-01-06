@@ -7,7 +7,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-svnserve-config-file-block
-  namespace: testns # use your own label here
+  namespace: default # use your own label here
 spec:
    message: "Alert!, Access denied for svnserve-config file"
    tags : ["config","exposure","svnserve","subversion"]
