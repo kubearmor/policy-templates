@@ -16,7 +16,7 @@ spec:
    file:
     matchPatterns:
     - pattern: /**/.git/
-    - pattern: /**/.git/config
+    - pattern: /**/.git/*
     - pattern: /**/.git/*.*
     - pattern: /**/.git/**/*.* #regex to get .git directory and associated files
     severity: 5
