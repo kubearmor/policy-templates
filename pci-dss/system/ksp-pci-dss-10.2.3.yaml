@@ -8,11 +8,7 @@ spec:
   message: "Alert! someone tried to modify log files "
   selector:
     matchLabels:
-      app: mysql #change app: mysql to match your label
-  process:
-    matchPaths:
-      - path: /bin/dmesg   
-    action: Block  
+      app: mysql #change app: mysql to match your label 
   file:
     severity: 4
     matchDirectories:
