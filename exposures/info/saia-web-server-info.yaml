@@ -5,7 +5,7 @@ metadata:
   name: ksp-saia-web-server-info
   namespace: default # use your own labels here
 spec:
-  message: Access deined for loadtextfile.htm file
+  message: Access denied to loadtextfile.htm file
   tags : ["config","exposure"]
   selector:
     matchLabels:
