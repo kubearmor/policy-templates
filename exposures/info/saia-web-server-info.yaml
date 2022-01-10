@@ -1,0 +1,18 @@
+---
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-saia-web-server-info
+  namespace: default # use your own labels here
+spec:
+  message: Access denied to loadtextfile.htm file
+  tags : ["config","exposure"]
+  selector:
+    matchLabels:
+       app: saia  # use your own labels here
+  file:
+   severity: 3
+   matchPatterns:
+   - pattern: /**/loadtextfile.htm
+     ownerOnly: true
+  action: Block
