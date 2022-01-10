@@ -16,6 +16,6 @@ spec:
       - port: "80"
         protocol: TCP
       rules:
-        http:                  #please add all the endpoints which is serviceable through apache
+        http:                  #please add all the endpoints which are serviceable through apache
         - method: "GET"
           path: "/"
