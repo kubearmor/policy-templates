@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-git-config-files-block
+  namespace: default # change your namespace here
+spec:
+   message: Access deined for git-config files
+   tags : ["config","exposure","git"]
+   selector:
+    matchLabels:
+      app: frontend # Use your own frontend pod label here
+   file:
+    matchPatterns:
+    - pattern: /**/.git/
+    - pattern: /**/.git/*
+    - pattern: /**/.git/*.*
+    - pattern: /**/.git/**/*.* #regex to get .git directory and associated files
+    severity: 5
+    action: Block
