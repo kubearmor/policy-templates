@@ -12,7 +12,7 @@ spec:
   tags: ["zend", "php", "config", "exposure"]
   selector:
     matchLabels:
-      container: ubuntu # use your own labels here
+      container: zend # use your own labels here
   file:
     severity: 6
     matchPatterns:
