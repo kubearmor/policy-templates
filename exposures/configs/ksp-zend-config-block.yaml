@@ -1,0 +1,33 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-zend-config-file
+  namespace: default # use your own namespace
+spec:
+  message: Zend Configuration File access is blocked
+  tags: ["zend", "php", "config", "exposure"]
+  selector:
+    matchLabels:
+      container: ubuntu # use your own labels here
+  file:
+    severity: 6
+    matchPatterns:
+      - pattern: /**/ZendApp/admin/configs/application.ini
+      - pattern: /**/ZendApp/module/Application/config/application.ini
+      - pattern: /**/application.ini
+      - pattern: /**/aplicacao/application/configs/application.ini
+      - pattern: /**/cloudexp/application/configs/application.ini
+      - pattern: /**/cms/application/configs/application.ini
+      - pattern: /**/moto/application/configs/application.iniZendApp/admin/configs/application.ini
+      - pattern: /**/moto/application/configs/application.ini
+      - pattern: /**/Partners/application/configs/application.ini
+      - pattern: /**/radio/application/configs/application.ini
+      - pattern: /**/seminovos/application/configs/application.ini
+      - pattern: /**/shop/application/configs/application.ini
+      - pattern: /**/site_cg/application/configs/application.iniradio/application/configs/application.ini
+      - pattern: /**/slr/application/configs/application.ini
+    action: Block
