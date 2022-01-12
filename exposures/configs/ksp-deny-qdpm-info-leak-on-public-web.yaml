@@ -16,10 +16,6 @@ spec:
       app: qdpm-server  #Change app: qdpm-server to labels of frontend web application pod 
   file:
     severity: 
-    matchDirectories:
-    - dir: /var/www/html/qdpm/core/
-      fromSource:
-      - path: /usr/sbin/nginx
     matchPatterns:
     - pattern: /**/databases.yml
     action: Block
