@@ -1,0 +1,21 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "cnp-ingress-deny-apache-perl-status-on-public-web"
+  namespace: default          #change default namespace to match your namespace
+spec:
+  description: "Deny the /perl-status endpoint by whitelisting all other http rules"
+  endpointSelector:
+    matchLabels:
+      app: apache-perl      #change app: apache-perl-server to match your label
+  ingress:
+  - fromEntities:
+    - cluster
+    toPorts:
+    - ports:
+      - port: "80"
+        protocol: TCP
+      rules:
+        http:                  #please add all the endpoints which is serviceable through apache
+        - method: "GET"
+          path: "/"
