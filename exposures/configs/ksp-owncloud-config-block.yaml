@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-owncloud-config-disclosure
+  namespace: default # Change your namespace
+spec:
+  tags: ["owncloud", "config", "exposure"]
+  message: Alert! ownCloud configuration files are accessed.
+  selector:
+    matchLabels:
+      app: testpod # Change your matchLabels
+  file:
+    severity: 2
+    matchPatterns:
+      - pattern: /**/**/owncloud/config/config.php
+      - pattern: /**/**/owncloud/config/config.apps.sample.php
+      - pattern: /**/**/owncloud/config/config.sample.php
+    action: Block
