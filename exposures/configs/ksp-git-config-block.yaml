@@ -9,7 +9,7 @@ metadata:
   namespace: default # change your namespace here
 spec:
    message: Access denied for git-config files
-   tags : ["config","exposure","git"]
+   tags : ["config","exposure","git","git-config"]
    selector:
     matchLabels:
       app: frontend # Use your own frontend pod label here
