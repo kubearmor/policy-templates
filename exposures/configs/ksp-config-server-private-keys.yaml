@@ -38,5 +38,5 @@ spec:
     - pattern: /**/config/jwt/private.pem
     - pattern: /**/jwt/private.pem
     - pattern: /**/private.pem
-    action: Block
+    action: Audit
 
