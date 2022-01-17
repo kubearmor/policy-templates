@@ -1,0 +1,34 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-laravel-env-config-block
+  namespace: default #Change to your namespace
+spec:
+  tags: ["config","exposure",".env",".env-config"]
+  message: "Alert! .env files is detected and blocked. Your sensitive files are secured."
+  selector:
+    matchLabels:
+      run: laravel-kubernetes-demo  #Change to labels of frontend web application pod 
+  file:
+    severity: 6
+    matchPatterns:
+     - pattern: /**/.env
+     - pattern: /**/.env.dev.local
+     - pattern: /**/.env.development.local
+     - pattern: /**/.env.prod.local
+     - pattern: /**/.env.production.local
+     - pattern: /**/.env.local
+     - pattern: /**/.env.example
+     - pattern: /**/.env.stage
+     - pattern: /**/.env.live
+     - pattern: /**/.env.backup
+     - pattern: /**/.env.save
+     - pattern: /**/.env.old
+     - pattern: /**/.env_1
+     - pattern: /**/.env_sample
+     - pattern: /**/api/.env
+    action: Block
