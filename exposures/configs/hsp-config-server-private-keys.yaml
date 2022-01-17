@@ -1,0 +1,42 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-config-server-private-keys
+spec:
+  tags: ["config","exposure","private-keys"]
+  message: "Alert! Access denied for server-private-keys file to users."
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-cluster-1-default-pool-1e4a9ae8-kb5m       # Change with your node label
+  file: 
+    severity: 5
+    matchPatterns:
+    - pattern: /**/localhost.key
+    - pattern: /**/host.key
+    - pattern: /**/www.key
+    - pattern: /**/private-key
+    - pattern: /**/privatekey.key
+    - pattern: /**/server.key
+    - pattern: /**/my.key
+    - pattern: /**/key.pem
+    - pattern: /**/ssl/localhost.key
+    - pattern: /**/ssl/*.key
+    - pattern: /**/id_rsa
+    - pattern: /**/id_rsa.pub
+    - pattern: /**/id_dsa
+    - pattern: /**/id_dsa.pub
+    - pattern: /**/.ssh/id_rsa
+    - pattern: /**/.ssh/id_rsa.pub
+    - pattern: /**/.ssh/id_dsa.pub
+    - pattern: /**/.ssh/id_dsa
+    - pattern: /**/*.key
+    - pattern: /**/*.pem
+    - pattern: /**/config/jwt/private.pem
+    - pattern: /**/jwt/private.pem
+    - pattern: /**/private.pem
+    action: Audit
+
