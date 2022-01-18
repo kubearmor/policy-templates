@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-airflow-config-block
+  namespace: default # use your own labels here
+spec:
+  message: Access deined for airflow.conf file to users
+  tags : ["config","exposure","apache","airflow"]
+  selector:
+    matchLabels:
+       app: airflow  # use your own labels here
+  file:
+    matchPatterns: 
+     - pattern: /**/airflow.cfg
+       ownerOnly: true  
+    severity: 5 
+  action: Block
