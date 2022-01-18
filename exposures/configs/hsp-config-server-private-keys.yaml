@@ -8,12 +8,12 @@ metadata:
   name: hsp-config-server-private-keys
 spec:
   tags: ["config","exposure","private-keys"]
-  message: "Alert! Access denied for server-private-keys file to users."
+  message: "Alert! Detected access to server-private-keys file"
   nodeSelector:
     matchLabels:
       kubernetes.io/hostname: gke-cluster-1-default-pool-1e4a9ae8-kb5m       # Change with your node label
   file: 
-    severity: 5
+    severity: 10
     matchPatterns:
     - pattern: /**/localhost.key
     - pattern: /**/host.key
