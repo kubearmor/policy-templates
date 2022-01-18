@@ -17,6 +17,6 @@ spec:
     matchPatterns: 
      - pattern: /**/apc/apc.php
      - pattern: /**/apc.php
-       ownerOnly: true  
+       ownerOnly: true
     severity: 4 
-  action: Block
+    action: Block
