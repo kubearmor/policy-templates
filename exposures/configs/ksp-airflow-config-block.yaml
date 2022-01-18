@@ -15,7 +15,7 @@ spec:
        app: airflow  # use your own labels here
   file:
     matchPatterns: 
-     - pattern: /**/airflow.cfg
-       ownerOnly: true  
+    - pattern: /**/airflow.cfg
+      ownerOnly: true  
     severity: 5 
-  action: Block
+    action: Block
