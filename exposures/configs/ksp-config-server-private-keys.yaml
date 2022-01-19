@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-config-server-private-keys
+  namespace: default #change your namespace if needed.
 spec:
   tags: ["config","exposure","private-keys"]
   message: "Alert! Access denied for server-private-keys file to users."
