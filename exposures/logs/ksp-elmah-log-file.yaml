@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata: 
+  name: ksp-elmah-log-file
+  namespace: default # Change your namespace
+spec:
+  tags: ["ksp", "elmah", "asp.net", "logs", "information-disclosure"]
+  message: "Access to elmah.axd file is detected and it is blocked"
+  selector:
+    matchLabels:
+      app: dotnet # Change your matchLabels
+  file:
+    severity: 10
+    matchPatterns:
+    - pattern: /**/**/elmah.axd
+    action: Block
