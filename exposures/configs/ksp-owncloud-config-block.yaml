@@ -19,6 +19,6 @@ spec:
       - pattern: /**/**/owncloud/config/config.php
       - pattern: /**/**/owncloud/config/config.apps.sample.php
       - pattern: /**/**/owncloud/config/config.sample.php
-	    - pattern: /**/**/owncloud/config/
-	    - pattern: /**/**/owncloud/config/*.*
+      - pattern: /**/**/owncloud/config/
+      - pattern: /**/**/owncloud/config/*.*
     action: Block
