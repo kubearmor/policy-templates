@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-owncloud-config-disclosure
+  namespace: default # Change your namespace
+spec:
+  tags: ["owncloud", "config", "exposure"]
+  message: Alert! Acess for owncloud configuration files are blocked.
+  selector:
+    matchLabels:
+      app: owncloud # Change your matchLabels
+  file:
+    severity: 2
+    matchPatterns:
+      - pattern: /**/**/owncloud/config/config.php
+      - pattern: /**/**/owncloud/config/config.apps.sample.php
+      - pattern: /**/**/owncloud/config/config.sample.php
+      - pattern: /**/**/owncloud/config/
+      - pattern: /**/**/owncloud/config/*.*
+    action: Block
