@@ -9,15 +9,16 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["owncloud", "config", "exposure"]
-  message: Alert! ownCloud configuration files are accessed.
+  message: Alert! Acess for owncloud configuration files are blocked.
   selector:
     matchLabels:
       app: owncloud # Change your matchLabels
   file:
     severity: 2
     matchPatterns:
-      - pattern: /**/owncloud/config/config.php
-      - pattern: /**/owncloud/config/config.apps.sample.php
-      - pattern: /**/owncloud/config/config.sample.php
-      - pattern: /**/owncloud/config/
+      - pattern: /**/**/owncloud/config/config.php
+      - pattern: /**/**/owncloud/config/config.apps.sample.php
+      - pattern: /**/**/owncloud/config/config.sample.php
+	    - pattern: /**/**/owncloud/config/
+	    - pattern: /**/**/owncloud/config/*.*
     action: Block
