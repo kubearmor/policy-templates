@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-zabbix-dashboard-unauthorised-access-block
+  namespace: default # use your own labels here
+spec:
+  message: Access deined for zabbix.php file to non-root users
+  tags : ["zabbix", "dashboard", "unauth"]
+  selector:
+    matchLabels:
+       app: zabbix  # use your own labels here
+  file:
+    matchPatterns: 
+     - pattern: /**/zabbix/zabbix.php
+       ownerOnly: true  
+    severity: 5 
+  action: Block
