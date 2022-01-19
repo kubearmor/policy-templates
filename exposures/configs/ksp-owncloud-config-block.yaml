@@ -12,13 +12,12 @@ spec:
   message: Alert! ownCloud configuration files are accessed.
   selector:
     matchLabels:
-      app: testpod # Change your matchLabels
+      app: owncloud # Change your matchLabels
   file:
     severity: 2
     matchPatterns:
-      - pattern: /**/**/owncloud/config/config.php
-      - pattern: /**/**/owncloud/config/config.apps.sample.php
-      - pattern: /**/**/owncloud/config/config.sample.php
-    matchDirectories:
-      - dir: /owncloud/config/
+      - pattern: /**/owncloud/config/config.php
+      - pattern: /**/owncloud/config/config.apps.sample.php
+      - pattern: /**/owncloud/config/config.sample.php
+      - pattern: /**/owncloud/config/
     action: Block
