@@ -1,0 +1,21 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "cnp-ingress-deny-dotnet-trace-on-public-web"
+  namespace: default          #change default namespace to match your namespace
+spec:
+  description: "Deny the /Trace.axd endpoint by whitelisting all other http rules"
+  endpointSelector:
+    matchLabels:
+      app: dotnet-app    #change app: dotnet-app to match your label
+  ingress:
+  - fromEntities:
+    - all
+    toPorts:
+    - ports:
+      - port: "80"
+        protocol: TCP
+      rules:
+        http:                  
+        - method: "GET"   #add all your endpoints serviceable via dotnet application
+          path: "/"
