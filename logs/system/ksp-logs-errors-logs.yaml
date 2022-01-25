@@ -1,0 +1,39 @@
+ KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-logs-common-web-sever
+spec:
+  tags: ["logs","common","web server"]
+  message: "Alert! Someone try to access the log file"
+  selector:
+    matchLabels:
+       app: nginx  # use your own labels
+  file: 
+    severity: 5
+    matchPatterns:
+    - pattern: /**/routes/error_log
+    - pattern: /**/config/error_log
+    - pattern: /**/error_log
+    - pattern: /**/errors_log
+    - pattern: /**/logs/error.log
+    - pattern: /**/logs/errors.log
+    - pattern: /**/errors/errors.log
+    - pattern: /**/errors.log
+    - pattern: /**/error.log
+    - pattern: /**/error.txt
+    - pattern: /**/errors.txt
+    - pattern: /**/admin/logs/error.log
+    - pattern: /**/admin/logs/errors.log
+    - pattern: /**/admin/log/error.log
+    - pattern: /**/admin/errors.log
+    - pattern: /**/MyErrors.log
+    - pattern: /**/logs.txt
+    - pattern: /**/log.txt
+    - pattern: /**/log.log
+    - pattern: /**/application/logs/application.log
+    - pattern: /**/application/logs/default.log
+    action: Audit
