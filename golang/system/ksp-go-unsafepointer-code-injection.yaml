@@ -6,13 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-go-unsafepointer-code-injection
-  namespace: testns
+  namespace: default
 spec:
   tags: ["unsafepackage", "code-injection", "golang"]
   message: "Alert! packages are used."
   selector:
     matchLabels:
-      container: ubuntu-1
+      container: ubuntu
   process:
     severity: 3
     matchPaths:
