@@ -52,8 +52,7 @@ We have also added a set of templates to help you understand how things work.
 -----
 
 Policy-templates is powered by major contributions from the community and an initiative from AccuKnox.
-Refer [Contribution](https://github.com/kubearmor/KubeArmor/blob/master/contribution/contribution_guide.md) for more info 
-
+Refer [Contribution](https://github.com/kubearmor/KubeArmor/blob/main/contribution/contribution_guide.md) for more info 
 
 💬 Discussion
 -----
