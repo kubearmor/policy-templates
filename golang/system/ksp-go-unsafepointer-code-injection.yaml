@@ -9,7 +9,7 @@ metadata:
   namespace: default #change to your namespace
 spec:
   tags: ["unsafepackage", "code-injection", "golang"]
-  message: "Alert! packages are used."
+  message: "Alert! usage of unsafe pointer is blocked."
   selector:
     matchLabels:
       container: ubuntu #change to your labels
