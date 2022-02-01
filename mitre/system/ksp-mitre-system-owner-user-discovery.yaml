@@ -12,7 +12,7 @@ spec:
   message: "System owner discovery command is blocked"
   selector:
     matchLabels:
-      app: ubuntu                 # use your own label here
+      app: nginx                 # use your own label here
   process:
     severity: 3
     matchPaths:
