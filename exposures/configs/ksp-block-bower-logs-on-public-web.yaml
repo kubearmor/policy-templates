@@ -8,7 +8,7 @@ metadata:
   name: ksp-bower-json-logs
   namespace: default # use your namespace label here
 spec:
-  message: Access deined for  file to users
+  message: Access deined for  file bower.json
   tags : ["Bower","json","exposure"]
   selector:
     matchLabels:
