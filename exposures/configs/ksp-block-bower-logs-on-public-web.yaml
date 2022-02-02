@@ -6,7 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-bower-json-logs
-  namespace: default # use your own labels here
+  namespace: default # use your namespace label here
 spec:
   message: Access deined for  file to users
   tags : ["Bower","json","exposure"]
@@ -15,7 +15,7 @@ spec:
        app: my-nginx  # use your own labels here
   file:
     matchPatterns: 
-     - pattern: /**/bower.json
-       readOnly: false
+    - pattern: /**/bower.json
+      readOnly: false
     severity: 4
-  action: Block
+    action: Block
