@@ -13,7 +13,7 @@ spec:
   selector:
     matchLabels:
       pod: test  #change app: test to match your label
-  file:
+  process:
     severity: 5
     matchPaths:
     - path: /var/log/utmp
