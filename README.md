@@ -88,10 +88,11 @@ kubectl apply -f https://raw.githubusercontent.com/kubearmor/policy-templates/ma
 
 **Step #05:** Checking if system owner command is Blocked or not
 ```sh
-kubectl exec -it --namespace default nginx-deployment-687d8556b7-8wjmj -- bash
+kubectl exec -it --namespace default nginx-deployment-xxxxxxxxxx-xxxxx -- bash
 root@nginx-deployment-687d8556b7-8wjmj:/# whoami
 bash: /usr/bin/whoami: Permission denied
 ```
+> Replace `nginx-deployment-xxxxxxxxxx-xxxxx` with pod name from Step #3. <br>
 > We can see the command didn't executed and instead we got Permission denied
 
 
