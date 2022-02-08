@@ -15,7 +15,7 @@ spec:
        app: php  # use your own labels here
   file:
     matchPatterns: 
-     - pattern: /**/__clockwork
+     - pattern: /**/clockwork.php
        ownerOnly: true  
     severity: 5 
   action: Block
