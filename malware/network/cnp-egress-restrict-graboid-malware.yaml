@@ -1,0 +1,30 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: "blocking-crypto-miners"
+spec:
+  description: "Policy to Deny crypto-miners via ports"
+  endpointSelector:
+    matchLabels:
+      app: graboid #change app: grabiod to match your label
+  egressDeny:
+  - toPorts:
+    - ports:
+      - port: "3333"
+        protocol: ANY
+      - port: "4444"
+        protocol: ANY
+      - port: "5555"
+        protocol: ANY
+      - port: "6666"
+        protocol: ANY
+      - port: "7777"
+        protocol: ANY
+      - port: "3347"
+        protocol: ANY
+      - port: "14444"
+        protocol: ANY
+      - port: "14433"
+        protocol: ANY
+      - port: "56415"
+        protocol: ANY
