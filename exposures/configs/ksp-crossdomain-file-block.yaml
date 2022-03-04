@@ -1,0 +1,17 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-crossdomain-file-block
+  namespace: default  #use-your-ns-here
+spec:
+  message: Permission denied for thumbs.db file
+  tags : ["exposure","files"]
+  selector:
+    matchLabels:
+      app: coldfusion  #use-your-label-here
+  file:
+    matchPatterns: 
+     - pattern: /**/crossdomain.xml
+       ownerOnly: true
+    severity: 2 # low severity
+  action: Block
