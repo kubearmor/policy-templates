@@ -12,7 +12,7 @@ spec:
   message: "Alert! Public Access denied for npm-debug"
   selector:
     matchLabels:
-       container: node-app # Change your matchLabels
+       app: node-app # Change your matchLabels
   file: 
     severity: 5
     matchPatterns:
