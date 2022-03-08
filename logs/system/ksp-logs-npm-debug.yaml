@@ -1,0 +1,19 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-logs-npm-debug
+spec:
+  tags: ["logs","npm","debug"]
+  message: "Alert! Public Access denied for npm-debug"
+  selector:
+    matchLabels:
+       container: ubuntu-1 # use your own labels
+  file: 
+    severity: 5
+    matchPatterns:
+    - pattern: /**/npm-debug.log 
+    action: Block
