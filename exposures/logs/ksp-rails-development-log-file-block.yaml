@@ -7,7 +7,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-railsdevelopment-log-file-block
-  namespace: rails # use your own label here
+  namespace: default # use your own namespace here
 spec:
    message: "Alert!, Access denied for rails development.log file"
    tags : ["rails","exposure","logs"]
