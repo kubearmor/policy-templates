@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-railsdevelopment-log-file-block
+  namespace: rails # use your own label here
+spec:
+   message: "Alert!, Access denied for rails development.log file"
+   tags : ["rails","exposure","logs"]
+   selector:
+    matchLabels:
+      container: rail-1 # use your own label here
+   file:
+    severity: 3
+    matchPatterns:
+    - pattern: /**/log/development.log
+    - pattern: /**/logs/development.log
+    - pattern: /**/development.log
+   action: Block
