@@ -12,6 +12,7 @@ spec:
   file:
     matchPatterns: 
      - pattern: /**/Thumbs.db
+     - pattern: /**/thumbs.db     
        ownerOnly: true
     severity: 6 # high severity
   action: Block
