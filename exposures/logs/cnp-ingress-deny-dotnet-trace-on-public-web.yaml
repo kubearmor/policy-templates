@@ -4,7 +4,7 @@ metadata:
   name: "cnp-ingress-deny-dotnet-trace-on-public-web"
   namespace: default          #change default namespace to match your namespace
 spec:
-  description: "Deny the /Trace.axd endpoint by whitelisting all other http rules"
+  description: "dotnet specific policy to deny the /Trace.axd endpoint by whitelisting all other http rules"
   endpointSelector:
     matchLabels:
       app: dotnet-app    #change app: dotnet-app to match your label
