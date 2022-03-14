@@ -15,7 +15,6 @@ spec:
        app: php  # use your own labels here
   file:
     matchPatterns: 
-    - pattern: /**/*clockwork/
-      recursive: true 
+    - pattern: /**/*clockwork/**
     severity: 5 
     action: Block
