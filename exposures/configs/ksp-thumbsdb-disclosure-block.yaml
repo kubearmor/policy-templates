@@ -1,8 +1,12 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-thumbsdb-disclosure-block
-  namespace: default  #use-your-ns-here
+  namespace: default  #use-your-namespace-here
 spec:
   message: Permission denied for thumbs.db file
   tags : ["exposure","files"]
@@ -12,7 +16,8 @@ spec:
   file:
     matchPatterns: 
      - pattern: /**/Thumbs.db
+       ownerOnly: true
      - pattern: /**/thumbs.db     
        ownerOnly: true
     severity: 6 # high severity
-  action: Block
+    action: Block
