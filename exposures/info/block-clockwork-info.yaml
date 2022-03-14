@@ -6,16 +6,16 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-clockwork-php-page
-  namespace: default # use your own labels here
+  namespace: default # use your namespace here
 spec:
-  message: Access deined for file to users
+  message: Access deined for clockwork files
   tags : ["clockwork","dashboard","exposure"]
   selector:
     matchLabels:
        app: php  # use your own labels here
   file:
     matchPatterns: 
-     - pattern: /**/clockwork.php
-       ownerOnly: true  
+     - pattern: /**/*clockwork/
+       recursive: true  
     severity: 5 
-  action: Block
+    action: Block
