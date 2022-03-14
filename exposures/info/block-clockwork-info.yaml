@@ -8,7 +8,7 @@ metadata:
   name: ksp-clockwork-php-page
   namespace: default # use your own labels here
 spec:
-  message: Access deined for  file to users
+  message: Access deined for file to users
   tags : ["clockwork","dashboard","exposure"]
   selector:
     matchLabels:
