@@ -15,6 +15,6 @@ spec:
        app: any  # use your own labels here
   file:
     matchPatterns: 
-     - pattern: /**/squid-reports
+    - pattern: /**/squid-reports/**
     severity: 4
-  action: Block
+    action: Block
