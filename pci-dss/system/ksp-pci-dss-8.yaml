@@ -18,7 +18,7 @@ spec:
     matchPaths:
     - path: /var/log/utmp
     action: Audit
-  file:
+  process:
     severity: 7
     matchPaths:
     - path: /var/log/mysql.log
