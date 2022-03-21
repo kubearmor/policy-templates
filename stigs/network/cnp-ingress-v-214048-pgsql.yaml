@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+# https://www.stigviewer.com/stig/postgresql_9.x/2021-06-04/finding/V-214048
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-ingress-v-214048-pgsql
+  namespace: default    #change default namespace to match your namespace
+spec:
+  description: "Other ports for pgsql are prohibited."
+  endpointSelector: 
+    matchLabels:
+      app: postgres  #change app: postgres to match your label
+  ingress:
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "5432"
