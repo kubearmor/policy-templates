@@ -24,7 +24,7 @@ spec:
       fromSource: # trigger an alert if the source
         - dir: /usr/
         - dir: /usr/lib/
-          recursive: true  
+          #recursive: true  
     severity: 5 # Higher severity 
     action:  Audit
   file:
