@@ -6,7 +6,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: mitre-tactic-defense-evasion-system-log
+  name: ksp-mitre-tactic-defense-evasion-system-log
   namespace: default # Change your namespace
 spec:
   tags: ["MITRE","T1070.001", "Defense Evasion"]
