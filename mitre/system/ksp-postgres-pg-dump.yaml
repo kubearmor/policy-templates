@@ -21,9 +21,9 @@ spec:
     - path: /usr/bin/pg_upgrade
     - path: /usr/lib/postgresql/13/bin/pg_dump
     - path: /usr/lib/postgresql/13/bin/pg_upgrade
-      fromSource: # trigger an alert if the source
-        - dir: /usr/
-        - dir: /usr/lib/
+      #fromSource: # trigger an alert if the source
+        #- dir: /usr/
+        #- dir: /usr/lib/
           #recursive: true  
     severity: 5 # Higher severity 
     action:  Audit
