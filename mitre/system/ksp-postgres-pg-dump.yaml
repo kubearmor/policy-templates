@@ -25,7 +25,7 @@ spec:
         #- dir: /usr/
         #- dir: /usr/lib/
           #recursive: true  
-    severity: 5 # Higher severity 
+    severity: 6 # Higher severity 
     action:  Audit
   file:
     matchPaths: 
