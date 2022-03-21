@@ -21,10 +21,6 @@ spec:
     - path: /usr/bin/pg_upgrade
     - path: /usr/lib/postgresql/13/bin/pg_dump
     - path: /usr/lib/postgresql/13/bin/pg_upgrade
-      #fromSource: # trigger an alert if the source
-        #- dir: /usr/
-        #- dir: /usr/lib/
-          #recursive: true  
     severity: 6 # Higher severity 
     action:  Audit
   file:
@@ -35,8 +31,5 @@ spec:
     - path: /usr/bin/pg_upgradecluster
     - path: /usr/lib/postgresql/13/bin/pg_dump
     - path: /usr/lib/postgresql/13/bin/pg_upgrade
-      fromSource: # trigger an alert if the source
-       - path: /usr
-       - path: /lib
     action: Audit
     severity: 9 # lowest severity
