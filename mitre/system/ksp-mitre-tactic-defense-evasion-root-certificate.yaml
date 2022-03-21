@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: mitre-tactic-defense-evasion-root-certificate
+  name: ksp-mitre-tactic-defense-evasion-root-certificate
   namespace: default # Change your namespace
 spec:
   tags: ["MITRE", "T1055"]
