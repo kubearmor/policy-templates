@@ -1,7 +1,7 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: "fqdn"
+  name: "cnp-dns-egress-allow-only-matchname"
 spec:
   description: "dns-egress allow only matchnames"
   endpointSelector:
