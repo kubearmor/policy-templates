@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-psql-fips-block
+  namespace: default # Change your namespace
+spec:
+  tags: ["PostgreSQL","logs","config"] 
+  message: "Unauthorized read access of PostgreSQL fips-file is Blocked"
+  selector:
+    matchLabels:
+      app: postgres
+  file:
+    severity: 6
+    matchPaths:
+    - path: /proc/sys/crypto/fips_enabled
+        readOnly: true
+    action: Block
