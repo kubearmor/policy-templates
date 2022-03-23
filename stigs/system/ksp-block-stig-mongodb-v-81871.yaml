@@ -18,5 +18,7 @@ spec:
     severity: 5
     matchDirectories:
     - dir: /etc/ssl/certs/ # PEMKeyFile
+    - dir: /etc/ssl/
+      recursive: true
       ownerOnly: true
     action: Block
