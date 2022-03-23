@@ -18,4 +18,5 @@ spec:
     severity: 5
     matchDirectories:
     - dir: /etc/ssl/certs/ # PEMKeyFile
+      ownerOnly: true
     action: Block
