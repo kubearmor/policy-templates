@@ -17,10 +17,11 @@ spec:
     severity: 6
     matchPaths:
     - path: /var/lib/postgresql/data/postgresql.conf
+        ownerOnly: true
         fromSource:
         - path: /bin/touch
         - path: /bin/chmod
         - path: /bin/nano
         - path: /bin/cat
         - path: /bin/vi
-    action: Audit
+    action: Block
