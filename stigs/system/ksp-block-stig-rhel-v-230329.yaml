@@ -6,7 +6,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-stig-rhel-v-230329
+  name: ksp-audit-stig-rhel-v-230329
   namespace: default # Change your namespace
 spec:
   tags: ["STIG","RHEL","V-230329","Configuration-File","File-Acess"]
