@@ -17,8 +17,8 @@ spec:
     severity: 6
     matchPaths:
     - path: /var/lib/postgresql/data/postgresql.conf
-        ownerOnly: true
-        fromSource:
+      ownerOnly: true
+      fromSource:
         - path: /bin/touch
         - path: /bin/chmod
         - path: /bin/nano
