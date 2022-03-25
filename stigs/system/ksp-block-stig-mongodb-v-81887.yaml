@@ -18,7 +18,9 @@ spec:
     severity: 5
     matchPaths:
       - path: /etc/mongod.conf
+        ownerOnly: true
     matchDirectories:
       - dir: /var/lib/mongo/
         recursive: true
+        ownerOnly: true
     action: Block
