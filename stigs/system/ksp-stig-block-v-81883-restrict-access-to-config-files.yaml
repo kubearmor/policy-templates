@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-stig-block-mongodb-v-81883
+  name: ksp-stig-block-v-81883-restrict-access-to-config-files
   namespace: default # Change your namespace
 spec:
   tags: ["mongodb", "config-files"]
