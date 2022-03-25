@@ -12,7 +12,7 @@ spec:
   message: "Unauthorized modification in audit configuration of PostgreSQL"
   selector:
     matchLabels:
-      app: postgres
+      app: postgres #change your labels
   file:
     severity: 6
     matchPaths:
