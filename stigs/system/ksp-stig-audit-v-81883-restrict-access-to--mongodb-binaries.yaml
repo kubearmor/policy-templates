@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-stig-audit-v-81883-restrict-access-to--mongodb-binaries
+  namespace: default # Change your namespace
+spec:
+  tags: ["mongodb", "binaries", "bin", "stig"]
+  message: "Alert! mongodb binaries have been accessed"
+  selector:
+    matchLabels:
+      app: mongodb # Change your labels
+  process:
+    severity: 5 
+    matchDirectories:
+    - dir: /usr/bin/ #directory of binaries
+      recursive: true              
+      ownerOnly: true
+    action: Audit
