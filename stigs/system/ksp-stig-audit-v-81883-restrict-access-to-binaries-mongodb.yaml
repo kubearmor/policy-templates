@@ -8,7 +8,7 @@ metadata:
   name: ksp-stig-restrict-access-to-binaries-mongodb-v-81883
   namespace: default # Change your namespace
 spec:
-  tags: ["mongodb", "config-files"]
+  tags: ["mongodb", "binaries", "bin"]
   message: "Alert! mongodb binaries have been accessed"
   selector:
     matchLabels:
