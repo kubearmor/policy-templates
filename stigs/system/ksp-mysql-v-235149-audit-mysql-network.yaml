@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-mysql-v-235149-audit-mysql-logs
+  name: ksp-mysql-v-235149-audit-mysql-network
   namespace: default    #change default to your namespace
 spec:
   tags: ["MySQL", "STIG", "V-235149"]
