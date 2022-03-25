@@ -10,7 +10,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["STIG","RHEL"]
-  message: "Alert! /etc/passwd access has been blocked"
+  message: "Alert! adding new users access has been blocked"
   selector:
     matchLabels:
       app: redhat # Change your matchLabels
@@ -18,5 +18,13 @@ spec:
     severity: 5
     matchPaths:
     - path: /etc/passwd
+      ownerOnly: true
+    - path: /usr/sbin/useradd
+      ownerOnly: true
+    - path: /usr/sbin/groupadd
+      ownerOnly: true
+    - path: /usr/sbin/userdel
+      ownerOnly: true
+    - path: /usr/sbin/usermod
       ownerOnly: true
     action: Block
