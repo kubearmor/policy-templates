@@ -16,7 +16,7 @@ spec:
   process:
     severity: 5 
     matchDirectories:
-    - dir: /usr/bin/
+    - dir: /usr/bin/ #directory of binaries
       recursive: true              
       ownerOnly: true
     action: Audit
