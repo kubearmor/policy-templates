@@ -8,7 +8,7 @@ metadata:
   name: ksp-audit-stig-psql-v-214152
   namespace: default # Change your namespace
 spec:
-  tags: ["PostgreSQL","logs","config"] 
+  tags: ["PostgreSQL","logs","config", "stig"] 
   message: "Unauthorized modification in audit configuration of PostgreSQL"
   selector:
     matchLabels:
