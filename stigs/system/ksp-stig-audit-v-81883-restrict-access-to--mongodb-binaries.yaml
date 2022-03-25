@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-stig-restrict-access-to-binaries-mongodb-v-81883
+  name: ksp-stig-audit-v-81883-restrict-access-to--mongodb-binaries
   namespace: default # Change your namespace
 spec:
   tags: ["mongodb", "binaries", "bin", "stig"]
