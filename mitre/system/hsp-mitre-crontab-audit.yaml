@@ -1,6 +1,6 @@
 # KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
-# To learn more about KubeArmor visit: 
-# https://www.accuknox.com/kubearmor/ 
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
 
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
@@ -8,36 +8,36 @@ metadata:
   name: hsp-mitre-t1053-003-scheduled-task-job-crontab
 spec:
   message: "Cronjob/Crontab has been accessed"
-  tags: ["MITRE","T1053-003","Execution","crontab"]
+  tags: ["MITRE", "T1053-003", "Execution", "crontab"]
   nodeSelector:
     matchLabels:
-        kubernetes.io/hostname: gke-ubuntu # use your labels here
-  process: 
-        matchPaths: 
-        - path: /etc/crontab 
-        - path: /usr/sbin/cron
-        - path: /etc/cron.d
-        - path: /etc/cron.d/cron.allow
-        - path: /etc/cron.d/cron.deny
-        - path: /etc/cron.daily
-        - path: /etc/cron.monthly
-        - path: /etc/cron.hourly
-        - path: /etc/cron.weekly
-        severity: 2 # Higher severity 
-        action: Audit
+      kubernetes.io/hostname: gke-ubuntu # use your labels here
+  process:
+    matchPaths:
+      - path: /etc/crontab
+      - path: /usr/sbin/cron
+      - path: /etc/cron.d
+      - path: /etc/cron.d/cron.allow
+      - path: /etc/cron.d/cron.deny
+      - path: /etc/cron.daily
+      - path: /etc/cron.monthly
+      - path: /etc/cron.hourly
+      - path: /etc/cron.weekly
+    severity: 2 # Higher severity
+    action: Audit
   file:
-          matchPaths: 
-             - path: /etc/crontab 
-             - path: /usr/sbin/cron
-             - path: /etc/cron.d
-             - path: /etc/cron.d/cron.allow
-             - path: /etc/cron.d/cron.deny
-             - path: /etc/cron.daily
-             - path: /etc/cron.monthly
-             - path: /etc/cron.hourly
-             - path: /etc/cron.weekly
-               fromSource:  # trigger an alert if the source
-               - path: /etc
-               - path: /usr/sbin
-          action: Audit
-          severity: 7 # lowest severity
+    matchPaths:
+      - path: /etc/crontab
+      - path: /usr/sbin/cron
+      - path: /etc/cron.d
+      - path: /etc/cron.d/cron.allow
+      - path: /etc/cron.d/cron.deny
+      - path: /etc/cron.daily
+      - path: /etc/cron.monthly
+      - path: /etc/cron.hourly
+      - path: /etc/cron.weekly
+        fromSource: # trigger an alert if the source
+          - path: /etc
+          - path: /usr/sbin
+    action: Audit
+    severity: 7 # lowest severity
