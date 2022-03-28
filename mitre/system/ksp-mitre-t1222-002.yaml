@@ -14,15 +14,6 @@ spec:
     matchLabels:
         app: ubuntu  # use your own label here
   process:
-    matchPaths:
-    - path: /usr/bin/chmod
-    - path: /bin/chmod
-    - path: /bin//chmod
-    - path: /sbin/chmod
-    - path: /usr/bin/chown
-    - path: /bin/chown
-    - path: /bin//chown
-    - path: /sbin/chown
     matchPatterns:
     - pattern: /**/chmod
     - pattern: /**/chown
