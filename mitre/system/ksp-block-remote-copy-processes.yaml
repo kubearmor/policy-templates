@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://kubearmor.io/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-remote-copy-processes
+  namespace: default # Change your namespace
+spec:
+  tags: ["MITRE"]
+  message: "remote copy binaries execution attempted!"
+  selector:
+    matchLabels:
+      app: testpod #change with your own label
+  process:
+    matchPaths:
+      - path: /usr/bin/scp
+      - path: /usr/bin/sftp
+      - path: /usr/bin/rsync
+      - path: /usr/bin/dcp
+    action: Audit
+    severity: 4
