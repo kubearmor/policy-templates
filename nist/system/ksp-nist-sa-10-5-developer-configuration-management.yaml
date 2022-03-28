@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: sa-10-5-developer-configuration-management
+  name: ksp-nist-sa-10-5-developer-configuration-management
   namespace: default # Change your namespace
 spec:
   tags: ["NIST", "sa-10-5"]

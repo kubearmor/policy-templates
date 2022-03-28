@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: sc-24-fail-in-known-state
+  name: ksp-nist-sc-24-fail-in-known-state
   namespace: default                   #use your own namespace
 spec:
   tags: ["NIST", "sc-24"]

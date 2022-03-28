@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: remote-access-and-control
+  name: ksp-nist-remote-access-and-control
   namespace: default
 spec:
   tags: ["NIST","system","ksp","AC-17(1)"]

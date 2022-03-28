@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: service-password-dorking-block
+  name: ksp-service-password-dorking-block
   namespace: default # Change to your namespace
 spec:
   tags: ["sensitive", "service.pwd", "dorking", "exposure", "listing"]

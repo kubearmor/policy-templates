@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/red_hat_enterprise_linux_8/2021-12-03/finding/V-230329
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-stig-rhel-v-230329
+  namespace: default # Change your namespace
+spec:
+  tags: ["STIG","RHEL","V-230329","Configuration-File","File-Acess"]
+  message: "Alert! gdm configuration file is accessed"
+  selector:
+    matchLabels:
+      app: redhat # Change your matchLabels
+  file:
+    severity: 6
+    matchPaths:
+    - path: /etc/gdm/custom.conf
+    action: Audit

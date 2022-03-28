@@ -2,23 +2,20 @@
 # To learn more about KubeArmor visit: 
 # https://www.accuknox.com/kubearmor/ 
 
-
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-mitre-tactic-defense-evasion-system-log
+  name: ksp-block-stig-v-81883-restrict-access-to-config-files
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE","T1070.001", "Defense Evasion"]
-  message: "Defense evasion clear linux system logs"
+  tags: ["mongodb", "config-files"]
+  message: "Alert! mangodb configuration files have been accessed"
   selector:
     matchLabels:
-      container: ubuntu # Change your own match labels
+      app: mongodb # Change your labels
   file:
     severity: 5
-    matchDirectories:
-    - dir: /var/log/
-      recursive: true
-      readOnly: true
-    action: Audit
- 
+    matchPatterns:
+    - pattern: /**/*.conf
+      ownerOnly: true
+    action: Block

@@ -5,19 +5,18 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-mitre-tactic-defense-evasion-root-certificate
+  name: ksp-stig-audit-v-81883-restrict-access-to--mongodb-binaries
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE", "T1055"]
-  message: "Audit modifications in root certificates"
+  tags: ["mongodb", "binaries", "bin", "stig"]
+  message: "Alert! mongodb binaries have been accessed"
   selector:
     matchLabels:
-      container: ubuntu # Change your own match labels
-  file:
-    severity: 6
-    matchPaths:
-    - path: /etc/ca-certificates.conf
+      app: mongodb # Change your labels
+  process:
+    severity: 5 
     matchDirectories:
-    - dir: /usr/local/share/ca-certificates/
-      recursive: true
+    - dir: /usr/bin/ #directory of binaries
+      recursive: true              
+      ownerOnly: true
     action: Audit
