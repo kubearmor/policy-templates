@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/red_hat_enterprise_linux_8/2021-12-03/finding/V-230236
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-stig-rhel-v-230236
+  namespace: default # Change your namespace
+spec:
+  tags: ["STIG", "RHEL", "V-230236", "Privileged-Access", "Boot", "Rescue-Mode"]
+  message: "Alert! boot files is accessed"
+  selector:
+    matchLabels:
+      app: redhat # Change your matchLabels
+  file:
+    severity: 5
+    matchPaths:
+      - path: /usr/lib/systemd/system/rescue.service
+      - path: /usr/lib/systemd/systemd-sulogin-shell
+    action: Audit
