@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-stig-psql-v-214152
+  namespace: default # Change your namespace
+spec:
+  tags: ["PostgreSQL","logs","config", "stig"] 
+  message: "Unauthorized modification in audit configuration of PostgreSQL"
+  selector:
+    matchLabels:
+      app: postgres #change your labels
+  file:
+    severity: 6
+    matchPaths:
+    - path: /var/lib/postgresql/data/postgresql.conf
+      ownerOnly: true
+      fromSource:
+        - path: /bin/touch
+        - path: /bin/chmod
+        - path: /bin/nano
+        - path: /bin/cat
+        - path: /bin/vi
+    action: Block
