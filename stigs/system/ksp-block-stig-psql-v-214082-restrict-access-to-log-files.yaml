@@ -6,11 +6,11 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-stig-psql-v-214082
+  name: ksp-block-stig-psql-v-214082-restrict-access-to-log-files
   namespace: default # Change your namespace
 spec:
   tags: ["STIG", "PSQL"]
-  message: "Alert! Logs & Configs file access has been denied."
+  message: "Alert! Log files access has been denied."
   selector:
     matchLabels:
       app: postgres  # Change your matchLabels
@@ -20,7 +20,4 @@ spec:
     - dir: /var/lib/postgresql/data/pg_log/  #contains all log files
       ownerOnly: true
       recursive: true
-    matchPaths:  
-    - path: /var/lib/postgresql/data/postgresql.conf
-      ownerOnly: true   #configuration files
     action: Block
