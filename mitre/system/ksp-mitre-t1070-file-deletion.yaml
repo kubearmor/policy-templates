@@ -19,4 +19,9 @@ spec:
     - path: /usr/bin/rm
     - path: /usr/bin/unlink
     - path: /usr/bin/rmdir
+    matchPatterns:
+    - pattern: /**/rm
+    - pattern: /**/rmdir
+    - pattern: /**/unlink
     action: Audit
+
