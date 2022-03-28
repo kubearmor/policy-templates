@@ -24,4 +24,3 @@ spec:
     - pattern: /**/rmdir
     - pattern: /**/unlink
     action: Audit
-
