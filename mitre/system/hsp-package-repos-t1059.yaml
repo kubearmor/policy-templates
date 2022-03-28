@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://kubearmor.io/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-package-repos-t1059
+spec:
+  tags: ["MITRE","T1059.004"]
+  message: "Package repositories are accessed"
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: ubuntu2004-vagrants   # Change your match labels
+  process:
+    severity: 5
+    matchDirectories:
+    - dir: /etc/apt/sources.list.d/
+    - dir: /etc/yum.repos.d/
+    - dir: /etc/apt/
+    matchPaths:
+    - path: /etc/apt/sources.list
+    action: Audit
+
