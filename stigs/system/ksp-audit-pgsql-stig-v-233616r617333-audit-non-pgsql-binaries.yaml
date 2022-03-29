@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-pgsql-stig-v-233616r617333-audit-non-pgsql-binaries
+  name: ksp-audit-pgsql-stig-v-233616r617333-non-pgsql-binaries
   namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "PSQL"]
