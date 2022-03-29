@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-pgsql-stig-v-233616r617333-audit-pgsql-directory
+  name: ksp-audit-pgsql-stig-v-233616r617333-audit-pgsql-directory
   namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "PSQL"]
