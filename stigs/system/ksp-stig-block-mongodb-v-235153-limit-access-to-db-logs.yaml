@@ -1,0 +1,37 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-stig-block-mongodb-v-235153-limit-access-to-db-logs
+  namespace: default # Change your namespace
+spec:
+  tags: ["STIGS", "MYSQL", "MARIADB"]
+  message: "Alert! Database configuration files access has been denied"
+  selector:
+    matchLabels:
+      container: mysql-1 # Change your match labels
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /etc/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /usr/lib/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /usr/share/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /var/lib/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /var/log/mysql/
+      recursive: true
+      ownerOnly: true
+    - dir: /usr/local/mysql/
+      recursive: true
+      ownerOnly: true
+    action: Block
