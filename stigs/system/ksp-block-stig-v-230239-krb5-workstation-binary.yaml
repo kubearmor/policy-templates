@@ -5,11 +5,11 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-stig-v-230239-deny-krb5-workstation-binary
+  name: ksp-block-stig-v-230239-krb5-workstation-binary
   namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "RHEL8","REDHAT","krb5-workstation"]
-  message: "Alert! FTP binary access detected. Violation of STIG v230239"
+  message: "Alert! krb5-workstation binary access detected and blocked. Violation of STIG v230239"
   selector:
     matchLabels:
       app: rhel8 # <--- add your own match labels
