@@ -9,7 +9,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["STIG","RHEL"]
-  message: "Alert! /etc/pam.d/password-auth access has been blocked"
+  message: "Alert! /etc/pam.d/password-auth file will be Audit"
   selector:
     matchLabels:
       app: redhat # Change your matchLabels
