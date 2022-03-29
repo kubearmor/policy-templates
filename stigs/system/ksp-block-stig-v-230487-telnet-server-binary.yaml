@@ -5,11 +5,11 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-stig-v-230487-deny-telnet-server-binary
+  name: ksp-block-stig-v-230487-telnet-server-binary
   namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "RHEL8","REDHAT","telnet-server"]
-  message: "Alert! FTP binary access detected. Violation of STIG v230487"
+  message: "Alert! telnet-server binary access detected. Violation of STIG v230487"
   selector:
     matchLabels:
       app: rhel8 # <--- add your own match labels
