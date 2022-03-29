@@ -10,7 +10,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["STIG","RHEL"]
-  message: "Alert! adding new users access has been blocked"
+  message: "Alert! /etc/passwd access has been blocked"
   selector:
     matchLabels:
       app: redhat # Change your matchLabels
