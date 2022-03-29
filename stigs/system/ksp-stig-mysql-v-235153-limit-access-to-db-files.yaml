@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-limit-access-to-database-files
+  name: ksp-stig-mysql-v-235153-limit-access-to-db-files
   namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "MYSQL", "MARIADB"]
@@ -35,24 +35,5 @@ spec:
     - path: /usr/lib/systemd/system/mysql.service
       ownerOnly: true
     - path: /usr/lib/systemd/system/mysqld.service
-      ownerOnly: true
-    matchDirectories:
-    - dir: /etc/mysql/
-      recursive: true
-      ownerOnly: true
-    - dir: /usr/lib/mysql/
-      recursive: true
-      ownerOnly: true
-    - dir: /usr/share/mysql/
-      recursive: true
-      ownerOnly: true
-    - dir: /var/lib/mysql/
-      recursive: true
-      ownerOnly: true
-    - dir: /var/log/mysql/
-      recursive: true
-      ownerOnly: true
-    - dir: /usr/local/mysql/
-      recursive: true
       ownerOnly: true
     action: Block
