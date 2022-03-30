@@ -9,7 +9,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["STIG","RHEL"]
-  message: "Alert! password-auth,system-auth,faillock.conf is accessed"
+  message: "Alert! password-auth,system-auth,faillock.conf files is accessed"
   selector:
     matchLabels:
       app: redhat # Change your matchLabels
