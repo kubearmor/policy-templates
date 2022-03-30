@@ -2,23 +2,19 @@
 # To learn more about KubeArmor visit: 
 # https://www.accuknox.com/kubearmor/ 
 
-
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-mitre-tactic-defense-evasion-system-log
+  name: ksp-block-stig-v-230533-tftp-server-binary
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE","T1070.001", "Defense Evasion"]
-  message: "Defense evasion clear linux system logs"
+  tags: ["STIGS", "RHEL8","REDHAT","tftp-server"]
+  message: "Alert! tftp-server binary access detected and blocked. Violation of STIG v230533"
   selector:
     matchLabels:
-      container: ubuntu # Change your own match labels
-  file:
+      app: rhel8 # <--- add your own match labels
+  process:
     severity: 5
-    matchDirectories:
-    - dir: /var/log/
-      recursive: true
-      readOnly: true
-    action: Audit
- 
+    matchPatterns:
+      - pattern: /**/*tftp-server*
+    action: Block
