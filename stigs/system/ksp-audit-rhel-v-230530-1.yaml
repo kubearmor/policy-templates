@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/red_hat_enterprise_linux_8/2021-12-03/finding/V-230530
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-rhel-v230530-1
+  namespace: default
+spec:
+  tags: ["STIG", "RHEL", "V230530"]
+  message: "Info! dconf profile has been accessed and stig rule v-230530 implemented"
+  selector:
+    matchLabels:
+      app: redhat
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/dconf/db/local.d/00-disable-CAD
+    action: Audit
