@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-stig-mysql-v-235153-limit-access-to-db-logs
+  name: ksp-block-stig-mongodb-v-235153-limit-access-to-db-logs
   namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "MYSQL", "MARIADB"]
