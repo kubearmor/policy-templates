@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-pgsql-stig-audit-non-pgsql
+  name: ksp-audit-pgsql-stig-v-233616r617333-audit-pgsql-directory
   namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "PSQL"]
@@ -16,12 +16,6 @@ spec:
   process:
     action: Audit
     severity: 6
-    matchPaths:
-      - path: /bin/mv
-      - path: /bin/cp
-      - path: /bin/rm
-      - path: /bin/rmdir
-      - path: /bin/ls
     matchDirectories:
       - dir: /var/lib/postgresql/data/
         fromSource:
