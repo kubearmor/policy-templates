@@ -5,20 +5,14 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-stigs-restrict-access-mysql-config
+  name: ksp-block-stigs-restrict-non-mysql-binaries
   namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "MYSQL"]
-  message: "Alert! Access to the mysql config files (/etc/mysql/) has been denied"
+  message: "Alert! Non MySQL binaries were accessed inside pod"
   selector:
     matchLabels:
       container: mysql # <--- add your own match labels
-  file:
-    severity: 5
-    matchDirectories:
-    - dir: /etc/mysql/  # <--- mysql directory
-      recursive: true
-    action: Block
   process:
     severity: 5
     matchPaths:
