@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-stig-block-mongodb-v-235169-limit-access-to-db-configuration-file
+  name: ksp-block-stig-mongodb-v-235169-limit-access-to-db-configuration-file
   namespace: default # Change your namespace
 spec:
   tags: ["STIGS", "MYSQL"]
