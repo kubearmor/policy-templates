@@ -5,19 +5,14 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-mysql-v-235149-audit-mysql-logs
+  name: ksp-audit-mysql-v-235149-mysql-access
   namespace: default    #change default to your namespace
 spec:
   tags: ["MySQL", "STIG", "V-235149"]
-  message: "MySQL was accessed by network or a process"
+  message: "MySQL was accessed by a process"
   selector:
     matchLabels:
       app: mysql        #change app: mysql to your label
-  network:
-    matchProtocols:
-    - protocol: TCP
-    severity: 6
-    action: Audit
   process:
     matchPatterns:      
     - pattern: /**/mysql* 
