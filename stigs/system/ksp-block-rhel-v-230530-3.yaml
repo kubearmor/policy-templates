@@ -1,0 +1,22 @@
+ # KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/red_hat_enterprise_linux_8/2021-12-03/finding/V-230530
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-rhel-v-230530-3
+  namespace: default
+spec:
+  tags: ["STIG", "RHEL", "V230530"]
+  message: "Alert! control-alt-delete.conf has been accessed and stig rule v-230530 violated"
+  selector:
+    matchLabels:
+      app: redhat
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/init/control-alt-delete.conf
+    - path: /etc/init/control-alt-delete.override
+    action: Block
