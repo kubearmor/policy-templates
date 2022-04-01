@@ -1,6 +1,7 @@
 # KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
 # To learn more about KubeArmor visit: 
 # https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/postgresql_9.x/2021-06-04/finding/V-214083
 
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
@@ -9,12 +10,12 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["PostgreSQL","logs","config"] 
-  message: "Unauthorized read access of info PostgreSQL conf-file is Blocked"
+  message: "Info! postgresql.conf file has been accessed and stig rule v-214083 implemented"
   selector:
     matchLabels:
       app: postgres
   file:
     severity: 5
-    matchPaths:
-    - path: /var/lib/postgresql/data/postgresql.conf
+    matchPatterns:
+    - pattern: /**/postgresql.conf
     action: Audit
