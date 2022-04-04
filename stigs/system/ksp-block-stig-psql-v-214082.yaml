@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/postgresql_9.x/2021-06-04/finding/V-214082
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-stig-psql-v-214082
+  namespace: default # Change your namespace
+spec:
+  tags: ["STIG", "PSQL","V-214082"]
+  message: "Alert! Configs and logs file access has been denied."
+  selector:
+    matchLabels:
+      app: postgres  # Change your matchLabels
+  file:
+    severity: 4
+    matchPaths:
+    - path: /etc/postgresql/13/main/postgresql.conf
+      ownerOnly: true
+    - path: /var/lib/pgsql/data/postgresql.conf
+      ownerOnly: true
+    matchPatterns:
+    - pattern: /**/pg_log/postgresql-Thu.log
+      ownerOnly: true
+    action: Block
