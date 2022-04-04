@@ -5,8 +5,8 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata: 
- name: ksp-mitre-tactic-defence-evasion-hidden-files-directories
- namespace: default #Change your namespace
+  name: ksp-mitre-tactic-defence-evasion-hidden-files-directories
+  namespace: default #Change your namespace
 spec:
  tags: ["MITRE","T1564.001"]
  message: "Bash history accessed"
