@@ -13,10 +13,10 @@ spec:
   message: "Config Files were Accessed!"
   selector:
     matchLabels:
-      app: mongo
+      app: mongo-client
   file:
     severity: 5
-    matchPaths:
-    - path: /etc/mongod.conf  # location for MongoDB configuration file
-      ownerOnly: true
+    matchPatterns:
+    - pattern: /**/etc/mongod.conf  # location for MongoDB configuration file
+      ownerOnly: true  
     action: Block
