@@ -6,7 +6,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-psql-conf-info-block
+  name: ksp-audit-rhel-v-214083
   namespace: default # Change your namespace
 spec:
   tags: ["PostgreSQL","logs","config","V214083"]
