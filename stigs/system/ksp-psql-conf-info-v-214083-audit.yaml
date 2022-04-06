@@ -9,7 +9,7 @@ metadata:
   name: ksp-psql-conf-info-block
   namespace: default # Change your namespace
 spec:
-  tags: ["PostgreSQL","logs","config"]
+  tags: ["PostgreSQL","logs","config","214083"]
   message: "Info! postgresql.conf file has been accessed and stig rule v-214083 implemented"
   selector:
     matchLabels:
