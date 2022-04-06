@@ -9,7 +9,7 @@ metadata:
   name: ksp-audit-rhel-v-214083
   namespace: default # Change your namespace
 spec:
-  tags: ["PostgreSQL","logs","config","V214083"]
+  tags: ["STIG","RHEL","V214083"]
   message: "Info! postgresql.conf file has been accessed and stig rule v-214083 implemented"
   selector:
     matchLabels:
