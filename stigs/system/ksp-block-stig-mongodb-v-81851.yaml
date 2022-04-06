@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/mongodb_enterprise_advanced_3.x/2020-06-12/finding/V-81887
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-stig-mongodb-v-81851
+  namespace: default # Change your namespace
+spec:
+  tags: ["STIG","MONGODB","V-81851","Unauthorized-Access"]
+  message: "Config Files were Accessed!"
+  selector:
+    matchLabels:
+      app: mongo-client
+  file:
+    severity: 5
+    matchPatterns:
+    - pattern: /**/etc/mongod.conf  # location for MongoDB configuration file
+      ownerOnly: true  
+    action: Block
