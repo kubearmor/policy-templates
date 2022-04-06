@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/postgresql_9.x/2021-06-04/finding/V-214083
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-rhel-v-214083
+  namespace: default # Change your namespace
+spec:
+  tags: ["STIG","RHEL","V214083"]
+  message: "Info! postgresql.conf file has been accessed and stig rule v-214083 implemented"
+  selector:
+    matchLabels:
+      app: postgres
+  file:
+    severity: 5
+    matchPatterns:
+    - pattern: /**/postgresql.conf
+    action: Audit
