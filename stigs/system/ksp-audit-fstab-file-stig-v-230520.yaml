@@ -7,7 +7,7 @@ metadata:
   name: ksp-audit-fstab-file-stig-v-230520
   namespace: default # Change your namespace
 spec:
-  tags: ["MYSQL", "config-files", "mysqldump"]
+  tags: ["rhel", "stig", "v-230520", "fstab"]
   message: "Alert! fstab file is accessed or modified"
   selector:
     matchLabels:
