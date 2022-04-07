@@ -1,3 +1,5 @@
+# STIG reference https://www.stigviewer.com/stig/red_hat_enterprise_linux_8/2021-03-04/finding/V-230504
+
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
