@@ -11,7 +11,7 @@ spec:
   message: "Alert! fstab file is accessed or modified"
   selector:
     matchLabels:
-      app: rhel # Change your labels
+      app: redhat # Change your labels
   file:
     severity: 5
     matchPaths:
