@@ -1,0 +1,32 @@
+# STIG reference https://www.stigviewer.com/stig/red_hat_enterprise_linux_8/2021-03-04/finding/V-230504
+
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-block-stig-v-230504-firewall-default-deny-all-allow-by-exception
+  namespace: rhel   #change namespace value to match your namespace
+spec:
+  description: "An RHEL firewall to employ a deny-all, allow-by-exception policy for allowing connections to other systems."
+  endpointSelector:
+    matchLabels:
+      app: rhel      #change app: rhel to match your label
+  ingress:
+    - {}             #default ingress deny
+  egress:            #egress allow-by-exception 
+    - toEndpoints:
+        - matchLabels:
+            app: rhel   #change pod label to allow connection
+      toPorts:
+        - ports:
+            - port: "80"  #change port to match your port
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+          rules:
+            dns:
+              - matchPattern: "*"
