@@ -2,6 +2,7 @@
 # To learn more about KubeArmor visit:
 # https://www.accuknox.com/kubearmor/
 
+# STIG reference https://www.stigviewer.com/stig/red_hat_enterprise_linux_8/2021-03-04/finding/V-230525
 # Suggested Fix: Add FirewallBackend=nftables to /etc/firewalld/firewalld.conf
 
 apiVersion: security.kubearmor.com/v1
