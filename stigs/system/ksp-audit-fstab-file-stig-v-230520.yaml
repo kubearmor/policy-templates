@@ -1,0 +1,19 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-fstab-file-stig-v-230520
+  namespace: default # Change your namespace
+spec:
+  tags: ["MYSQL", "config-files", "mysqldump"]
+  message: "Alert! fstab file is accessed or modified"
+  selector:
+    matchLabels:
+      app: rhel # Change your labels
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/fstab #if /var/tmp is mounted without the "nodev" option, this is a finding. Configure the system so that /var/tmp is mounted with the "nodev" option by adding /modifying the /etc/fstab with the following line: /dev/mapper/rhel-var-tmp /var/tmp xfs defaults,nodev,nosuid,noexec 0 0
+    action: Audit
