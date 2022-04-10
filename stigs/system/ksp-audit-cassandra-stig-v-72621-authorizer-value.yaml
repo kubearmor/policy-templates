@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+# Reference: https://www.stigviewer.com/stig/vrealize_-_cassandra/2017-06-06/finding/V-72621
+# Suggested Fix: Configure the Cassandra Server settings and access controls to permit user access only to objects and data that the user is authorized to view or interact with, and to prevent access to all other objects and data.
+
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cassandra-stig-v-72621-authorizer-value
+  namespace: default # Change your name space
+spec:
+  tags: ["STIGS", "CASSANDRA", "STIG V-72621", "authorizer value", "database"]
+  message: "Alert! cassandra.yaml file has been accessed"
+  selector:
+    matchLabels:
+      app: cassandra # Change your matchLabels
+  file:
+    severity: 5
+    matchPaths:
+    - path: /usr/lib/vmware-vcops/user/conf/cassandra/cassandra.yaml   # change cassandra.yaml file path 
+  action: Audit
