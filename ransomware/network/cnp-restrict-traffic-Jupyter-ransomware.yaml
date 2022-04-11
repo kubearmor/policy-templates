@@ -6,8 +6,8 @@ metadata:
 spec:
   description: "Policy to restrict ingress and egress traffic in Jupyter Notebook"
   endpointSelector:
-  matchLabels:
-    app: jupyter # Change your matchLabels
+    matchLabels:
+      app: jupyter # Change your matchLabels
   ingress:
     - fromEndpoints: # Restricts ingress communication from outside Cluster
         - {}
