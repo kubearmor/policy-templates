@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+# https://www.stigviewer.com/stig/red_hat_enterprise_linux_8/2021-12-03/finding/V-230456
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-stig-v-230456-audit-chmod-process
+  namespace: sal # Change your namespace
+spec:
+  tags: ["rhel", "chmod", "stig"]
+  message: "Alert! Use of chmod process is detected"
+  selector:
+    matchLabels:
+      app: redhat # Change your labels
+  process:
+    matchPatterns:
+    - pattern: /**/chmod
+    action: Audit
