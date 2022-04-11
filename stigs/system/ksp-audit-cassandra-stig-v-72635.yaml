@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/vrealize_-_cassandra/2017-06-06/finding/V-72635
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cassandra-stig-v-72635
+  namespace: default # Change your name space
+spec:
+  tags: ["STIGS", "CASSANDRA", "STIG V-72635", "audit records"]
+  message: "Alert! xml file has been accessed"
+  selector:
+    matchLabels:
+      app: cassandra # Change your matchLabels
+  file:
+    severity: 4
+    matchPaths:
+    - path: /usr/lib/vmware-vcops/user/conf/cassandra/logback.xml   
+    - path: /etc/cassandra/logback.xml 
+  action: Audit
