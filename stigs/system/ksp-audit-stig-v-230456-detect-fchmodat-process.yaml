@@ -17,5 +17,5 @@ spec:
       app: redhat # Change your labels
   process:
     matchPatterns:
-    - pattern: /**/fchmodat # Pattern to get chmod process
+    - pattern: /**/fchmodat # Pattern to get fchmodat process
     action: Audit
