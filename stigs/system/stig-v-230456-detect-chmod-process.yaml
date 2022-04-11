@@ -7,8 +7,8 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-stig-v-230456-audit-chmod-process
-  namespace: sal # Change your namespace
+  name: ksp-audit-stig-v-230456-detect-chmod-process
+  namespace: default # Change your namespace
 spec:
   tags: ["rhel", "chmod", "stig"]
   message: "Alert! Use of chmod process is detected"
