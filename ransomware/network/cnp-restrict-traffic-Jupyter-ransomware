@@ -4,14 +4,18 @@ metadata:
   name: deny-all-ingress
   namespace: default # Change your namespace
 spec:
-  description: "Policy to restrict ingress and egrees traffic in Jupyter Notebook"
-  endpointSelector:
+  description: "Policy to restrict ingress and egress traffic in Jupyter Notebook"
+    endpointSelector:
     matchLabels:
       app: jupyter # Change your matchLabels
   ingress:
-    - fromEndpoints:
+    - fromEndpoints: # Restricts ingress communication from outside Cluster
         - {}
+    - fromEntities: # Allows ingress communication within Cluster and Namespace
+        - cluster
   egress:
+    - toEntities: # Allows egress communication within Cluster and Namespace
+        - cluster
     - toEndpoints:
         - matchLabels:
             io.kubernetes.pod.namespace: kube-system
@@ -23,5 +27,5 @@ spec:
           rules:
             dns:
               - matchPattern: "*"
-    - toEndpoints:
+    - toEndpoints: # Restricts egress communication to outside Cluster
         - {}
