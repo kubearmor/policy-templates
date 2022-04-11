@@ -4,7 +4,7 @@ metadata:
   name: deny-all-ingress
   namespace: default # Change your namespace
 spec:
-  description: "Policy to restrict ingress and egress traffic in Jupyter Notebook"
+    description: "Policy to restrict ingress and egress traffic in Jupyter Notebook"
     endpointSelector:
     matchLabels:
       app: jupyter # Change your matchLabels
