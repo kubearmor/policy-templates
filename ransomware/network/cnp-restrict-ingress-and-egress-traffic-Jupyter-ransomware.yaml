@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: deny-all-ingress
+  name: restrict-ingress-and-egress-access
   namespace: default # Change your namespace
 spec:
   description: "Policy to restrict ingress and egress traffic in Jupyter Notebook"
