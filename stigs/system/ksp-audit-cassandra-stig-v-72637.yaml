@@ -10,7 +10,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["STIG", "LOG", "CASSANDRA", "V-72637"]
-  message: "Alert! Logs access has been denied"
+  message: "Alert! Log files are accessed."
   selector:
     matchLabels:
       app: cass-server # Change your matchLabels
