@@ -8,7 +8,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-cassandra-stig-v-72679-protet-truststore-file
+  name: ksp-block-cassandra-stig-v-72679-protect-truststore-file
   namespace: database # Change your name space
 spec:
   tags: ["STIGS", "CASSANDRA", "STIG V-72679", "Truststore", "database", ]
