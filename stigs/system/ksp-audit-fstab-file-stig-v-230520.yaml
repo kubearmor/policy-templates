@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-fstab-file-stig-v-230520
+  name: ksp-audit-stig-v-230520-monitor-fstab-file
   namespace: default # Change your namespace
 spec:
   tags: ["rhel", "stig", "v-230520", "fstab"]
