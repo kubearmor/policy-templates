@@ -20,6 +20,5 @@ spec:
     severity: 3
     matchDirectories:
     - dir: /usr/lib/vmware-vcops/user/conf/cassandra/ 
-      readOnly: true
       ownerOnly: true
     action: Audit
