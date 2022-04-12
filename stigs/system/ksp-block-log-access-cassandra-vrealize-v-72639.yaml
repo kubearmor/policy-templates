@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/vrealize_-_cassandra/2017-06-06/finding/V-72639
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-log-access-cassandra-vrealize-v-72639
+  namespace: default # Change your namespace
+spec:
+  tags: ["STIG", "CASSANDRA", "vRealize", "V-72639"]
+  message: "Cassandra logs access denied."
+  selector:
+    matchLabels:
+      app: cassandra # Change your matchLabels
+  file:
+    severity: 7
+    matchDirectories:
+    - dir: /storage/log/vcops/log/
+      recursive: true
+      ownerOnly: true
+    action: Block
