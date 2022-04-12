@@ -8,7 +8,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-cassandra-stig-V-72671
+  name: ksp-audit-cassandra-stig-v-72671
   namespace: default # Change your name space
 spec:
   tags: ["STIGS", "CASSANDRA", "STIG V-72671", "database"]
