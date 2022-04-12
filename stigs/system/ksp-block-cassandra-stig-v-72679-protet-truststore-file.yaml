@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+# Reference: https://www.stigviewer.com/stig/vrealize_-_cassandra/2017-06-06/finding/V-72679 
+# Suggested Fix: chmod 0640 /storage/vcops/user/conf/ssl/tcserver.truststore
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-cassandra-stig-v-72679-protect-truststore-file
+  namespace: default # Change your name space
+spec:
+  tags: ["STIGS", "CASSANDRA", "STIG V-72679", "Truststore", "database", ]
+  message: "Alert! tcserver.truststore file has been accessed"
+  selector:
+    matchLabels:
+      app: cass-server # Change your matchLabels
+  file:
+    severity: 5
+    matchPaths:
+    - path: /storage/vcops/user/conf/ssl/tcserver.truststore   # change tcserver.truststore file path 
+      readOnly: true
+      ownerOnly: true
+  action: Block
