@@ -1,0 +1,19 @@
+# https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235146
+
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-mysql-stig-v-235146
+spec:
+  description: "Restrict access to unused ports"
+  endpointSelector:
+    matchLabels: 
+      app: mysql #change label app: mysql with your own labels.
+  ingress:
+    - fromEndpoints:
+        - {}
+      toPorts:
+        - ports:
+            - port: "3306"
+        - ports:
+            - port: "33060"
