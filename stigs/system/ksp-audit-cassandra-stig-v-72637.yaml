@@ -19,11 +19,7 @@ spec:
     - dir: /var/log/cassandra/
       recursive: true
       ownerOnly: true
-      fromSource:
-      - path: /usr/bin/chmod
     - dir: /storage/log/vcops/log/cassandra/
       recursive: true
       ownerOnly: true
-      fromSource:
-      - path: /usr/bin/chmod
     action: Audit
