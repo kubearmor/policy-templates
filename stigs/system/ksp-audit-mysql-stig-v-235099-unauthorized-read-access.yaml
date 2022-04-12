@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+# Reference: https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235099 
+# Suggested Fix: sudo chown mysql; sudo chgrp mysql; Change permissions -- chmod 750 audit.log
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-mysql-stig-v-235099-unauthorized-read-access
+  namespace: default # Change your name space
+spec:
+  tags: ["STIGS", "MySQL", "STIG V-235099", "Unauthorized Read Access"]
+  message: "Alert! unauthorized read access has been detected"
+  selector:
+    matchLabels:
+      app: mysql # Change your matchLabels
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /usr/local/mysql/data/   # change mysql dir path, if needed 
+      ownerOnly: true
+  action: Audit
