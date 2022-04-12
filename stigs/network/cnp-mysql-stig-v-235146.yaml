@@ -1,6 +1,3 @@
-# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
-# To learn more about KubeArmor visit:
-# https://www.accuknox.com/kubearmor/
 # https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235146
 
 apiVersion: cilium.io/v2
