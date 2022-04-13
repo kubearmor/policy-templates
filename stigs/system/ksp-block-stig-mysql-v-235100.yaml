@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235100
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-stig-mysql-v-235100
+  namespace: default # Change your namespace
+spec:
+  tags: ["STIG","MYSQL","V-235100","Log-Files","Unauthorized-Modification"]
+  message: "Alert! Modification to log files are blocked"
+  selector:
+    matchLabels:
+      app: mysql8 # Change your matchLabels
+  file:
+    severity: 3
+    matchPatterns:
+    - pattern: /**/mysql.log
+    - pattern: /**/mysqld.log  
+    - pattern: /**/audit.log
+    - pattern: /**/error.log    
+    action: Block
