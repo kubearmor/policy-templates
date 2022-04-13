@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+# https://www.stigviewer.com/stig/red_hat_enterprise_linux_8/2021-12-03/finding/V-230246
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-stig-v-230246-rhel-allow-only-root-access-to-chown-command
+  namespace:  # Change your namespace
+spec:
+  tags: ["rhel", "chown", "stig", "v-230246"]
+  message: "Alert! Access to chown is detected"
+  selector:
+    matchLabels:
+      app: redhat # Change your labels
+  process:
+    severity: 3
+    matchPatterns:
+    - pattern: /**/chown #pattern to get chown process
+      ownerOnly: true # allow access for root only
+    action: Block
