@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-ua-parser-js 
+  name: ksp-ua-parser-js
   namespace: default #change the namespace to match your requirement
 spec:
   tags: ["NPM", "Package", "Vulnerability"]
@@ -15,6 +15,6 @@ spec:
       app: nodejs #change label app: nodejs to match your requirement
   file:
     severity: 4
-    matchPaths:
-      - path: /usr/local/lib/node_modules/ua-parser-js/src/ua-parser.js
+    matchPatterns:
+      - pattern: /**/ua-parser.js
     action: Block
