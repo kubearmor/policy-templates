@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235161
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-stig-v-235161-monitor-my.cnf-file
+  namespace: default # Change your namespace
+spec:
+  tags: ["stig", "log", "MySQL", "v-235161"]
+  message: "Alert! my.cnf is accessed."
+  selector:
+    matchLabels:
+      app: mysql # Change your matchLabels
+  file:
+    severity: 2
+    matchPaths:
+    - path: /**/my.cnf #
+    action: Audit
