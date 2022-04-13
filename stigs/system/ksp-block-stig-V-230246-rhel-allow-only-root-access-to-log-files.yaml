@@ -7,7 +7,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-stig-V-230246-rhel-allow-only-root-access-to-log-files
+  name: ksp-block-stig-v-230246-rhel-allow-only-root-access-to-log-files
   namespace: default # Change your namespace
 spec:
   tags: ["rhel", "log", "stig", "v-230246"]
