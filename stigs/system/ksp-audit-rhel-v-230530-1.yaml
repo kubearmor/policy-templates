@@ -6,14 +6,14 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-rhel-v230530-1
-  namespace: default
+  name: ksp-audit-stig-v-230530-monitor-dconf-profile
+  namespace: default # change to your namespace if needed
 spec:
   tags: ["STIG", "RHEL", "V230530"]
   message: "Info! dconf profile has been accessed and stig rule v-230530 implemented"
   selector:
     matchLabels:
-      app: redhat
+      app: redhat # change labels
   file:
     severity: 5
     matchPaths:
