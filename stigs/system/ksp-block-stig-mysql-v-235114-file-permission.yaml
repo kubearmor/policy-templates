@@ -6,19 +6,19 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-stig-mysql-v-235114-file-permission
+  name: ksp-block-stig-mysql-v-235114-restrict-chown-chgrp-command-access
   namespace: default # Change your namespace
 spec:
   tags: ["STIG", "MYSQL", "V-235114", "File-Modification"]
-  message: "Alert! Modification to log files are blocked"
+  message: "Alert! Unautherized (non-root) attempt to change the user and/or group ownership of a given file, directory, or symbolic link. is detected and blocked"
   selector:
     matchLabels:
       app: mysql8 # Change your matchLabels
   process:
     severity: 3
     matchPatterns:
-      - pattern: /**/chmod  
-        ownerOnly: true
+      - pattern: /**/chown  
+        ownerOnly: true # only allow root access
       - pattern: /**/chgrp 
-        ownerOnly: true
+        ownerOnly: true # only allow root access
     action: Block
