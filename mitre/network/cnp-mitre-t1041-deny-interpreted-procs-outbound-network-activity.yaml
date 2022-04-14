@@ -1,0 +1,34 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: "cnp-mitre-t1041-deny-interpreted-procs-outbound-network-activity"
+spec:
+  description: "This policy will deny any outbound network activity performed by any interpreted program (perl, python, ruby, etc.)"
+  endpointSelector:
+    matchLabels:
+      app: test-app       #change app: test-app to match your label
+  egressDeny:
+  - toPorts:
+    - ports:
+      - port: "1194"
+        protocol: ANY
+      - port: "1197"
+        protocol: ANY
+      - port: "1198"
+        protocol: ANY
+      - port: "8080"
+        protocol: ANY
+      - port: "9201"
+        protocol: ANY
+      - port: "500"
+        protocol: ANY
+      - port: "1701"
+        protocol: ANY
+      - port: "4500"
+        protocol: ANY
+      - port: "10000"
+        protocol: ANY
+      - port: "123"
+        protocol: ANY
+      - port: "8125"
+        protocol: ANY
