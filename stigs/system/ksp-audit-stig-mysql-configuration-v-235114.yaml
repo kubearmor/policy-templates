@@ -10,7 +10,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["STIG", "MYSQL", "V-235114", "Configuration-Files", "privileges"]
-  message: "Alert! Access to mysql configuration files is detected"
+  message: "Alert! Access to mysql configuration files is audited"
   selector:
     matchLabels:
       app: mysql8 # Change your matchLabels
