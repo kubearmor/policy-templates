@@ -6,7 +6,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-stig-v-235114-mysql-log
+  name: ksp-block-stig-v-235114-restrict-access-to-mysql-logs
   namespace: default # Change your namespace
 spec:
   tags: ["STIG", "MYSQL", "V-235114", "Unauthorized-Acess", "Privileges","Log-Files"]
