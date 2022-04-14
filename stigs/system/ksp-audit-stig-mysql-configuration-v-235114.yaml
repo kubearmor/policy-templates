@@ -6,11 +6,11 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-stig-v-235114-mysql-unauthorized-modification-configuration-file
+  name: ksp-audit-stig-v-235114-detect-access-to-mysql-configuration-file
   namespace: default # Change your namespace
 spec:
   tags: ["STIG", "MYSQL", "V-235114", "Configuration-Files", "privileges"]
-  message: "Alert! mysql configuration files is audited"
+  message: "Alert! Access to mysql configuration files is detected"
   selector:
     matchLabels:
       app: mysql8 # Change your matchLabels
