@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-ua-parser-js-package
+  namespace: default  #change the namespace to match your requirement
+spec:
+  tags: ["NPM", "Package", "Vulnerability"]
+  message: "Alert! ua-parser-js package is invoked"
+  selector:
+    matchLabels:
+      app: nodejs #change label app: nodejs to match your requirement
+  file:
+    severity: 4
+    matchPatterns:
+      - pattern: /**/ua-parser.js
+        ownerOnly: true
+    action: Block
