@@ -17,10 +17,6 @@ spec:
   file:
     severity: 5
     matchPatterns:
-      - pattern: /**/mysqld.log   # mysql log files
-        ownerOnly: true
-      - pattern: /**/audit.log
-        ownerOnly: true
-      - pattern: /**/error.log
+      - pattern: /**/*.log   # mysql log files
         ownerOnly: true
     action: Block
