@@ -2,6 +2,9 @@
 # To learn more about KubeArmor visit:
 # https://www.accuknox.com/kubearmor/
 
+# Affected versions: ua-parser-js version 0.7.29, 0.8.0, and 1.0.0
+# Patched versions: 0.7.30, 0.8.1, 1.0.1
+
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
@@ -9,12 +12,12 @@ metadata:
   namespace: default  #change the namespace to match your requirement
 spec:
   tags: ["NPM", "Package", "Vulnerability"]
-  message: "Alert! ua-parser-js package is invoked"
+  message: "Alert! ua-parser-js package is invoked and denied. Please make sure you update your package to latest versions. Patched versions: 0.7.30, 0.8.1, 1.0.1 Change action to Audit if you already have patched version "
   selector:
     matchLabels:
       app: nodejs #change label app: nodejs to match your requirement
   file:
-    severity: 4
+    severity: 1
     matchPatterns:
       - pattern: /**/ua-parser.js
         ownerOnly: true
