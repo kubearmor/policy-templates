@@ -6,7 +6,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-stig-mysql-configuration-v-235114
+  name: ksp-audit-stig-v-235114-mysql-unauthorized-modification-configuration-file
   namespace: default # Change your namespace
 spec:
   tags: ["STIG", "MYSQL", "V-235114", "Configuration-Files", "privileges"]
@@ -17,6 +17,6 @@ spec:
   file:
     severity: 5
     matchPatterns:
-      - pattern: /**/my.cnf # The commands chown and chgrp are used to set permissions to the configuration file. 
+      - pattern: /**/my.cnf #mysql configuration file  
         ownerOnly: true
     action: Audit
