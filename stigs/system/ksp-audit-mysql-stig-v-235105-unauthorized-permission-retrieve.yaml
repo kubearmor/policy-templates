@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# Reference:https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235105 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-mysql-stig-v-235105-unauthorized-permission-retrieve
+  namespace: default # Change your name space
+spec:
+  tags: ["STIGS", "MySQL", "STIG V-235105", "Unauthorized Permission retrieve"]
+  message: "Alert! Unauthorized  Privileges/Permissions were retrieved"
+  selector:
+    matchLabels:
+      app: mysql # Change your matchLabels
+  file:
+    severity: 5
+    matchPaths:
+    - path: /usr/local/mysql/data/audit.log  
+      ownerOnly: true
+  action: Audit
