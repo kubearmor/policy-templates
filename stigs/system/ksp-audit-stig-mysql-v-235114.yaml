@@ -6,7 +6,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-stig-mysql-v-235114
+  name: ksp-audit-stig-mysql-v-235114-configuration-file
   namespace: default # Change your namespace
 spec:
   tags: ["STIG", "MYSQL", "V-235114", "Unauthorized-Acess", "Privileges"]
