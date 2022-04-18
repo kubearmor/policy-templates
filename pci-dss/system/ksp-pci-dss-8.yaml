@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: database-log-cannot-be-modified
+  name: ksp-pci-dss-8-database-log-cannot-be-modified
   namespace: default # Change your namespace
 spec:
   tags: ["PCI-DSS"] 
@@ -13,11 +13,6 @@ spec:
   selector:
     matchLabels:
       pod: test  #change app: test to match your label
-  file:
-    severity: 5
-    matchPaths:
-    - path: /var/log/utmp
-    action: Audit
   file:
     severity: 7
     matchPaths:
@@ -28,4 +23,4 @@ spec:
       - path: /usr/bin/cat
       - path: /usr/bin/nano
       - path: /usr/bin/vi
-      action: Block
+    action: Block
