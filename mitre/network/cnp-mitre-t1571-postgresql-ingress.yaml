@@ -2,6 +2,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-mitre-t1571-postgresql-ingress
+  namespace: default        #change default namespace to match your namespace
 spec:
   description: "Allow ingress communication only through standard ports of PostgresSQL" 
   endpointSelector:
