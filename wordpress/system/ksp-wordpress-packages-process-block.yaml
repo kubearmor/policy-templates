@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-wordpress-packages-process-block
+  namespace: default        #change default namespace to match your namespace
 spec:  
   message: "(Alert) Package Manager triggered! unexpected behaviour"
   tags: ["Wordpress"]
