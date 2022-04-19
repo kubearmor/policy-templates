@@ -2,6 +2,7 @@ apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
   name: "cnp-egress-mitre-t1496-crypto-miner-ip-blocking"
+  namespace: default        #change default namespace to match your namespace
 spec:
   description: "The policy will block crypto-miner hijacking"
   endpointSelector: 
