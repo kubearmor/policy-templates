@@ -2,6 +2,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-pci-dss-1.3.3-ingress
+  namespace: default        #change default namespace to match your namespace
 spec:
   description: "This policy will allow the inbound connection"
   endpointSelector:
