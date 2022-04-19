@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-squid-reports-block
+  name: ksp-block-squid-reports
   namespace: default # use your own labels here
 spec:
   message: Access deined for  file squid-reports
