@@ -2,6 +2,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: "cnp-pci-dss-10-track-and-monitor-all-access-to-network-resources-and-cardholder-data"
+  namespace: default        #change default namespace to match your namespace
 spec:
   description: "Monitor Network Resources"
   endpointSelector:
