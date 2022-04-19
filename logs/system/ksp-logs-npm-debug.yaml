@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-logs-npm-debug
+  namespace: default        #change default namespace to match your namespace
 spec:
   tags: ["logs","npm","debug"]
   message: "Alert! Public Access denied for npm-debug"
