@@ -4,6 +4,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-mysql-stig-v-235146
+  namespace: default        #change default namespace to match your namespace
 spec:
   description: "Restrict access to unused ports"
   endpointSelector:
