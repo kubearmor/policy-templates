@@ -2,6 +2,7 @@ apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
   name: "cnp-pci-dss-7.2.3-egress-default-deny"
+  namespace: default        #change default namespace to match your namespace
 spec:
   description: "Egress default deny. An endpoint can be put into the default deny mode at egress"
   endpointSelector:
