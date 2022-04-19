@@ -2,6 +2,7 @@ apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-egress-deny-external-communication-from-mysql-pod
+  namespace: default        #change default namespace to match your namespace
 spec:
   description: "To block all external world communication from mysql pod and limit it to specific pods"
   endpointSelector:
