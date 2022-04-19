@@ -6,6 +6,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-logs-common-web-sever
+  namespace: default        #change default namespace to match your namespace
 spec:
   tags: ["logs","common","web server"]
   message: "Alert! Someone try to access the log file"
