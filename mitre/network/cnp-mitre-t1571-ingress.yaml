@@ -2,6 +2,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-mitre-t1571-ingress
+  namespace: default        #change default namespace to match your namespace
 spec:
   description: "Adversaries may communicate using a protocol and port paring that are typically not associated. Block all non-standard ports and protocol." 
   endpointSelector:
