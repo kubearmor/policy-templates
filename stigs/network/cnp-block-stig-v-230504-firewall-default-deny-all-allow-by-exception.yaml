@@ -4,7 +4,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-block-stig-v-230504-firewall-default-deny-all-allow-by-exception
-  namespace: rhel   #change namespace value to match your namespace
+  namespace: default        #change default namespace to match your namespace
 spec:
   description: "An RHEL firewall to employ a deny-all, allow-by-exception policy for allowing connections to other systems."
   endpointSelector:
