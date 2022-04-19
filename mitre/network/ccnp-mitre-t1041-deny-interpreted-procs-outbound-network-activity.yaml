@@ -1,7 +1,7 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumClusterwideNetworkPolicy
 metadata:
-  name: "cnp-mitre-t1041-deny-interpreted-procs-outbound-network-activity"
+  name: "ccnp-mitre-t1041-deny-interpreted-procs-outbound-network-activity"
 spec:
   description: "This policy will deny any outbound network activity performed by any interpreted program (perl, python, ruby, etc.)"
   endpointSelector:
