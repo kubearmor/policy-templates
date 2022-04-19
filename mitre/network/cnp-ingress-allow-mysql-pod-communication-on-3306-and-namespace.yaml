@@ -2,6 +2,7 @@ apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-ingress-allow-mysql-pod-communication-on-3306-and-selected-pods
+  namespace: default        #change default namespace to match your namespace
 spec:
   description: "To allow communication to mysql pods from specific pods on port 3306"
   endpointSelector:
