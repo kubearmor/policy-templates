@@ -2,6 +2,7 @@ apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
   name: "cnp-egress-t1071-ftp-rule"
+  namespace: default        #change default namespace to match your namespace
 spec:
   description: "Policy to Deny FTP Outgoing Traffic"
   endpointSelector:
