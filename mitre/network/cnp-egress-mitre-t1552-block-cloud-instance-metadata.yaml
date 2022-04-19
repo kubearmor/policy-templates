@@ -2,6 +2,7 @@ apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
   name: "cnp-mitre-t1552-block-cloud-instance-metadata-access-from-pods"
+  namespace: default        #change default namespace to match your namespace
 spec:
   description: "The policy will block access to cloud metadata ips from containers"
   endpointSelector:
