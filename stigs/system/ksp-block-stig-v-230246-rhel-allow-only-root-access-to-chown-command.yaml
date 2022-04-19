@@ -8,7 +8,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-block-stig-v-230246-rhel-allow-only-root-access-to-chown-command
-  namespace:  # Change your namespace
+  namespace: default        #change default namespace to match your namespace
 spec:
   tags: ["rhel", "chown", "stig", "v-230246"]
   message: "Alert! Access to chown is detected"
