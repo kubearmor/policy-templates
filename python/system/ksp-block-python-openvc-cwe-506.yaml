@@ -1,0 +1,29 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+
+# Reference: https://security.snyk.io/vuln/SNYK-PYTHON-OPENVC-2419145
+# Fix: Avoid using openvc altogether.
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-python-openvc-cwe-506
+  namespace: default # Change your namespace
+spec:
+  tags: ["Python", "openvc", "CWE-506"]
+  message: "Alert! openvc file blocked"
+  selector:
+    matchLabels:
+      app: python # Change your matchLabels
+  file:
+    severity: 5
+    matchPatterns:
+    - pattern: /**/opencv*/**/*.*
+    - pattern: /opencv*/**/*.*
+    - pattern: /**/opencv-1.0.0/**
+    - pattern: /opencv-1.0.0/**
+    matchDirectories:
+    - dir: /opencv-1.0.0/
+    action: Block
