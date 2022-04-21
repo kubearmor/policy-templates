@@ -18,6 +18,5 @@ spec:
     severity: 7
     matchPatterns:
     - pattern: /**/log/**
-      recursive: true
       ownerOnly: true
     action: Block
