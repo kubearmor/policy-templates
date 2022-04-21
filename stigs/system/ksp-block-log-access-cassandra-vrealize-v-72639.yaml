@@ -17,6 +17,6 @@ spec:
   file:
     severity: 7
     matchPatterns:
-    - pattern: /**/log/**
+    - pattern: /**/log/*.*
       ownerOnly: true
     action: Block
