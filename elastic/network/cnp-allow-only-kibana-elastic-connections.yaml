@@ -1,0 +1,14 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-allow-only-kibana-elastic-connections
+  namespace: default  #change default namespace to match your namespace
+spec:
+  description: "Allow kibana to only connect to elastic search"
+  endpointSelector:
+    matchLabels:
+      app: kibana
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        app: elasticsearch
