@@ -16,8 +16,8 @@ spec:
       app: cassandra # Change your matchLabels
   file:
     severity: 7
-    matchDirectories:
-    - dir: /storage/log/vcops/log/
+    matchPatterns:
+    - pattern: /**/log/**
       recursive: true
       ownerOnly: true
     action: Block
