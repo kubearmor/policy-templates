@@ -8,7 +8,7 @@ metadata:
   name: ksp-audit-golang-unmarshal
   namespace: default # Change your name space
 spec:
-  tags: ["golang", "protobuf", "index-validation"]
+  tags: ["golang", "protobuf", "index-validation","CVE-2021-3121"]
   message: "Alert! unmarshal.go has been accessed"
   selector:
     matchLabels:
