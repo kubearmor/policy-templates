@@ -16,7 +16,8 @@ spec:
   file:
     severity: 5
     matchPatterns:
-    - pattern: ghostdog.sh
+    - pattern: /**/*ghostdog.sh
+    - pattern: /*ghostdog.sh
     action: Block
   process:
     severity: 5
