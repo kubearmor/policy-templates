@@ -1,0 +1,30 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-virus-java-hawk
+  namespace: default
+spec:
+  tags: ["JAVA", "MALWARE", "Java Hawk", "Blackhawk"]
+  message: "Alert! Virus.Java.Hawk malware found!"
+  selector:
+    matchLabels:
+      app: ubuntu-java
+  file:
+    severity: 5
+    matchPatterns:
+    - pattern: /**/.Blackhawk.sh
+    - pattern: /.Blackhawk.sh
+    matchPaths:
+    - path: /root/.Blackhawk.sh
+  action: Block
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/chmod
+      fromSource: 
+      - path: /usr/lib/jvm/java-9-openjdk-amd64/bin/java
+  action: Block
