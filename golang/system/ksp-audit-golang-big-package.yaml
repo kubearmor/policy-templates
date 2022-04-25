@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-golang-big-package
+  namespace: default # Change your name space
+spec:
+  tags: ["golang", "big-package", "memory"]
+  message: "Alert! big package directory has been invoked"
+  selector:
+    matchLabels:
+      app: golang # Change your matchLabels
+  file:
+    severity: 5
+    matchPaths:
+      - path: /usr/local/go/src/math/big
+  action: Audit
