@@ -19,4 +19,4 @@ spec:
       - pattern: /**/unmarshal.go
     matchPaths:
       - path: /go/src/github.com/gogo/protobuf/plugin/unmarshal/unmarshal.go
-  action: Audit
+    action: Audit
