@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-virus-java-ghostdog
+  namespace: default
+spec:
+  tags: ["JAVA", "MALWARE"]
+  message: "Alert! ghostdog malware found!"
+  selector:
+    matchLabels:
+      app: ubuntu-java
+  file:
+    severity: 5
+    matchPatterns:
+    - pattern: /**/*ghostdog.sh
+    - pattern: /*ghostdog.sh
+    action: Block
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/chmod
+    - path: /bin/sh
+    action: Audit
