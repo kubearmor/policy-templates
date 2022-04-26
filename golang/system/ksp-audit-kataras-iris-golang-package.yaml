@@ -12,7 +12,7 @@ spec:
   message: "Access to Golang kataras iris package is detected. Please make sure that you are using Upgrade github.com/kataras/iris to version 12.2.0-alpha8 or higher to avoid Arbitrary File Write"
   selector:
     matchLabels:
-      app: go-app # Change your labels
+      app: go-app # Change to your labels
   file:
     severity: 5
     matchPatterns:
