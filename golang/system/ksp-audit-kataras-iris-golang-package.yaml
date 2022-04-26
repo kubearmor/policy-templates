@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-kataras-iris-golang-package
+  namespace: default # Change your namespace
+spec:
+  tags: ["Go", "iris-package", "kataras", "CVE-2021-23772"]
+  message: "Access to Golang kataras iris package is detected. Please make sure that you are using Upgrade github.com/kataras/iris to version 12.2.0-alpha8 or higher to avoid Arbitrary File Write"
+  selector:
+    matchLabels:
+      app: go-app # Change to your labels
+  file:
+    severity: 5
+    matchPatterns:
+    - pattern: /**/kataras/iris/**/
+    action: Audit
