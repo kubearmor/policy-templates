@@ -18,8 +18,6 @@ spec:
     matchDirectories:
     - dir: /usr/local/go/src/crypto/
       recursive: true
-      ownerOnly: true
     matchPatterns:
     - pattern: /**/crypto/**/
-      ownerOnly: true
     action: Audit
