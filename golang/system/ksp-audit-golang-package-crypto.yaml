@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-golang-package-crypto
+  namespace: default # Change your namespace
+spec:
+  tags: ["Go", "crypto-package", "CVE-2021-34558"]
+  message: "Access to Go crypto package is detected. Please make sure that used version is >1.16.5. The crypto package of Go through 1.16.5 is CVE-2021-34558 vulnerable"
+  selector:
+    matchLabels:
+      app: go-app # Change your labels
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /usr/local/go/src/crypto/
+      recursive: true
+    matchPatterns:
+    - pattern: /**/crypto/**/
+    action: Audit
