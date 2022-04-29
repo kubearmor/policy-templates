@@ -18,7 +18,3 @@ spec:
     matchPatterns:
     - pattern: /**/jolokia
     action: Audit
-
-
-
-
