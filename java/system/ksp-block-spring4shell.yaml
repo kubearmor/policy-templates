@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-spring4shell
+  namespace: default # Change your namespace
+spec:
+  tags:
+    ["spring4shell", "rce", "tomcat", "jsp", "unauthorized-acess", "spring-web"]
+  message: "Alert! Remote Code Excecution is blocked. "
+  selector:
+    matchLabels:
+      app: spring4shell # Change your matchLabels
+  file:
+    severity: 2
+    matchPatterns:
+      - pattern: /**/tomcatwar.jsp
+      - pattern: /**/tomcatwar_jsp.class
+      - pattern: /**/tomcatwar_jsp.java
+    action: Block
