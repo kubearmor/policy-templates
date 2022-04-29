@@ -21,8 +21,3 @@ spec:
     - pattern: /**/info.log
     - pattern: /**/app.log
     action: Block
-
-
-
-
-    
