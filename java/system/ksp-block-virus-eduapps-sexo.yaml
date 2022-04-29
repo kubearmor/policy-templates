@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-virus-eduapps-sexo
+  namespace: default # Change your namespace
+spec:
+  tags: ["java","virus","eduapps"]
+  message: "Alert! someone trying to delete the files."
+  selector:
+    matchLabels:
+      app: java # Change your matchLabels
+    process: 
+    severity: 3    
+    matchPaths:      
+    - path: /usr/bin/rm 
+    - path: /usr/bin/unlink
+    - path: /usr/bin/rmdir  
+    action: Block    
