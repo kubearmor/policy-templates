@@ -16,11 +16,9 @@ spec:
       app: spring4shell # Change your matchLabels
   file:
     severity: 2
-    matchPatterns:
-      - pattern: /**/tomcatwar.jsp
-      - pattern: /**/tomcatwar_jsp.class
-      - pattern: /**/tomcatwar_jsp.java
-      - pattern: /**/shell.jsp
-      - pattern: /**/shell_jsp.java
-      - pattern: /**/shell_jsp.class
+    matchDirectories:
+      - dir: /usr/local/tomcat/webapps/ROOT/
+        recursive: true
+      - dir: /usr/local/tomcat/work/Catalina/localhost/ROOT/org/apache/jsp/
+        recursive: true  
     action: Block
