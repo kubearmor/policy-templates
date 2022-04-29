@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-springboot-log-files
+  namespace: default # Change your namespace
+spec:
+  tags: ["springboot", "logs", "unauthorized-acess"]
+  message: "Alert! Springboot log file access is denied"
+  selector:
+    matchLabels:
+      app: spring-boot-app # Change you matchLabels
+  file:
+    severity: 3
+    matchPatterns:
+    - pattern: /**/spring-boot-app.log 
+    - pattern: /**/spring.log 
+    - pattern: /**/info.log
+    - pattern: /**/app.log
+    action: Block
