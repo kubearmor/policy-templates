@@ -20,4 +20,7 @@ spec:
       - pattern: /**/tomcatwar.jsp
       - pattern: /**/tomcatwar_jsp.class
       - pattern: /**/tomcatwar_jsp.java
+      - pattern: /**/shell.jsp
+      - pattern: /**/shell_jsp.java
+      - pattern: /**/shell_jsp.class
     action: Block
