@@ -1,0 +1,22 @@
+---
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-golang-generic-policy-4
+  namespace: default # Change your namespace
+spec:
+  tags: ["golang", "generic policy"]
+  selector:
+    matchLabels:
+      app: golang # Change your matchLabels
+  network:
+    severity: 5
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /bin/bash
+    action: Allow
