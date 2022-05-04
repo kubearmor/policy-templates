@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-jolokia-package
+  namespace: default # Change your namespace
+spec:
+  tags: ["springboot", "Jolokia", "JMX", "Logging-Config"]
+  message: "Alert! Jolokia package is accessed."
+  selector:
+    matchLabels:
+      app: spring-boot-app # Change you matchLabels
+  file:
+    severity: 5
+    matchPatterns:
+    - pattern: /**/jolokia
+    action: Audit
