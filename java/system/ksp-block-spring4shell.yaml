@@ -10,7 +10,7 @@ metadata:
 spec:
   tags:
     ["spring4shell", "rce", "tomcat", "jsp", "unauthorized-acess", "spring-web"]
-  message: "Alert! Remote Code Execution is blocked. "
+  message: "Alert! Exploit files is created under the specific directories. "
   selector:
     matchLabels:
       app: spring4shell # Change your matchLabels
