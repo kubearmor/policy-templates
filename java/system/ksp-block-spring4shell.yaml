@@ -10,7 +10,7 @@ metadata:
 spec:
   tags:
     ["spring4shell", "rce", "tomcat", "jsp", "unauthorized-acess", "spring-web"]
-  message: "Alert! Exploit files is created under the specific directories. "
+  message: "Alert! Blocked spring4shell file creation"
   selector:
     matchLabels:
       app: spring4shell # Change your matchLabels
