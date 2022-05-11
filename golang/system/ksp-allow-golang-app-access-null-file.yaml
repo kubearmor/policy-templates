@@ -9,7 +9,7 @@ metadata:
   namespace: default        #change namespace to match your namespace
 spec:
   tags: ["GoLang", "Allow policy", "Baseline policy","null file"]
-  message: "shell accessed by GoLang binary."
+  message: "null file accessed by GoLang binary."
   selector:
     matchLabels:
       app: frontend         #change label to match your label
