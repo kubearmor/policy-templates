@@ -1,0 +1,38 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-golang-app-access-file-null-group-ldd-proc-sys
+  namespace: default        #change namespace to match your namespace
+spec:
+  tags: ["GoLang", "Allow policy", "Baseline policy"]
+  message: "file accessed by GoLang binary."
+  selector:
+    matchLabels:
+      app: paymentservice             #change label to match your label
+  file:
+    severity: 1
+    matchPaths:
+    - path: /dev/null
+      fromSource:
+      - path: /usr/local/bin/node       #change binary path to match your binary path
+    - path: /etc/group
+      fromSource:
+      - path: /bin/grpc_health_probe    #change binary path to match your binary path
+    - path: /usr/bin/ldd
+      fromSource:
+      - path: /lib/ld-musl-x86_64.so.1
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /bin/grpc_health_probe    #change binary path to match your binary path
+    - dir: /sys/
+      fromSource:
+      - path: /bin/grpc_health_probe    #change binary path to match your binary path
+    - dir: /usr/src/app/node_modules/
+      fromSource:
+      - path: /usr/local/bin/node       #change binary path to match your binary path
+    action: Allow
