@@ -8,7 +8,7 @@ metadata:
   name: ksp-allow-golang-tcp-udp-packets-from-pod
   namespace: default		#change namespace to match your namespace
 spec:
-  tags: ["GoLang", "Generic", "Allow policy", "Baseline policy","TCP-UDP packets"]
+  tags: ["GoLang", "Allow policy", "Baseline policy","TCP-UDP packets"]
   message: "TCP-UDP packets crafted by golang binary."
   selector:
     matchLabels:
