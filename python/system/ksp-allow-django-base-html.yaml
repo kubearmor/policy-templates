@@ -8,7 +8,7 @@ metadata:
   name: ksp-allow-django-base-html
   namespace: default
 spec:
-  tags: ["PYTHON", "DJANGO", "GENERIC"]
+  tags: ["PYTHON", "DJANGO"]
   message: "Alert! python is the only allowed access"
   severity: 1
   selector:
