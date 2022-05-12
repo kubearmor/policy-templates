@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-STIG-restrict-non-mysql-binaries
+  name: ksp-block-stig-restrict-non-mysql-binaries
   namespace: default # Change your namespace
 spec:
   tags: ["STIG", "MYSQL"]
