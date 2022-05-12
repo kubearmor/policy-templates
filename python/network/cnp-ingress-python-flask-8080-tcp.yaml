@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-ingress-python-flask-8080-tcp
+  namespace: default
+spec:
+  description: "Allow only tcp connection via 8080 port"
+  endpointSelector:
+    matchLabels:
+      app: python-flask
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+    fromEntities:
+    - world
