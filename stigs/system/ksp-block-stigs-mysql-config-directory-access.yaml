@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-STIG-mysql-config-directory-access
+  name: ksp-block-stig-mysql-config-directory-access
   namespace: default # Change your namespace
 spec:
   tags: ["STIG", "MYSQL"]
