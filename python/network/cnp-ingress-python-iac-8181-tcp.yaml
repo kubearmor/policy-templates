@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-ingress-python-iac-8181-tcp
+  namespace: default
+spec:
+  description: "Allow only tcp connection only via 8181 port"
+  endpointSelector:
+    matchLabels:
+      app: iac-python-deployment
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "8181"
+        protocol: TCP
+    fromEntities:
+    - world
