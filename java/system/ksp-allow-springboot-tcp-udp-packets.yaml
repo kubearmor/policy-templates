@@ -9,7 +9,7 @@ metadata:
   namespace: default  # Change your namespace
 spec:
   tags: ["springboot", "framework", "protocols","java"]
-  message: "Alert! The so files are permitted"
+  message: "Alert! TCP-UDP packets crafted by java binary"
   selector:
     matchLabels:
       app: springboot-pet-clinic # Change your matchLabels
