@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["PYTHON","IAC"]
-  message: "Alert! gconv modules is only allowed"
+  message: "Alert! python gconv modules is only allowed to access tcp connection"
   severity: 1
   selector:
     matchLabels:
