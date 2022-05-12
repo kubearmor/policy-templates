@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-allow-ingress-icmp-request-to-golang-pod
+  namespace: default                                #change namespace to match your namespace
+spec:
+  description: "Allow ingress icmp communication on golang pod from world entity"
+  endpointSelector:
+    matchLabels:
+      app: cinema-website                           #change label to match your label
+  ingress:
+  - icmps:
+    - fields:
+      - family: IPv4
+        type: 3
+    fromEntities:
+    - world
