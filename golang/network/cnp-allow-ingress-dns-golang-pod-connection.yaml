@@ -1,0 +1,18 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-allow-ingress-dns-golang-pod-connection
+  namespace: kube-system
+spec:
+  description: "Allow ingress communication between dns and golang pod via port 53"
+  endpointSelector:
+    matchLabels:
+      k8s-app: kube-dns
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        app: cinema-movies                           #change label to match your label
+    toPorts:
+    - ports:
+      - port: "53"
+        protocol: UDP
