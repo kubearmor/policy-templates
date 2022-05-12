@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["PYTHON","FLASK","OMS","SLACK"]
-  message: "Alert! python can only apk packages"
+  message: "Alert! apk pacakges can only allowed to access python"
   severity: 1
   selector:
     matchLabels:
