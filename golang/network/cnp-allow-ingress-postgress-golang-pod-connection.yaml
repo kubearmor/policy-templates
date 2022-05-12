@@ -7,11 +7,11 @@ spec:
   description: "Allow ingress communication between postgress and golang pod via port 5432"
   endpointSelector:
     matchLabels:
-      io.kompose.service: postgres                  #change label to match your label
+      app: postgres                  #change label to match your label
   ingress:
   - fromEndpoints:
     - matchLabels:
-      app: advice-service                           #change label to match your label
+        app: advice-service                           #change label to match your label
     toPorts:
     - ports:
       - port: "5432"
