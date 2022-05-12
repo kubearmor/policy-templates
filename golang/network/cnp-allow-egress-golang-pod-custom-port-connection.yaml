@@ -1,0 +1,22 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-allow-egress-golang-pod-custom-port-connection
+  namespace: default                                #change namespace to match your namespace
+spec:
+  description: "Allow egress communication for golang pod for custom ports"
+  endpointSelector:
+    matchLabels:
+      app: frontend                                 #change label to match your label
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        app: shippingservice                        #change label to match your label
+    toPorts:
+    - ports:
+      - port: "50051"
+        protocol: TCP
+      - port: "9555"
+        protocol: TCP
+      - port: "7070"
+        protocol: TCP
