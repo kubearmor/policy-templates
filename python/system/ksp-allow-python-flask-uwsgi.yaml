@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-python-flask-uwsgi
+  namespace: default
+spec:
+  tags: ["PYTHON", "FLASK"]
+  message: "Alert! python and uwsgi is only access allowed"
+  severity: 1
+  selector:
+    matchLabels:
+      app: python-flask-mssql
+  process:
+    matchPaths:
+    - path: /usr/local/bin/uwsgi
+      fromSource:
+      - path: /usr/bin/python2.7
+    - path: /usr/sbin/nginx
+      fromSource:
+      - path: /usr/bin/python2.7
+  action: Allow
