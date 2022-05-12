@@ -1,0 +1,18 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-ingress-python-flask-tcp-8080
+  namespace: default
+spec:
+  description: "Allow tcp connections from world and remote-node via 8080 port"
+  endpointSelector:
+    matchLabels:
+      app: oms-python-slack
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+    fromEntities:
+    - world
+    - remote-node
