@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["PYTHON", "DJANGO"]
-  message: "Alert! idconfig and core files are only allowed"
+  message: "Alert! Django config files access from python bin is only allowed"
   severity: 1
   selector:
     matchLabels:
