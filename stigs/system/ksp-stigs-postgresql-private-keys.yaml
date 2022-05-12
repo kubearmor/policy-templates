@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-STIG-postgresql-private-keys
+  name: ksp-stig-postgresql-private-keys
   namespace: default # Change your namespace
 spec:
   tags: ["STIG", "PSQL"]

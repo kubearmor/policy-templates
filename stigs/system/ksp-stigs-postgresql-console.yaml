@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-STIG-postgresql-console
+  name: ksp-stig-postgresql-console
   namespace: default # Change your namespace
 spec:
   tags: ["STIG", "PSQL"]

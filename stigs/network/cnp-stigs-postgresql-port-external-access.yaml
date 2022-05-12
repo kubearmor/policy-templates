@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: cnp-STIG-postgresql-port-external-access
+  name: cnp-stig-postgresql-port-external-access
   namespace: default        #change default namespace to match your namespace
 spec:
   description: "This will Block PostgreSQL External Access"
