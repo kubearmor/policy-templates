@@ -1,0 +1,92 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-python-flask-slack-modules
+  namespace: default
+spec:
+  tags: ["PYTHON","SLACK","FLASK"]
+  message: "Alert! slack modules are only accessible via python"
+  severity: 1
+  selector:
+    matchLabels:
+      app: oms-python-slack
+  file:
+    matchPaths:
+    - path: /etc/ca-certificates.conf
+      fromSource:
+      - path: /usr/sbin/update-ca-certificates
+    - path: /etc/ca-certificates/update.d/certhash
+      fromSource:
+      - path: /usr/bin/c_rehash
+    - path: /etc/inputrc
+      fromSource:
+      - path: /usr/local/bin/python3.7
+    - path: /etc/passwd
+      fromSource:
+      - path: /bin/busybox
+    - path: /etc/ssl/certs/bundlejlMGEP
+      fromSource:
+      - path: /usr/sbin/update-ca-certificates
+    - path: /etc/terminfo/x/xterm
+      fromSource:
+      - path: /usr/local/bin/python3.7
+    - path: /lib/libcrypto.so.1.1
+      fromSource:
+      - path: /usr/bin/c_rehash
+      - path: /usr/local/bin/python
+    - path: /lib/libz.so.1
+      fromSource:
+      - path: /sbin/apk
+    - path: /root/.ash_history
+      fromSource:
+      - path: /bin/busybox
+    - path: /root/.python_history
+      fromSource:
+      - path: /usr/local/bin/python3.7
+    - path: /tmp/pip-install-mz23d9ic/slack/setup.py
+      fromSource:
+      - path: /usr/local/bin/python
+    - path: /tmp/pip-install-mz23d9ic/slack/slack.egg-info/PKG-INFO
+      fromSource:
+      - path: /usr/local/bin/python
+    - path: /usr/lib/libexpat.so.1
+      fromSource:
+      - path: /usr/local/bin/python
+    - path: /usr/lib/libffi.so.6
+      fromSource:
+      - path: /usr/local/bin/python
+    - path: /usr/lib/libncursesw.so.6
+      fromSource:
+      - path: /bin/bash
+      - path: /usr/local/bin/python3.7
+    - path: /usr/lib/libreadline.so.8
+      fromSource:
+      - path: /bin/bash
+      - path: /usr/local/bin/python3.7
+    - path: /usr/local/lib/libpython3.7m.so.1.0
+      fromSource:
+      - path: /usr/local/bin/python
+      - path: /usr/local/bin/python3.7
+    matchDirectories:
+    - dir: /etc/ssl/certs/
+      fromSource:
+      - path: /usr/bin/c_rehash
+    - dir: /proc/
+      fromSource:
+      - path: /bin/lsb_release
+      - path: /bin/sh
+      - path: /bin/uname
+      - path: /lib/ld-musl-x86_64.so.1
+      - path: /sbin/uname
+      - path: /tmp/pip-build-env-ks48ihwk/overlay/bin/gcc
+      - path: /usr/bin/lsb_release
+      - path: /usr/local/bin/python
+      - path: /usr/local/sbin/lsb_release
+    - dir: /usr/local/lib/python3.7/
+      fromSource:
+      - path: /usr/local/bin/python
+      - path: /usr/local/bin/python3.7
+    - dir: /usr/share/ca-certificates/mozilla/
+      fromSource:
+      - path: /usr/sbin/update-ca-certificates
+  action: Allow
