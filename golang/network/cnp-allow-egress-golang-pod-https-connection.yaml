@@ -1,0 +1,15 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-allow-egress-golang-pod-https-connection
+  namespace: default                                #change namespace to match your namespace
+spec:
+  description: "Allow egress HTTPS communication on golang pod"
+  endpointSelector:
+    matchLabels:
+      app: frontend                                 #change label to match your label
+  egress:
+  - toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
