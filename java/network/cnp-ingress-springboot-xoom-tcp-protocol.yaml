@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: autopol-ingress-qendsppalyfxjxe
+  namespace: default # Change your namespace
+spec:
+  description: "Allow tcp connections only through 8080 port from the internet"
+  endpointSelector:
+    matchLabels:
+      app: springboot-xoom-designer  # Change your matchLabels
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+    fromEntities:
+    - world
