@@ -1,0 +1,19 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-allow-egress-golang-pod-dns-connection
+  namespace: default                                  #change namespace to match your namespace
+spec:
+  description: "Allow egress communication between golang pod and dns via port 53"
+  endpointSelector:
+    matchLabels:
+      app: cinema-movies                              #change label to match your label
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        k8s-app: kube-dns
+        k8s:io.kubernetes.pod.namespace: kube-system
+    toPorts:
+    - ports:
+      - port: "53"
+        protocol: UDP
