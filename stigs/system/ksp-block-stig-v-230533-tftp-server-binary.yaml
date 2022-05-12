@@ -8,7 +8,7 @@ metadata:
   name: ksp-block-stig-v-230533-tftp-server-binary
   namespace: default # Change your namespace
 spec:
-  tags: ["STIGS", "RHEL8","REDHAT","tftp-server"]
+  tags: ["STIG", "RHEL8","REDHAT","tftp-server"]
   message: "Alert! tftp-server binary access detected and blocked. Violation of STIG v230533"
   selector:
     matchLabels:

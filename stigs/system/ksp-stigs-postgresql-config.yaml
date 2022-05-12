@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-stigs-postgresql-config
+  name: ksp-STIG-postgresql-config
   namespace: default # Change your namespace
 spec:
-  tags: ["STIGS", "PSQL"]
+  tags: ["STIG", "PSQL"]
   message: "Notification! PostgreSQL Config Files has been accessed"
   selector:
     matchLabels:

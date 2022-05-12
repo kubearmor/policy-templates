@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-stigs-mysql-config-directory-access
+  name: ksp-block-STIG-mysql-config-directory-access
   namespace: default # Change your namespace
 spec:
-  tags: ["STIGS", "MYSQL"]
+  tags: ["STIG", "MYSQL"]
   message: "Alert! Access to mysql conf files has been denied"
   selector:
     matchLabels:

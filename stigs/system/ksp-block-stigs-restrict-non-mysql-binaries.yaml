@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-stigs-restrict-non-mysql-binaries
+  name: ksp-block-STIG-restrict-non-mysql-binaries
   namespace: default # Change your namespace
 spec:
-  tags: ["STIGS", "MYSQL"]
+  tags: ["STIG", "MYSQL"]
   message: "Alert! Non MySQL binaries were accessed inside pod"
   selector:
     matchLabels:

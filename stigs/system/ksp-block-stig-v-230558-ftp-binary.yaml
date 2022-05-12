@@ -8,7 +8,7 @@ metadata:
   name: ksp-block-stig-v-230558-ftp-binary
   namespace: default # Change your namespace
 spec:
-  tags: ["STIGS", "RHEL8","REDHAT","FTP"]
+  tags: ["STIG", "RHEL8","REDHAT","FTP"]
   message: "Alert! FTP binary access detected and blocked. Violation of STIG v230558"
   selector:
     matchLabels:

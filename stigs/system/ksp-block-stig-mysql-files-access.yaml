@@ -8,7 +8,7 @@ metadata:
   name: ksp-block-stig-mysql-files-access
   namespace: default # Change your namespace
 spec:
-  tags: ["STIGS", "MYSQL"]
+  tags: ["STIG", "MYSQL"]
   message: "Alert! Access to mysql conf files has been denied"
   selector:
     matchLabels:

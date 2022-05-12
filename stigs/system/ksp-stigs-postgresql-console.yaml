@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-stigs-postgresql-console
+  name: ksp-STIG-postgresql-console
   namespace: default # Change your namespace
 spec:
-  tags: ["STIGS", "PSQL"]
+  tags: ["STIG", "PSQL"]
   message: "Alert! Access to psql database files has been denied"
   selector:
     matchLabels:

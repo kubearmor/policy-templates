@@ -11,7 +11,7 @@ metadata:
   name: ksp-audit-cassandra-stig-v-72663-validated-cryptographic-modules
   namespace: default # Change your name space
 spec:
-  tags: ["STIGS", "CASSANDRA", "STIG V-72663", "Cryptography", "validated cryptographic modules"]
+  tags: ["STIG", "CASSANDRA", "STIG V-72663", "Cryptography", "validated cryptographic modules"]
   message: "Alert! ssl-global.conf file has been accessed"
   selector:
     matchLabels:

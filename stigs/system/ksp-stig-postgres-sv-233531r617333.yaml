@@ -9,7 +9,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   message: "Caution! Someone tried deleting a postgres data file(s)"
-  tags: ["PSQL", "STIGS"]
+  tags: ["PSQL", "STIG"]
   selector:
     matchLabels:
       app: postgres # Change your match labels

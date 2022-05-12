@@ -9,7 +9,7 @@ metadata:
   name: ksp-audit-mysql-stig-v-235153
   namespace: default # Change your name space
 spec:
-  tags: ["STIGS", "mysql", "STIG V-235153", "database-files"]
+  tags: ["STIG", "mysql", "STIG V-235153", "database-files"]
   message: "Alert! database file has been accessed"
   selector:
     matchLabels:

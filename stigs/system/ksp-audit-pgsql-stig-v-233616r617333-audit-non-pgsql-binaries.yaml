@@ -8,7 +8,7 @@ metadata:
   name: ksp-audit-pgsql-stig-v-233616r617333-non-pgsql-binaries
   namespace: default # Change your namespace
 spec:
-  tags: ["STIGS", "PSQL"]
+  tags: ["STIG", "PSQL"]
   message: "Notification! postgresql data has been accessed"
   selector:
     matchLabels:

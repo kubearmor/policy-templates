@@ -9,7 +9,7 @@ metadata:
   namespace: default           # use your own namespace
 spec:
   message: "Postgres Log File is Blocked"
-  tags: ["postgres", "STIGS"]
+  tags: ["postgres", "STIG"]
   selector:
     matchLabels:
       app: postgres            # use your own matchLabels

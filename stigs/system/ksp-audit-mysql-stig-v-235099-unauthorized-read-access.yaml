@@ -11,7 +11,7 @@ metadata:
   name: ksp-audit-mysql-stig-v-235099-unauthorized-read-access
   namespace: default # Change your name space
 spec:
-  tags: ["STIGS", "MySQL", "STIG V-235099", "Unauthorized Read Access"]
+  tags: ["STIG", "MySQL", "STIG V-235099", "Unauthorized Read Access"]
   message: "Alert! unauthorized read access has been detected"
   selector:
     matchLabels:

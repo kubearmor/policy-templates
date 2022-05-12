@@ -11,7 +11,7 @@ metadata:
   name: ksp-audit-cassandra-stig-v-72671
   namespace: default # Change your name space
 spec:
-  tags: ["STIGS", "CASSANDRA", "STIG V-72671", "database"]
+  tags: ["STIG", "CASSANDRA", "STIG V-72671", "database"]
   message: "Alert!  file has been accessed"
   selector:
     matchLabels:
