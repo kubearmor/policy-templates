@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-springboot-system-data
+  namespace: default  # Change your namespace
+spec:
+  tags: ["springboot", "framework", "openjdk","system"]
+  message: "Alert! The system directory modification is permited"
+  selector:
+    matchLabels:
+      app: springboot # Change your matchLabels
+  file:
+    severity: 3
+    matchDirectories:
+    - dir: /sys/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - dir: /bin/  
+  action: Allow

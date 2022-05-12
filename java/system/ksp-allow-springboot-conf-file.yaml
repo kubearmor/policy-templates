@@ -1,0 +1,56 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-springboot-conf-file
+  namespace: default
+spec:
+  tags: ["springboot", "framework", "configuration","tomcat"]
+  message: "Alert! The configuration files are permited"
+  selector:
+    matchLabels:
+      app: springboot-product-service
+  file:
+    severity: 1
+    matchPaths:
+    - path: /etc/gai.conf
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /etc/host.conf
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /etc/hosts
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /usr/lib/ssl/openssl.cnf
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /usr/lib/x86_64-linux-gnu/libuuid.so.1
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - dir: /sys/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - dir: /usr/local/openjdk-11/lib/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - dir: /usr/local/tomcat/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+  network:
+    matchProtocols:
+    - protocol: raw
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - protocol: tcp
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+  action: Allow
+
