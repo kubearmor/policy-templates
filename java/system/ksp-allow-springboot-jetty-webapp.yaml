@@ -2,13 +2,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-allow-springboot-jetty-webapp
-  namespace: default
+  namespace: default # Change your namespace
 spec:
   tags: ["springboot", "framework", "web-application","java-binaries"]
   message: "Alert! The so files are permitted" 
   selector:
     matchLabels:
-      app: springboot
+      app: springboot # Change your matchLabels
   file:
     severity: 1
     matchPaths:
