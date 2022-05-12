@@ -1,0 +1,18 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-allow-egress-golang-postgress-pod-connection
+  namespace: default                                #change namespace to match your namespace
+spec:
+  description: "Allow egress communication between golang pod and postgres via port 5432"
+  endpointSelector:
+    matchLabels:
+      app: advice-service                           #change label to match your label
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        app: postgres                               #change label to match your label
+    toPorts:
+    - ports:
+      - port: "5432"
+        protocol: TCP
