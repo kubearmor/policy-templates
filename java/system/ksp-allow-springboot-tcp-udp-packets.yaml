@@ -1,0 +1,26 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-springboot-tcp-udp-packets
+  namespace: default  # Change your namespace
+spec:
+  tags: ["springboot", "framework", "protocols","java"]
+  message: "Alert! TCP-UDP packets crafted by java binary"
+  selector:
+    matchLabels:
+      app: springboot-pet-clinic # Change your matchLabels
+  network:
+    severity: 1
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /bin/tar
+    - protocol: udp
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
+  action: Allow
+
