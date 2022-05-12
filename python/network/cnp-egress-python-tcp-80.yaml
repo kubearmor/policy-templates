@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-python-tcp-80
+  namespace: default
+spec:
+  description: "Allow only tcp connection 80 port"
+  endpointSelector:
+    matchLabels:
+      app: oms-python-slack
+  egress:
+  - toPorts:
+    - ports:
+      - port: "80"
+        protocol: TCP
+    toCIDR:
+    - 151.101.2.133/32

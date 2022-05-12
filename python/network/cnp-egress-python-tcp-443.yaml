@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-python-tcp-443
+  namespace: default
+spec:
+  description: "Allow connections only via tcp 443 port"
+  endpointSelector:
+    matchLabels:
+      app: oms-python-slack
+  egress:
+  - toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
+    toCIDR:
+    - 151.101.128.223/32

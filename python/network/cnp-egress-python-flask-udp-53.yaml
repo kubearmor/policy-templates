@@ -1,0 +1,19 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-python-flask-udp-53
+  namespace: default
+spec:
+  description: "Allow only UDP connection via 53 port"
+  endpointSelector:
+    matchLabels:
+      app: oms-python-slack
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        k8s-app: kube-dns
+        k8s:io.kubernetes.pod.namespace: kube-system
+    toPorts:
+    - ports:
+      - port: "53"
+        protocol: UDP
