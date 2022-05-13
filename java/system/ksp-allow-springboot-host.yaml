@@ -9,7 +9,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["springboot", "framework", "openjdk" , "libraries" ]
-  message: "Alert! The java binaries are used"
+  message: "Allow specific files,process/protocols from java binary"
   severity: 1
   selector:
     matchLabels:
