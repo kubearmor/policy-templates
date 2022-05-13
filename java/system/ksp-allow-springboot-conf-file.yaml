@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["springboot", "framework", "configuration","tomcat"]
-  message: "Alert! The configuration files are permited"
+  message: "Allow access to the files from java binary"
   selector:
     matchLabels:
       app: springboot-product-service
