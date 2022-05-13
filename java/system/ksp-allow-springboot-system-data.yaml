@@ -5,7 +5,7 @@ metadata:
   namespace: default  # Change your namespace
 spec:
   tags: ["springboot", "framework", "openjdk","system"]
-  message: "Alert! The system directory modification is permited"
+  message: "java binaries are executed in system directory"
   selector:
     matchLabels:
       app: springboot # Change your matchLabels
