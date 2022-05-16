@@ -8,6 +8,8 @@ metadata:
   name: ksp-jboss-allow-service-resources
   namespace: default  # Change your namespace
 spec:
+  tags: ["jboss", "wildfly", "binaries", "libraries", "services" ]
+  message: "Alert! The library files are acessed"
   severity: 1
   selector:
     matchLabels:
