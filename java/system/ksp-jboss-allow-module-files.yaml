@@ -8,6 +8,8 @@ metadata:
   name: ksp-jboss-allow-module-files
   namespace: default # Change your namespace
 spec:
+  tags: ["jboss", "wildfly", "configuration", "files", "modules" ]
+  message: "Alert! The module files are acessed"
   severity: 1
   selector:
     matchLabels:
