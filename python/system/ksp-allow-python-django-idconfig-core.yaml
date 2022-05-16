@@ -1,0 +1,102 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-python-django-idconfig-core
+  namespace: default
+spec:
+  tags: ["PYTHON", "DJANGO"]
+  message: "Alert! Django config files access from python bin is only allowed"
+  severity: 1
+  selector:
+    matchLabels:
+      app: django
+  file:
+    matchPaths:
+    - path: /app/blog/__pycache__/__init__.cpython-35.pyc.139922291881040
+      fromSource:
+      - path: /venv/bin/python3.5
+    - path: /app/blog/__pycache__/admin.cpython-35.pyc.139922245712752
+      fromSource:
+      - path: /venv/bin/python3.5
+    - path: /app/mysite/__init__.py
+      fromSource:
+      - path: /venv/bin/python3.5
+    - path: /app/mysite/__pycache__/__init__.cpython-35.pyc.139922316537456
+      fromSource:
+      - path: /venv/bin/python3.5
+    - path: /dev/null
+      fromSource:
+      - path: /bin/dash
+      - path: /venv/bin/python3.5
+    - path: /dev/urandom
+      fromSource:
+      - path: /venv/bin/python3.5
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /bin/dash
+      - path: /sbin/ldconfig.real
+      - path: /venv/bin/python3.5
+    - path: /lib/x86_64-linux-gnu/libc.so.6
+      fromSource:
+      - path: /bin/dash
+    - path: /lib/x86_64-linux-gnu/libuuid.so.1
+      fromSource:
+      - path: /venv/bin/python3.5
+    - path: /sbin/ldconfig
+      fromSource:
+      - path: /bin/dash
+    - path: /tmp/fykpv6mh
+      fromSource:
+      - path: /venv/bin/python3.5
+    - path: /tmp/wgunicorn-4qdctmno
+      fromSource:
+      - path: /venv/bin/python3.5
+    - path: /venv/lib/python3.5/__pycache__/bisect.cpython-35.pyc
+      fromSource:
+      - path: /venv/bin/python3.5
+    - path: /venv/lib/python3.5/__pycache__/hmac.cpython-35.pyc
+      fromSource:
+      - path: /venv/bin/python3.5
+    - path: /venv/lib/python3.5/site-packages/gunicorn/workers/__pycache__/base.cpython-35.pyc
+      fromSource:
+      - path: /venv/bin/python3.5
+    - path: /venv/lib/python3.5/site-packages/gunicorn/workers/__pycache__/sync.cpython-35.pyc
+      fromSource:
+      - path: /venv/bin/python3.5
+    - path: /venv/lib/python3.5/site-packages/psycopg2/_psycopg.cpython-35m-x86_64-linux-gnu.so
+      fromSource:
+      - path: /venv/bin/python3.5
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /bin/dash
+      - path: /sbin/ldconfig
+    - dir: /sys/
+      fromSource:
+      - path: /venv/bin/python
+    - dir: /usr/lib/locale/C.UTF-8/
+      fromSource:
+      - path: /bin/uname
+    - dir: /usr/lib/x86_64-linux-gnu/
+      fromSource:
+      - path: /venv/bin/python3.5
+    - dir: /usr/local/lib/python3.5/
+      fromSource:
+      - path: /venv/bin/python3.5
+    - dir: /venv/lib/python3.5/lib-dynload/
+      fromSource:
+      - path: /venv/bin/python3.5
+    - dir: /venv/lib/python3.5/site-packages/django/
+      fromSource:
+      - path: /venv/bin/python3.5
+    - dir: /venv/lib/python3.5/site-packages/gunicorn/http/__pycache__/
+      fromSource:
+      - path: /venv/bin/python3.5
+    - dir: /venv/lib/python3.5/site-packages/psycopg2/__pycache__/
+      fromSource:
+      - path: /venv/bin/python3.5
+  action: Allow
