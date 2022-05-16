@@ -1,0 +1,87 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-jboss-allow-module-files
+  namespace: default # Change your namespace
+spec:
+  severity: 1
+  selector:
+    matchLabels:
+      name: wildfly # Change your matchLabels
+  process:
+    matchPaths:
+    - path: /usr/bin/grep
+      fromSource:
+      - path: /usr/bin/bash
+  file:
+    matchPaths:
+    - path: /dev/null
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /etc/localtime
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /etc/passwd
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /lib64/libc.so.6
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /lib64/libpcre.so.1
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /lib64/libpthread.so.0
+      fromSource:
+      - path: /usr/bin/grep
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /opt/jboss/wildfly/jboss-modules.jar
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /opt/jboss/wildfly/modules/system/layers/base/javax/json/api/main/jakarta.json-api-1.1.6.jar
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /opt/jboss/wildfly/standalone/log/server.log
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/../lib/jli/libjli.so
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/conf/security/java.policy
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/conf/security/java.security
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    matchDirectories:
+    - dir: /opt/jboss/wildfly/modules/system/layers/base/org/
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - dir: /proc/
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - dir: /sys/
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - dir: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/lib/
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+  network:
+    matchProtocols:
+    - protocol: raw
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - protocol: tcp
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - protocol: udp
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+  action: Allow
+---
