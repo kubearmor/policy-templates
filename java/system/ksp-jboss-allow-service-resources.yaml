@@ -1,0 +1,110 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-jboss-allow-service-resources
+  namespace: default  # Change your namespace
+spec:
+  severity: 1
+  selector:
+    matchLabels:
+      name: wildfly # Change your matchLabels
+  process:
+    matchPaths:
+    - path: /usr/bin/bash
+    - path: /usr/bin/grep
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /usr/bin/ls
+      fromSource:
+      - path: /usr/bin/bash
+  file:
+    matchPaths:
+    - path: /dev/null
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /dev/ptmx
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /etc/GREP_COLORS
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/dircolors
+      - path: /usr/bin/grep
+      - path: /usr/bin/ls
+      - path: /usr/bin/tty
+    - path: /etc/profile.d/colorls.sh
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /lib64/libc.so.6
+      fromSource:
+      - path: /usr/bin/dircolors
+      - path: /usr/bin/grep
+    - path: /lib64/libdl.so.2
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /lib64/libpcre.so.1
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /lib64/libpthread.so.0
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /lib64/libselinux.so.1
+      fromSource:
+      - path: /usr/bin/id
+    - path: /lib64/libtinfo.so.5
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /opt/jboss/wildfly/modules/system/layers/base/io/undertow/core/main/undertow-core-2.2.12.Final.jar
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /opt/jboss/wildfly/modules/system/layers/base/sun/jdk/main/service-loader-resources/META-INF/services
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /opt/jboss/wildfly/standalone/data/kernel/process-uuid
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /opt/jboss/wildfly/standalone/log/server.log
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/conf/security/java.policy
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/conf/security/java.security
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    matchDirectories:
+    - dir: /lib64/
+      fromSource:
+      - path: /usr/bin/ls
+    - dir: /opt/jboss/wildfly/modules/system/layers/base/org/
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - dir: /proc/
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/id
+      - path: /usr/bin/ls
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - dir: /sys/
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+    - dir: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/lib/
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+  network:
+    matchProtocols:
+    - protocol: raw
+      fromSource:
+      - path: /usr/bin/bash
+    - protocol: tcp
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.8.10-0.el7_8.x86_64/bin/java
+  action: Allow
+---
