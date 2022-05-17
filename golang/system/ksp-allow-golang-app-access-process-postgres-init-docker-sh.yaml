@@ -9,7 +9,7 @@ metadata:
   namespace: default        #change namespace to match your namespace
 spec:
   tags: ["GoLang", "Allow policy", "Baseline policy"]
-  message: "file accessed by GoLang binary."
+  message: "Process aceess initdb, docker.sh by GoLang binary."
   selector:
     matchLabels:
       app: user-service             #change label to match your label
