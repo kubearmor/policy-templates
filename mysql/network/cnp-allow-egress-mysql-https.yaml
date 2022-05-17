@@ -1,0 +1,19 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-allow-egress-mysql-http
+  namespace: wordpress-mysql   #change namespace to match your namespace
+spec:
+  description: "Allow egress HTTPS communication on Mysql pod"
+  endpointSelector:
+    matchLabels:
+      app: wordpress
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        app: mysql                #change label to match your label
+        k8s:io.kubernetes.pod.namespace: wordpress-mysql
+    toPorts:
+    - ports:
+      - port: "3306"
+        protocol: TCP
