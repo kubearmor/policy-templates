@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-mysql-network-operator
+  namespace: mysql-operator   #change namespace to match your namespace
+spec:
+  tags: ["mysql","mysql-operator","network-operator" ]
+  message: "Alert! The library files are acessed"
+  severity: 1
+  selector:
+    matchLabels:
+      name: mysql-operator     #change label to match your label
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/bin/mysqlsh
+  action: Allow
