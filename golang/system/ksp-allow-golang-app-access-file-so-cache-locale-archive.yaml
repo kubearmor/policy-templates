@@ -1,0 +1,83 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-golang-app-access-file-so-cache-locale-archive
+  namespace: default        #change namespace to match your namespace
+spec:
+  tags: ["GoLang", "Allow policy", "Baseline policy"]
+  message: "file accessed by GoLang binary."
+  selector:
+    matchLabels:
+      app: user-service             #change label to match your label
+  file:
+    severity: 1
+    matchPaths:
+    - path: /etc/group
+      fromSource:
+      - path: /usr/local/bin/gosu
+    - path: /etc/hosts
+      fromSource:
+      - path: /app
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /bin/bash
+      - path: /usr/bin/env
+      - path: /usr/bin/find
+      - path: /usr/bin/id
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /bin/bash
+      - path: /usr/bin/find
+    - path: /etc/passwd
+      fromSource:
+      - path: /usr/local/bin/gosu
+    - path: /lib/x86_64-linux-gnu/libc.so.6
+      fromSource:
+      - path: /bin/bash
+      - path: /bin/chmod
+      - path: /bin/ls
+      - path: /usr/bin/env
+    - path: /lib/x86_64-linux-gnu/libnss_files.so.2
+      fromSource:
+      - path: /bin/bash
+    - path: /lib/x86_64-linux-gnu/libpthread.so.0
+      fromSource:
+      - path: /usr/bin/id
+    - path: /lib/x86_64-linux-gnu/libselinux.so.1
+      fromSource:
+      - path: /bin/mkdir
+      - path: /usr/bin/id
+    - path: /lib/x86_64-linux-gnu/libtinfo.so.6
+      fromSource:
+      - path: /bin/bash
+    - path: /usr/lib/locale/locale-archive
+      fromSource:
+      - path: /bin/chmod
+      - path: /usr/bin/env
+      - path: /usr/bin/id
+      - path: /usr/local/sbin/bash
+    - path: /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+      fromSource:
+      - path: /bin/bash
+      - path: /usr/bin/find
+    - path: /var/lib/postgresql/data
+      fromSource:
+      - path: /usr/bin/find
+    matchDirectories:
+    - dir: /lib/x86_64-linux-gnu/
+      fromSource:
+      - path: /usr/bin/find
+    - dir: /proc/
+      fromSource:
+      - path: /app
+      - path: /usr/bin/find
+      - path: /usr/bin/id
+    - dir: /sys/
+      fromSource:
+      - path: /app
+      - path: /usr/local/bin/gosu
+    action: Allow
