@@ -9,7 +9,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   message: "Blocking chmod and chown"
-  tags : ["MITRE","T1222.002"]
+  tags : ["MITRE", "T1222.002"]
   selector:
     matchLabels:
         app: ubuntu  # use your own label here
