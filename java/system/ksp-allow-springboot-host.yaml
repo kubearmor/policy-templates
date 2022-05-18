@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-allow-springboot-host
+  name: ksp-allow-java-springboot-host
   namespace: default # Change your namespace
 spec:
-  tags: ["springboot", "framework", "openjdk" , "libraries" ]
+  tags: ["java", "springboot", "framework", "openjdk" , "libraries" ]
   message: "Allow specific files,process/protocols from java binary"
   severity: 1
   selector:
