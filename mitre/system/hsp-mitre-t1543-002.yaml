@@ -8,7 +8,7 @@ metadata:
   name: hsp-mitre-t1543-002
   namespace: default # Change your namespace
 spec:
-  tags: ["HOST", "T1543.002","MITRE", "PERSISTENCE"]
+  tags: ["HOST", "T1543.002", "MITRE", "PERSISTENCE"]
   message: "Someone Tried to Access System Process Files"
   nodeSelector:
     matchLabels:
