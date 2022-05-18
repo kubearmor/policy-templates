@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-java-grails-tcp-protocol
+  namespace: default # Change your namespace
+spec:
+  description: "Allow ingress communication on grails pod"
+  endpointSelector:
+    matchLabels:
+      name: grails # Change your matchLabels
+  egress:
+  - toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
+    toCIDR:
+    - 172.67.138.93/32
