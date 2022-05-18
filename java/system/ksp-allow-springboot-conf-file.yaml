@@ -8,7 +8,7 @@ metadata:
   name: ksp-allow-java-springboot-conf-file
   namespace: default
 spec:
-  tags: ["springboot", "framework", "configuration","tomcat"]
+  tags: ["java", "springboot", "framework", "configuration", "tomcat"]
   message: "Allow access to the files from java binary"
   selector:
     matchLabels:
