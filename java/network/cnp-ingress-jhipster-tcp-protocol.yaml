@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: cnp-ingress-jhipster-tcp-protocol
+  name: cnp-ingress-java-jhipster-tcp-protocol
   namespace: default # Change your namespace
 spec:
   endpointSelector:
