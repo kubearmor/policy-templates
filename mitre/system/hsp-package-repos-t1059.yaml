@@ -7,7 +7,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-package-repos-t1059
 spec:
-  tags: ["MITRE","T1059.004"]
+  tags: ["MITRE", "T1059.004"]
   message: "Package repositories are accessed"
   nodeSelector:
     matchLabels:

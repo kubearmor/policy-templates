@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-tactic-scheduled-job-analysis
   namespace: default # Change your namespace
 spec:
-  tags: ["mitre","system","cron","T1053"]
+  tags: ["MITRE", "system", "cron", "T1053"]
   message: “Someone tried to access scheduled job”
   selector:
     matchLabels:

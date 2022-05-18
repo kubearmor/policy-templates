@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-tactic-persistence-createaccount-localaccount
   namespace: default    # Change your namespace
 spec:
-  tags: ["MITRE","system","K8s","T1136"]
+  tags: ["MITRE", "system", "K8s", "T1136"]
   message: "Alert! Someone created new user or Accessed user details."
   selector:
     matchLabels: 

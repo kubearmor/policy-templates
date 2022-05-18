@@ -8,7 +8,7 @@ metadata:
   name: ksp-psql-block
   namespace: default  #change with your namespace
 spec:
-  tags: ["MITRE","PostgreSQL"]
+  tags: ["MITRE", "PostgreSQL"]
   message: "Someone tried to access PostgreSQL Command Line Interface"
   selector:
     matchLabels:

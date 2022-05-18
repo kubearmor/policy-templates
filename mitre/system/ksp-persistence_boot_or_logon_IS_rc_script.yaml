@@ -8,7 +8,7 @@ metadata:
   name: ksp-persistence-blis-rc-scripts
   namespace: default    # Change your namespace
 spec:
-  tags: ["MITRE","system","K8s","T1037", "Persistence"]
+  tags: ["MITRE", "system", "K8s", "T1037", "Persistence"]
   message: "Warning! someone accessed sensitive process or files"
   selector:
     matchLabels:

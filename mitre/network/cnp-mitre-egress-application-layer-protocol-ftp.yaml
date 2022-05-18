@@ -1,14 +1,14 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: "cnp-ingress-t1071-ftp-rule"
+  name: "cnp-mitre-egress-t1071-ftp-rule"
   namespace: default        #change default namespace to match your namespace
 spec:
-  description: "Policy to Deny FTP Incoming Traffic"
+  description: "Policy to Deny FTP Outgoing Traffic"
   endpointSelector:
     matchLabels:
-      app: test        #change app: test to match your label
-  ingress:
+      app: test           #change app: test to match your label
+  egress:
     - toPorts:
         - ports:
             - port: "20"

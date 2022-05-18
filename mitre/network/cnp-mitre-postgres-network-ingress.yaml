@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: cnp-postgresql-port
+  name: cnp-mitre-postgresql-port
   namespace: default  #change with your namespace
 spec:
   description: "This Policy will Protect PostgreSQL External Access from unknown IP's"

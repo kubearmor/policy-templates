@@ -7,7 +7,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-mitre-ptrace-syscall
 spec:
-  tags : ["MITRE","T1055.008","Privilege Escalation","P-trace"]
+  tags : ["MITRE", "T1055.008", "Privilege Escalation", "P-trace"]
   message: "Alert! ptrace access denied"
   nodeSelector:
     matchLabels:

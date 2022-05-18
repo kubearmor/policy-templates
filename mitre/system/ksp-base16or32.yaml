@@ -8,7 +8,7 @@ metadata:
   name: ksp-defense-evasion-deobfuscate
   namespace: default  #change with your namespace
 spec:
-  tags: ["MITRE","system","K8s","base32"]
+  tags: ["MITRE", "system", "K8s", "base32"]
   message: "Someone decoded file information"
   selector:
     matchLabels:

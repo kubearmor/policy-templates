@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-t1057
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE", "T1057","Discovery"]
+  tags: ["MITRE", "T1057", "Discovery"]
   message: "Someone Tried to Access Running Process Details"
   selector:
     matchLabels:

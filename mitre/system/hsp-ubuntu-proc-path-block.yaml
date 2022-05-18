@@ -8,7 +8,7 @@ metadata:
   name: hsp-ubuntu-proc-path-block
 spec:
   message: " (Notification) Modify the kernel to automatically execute programs on system boot " 
-  tags: ["MITRE","T1547.006"]
+  tags: ["MITRE", "T1547.006"]
   nodeSelector:
     matchLabels:
        kubernetes.io/hostname: gke-cluster # Change your matchLabels

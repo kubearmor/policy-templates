@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-tactic-defense-evasion
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE","T1218"]
+  tags: ["MITRE", "T1218"]
   message: "Certificates files have been accessed!"
   selector:
     matchLabels:

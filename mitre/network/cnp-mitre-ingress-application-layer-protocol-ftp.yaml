@@ -1,13 +1,13 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: "cnp-ingress-ftp-rule"
+  name: "cnp-mitre-t1071-ingress-ftp-rule"
   namespace: default        #change default namespace to match your namespace
 spec:
-  description: "This policy will block the inbound FTP connection"
+  description: "Policy to Deny FTP Incoming Traffic"
   endpointSelector:
     matchLabels:
-      app: ftp-pod # Change your matchLabels
+      app: test        #change app: test to match your label
   ingress:
     - toPorts:
         - ports:
