@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-t1070-file-deletion
   namespace: default # Change the namespace
 spec:
-  tags : ["MITRE","Defense-Evasion","D3fend","Permission","T1070.004"]
+  tags : ["MITRE", "Defense-Evasion", "D3fend", "Permission", "T1070.004"]
   message: "Notifications! Deletion commands has been accessed"
   selector:
     matchLabels:
