@@ -1,7 +1,7 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: "cnp-dns-egress-allow-only-matchname"
+  name: "cnp-mitre-dns-egress-allow-only-matchname"
   namespace: default        #change default namespace to match your namespace
 spec:
   description: "dns-egress allow only matchnames"
