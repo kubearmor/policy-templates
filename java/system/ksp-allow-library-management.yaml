@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-allow-library-management
+  name: ksp-allow-java-library-management
   namespace: default  # Change your namespace
 spec:
   tags: ["springboot", "framework", "so-file","lib-management"]
