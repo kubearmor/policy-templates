@@ -8,7 +8,7 @@ metadata:
   name: ksp-allow-java-library-management
   namespace: default  # Change your namespace
 spec:
-  tags: ["springboot", "framework", "so-file","lib-management"]
+  tags: ["java", "springboot", "framework", "so-file","lib-management"]
   message: "Alert! The so files are permitted"
   selector:
     matchLabels:
