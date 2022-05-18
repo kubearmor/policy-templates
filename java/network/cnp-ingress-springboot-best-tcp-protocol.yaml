@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: cnp-ingress-springboot-best-tcp-protocol.yaml
+  name: cnp-ingress-java-springboot-best-tcp-protocol.yaml
   namespace: default # Change your namespace
 spec:
   description: "Allow tcp connections only via 8080 port from the internet"
