@@ -1,7 +1,7 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: "cnp-ingress-mitre-t1210-block-helm-tiller-endpoint"
+  name: "cnp-mitre-t1210-ingress-block-helm-tiller-endpoint"
   namespace: default        #change default namespace to match your namespace
 spec:
   description: "Policy to Deny Access to tiller endpoint on port 44134"
