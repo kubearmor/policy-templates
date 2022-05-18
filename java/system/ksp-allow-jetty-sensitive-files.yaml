@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-allow-jetty-sensitive-files
+  name: ksp-allow-java-jetty-sensitive-files
   namespace: default # Change your namespace
 spec: 
   tags: ["jetty", "framework", "password-file" , "libraries" ]
