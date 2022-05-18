@@ -8,7 +8,7 @@ metadata:
   name: hsp-create-account-create-local-account
 spec:
   message: "Notification! User and password added/modified"
-  tags: ["MITRE","T1136.001"]
+  tags: ["MITRE", "T1136.001"]
   nodeSelector:
     matchLabels:
       kubernetes.io/hostname: gke-ubuntu # Change your match labels
