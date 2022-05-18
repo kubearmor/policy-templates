@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-tactic-postgres-pg-dump
   namespace: default  #change with your namespace
 spec:
-  tags : ["postgresql","CVE-2018-16850"]
+  tags : ["postgresql", "CVE-2018-16850", "MITRE"]
   message: "PostgreSQL data accessed by unknown process"
   selector:
       matchLabels:
