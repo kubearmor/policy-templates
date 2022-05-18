@@ -7,7 +7,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-mitre-sudo-caching
 spec:
-  tags: ["MITRE","T1548.003"]
+  tags: ["MITRE", "T1548.003"]
   message: "Notification! sudoers File Has Been Accessed"
   nodeSelector:
     matchLabels:
