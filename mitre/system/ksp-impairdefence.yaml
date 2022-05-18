@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-tactic-impair-defence
   namespace: default  #change with your namespace
 spec:
-  tags: ["MITRE","T1562"]
+  tags: ["MITRE", "T1562"]
   message: "Selinux Files Accessed by Unknown Process"
   selector:
     matchLabels:
