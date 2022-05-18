@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-allow-springboot-conf-file
+  name: ksp-allow-java-springboot-conf-file
   namespace: default
 spec:
   tags: ["springboot", "framework", "configuration","tomcat"]
