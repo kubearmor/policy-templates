@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-t1053-scheduled-task-job-at
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE","T1053","Execution","at"]
+  tags: ["MITRE", "T1053", "Execution", "at"]
   message: "Task job has been accessed"
   selector:
     matchLabels:
