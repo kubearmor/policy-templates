@@ -8,7 +8,7 @@ metadata:
   name: ksp-allow-java-springboot-binary-properties
   namespace: default # Change your namespace
 spec:
-  tags: ["springboot", "framework", "configuration","jdk-binaries"]
+  tags: ["java", "springboot", "framework", "configuration", "jdk-binaries"]
   message: "Alert! The java binaries are used"
   severity: 1
   selector:
