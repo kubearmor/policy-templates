@@ -8,7 +8,7 @@ metadata:
   name: ksp-allow-vaadin-conf
   namespace: default # Change your namespace
 spec:
-  tags: ["vaadin", "framework", "configuration", "files"]
+  tags: ["java", "vaadin", "framework", "configuration", "files"]
   message: "Alert! The configuration files are acessed"
   severity: 1
   selector:
