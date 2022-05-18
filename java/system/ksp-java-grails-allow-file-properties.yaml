@@ -1,0 +1,224 @@
+
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-grails-allow-file-properties
+  namespace: default # Change your namespace
+spec:
+  tags: [ "java", "grails", "files", "binaries", "libraries", "jre" ]
+  message: "Alert! The grail file properties are acessed"
+  severity: 1
+  selector:
+    matchLabels:
+      app: grails # Change your matchLabels
+  process:
+    matchPaths:
+    - path: /bin/chmod
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /bin/ls
+      fromSource:
+      - path: /bin/sh
+    - path: /bin/sh
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /bin/uname
+      fromSource:
+      - path: /bin/dash
+    - path: /usr/bin/basename
+      fromSource:
+      - path: /bin/dash
+    - path: /usr/bin/dirname
+      fromSource:
+      - path: /bin/dash
+      - path: /bin/sh
+    - path: /usr/bin/expr
+      fromSource:
+      - path: /bin/sh
+    - path: /usr/lib/jvm/grails/bin/grails
+    - path: /usr/local/bin/docker-entrypoint.sh
+      fromSource:
+      - path: /tini
+  file:
+    matchPaths:
+    - path: /dev/null
+      fromSource:
+      - path: /bin/dash
+      - path: /opt/java/openjdk/bin/java
+    - path: /dev/random
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /dev/urandom
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /bin/dash
+      - path: /bin/ls
+      - path: /bin/uname
+      - path: /opt/java/openjdk/bin/java
+      - path: /usr/bin/basename
+      - path: /usr/bin/dirname
+      - path: /usr/bin/env
+      - path: /usr/bin/expr
+      - path: /usr/sbin/sh
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /bin/ls
+    - path: /etc/passwd
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /home/gradle/.gradle/caches/6.0.1/file-changes/last-build.bin
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /home/gradle/.gradle/caches/6.0.1/file-changes/this-build18407113722313002434bin
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /home/gradle/.gradle/caches/6.0.1/fileHashes/fileHashes.lock
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /home/gradle/.gradle/caches/journal-1/file-access.properties
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /home/gradle/.gradle/caches/journal-1/journal-1.lock
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /home/gradle/.gradle/daemon/6.0.1/daemon-31.out.log
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /home/gradle/.gradle/daemon/6.0.1/registry.bin.lock
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /home/gradle/.gradle/daemon/6.0.1/registry.bin
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /lib/x86_64-linux-gnu/libc.so.6
+      fromSource:
+      - path: /bin/dash
+      - path: /bin/uname
+      - path: /sbin/sh
+      - path: /usr/bin/dirname
+      - path: /usr/bin/env
+      - path: /usr/bin/expr
+    - path: /lib64/libc.so.6
+      fromSource:
+      - path: /tini
+    - path: /opt/gradle/init.d
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /opt/java/openjdk/conf/logging.properties
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /opt/java/openjdk/conf/security/java.security
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /root/.grails_history
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /root/.m2/repository/org/grails/grails-bom/3.2.8/grails-bom-3.2.8.pom.part.lock
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /root/.m2/repository/org/grails/grails-bom/3.2.8/grails-bom-3.2.8.pom.part
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /tmp/hsperfdata_root
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /tmp/libjansi-64-1-1734679700204729224.14
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /usr/lib/jvm/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /usr/lib/jvm/.gradle/buildOutputCleanup/cache.properties
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/../lib/amd64/jli/libjli.so
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /usr/lib/locale/C.UTF-8/LC_CTYPE
+      fromSource:
+      - path: /bin/chmod
+    - path: /usr/lib/locale/locale-archive
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+      - path: /usr/bin/expr
+    - path: /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+      fromSource:
+      - path: /bin/dash
+      - path: /opt/java/openjdk/bin/java
+      - path: /usr/bin/dirname
+      - path: /usr/bin/expr
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /usr/share/locale/locale.alias
+      fromSource:
+      - path: /bin/ls
+    matchDirectories:
+    - dir: /etc/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /lib/x86_64-linux-gnu/
+      fromSource:
+      - path: /bin/ls
+      - path: /opt/java/openjdk/bin/java
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /opt/gradle/lib/
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - dir: /opt/java/openjdk/lib/
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - dir: /proc/
+      fromSource:
+      - path: /bin/dash
+      - path: /bin/ls
+      - path: /bin/sh
+      - path: /opt/java/openjdk/bin/java
+      - path: /usr/bin/sh
+      - path: /usr/lib/jvm/grails/bin/sh
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+      - path: /usr/local/bin/sh
+      - path: /usr/local/sbin/sh
+      - path: /usr/sbin/sh
+    - dir: /sys/
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /usr/lib/jvm/.gradle/6.0.1/
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - dir: /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /usr/lib/locale/C.UTF-8/
+      fromSource:
+      - path: /bin/dash
+      - path: /bin/uname
+      - path: /usr/bin/basename
+      - path: /usr/bin/dirname
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+  network:
+    matchProtocols:
+    - protocol: raw
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - protocol: tcp
+      fromSource:
+      - path: /bin/ls
+      - path: /opt/java/openjdk/bin/java
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - protocol: udp
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+  action: Allow
+---

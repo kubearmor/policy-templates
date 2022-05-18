@@ -1,0 +1,78 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-spark-allow-tcp-udp
+  namespace: default # Change your namespace
+spec:
+  severity: 1
+  selector:
+    matchLabels:
+      app: spark  # Change your matchLabels
+  process:
+    matchPaths:
+    - path: /bin/bash
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+    - path: /opt/bitnami/java/bin/java
+      fromSource:
+      - path: /bin/bash
+    - path: /usr/bin/setsid
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+  file:
+    matchPaths:
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /bin/bash
+      - path: /opt/bitnami/spark/sbin/bash
+    - path: /lib/x86_64-linux-gnu/libc.so.6
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+    - path: /opt/bitnami/common/lib/libnss_wrapper.so
+      fromSource:
+      - path: /bin/bash
+      - path: /opt/bitnami/java/bin/java
+      - path: /usr/bin/setsid
+    - path: /opt/bitnami/java/bin/../lib/amd64/jli/libjli.so
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+    - path: /opt/bitnami/spark/conf/spark-defaults.conf
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+    - path: /opt/bitnami/spark/tmp/nss_passwd
+      fromSource:
+      - path: /bin/bash
+      - path: /opt/bitnami/java/bin/java
+    matchDirectories:
+    - dir: /etc/
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+    - dir: /lib/x86_64-linux-gnu/
+      fromSource:
+      - path: /bin/bash
+    - dir: /opt/bitnami/java/jre/lib/
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+    - dir: /opt/bitnami/spark/jars/
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+    - dir: /proc/
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+    - dir: /sys/
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+    - protocol: udp
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+  action: Allow
+---

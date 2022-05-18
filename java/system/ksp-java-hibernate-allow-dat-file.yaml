@@ -1,0 +1,122 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-hibernate-allow-dat-file
+  namespace: default # Change your namespace
+spec:
+  tags: [ "java", "hibernate", "process", "binaries", "dat-file", "root" ]
+  message: "Alert! The jre binaries are acessed"
+  severity: 1
+  selector:
+    matchLabels:
+      app: hibernate # Change your matchLabels
+  process:
+    matchPaths:
+    - path: /bin/sh
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/jshell
+    - path: /usr/local/openjdk-11/bin/jshell
+  file:
+    matchPaths:
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /bin/dash
+      - path: /usr/local/bin/sh
+    - path: /lib/x86_64-linux-gnu/libc.so.6
+      fromSource:
+      - path: /bin/dash
+      - path: /usr/bin/sh
+    - path: /lib/x86_64-linux-gnu/libgcc_s.so.1
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /lib/x86_64-linux-gnu/libnss_nis.so.2
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /lib/x86_64-linux-gnu/librt.so.1
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /root/.java/.userPrefs/.user.lock.root
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/jshell
+    - path: /root/.java/.userPrefs/.userRootModFile.root
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/jshell
+    - path: /root/.java/.userPrefs/tool/JShell/prefs.tmp
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/jshell
+    - path: /root/.java/.userPrefs/tool/prefs.tmp
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/jshell
+    - path: /tmp/hsperfdata_root
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /tmp/remote10654552698284468482error
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/jshell
+    - path: /tmp/remote14039273827663306554output
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/jshell
+    - path: /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /usr/local/openjdk-11/conf/net.properties
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /usr/local/openjdk-11/conf/security/java.security
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      - path: /usr/local/openjdk-11/bin/jshell
+    - path: /usr/local/openjdk-11/lib/libnet.so
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/jshell
+    - path: /usr/local/openjdk-11/lib/libprefs.so
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/jshell
+    - path: /usr/local/openjdk-11/lib/tzdb.dat
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/jshell
+    - path: /usr/share/locale/locale.alias
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    matchDirectories:
+    - dir: /etc/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      - path: /usr/local/openjdk-11/bin/jshell
+    - dir: /proc/
+      fromSource:
+      - path: /bin/dash
+      - path: /bin/sh
+      - path: /sbin/sh
+      - path: /usr/bin/sh
+      - path: /usr/local/openjdk-11/bin/java
+      - path: /usr/local/openjdk-11/bin/jshell
+      - path: /usr/local/openjdk-11/bin/sh
+      - path: /usr/local/sbin/sh
+      - path: /usr/sbin/sh
+    - dir: /sys/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      - path: /usr/local/openjdk-11/bin/jshell
+    - dir: /usr/lib/locale/C.UTF-8/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      - path: /usr/local/openjdk-11/bin/jshell
+    - dir: /usr/local/openjdk-11/lib/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      - path: /usr/local/openjdk-11/bin/jshell
+    - protocol: udp
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+  action: Allow
+---

@@ -1,0 +1,125 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-grails-allow-jre-binaries
+  namespace: default  # Change your namespace
+spec:
+  tags: [ "java", "grails", "process", "binaries", "libraries", "jre" ]
+  message: "Alert! The jre binaries are acessed"
+  severity: 1
+  selector:
+    matchLabels:
+      name: grails # Change your matchLabels
+  process:
+    matchPaths:
+    - path: /bin/chmod
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /bin/sh
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /bin/uname
+      fromSource:
+      - path: /bin/dash
+    - path: /usr/bin/basename
+      fromSource:
+      - path: /bin/dash
+    - path: /usr/bin/dirname
+      fromSource:
+      - path: /bin/dash
+    - path: /usr/lib/jvm/grails/bin/grails
+    - path: /usr/lib/jvm/java-8-openjdk-amd64/bin/java
+  file:
+    matchPaths:
+    - path: /dev/random
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /dev/urandom
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /bin/chmod
+      - path: /bin/dash
+      - path: /usr/bin/basename
+      - path: /usr/bin/dirname
+    - path: /lib/x86_64-linux-gnu/libc.so.6
+      fromSource:
+      - path: /bin/chmod
+      - path: /bin/dash
+      - path: /bin/uname
+      - path: /usr/bin/env
+    - path: /root/.grails_history
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /root/.m2/repository/org/grails/grails-bom/3.2.8/grails-bom-3.2.8.pom.part.lock
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /root/.m2/repository/org/grails/grails-bom/3.2.8/grails-bom-3.2.8.pom.part
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /tmp/libjansi-64-1-605452627771632293.14
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /usr/lib/locale/C.UTF-8/LC_IDENTIFICATION
+      fromSource:
+      - path: /bin/chmod
+    - path: /usr/lib/locale/C.UTF-8/LC_MEASUREMENT
+      fromSource:
+      - path: /bin/chmod
+      - path: /usr/bin/basename
+    - path: /usr/lib/locale/C.UTF-8/LC_NAME
+      fromSource:
+      - path: /bin/chmod
+    - path: /usr/lib/locale/C.UTF-8/LC_NUMERIC
+      fromSource:
+      - path: /usr/bin/basename
+    - path: /usr/lib/locale/C.UTF-8/LC_TIME
+      fromSource:
+      - path: /usr/bin/basename
+    - path: /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+      fromSource:
+      - path: /bin/chmod
+      - path: /usr/bin/basename
+    matchDirectories:
+    - dir: /etc/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /proc/
+      fromSource:
+      - path: /bin/dash
+      - path: /bin/sh
+      - path: /usr/lib/jvm/grails/bin/sh
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+      - path: /usr/local/bin/sh
+      - path: /usr/local/sbin/sh
+      - path: /usr/sbin/sh
+    - dir: /sys/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /usr/lib/jvm/grails-3.2.8/lib/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /usr/lib/locale/C.UTF-8/
+      fromSource:
+      - path: /bin/uname
+  network:
+    matchProtocols:
+    - protocol: raw
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - protocol: tcp
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - protocol: udp
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+  action: Allow
+---

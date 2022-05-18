@@ -1,0 +1,93 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-play-framework-allow-jar-file
+  namespace: default # Change your namespace
+spec:
+  tags: [ "java", "play-framework", "binary", "cache", "jar"]
+  message: "Alert! The jar files are acessed"
+  severity: 1
+  selector:
+    matchLabels:
+      app: play-framework # Change your matchLabels
+  process:
+    matchPaths:
+    - path: /activator-1.3.4/activator
+    - path: /usr/bin/bash
+    - path: /usr/java/latest/bin/java
+      fromSource:
+      - path: /usr/bin/bash
+    matchDirectories:
+    - dir: /usr/bin/
+      fromSource:
+      - path: /usr/bin/bash
+  file:
+    matchPaths:
+    - path: /activator-1.3.4/activator-launch-1.3.4.jar
+      fromSource:
+      - path: /usr/java/jdk1.8.0_45/bin/java
+    - path: /activator-1.3.4/activator
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /usr/bin/basename
+      - path: /usr/bin/bash
+      - path: /usr/bin/dirname
+      - path: /usr/bin/env
+      - path: /usr/bin/uname
+    - path: /lib64/libc.so.6
+      fromSource:
+      - path: /usr/bin/basename
+      - path: /usr/bin/dirname
+      - path: /usr/bin/env
+      - path: /usr/bin/uname
+    - path: /root/.sbt/boot/update.log
+      fromSource:
+      - path: /usr/java/jdk1.8.0_45/bin/java
+    - path: /root/.sbt/repositories_2ca9d783017a5f12.tmp
+      fromSource:
+      - path: /usr/java/jdk1.8.0_45/bin/java
+    - path: /usr/java/jdk1.8.0_45/jre/lib/resources.jar
+      fromSource:
+      - path: /usr/java/jdk1.8.0_45/bin/java
+    matchDirectories:
+    - dir: /activator-1.3.4/repository/
+      fromSource:
+      - path: /usr/java/jdk1.8.0_45/bin/java
+    - dir: /lib64/
+      fromSource:
+      - path: /usr/bin/bash
+    - dir: /proc/
+      fromSource:
+      - path: /usr/bin/bash
+    - dir: /root/.ivy2/cache/
+      fromSource:
+      - path: /usr/java/jdk1.8.0_45/bin/java
+    - dir: /root/.sbt/boot/resolution-cache/
+      fromSource:
+      - path: /usr/java/jdk1.8.0_45/bin/java
+    - dir: /root/.sbt/boot/scala-2.11.6/com.typesafe.activator/activator-launcher/1.3.4/
+      fromSource:
+      - path: /usr/java/jdk1.8.0_45/bin/java
+    - dir: /root/.sbt/boot/scala-2.11.6/lib/
+      fromSource:
+      - path: /usr/java/jdk1.8.0_45/bin/java
+    - dir: /tmp/
+      fromSource:
+      - path: /usr/java/jdk1.8.0_45/bin/java
+    - dir: /usr/java/jdk1.8.0_45/jre/lib/amd64/
+      fromSource:
+      - path: /usr/java/jdk1.8.0_45/bin/java
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/java/jdk1.8.0_45/bin/java
+  action: Allow
+---

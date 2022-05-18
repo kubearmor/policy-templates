@@ -1,0 +1,141 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-eclipse-allow-jshell
+  namespace: default # Change your namespace
+spec:
+  tags: [ "java", "jshell", "jspawn", "libraries", "openjdk" ]
+  message: "Alert! The jshell are acessed"
+  severity: 1
+  selector:
+    matchLabels:
+      app: eclipse-jersey # Change your matchLabels
+  process:
+    matchPaths:
+    - path: /opt/java/openjdk/bin/java
+      fromSource:
+      - path: /opt/java/openjdk/bin/jshell
+    - path: /opt/java/openjdk/lib/jspawnhelper
+      fromSource:
+      - path: /opt/java/openjdk/bin/jshell
+    - path: /usr/bin/bash
+    - path: /usr/bin/tty
+      fromSource:
+      - path: /opt/java/openjdk/bin/jshell
+    - path: /usr/local/bin/docker-entrypoint.sh
+      fromSource:
+      - path: /tini
+  file:
+    matchPaths:
+    - path: /dev/random
+      fromSource:
+      - path: /opt/java/openjdk/bin/jshell
+    - path: /dev/urandom
+      fromSource:
+      - path: /opt/java/openjdk/bin/jshell
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /opt/java/openjdk/lib/jspawnhelper
+      - path: /usr/bin/bash
+      - path: /usr/bin/tty
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /etc/passwd
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /lib/x86_64-linux-gnu/libc.so.6
+      fromSource:
+      - path: /opt/java/openjdk/lib/jspawnhelper
+      - path: /usr/bin/bash
+      - path: /usr/bin/tty
+    - path: /lib/x86_64-linux-gnu/libdl.so.2
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /lib/x86_64-linux-gnu/libnss_files.so.2
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /lib/x86_64-linux-gnu/libpthread.so.0
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /lib/x86_64-linux-gnu/libtinfo.so.6
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /lib/x86_64-linux-gnu/libz.so.1
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /opt/java/openjdk/bin/../lib/libjli.so
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /opt/java/openjdk/conf/net.properties
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /opt/java/openjdk/conf/security/java.security
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+      - path: /opt/java/openjdk/bin/jshell
+    - path: /root/.java/.userPrefs/.user.lock.root
+      fromSource:
+      - path: /opt/java/openjdk/bin/jshell
+    - path: /root/.java/.userPrefs/tool/JShell/prefs.tmp
+      fromSource:
+      - path: /opt/java/openjdk/bin/jshell
+    - path: /root/.java/.userPrefs/tool/prefs.tmp
+      fromSource:
+      - path: /opt/java/openjdk/bin/jshell
+    - path: /tmp/hsperfdata_root
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /tmp/remote15868111124919772734error
+      fromSource:
+      - path: /opt/java/openjdk/bin/jshell
+    - path: /tmp/remote5986269428071477879output
+      fromSource:
+      - path: /opt/java/openjdk/bin/jshell
+    - path: /usr/lib/locale/locale-archive
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+      - path: /usr/bin/bash
+      - path: /usr/bin/tty
+    - path: /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - path: /usr/share/locale/locale.alias
+      fromSource:
+      - path: /usr/bin/tty
+    matchDirectories:
+    - dir: /etc/
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+      - path: /opt/java/openjdk/bin/jshell
+    - dir: /opt/java/openjdk/lib/
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - dir: /proc/
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+      - path: /opt/java/openjdk/bin/jshell
+      - path: /opt/java/openjdk/bin/tty
+      - path: /usr/bin/tty
+    - dir: /sys/
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+      - path: /opt/java/openjdk/bin/jshell
+  network:
+    matchProtocols:
+    - protocol: raw
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+    - protocol: tcp
+      fromSource:
+      - path: /opt/java/openjdk/bin/java
+      - path: /opt/java/openjdk/bin/jshell
+    - protocol: udp
+      fromSource:
+      - path: /opt/java/openjdk/bin/jshell
+  action: Allow
+---
