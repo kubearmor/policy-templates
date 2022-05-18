@@ -14,4 +14,4 @@ spec:
       - port: "443"
         protocol: TCP
     toCIDR:
-    - 172.67.138.93/32
+    - {}
