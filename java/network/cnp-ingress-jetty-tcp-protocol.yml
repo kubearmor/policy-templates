@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: cnp-ingress-jetty-tcp-protocol
+  name: cnp-ingress-java-jetty-tcp-protocol
   namespace: default # Change your namespace
 spec:
   description: "Allow tcp connections only via 8080 port from the internet"
