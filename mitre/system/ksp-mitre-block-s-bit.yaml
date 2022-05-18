@@ -9,7 +9,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   message: "Blocked the setuid or setgid flag"
-  tags : ["MITRE","T1548.001","Privilege Escalation","S-Bit"]
+  tags : ["MITRE", "T1548.001", "Privilege Escalation", "S-Bit"]
   selector:
     matchLabels:
         container: ubuntu  # use your own label here
