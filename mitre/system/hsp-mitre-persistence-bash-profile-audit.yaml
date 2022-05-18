@@ -8,7 +8,7 @@ metadata:
   name: hsp-mitre-persistence-bash-profile-audit
 spec:
   message: "Notification! Bash history and Bash profile files has been accessed"
-  tags: ["MITRE","T1552.003"]
+  tags: ["MITRE", "T1552.003"]
   nodeSelector:
     matchLabels:
       kubernetes.io/hostname: gke-ubuntu # Change your match labels
