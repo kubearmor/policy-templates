@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-t1087-001
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE","T1087.001", "DISCOVERY"]
+  tags: ["MITRE", "T1087.001", "DISCOVERY"]
   message: "Someone Tried to Access Local User Account Details"
   selector:
     matchLabels:
