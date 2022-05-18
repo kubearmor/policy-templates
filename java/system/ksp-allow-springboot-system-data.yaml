@@ -1,10 +1,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-allow-springboot-system-data
+  name: ksp-allow-java-springboot-system-data
   namespace: default  # Change your namespace
 spec:
-  tags: ["springboot", "framework", "openjdk","system"]
+  tags: ["java", "springboot", "framework", "openjdk", "system"]
   message: "java binaries are executed in system directory"
   selector:
     matchLabels:
