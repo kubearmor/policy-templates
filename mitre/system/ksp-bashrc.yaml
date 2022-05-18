@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-persistence-bash-profile
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE","Persistence","K8s"]
+  tags: ["MITRE", "Persistence", "K8s"]
   message: "Warning! Someone accessed profile details"
   selector:
     matchLabels:
