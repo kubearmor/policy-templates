@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-allow-springboot-binary-properties
+  name: ksp-allow-java-springboot-binary-properties
   namespace: default # Change your namespace
 spec:
   tags: ["springboot", "framework", "configuration","jdk-binaries"]
