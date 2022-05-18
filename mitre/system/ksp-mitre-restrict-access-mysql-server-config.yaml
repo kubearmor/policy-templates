@@ -8,7 +8,7 @@ metadata:
   name: ksp-restrict-access-mysql-server-config
   namespace: default # Change your namespace
 spec:
-  tags: ["mysql","mitre","system"]
+  tags: ["mysql", "MITRE", "system"]
   message: "Warning! someone tried access the MySQL server config file"
   selector:
     matchLabels:
