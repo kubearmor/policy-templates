@@ -8,7 +8,7 @@ metadata:
   name: ksp-create-or-modify-system-process-systemd-service
   namespace: default    # Change your namespace
 spec:
-  tags: ["MITRE","system","K8s","T1543"]
+  tags: ["MITRE", "system", "K8s", "T1543"]
   message: "Warning! someone created or Modified the system process"
   selector:
     matchLabels:
