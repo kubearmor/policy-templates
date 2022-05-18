@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-allow-springboot-webapps
+  name: ksp-allow-java-springboot-webapps
   namespace: default # Change your namespace
 spec:
-  tags: ["springboot", "framework", "tomcat" , "users" ]
+  tags: ["java", "springboot", "framework", "tomcat" , "users" ]
   message: "Alert! The java binaries are used"
   severity: 1
   selector:
