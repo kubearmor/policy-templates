@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-tactic-persistence-external-remote-services
   namespace: default    # Change your namespace
 spec:
-  tags: ["MITRE","system","K8s","T1133"]
+  tags: ["MITRE", "system", "K8s", "T1133"]
   message: "Warning! someone tried to access This sensitive file"
   selector:
     matchLabels: 
