@@ -8,19 +8,19 @@ metadata:
   name: ksp-allow-mysql-id-process
   namespace: default   #change namespace to match your namespace
 spec:
-  tags: ["MySQL", "GENERIC"]
-  message: "Alert! mysql is the only allowed docker entrypoint access"
+  tags: ["MySQL", "Allow policy"]
+  message: "mysql only allowed docker entrypoint access"
   severity: 1
   selector:
     matchLabels:
-      app: mysql  
+      app: mysql     #change label to match your label
   process:
     matchPaths:
     - path: /usr/bin/id
       fromSource:
       - path: /bin/bash
-    - path: /usr/local/bin/docker-entrypoint.sh
-    - path: /usr/sbin/mysqld
+      - path: /usr/local/bin/docker-entrypoint.sh
+      - path: /usr/sbin/mysqld
       fromSource:
       - path: /bin/bash
     matchDirectories:
