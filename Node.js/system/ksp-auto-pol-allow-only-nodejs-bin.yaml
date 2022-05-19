@@ -43,9 +43,4 @@ spec:
     - dir: /usr/src/app/node_modules/qs/lib/
       fromSource:
       - path: /usr/local/bin/node
-  network:
-    matchProtocols:
-    - protocol: tcp
-      fromSource:
-      - path: /usr/local/bin/node
   action: Allow
