@@ -8,7 +8,7 @@ metadata:
   name: ksp-allow-mysql-process
   namespace: default  #change namespace to match your namespace
 spec:
-  tags: ["MySQL", "GENERIC"]
+  tags: ["MySQL", "Allow Policy"]
   message: "Alert! mysql is the only allowed access"
   severity: 1
   selector:
