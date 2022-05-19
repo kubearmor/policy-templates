@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-allow-elastic-jar-file-access
+  name: ksp-allow-elastic-process
   namespace: default                       #change label to match your label
 spec:
   tags: ["elastic", "jdk", "java"]
