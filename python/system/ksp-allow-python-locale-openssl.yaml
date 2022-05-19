@@ -1,0 +1,60 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-python-locale-openssl
+  namespace: default
+spec:
+  tags: ["PYTHON", "SYSTEM"]
+  message: "Alert! python can only access system locale."
+  severity: 1
+  selector:
+    matchLabels:
+      app: python
+  file:
+    matchPaths:
+    - path: /usr/lib/locale/en_US.utf8/LC_CTYPE
+      fromSource:
+      - path: /usr/bin/python
+      - path: /usr/bin/tail
+      - path: /usr/local/bin/bash
+    - path: /usr/lib/locale/en_US.utf8/LC_MEASUREMENT
+      fromSource:
+      - path: /bin/chown
+      - path: /bin/sleep
+    - path: /usr/lib/locale/en_US.utf8/LC_MESSAGES/SYS_LC_MESSAGES
+      fromSource:
+      - path: /usr/local/sbin/python
+    - path: /usr/lib/locale/en_US.utf8/LC_MONETARY
+      fromSource:
+      - path: /bin/mknod
+    - path: /usr/lib/locale/en_US.utf8/LC_NUMERIC
+      fromSource:
+      - path: /sbin/bash
+    - path: /usr/lib/locale/en_US.utf8/LC_PAPER
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /usr/lib/locale/en_US.utf8/LC_TELEPHONE
+      fromSource:
+      - path: /usr/bin/tail
+    - path: /usr/lib/locale/en_US.utf8/LC_TIME
+      fromSource:
+      - path: /sbin/bash
+      - path: /usr/local/bin/bash
+      - path: /usr/sbin/python
+    - path: /usr/lib/ssl/openssl.cnf
+      fromSource:
+      - path: /usr/sbin/nginx
+    - path: /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+      fromSource:
+      - path: /bin/chown
+      - path: /bin/rm
+      - path: /bin/sleep
+      - path: /usr/bin/env
+      - path: /usr/bin/find
+      - path: /usr/bin/python2.7
+      - path: /usr/bin/xargs
+  allow: Allow
