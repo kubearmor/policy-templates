@@ -9,7 +9,7 @@ metadata:
   namespace: default # Change your namespace
 spec: 
   tags: ["java", "jetty", "framework", "password-file" , "libraries" ]
-  message: "Alert! Access to sensitive files are blocked."
+  message: "Alert! Access to sensitive files is allowed."
   severity: 1
   selector:
     matchLabels:
