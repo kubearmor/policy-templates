@@ -8,7 +8,7 @@ metadata:
   name: ksp-auto-pol-allow-only-nodejs-bin
   namespace: default #change namespace
 spec:
-  tags: ["Node.js", "Allow Policy", "Binary", "config", "protocol"]
+  tags: ["Node.js", "Allow Policy", "Binary", "config"]
   severity: 1
   selector:
     matchLabels:
