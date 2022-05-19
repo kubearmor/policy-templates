@@ -9,7 +9,7 @@ metadata:
   namespace: default  #change namespace to match your namespace
 spec:
   tags: ["MySQL", "Allow Policy"]
-  message: "Alert! mysql is the only allowed access"
+  message: "Alert! MySQL binaries accessed"
   severity: 1
   selector:
     matchLabels:
