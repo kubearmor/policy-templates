@@ -1,0 +1,222 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-mysql-files
+  namespace: default   #change namespace to match your namespace
+spec:
+  tags: ["MySQL", "Allow Policy"]
+  message: "Alert! mysql is the only allowed file access"
+  severity: 1
+  selector:
+    matchLabels:
+      app: mysql
+  file:
+    matchPaths:
+    - path: /dev/fd/63
+      fromSource:
+      - path: /usr/bin/mysql
+    - path: /dev/null
+      fromSource:
+      - path: /bin/bash
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /bin/dash
+      - path: /bin/date
+      - path: /bin/sleep
+      - path: /usr/bin/mysql
+      - path: /usr/sbin/mysqld
+    - path: /etc/localtime
+      fromSource:
+      - path: /bin/date
+    - path: /etc/mysql/my.cnf
+      fromSource:
+      - path: /usr/bin/mysql
+    - path: /etc/mysql/mysql.conf.d/mysqld.cnf
+      fromSource:
+      - path: /usr/bin/mysql
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /usr/bin/mysql
+      - path: /usr/sbin/mysqld
+    - path: /lib/x86_64-linux-gnu/libc.so.6
+      fromSource:
+      - path: /bin/dash
+      - path: /bin/date
+      - path: /bin/sleep
+    - path: /lib/x86_64-linux-gnu/libpthread.so.0
+      fromSource:
+      - path: /bin/sed
+    - path: /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+      fromSource:
+      - path: /usr/bin/mysql
+    - path: /usr/share/mysql/charsets/Index.xml
+      fromSource:
+      - path: /usr/bin/mysql
+      - path: /usr/bin/mysqladmin
+    - path: /usr/share/mysql/fill_help_tables.sql
+      fromSource:
+      - path: /usr/bin/perl
+    - path: /var/run/mysqld/mysqld.pid
+      fromSource:
+      - path: /usr/bin/mysqladmin
+    matchDirectories:
+    - dir: /etc/mysql/conf.d/
+      fromSource:
+      - path: /usr/bin/mysql
+    - dir: /lib/x86_64-linux-gnu/
+      fromSource:
+      - path: /usr/bin/mysql
+    - dir: /sys/
+      fromSource:
+      - path: /usr/bin/mysql
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /tmp/
+      fromSource:
+      - path: /bin/bash
+      - path: /usr/sbin/mysqld
+    - dir: /usr/share/zoneinfo/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Africa/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/America/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/America/Argentina/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/America/Kentucky/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Antarctica/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Asia/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Atlantic/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Australia/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Brazil/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Canada/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Chile/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Etc/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Indian/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Mexico/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Pacific/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/SystemV/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/US/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/Africa/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/America/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/America/Indiana/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/America/Kentucky/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/Antarctica/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/Arctic/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/Australia/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/Brazil/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/Canada/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/Chile/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/Etc/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/Indian/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/SystemV/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/Africa/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/America/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/America/Kentucky/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/Antarctica/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/Arctic/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/Asia/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/Atlantic/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/Australia/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/Brazil/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/Indian/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/Mexico/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/Pacific/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/US/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /var/lib/mysql/mysql/
+      fromSource:
+      - path: /usr/sbin/mysqld
+  action: Allow
