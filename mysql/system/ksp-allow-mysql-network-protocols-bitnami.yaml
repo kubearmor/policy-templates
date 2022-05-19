@@ -9,8 +9,8 @@ metadata:
   name: ksp-allow-mysql-network-protocols-bitnami
   namespace: default  #change namespace to match your namespace 
 spec:
-  tags: ["MySQL", "GENERIC"]
-  message: "Alert! mysql is the only allowed access"
+  tags: ["MySQL", "Allow policy"]
+  message: "network accessed by mysql binary"
   severity: 1
   selector:
     matchLabels:
