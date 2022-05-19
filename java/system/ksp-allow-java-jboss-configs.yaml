@@ -1,0 +1,141 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-java-jboss-configs
+  namespace: default  # Change your namespace
+spec:
+  tags: [ "java", "jboss", "binaries", "configs", "jvm" ]
+  message: "Alert! The java configuration files is acessed"
+  severity: 1
+  selector:
+    matchLabels:
+      app: jboss # Change your matchLabels
+  file:
+    matchPaths:
+    - path: /dev/null
+      fromSource:
+      - path: /usr/bin/openssl
+    - path: /dev/urandom
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /etc/crypto-policies/back-ends/java.config
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /etc/crypto-policies/back-ends/opensslcnf.config
+      fromSource:
+      - path: /usr/bin/openssl
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/grep
+      - path: /usr/bin/hostname
+      - path: /usr/bin/openssl
+      - path: /usr/bin/rm
+      - path: /usr/bin/sed
+      - path: /usr/bin/tr
+    - path: /etc/pki/tls/openssl.cnf
+      fromSource:
+      - path: /usr/bin/openssl
+    - path: /lib64/libc.so.6
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/hostname
+    - path: /lib64/libtinfo.so.6
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /opt/jboss/keycloak/modules/system/layers/base/com/fasterxml/jackson/core/jackson-annotations/main/jackson-annotations-2.10.1.jar
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /opt/jboss/keycloak/modules/system/layers/base/com/fasterxml/jackson/core/jackson-annotations/main/module.xml
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /opt/jboss/keycloak/modules/system/layers/base/com/fasterxml/jackson/core/jackson-core/main/jackson-core-2.10.1.jar
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /opt/jboss/keycloak/modules/system/layers/base/com/fasterxml/jackson/core/jackson-core/main/module.xml
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /opt/jboss/keycloak/modules/system/layers/base/javax/api/main/module.xml
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /opt/jboss/keycloak/modules/system/layers/base/org/aesh/main/module.xml
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /opt/jboss/keycloak/modules/system/layers/base/org/aesh/main/readline-2.0.jar
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /opt/jboss/keycloak/modules/system/layers/base/org/jboss/as/domain-management/main/module.xml
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /opt/jboss/keycloak/modules/system/layers/base/org/jboss/logging/main/jboss-logging-3.4.1.Final.jar
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /opt/jboss/keycloak/modules/system/layers/keycloak/com/github/ua-parser/main/module.xml
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /opt/jboss/keycloak/standalone/configuration/standalone_xml_history
+      fromSource:
+      - path: /usr/bin/rm
+    - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/conf/logging.properties
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/conf/security/java.policy
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/conf/security/java.security
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - path: /usr/lib/locale/en_US.utf8/LC_CTYPE
+      fromSource:
+      - path: /usr/bin/rm
+    - path: /usr/lib/locale/en_US.utf8/LC_MESSAGES/SYS_LC_MESSAGES
+      fromSource:
+      - path: /usr/bin/rm
+      - path: /usr/bin/sed
+    - path: /usr/lib/locale/en_US.utf8/LC_MONETARY
+      fromSource:
+      - path: /usr/bin/rm
+      - path: /usr/bin/sed
+    - path: /usr/lib/locale/en_US.utf8/LC_NUMERIC
+      fromSource:
+      - path: /usr/bin/sed
+    - path: /usr/lib64/gconv/gconv-modules.cache
+      fromSource:
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/grep
+    - path: /usr/share/locale/locale.alias
+      fromSource:
+      - path: /usr/bin/tr
+    matchDirectories:
+    - dir: /lib64/
+      fromSource:
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/openssl
+      - path: /usr/bin/rm
+      - path: /usr/bin/tr
+    - dir: /opt/jboss/keycloak/modules/system/layers/keycloak/org/keycloak/
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - dir: /proc/
+      fromSource:
+      - path: /bin/infocmp
+      - path: /usr/bin/tr
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+      - path: /usr/local/sbin/infocmp
+    - dir: /sys/
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - dir: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/lib/
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-11.0.7.10-1.el8_1.x86_64/bin/java
+    - dir: /usr/lib/locale/en_US.utf8/
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/grep
+  action: Allow
+---

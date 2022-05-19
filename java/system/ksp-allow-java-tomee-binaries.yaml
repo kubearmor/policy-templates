@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-java-tomee-binaries
+  namespace: default # Change your namespace
+spec:
+  tags: [ "java", "tomee", "application", "sh-files", "commands" ]
+  message: "Alert! The binaries is executed"
+  severity: 1
+  selector:
+    matchLabels:
+      name: java-synopsis # Change your matchLabels
+  process:
+    matchPaths:
+    - path: /bin/uname
+      fromSource:
+      - path: /bin/dash
+    - path: /usr/local/openjdk-11/bin/java
+    - path: /usr/local/tomee/bin/catalina.sh
+  action: Allow
+---

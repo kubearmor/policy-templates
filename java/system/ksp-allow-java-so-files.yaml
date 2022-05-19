@@ -1,0 +1,34 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-java-so-files
+  namespace: sock-shop # Change your namespace
+spec:
+  tags: [ "java", "libraries", "openjdk", "jar-files" ]
+  message: "Alert! java libraries is accessed."
+  severity: 1
+  selector:
+    matchLabels:
+      name: carts # Change your matchLabels
+  file:
+    matchPaths:
+    - path: /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libzip.so
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
+    - path: /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/server/libjvm.so
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
+    - path: /usr/src/app/app.jar
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
+  network:
+    matchProtocols:
+    - protocol: udp
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
+  action: Allow
+---
