@@ -8,7 +8,7 @@ metadata:
   name: ksp-allow-mysql-files
   namespace: default   #change namespace to match your namespace
 spec:
-  tags: ["MySQL", "GENERIC"]
+  tags: ["MySQL"]
   message: "Alert! mysql is the only allowed file access"
   severity: 1
   selector:
