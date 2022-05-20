@@ -4,7 +4,7 @@ metadata:
   name: cnp-allow-egress-golang-mysql-pods-connection
   namespace: default                                  #change namespace to match your namespace
 spec:
-  description: "Allow egress communication between golang pod and mongodb via port 27017"
+  description: "Allow egress communication between golang pod and mysql via port 3306"
   endpointSelector:
     matchLabels:
       app: cinema-showtimes                           #change label to match your label
