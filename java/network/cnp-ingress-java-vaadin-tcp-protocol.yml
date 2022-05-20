@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: autopol-ingress-nelhxfinspnguss
+  name: autopol-java-ingress-nelhxfinspnguss
   namespace: default # Change your namespace
 spec:
   description: "Allow tcp connections only via 8080 port from the internet"
