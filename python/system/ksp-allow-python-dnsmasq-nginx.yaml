@@ -1,0 +1,41 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-python-dnsmasq-nginx
+  namespace: default
+spec:
+  tags: ["PYTHON", "SYSTEM"]
+  message: "Alert! python can only access nginx and dnsmasq."
+  severity: 1
+  selector:
+    matchLabels:
+      app: python
+  file:
+    matchDirectories:
+    - dir: /etc/
+      fromSource:
+      - path: /usr/sbin/dnsmasq
+      - path: /usr/sbin/nginx
+    - dir: /etc/php/7.0/fpm/conf.d/
+      fromSource:
+      - path: /usr/sbin/php-fpm
+    - dir: /lib/x86_64-linux-gnu/
+      fromSource:
+      - path: /bin/bash
+      - path: /usr/bin/find
+      - path: /usr/bin/python2.7
+      - path: /usr/sbin/dnsmasq
+      - path: /usr/sbin/php-fpm
+    - dir: /opt/docker/bin/service.d/syslog-ng.d//
+      fromSource:
+      - path: /bin/bash
+    - dir: /opt/docker/etc/nginx/
+      fromSource:
+      - path: /usr/bin/find
+      - path: /usr/bin/python2.7
+      - path: /usr/sbin/nginx
+  action: Allow
