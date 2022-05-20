@@ -1,0 +1,18 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-allow-egress-golang-mysql-pods-connection
+  namespace: default                                  #change namespace to match your namespace
+spec:
+  description: "Allow egress communication between golang pod and mongodb via port 27017"
+  endpointSelector:
+    matchLabels:
+      app: cinema-showtimes                           #change label to match your label
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        app: mysql                                  #change label to match your label
+    toPorts:
+    - ports:
+      - port: "3306"
+        protocol: TCP
