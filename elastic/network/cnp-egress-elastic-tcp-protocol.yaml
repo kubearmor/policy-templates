@@ -1,0 +1,15 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+   name: cnp-egress-elastic-tcp-protocol
+  namespace: default  #change with your namespace
+spec:
+  description: "Allow tcp egress connections via port 443"
+  endpointSelector:
+    matchLabels:
+      app: elastic-operator   #change with your app
+  egress:
+  - toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
