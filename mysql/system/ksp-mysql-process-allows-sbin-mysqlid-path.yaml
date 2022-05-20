@@ -1,0 +1,21 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mysql-process-allows-sbin-mysqlid-path
+  namespace: default    #change namespace to match your namespace
+spec:
+  tags: ["mysql","Allow policy" ]
+  message: "Process accessed by MySQL binary"
+  severity: 1
+  selector:
+    matchLabels:
+      name: mysql         #change label to match your label  
+  process:
+    matchPaths:
+    - path: /bin/mkdir
+      fromSource:
+      - path: /bin/bash
+    - path: /usr/sbin/mysqld
+      fromSource:
+      - path: /bin/bash
+    action: Allow
