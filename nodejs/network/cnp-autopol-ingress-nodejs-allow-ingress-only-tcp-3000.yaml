@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: autopol-ingress-nodejs-allow-ingress-only-tcp-3000
+  namespace: default
+spec:
+  endpointSelector:
+    matchLabels:
+      app: nodejs
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "3000"
+        protocol: TCP
+    fromEntities:
+    - remote-node
+    - world
