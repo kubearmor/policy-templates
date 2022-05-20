@@ -9,7 +9,7 @@ metadata:
   namespace: default                       #change label to match your label
 spec:
   tags: ["elastic", "jdk", "java"]
-  message: "Alert! Elastic JAR files accessed"
+  message: "Elastic JAR files accessed"
   severity: 1
   selector:
     matchLabels:
