@@ -9,6 +9,7 @@ metadata:
   namespace: default #change namespace
 spec:
   tags: ["Node.js", "Allow Policy", "Binary", "config", "nodejs"]
+  message: "Access to application config files detected"
   severity: 1
   selector:
     matchLabels:
