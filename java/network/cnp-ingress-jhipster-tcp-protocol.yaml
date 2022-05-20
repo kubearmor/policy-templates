@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-ingress-java-jhipster-tcp-protocol
+  namespace: default # Change your namespace
+spec:
+  endpointSelector:
+    matchLabels:
+      app: jhipster # Change your matchLabels
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+    fromEntities:
+    - remote-node
+    - world
