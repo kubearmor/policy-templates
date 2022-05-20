@@ -1,0 +1,46 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-auto-pol-allow-only-nodejs-bin
+  namespace: default #change namespace
+spec:
+  tags: ["Node.js", "Allow Policy", "Binary", "config", "nodejs"]
+  severity: 1
+  selector:
+    matchLabels:
+      app: nodejs
+  file:
+    matchPaths:
+    - path: /dev/null
+      fromSource:
+      - path: /usr/local/bin/node
+    - path: /dev/urandom
+      fromSource:
+      - path: /usr/local/bin/node
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /usr/local/bin/node
+    - path: /etc/resolv.conf
+      fromSource:
+      - path: /usr/local/bin/node
+    - path: /usr/src/app/node_modules/moment/moment.js
+      fromSource:
+      - path: /usr/local/bin/node
+    - path: /usr/src/app/node_modules/moment/package.json
+      fromSource:
+      - path: /usr/local/bin/node
+    - path: /usr/src/app/node_modules/qs/index.js
+      fromSource:
+      - path: /usr/local/bin/node
+    - path: /usr/src/app/server.js
+      fromSource:
+      - path: /usr/local/bin/node
+    matchDirectories:
+    - dir: /usr/src/app/node_modules/qs/lib/
+      fromSource:
+      - path: /usr/local/bin/node
+  action: Allow
