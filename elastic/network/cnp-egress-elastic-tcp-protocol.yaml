@@ -13,5 +13,3 @@ spec:
     - ports:
       - port: "443"
         protocol: TCP
-    toCIDR:
-    - 35.202.179.126/32   #change with your CIDR 
