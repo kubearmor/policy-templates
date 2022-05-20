@@ -1,0 +1,48 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mysql-allows-openssl-config-files
+  namespace: default    #change namespace to match your namespace
+spec:
+  tags: ["mysql","Allow policy" ]
+  message: "Files accessed by MySQL binary"
+  severity: 1
+  selector:
+    matchLabels:
+      name: mysql         #change label to match your label 
+  file:
+    matchPaths:
+    - path: /etc/crypto-policies/back-ends/openssl.config
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - path: /etc/services
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - path: /lib64/libnss_files.so.2
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - path: /var/lib/mysql/mysql/columns_priv.MYI
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - path: /var/lib/mysql/mysql/func.MYI
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - path: /var/lib/mysql/mysql/tables_priv.MYI
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - path: /var/run/mysqld/mysqld.pid
+      fromSource:
+      - path: /usr/sbin/mysqld
+    matchDirectories:
+    - dir: /var/lib/mysql/
+      fromSource:
+      - path: /usr/sbin/mysqld
+  action: Allow
