@@ -8,8 +8,8 @@ metadata:
   name: ksp-allow-mysql-process
   namespace: default  #change namespace to match your namespace
 spec:
-  tags: ["MySQL","Allow policy"]
-  message: "process accessed by MySQL binary"
+  tags: ["MySQL","Allow policy", "mysql"]
+  message: "Process accessed by MySQL binary"
   severity: 1
   selector:
     matchLabels:
