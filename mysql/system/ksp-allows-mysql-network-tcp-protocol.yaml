@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allows-mysql-network-tcp-protocol
+  namespace: mysql-operator   #change namespace to match your namespace
+spec:
+  tags: ["mysql","network-operator","Allow policy" ]
+  message: "Allows only tcp protocols of mysql pods"
+  severity: 1
+  selector:
+    matchLabels:
+      name: mysql-operator     #change label to match your label
+    network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/sbin/mysqld
+  action: Allow
