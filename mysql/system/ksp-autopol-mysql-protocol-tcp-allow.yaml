@@ -1,0 +1,29 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-mysql-protocol-tcp-allow
+  namespace: default # change your namespace
+spec:
+  tags: ["mysql", "system", "allow", "protocol", "tcp"]
+  message: "tcp rule for mysql workload"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: accuknox-dev-mysql
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/mysql
+      - path: /usr/bin/sed
+      - path: /usr/local/bin/check_pxc.sh
+      - path: /usr/local/bin/liveness-check.sh
+      - path: /usr/local/bin/readiness-check.sh
+      - path: /usr/sbin/haproxy
+  action: Allow

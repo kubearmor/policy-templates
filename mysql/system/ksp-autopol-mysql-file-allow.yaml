@@ -1,0 +1,84 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-mysql-file-allow
+  namespace: default # change your namespace
+spec:
+  tags: ["mysql", "system", "allow", "files"]
+  message: "Allowed files for mysql workload"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: accuknox-dev-mysql
+  file:
+    matchPaths:
+    - path: /etc/haproxy/pxc/AVAILABLE_NODES
+      fromSource:
+      - path: /usr/bin/coreutils
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/cat
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/grep
+      - path: /usr/bin/sed
+      - path: /usr/bin/tr
+      - path: /usr/local/bin/check_pxc.sh
+    - path: /etc/mysql/mysql-users-secret/monitor
+      fromSource:
+      - path: /usr/bin/cat
+      - path: /usr/bin/coreutils
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/local/bin/check_pxc.sh
+    - path: /etc/passwd
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/local/bin/check_pxc.sh
+    - path: /lib64/libc.so.6
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /lib64/libcap.so.2
+      fromSource:
+      - path: /usr/bin/timeout
+    - path: /lib64/libdl.so.2
+      fromSource:
+      - path: /usr/bin/timeout
+    - path: /lib64/libpcre.so.1
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /lib64/libpcre2-8.so.0
+      fromSource:
+      - path: /usr/bin/timeout
+    - path: /usr/local/bin/check_pxc.sh
+      fromSource:
+      - path: /usr/bin/bash
+    matchDirectories:
+    - dir: /etc/
+      fromSource:
+      - path: /usr/bin/mysql
+    - dir: /lib64/
+      fromSource:
+      - path: /bin/cat
+      - path: /usr/bin/bash
+      - path: /usr/bin/cat
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/mysql
+      - path: /usr/bin/sed
+      - path: /usr/bin/tr
+      - path: /usr/local/bin/check_pxc.sh
+    - dir: /proc/
+      fromSource:
+      - path: /bin/cat
+      - path: /usr/bin/cat
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/sed
+      - path: /usr/bin/tr
+      - path: /usr/local/bin/liveness-check.sh
+      - path: /usr/local/bin/readiness-check.sh
+  action: Allow

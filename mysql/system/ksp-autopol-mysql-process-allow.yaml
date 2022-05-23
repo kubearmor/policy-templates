@@ -1,0 +1,61 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-mysql-process-allow
+  namespace: default # change your namespace
+spec:
+  tags: ["mysql", "system", "allow", "process"]
+  message: "Allowed processes for mysql workload"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: accuknox-dev-mysql # change your labels
+  process:
+    matchPaths:
+    - path: /bin/cat
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/local/bin/check_pxc.sh
+    - path: /usr/bin/cat
+      fromSource:
+      - path: /usr/local/bin/liveness-check.sh
+      - path: /usr/local/bin/readiness-check.sh
+    - path: /usr/bin/grep
+      fromSource:
+      - path: /usr/bin/cat
+      - path: /usr/bin/sed
+    - path: /usr/bin/mysql
+      fromSource:
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/timeout
+    - path: /usr/bin/sed
+      fromSource:
+      - path: /usr/bin/cat
+      - path: /usr/bin/grep
+    - path: /usr/bin/timeout
+      fromSource:
+      - path: /usr/bin/grep
+      - path: /usr/bin/sed
+    - path: /usr/bin/tr
+      fromSource:
+      - path: /usr/bin/cat
+      - path: /usr/bin/grep
+      - path: /usr/bin/sed
+    - path: /usr/local/bin/check_pxc.sh
+      fromSource:
+      - path: /usr/sbin/haproxy
+    - path: /usr/local/bin/readiness-check.sh
+      fromSource:
+      - path: /usr/bin/grep
+      - path: /usr/bin/tr
+    matchDirectories:
+    - dir: /usr/bin/
+      fromSource:
+      - path: /bin/cat
+      - path: /usr/bin/bash
+      - path: /usr/bin/mysql
+  action: Allow
