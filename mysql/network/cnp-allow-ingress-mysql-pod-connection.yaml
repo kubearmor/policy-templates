@@ -2,7 +2,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: cnp-allow-ingress-mysql-pod-connection
-  namespace: wordpress-mysql        #change namespace to match your namespace
+  namespace: default        #change namespace to match your namespace
 spec:
   description: "Allow tcp connections only via 3306 port"
   endpointSelector:
