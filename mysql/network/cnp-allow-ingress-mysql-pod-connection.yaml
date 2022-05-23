@@ -7,7 +7,7 @@ spec:
   description: "Allow tcp connections only via 3306 port"
   endpointSelector:
     matchLabels:
-      app: mysql
+      app: mysql            #change label to match your label
   ingress:
   - fromEndpoints:
     - matchLabels:
