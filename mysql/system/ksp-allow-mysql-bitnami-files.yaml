@@ -1,0 +1,54 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-mysql-bitnami-files
+  namespace: mysql-operator   #change namespace to match your namespace
+spec:
+  tags: ["mysql","mysql-operator"]
+  message: "Allows! The mysql bitnami files"
+  severity: 1
+  selector:
+    matchLabels:
+      name: mysql-operator     #change label to match your label
+  file:
+    matchPaths:
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /opt/bitnami/mysql/bin/mysqladmin
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /opt/bitnami/mysql/bin/mysqladmin
+    - path: /etc/passwd
+      fromSource:
+      - path: /opt/bitnami/mysql/bin/mysqladmin
+    - path: /opt/bitnami/mysql/share/charsets/Index.xml
+      fromSource:
+      - path: /opt/bitnami/mysql/bin/mysqladmin
+    - path: /usr/lib/ssl/openssl.cnf
+      fromSource:
+      - path: /opt/bitnami/mysql/bin/mysqladmin
+    - path: /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+      fromSource:
+      - path: /opt/bitnami/mysql/bin/mysqladmin
+    - path: /usr/lib/x86_64-linux-gnu/libssl.so.1.1
+      fromSource:
+      - path: /opt/bitnami/mysql/bin/mysqladmin
+    - path: /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+      fromSource:
+      - path: /opt/bitnami/mysql/bin/mysqladmin
+    matchDirectories:
+    - dir: /lib/x86_64-linux-gnu/
+      fromSource:
+      - path: /opt/bitnami/mysql/bin/mysqladmin
+    - dir: /proc/
+      fromSource:
+      - path: /bin/bash
+      - path: /opt/bitnami/mysql/bin/mysqladmin
+    - dir: /sys/
+      fromSource:
+      - path: /bin/bash
+  action: Allow
