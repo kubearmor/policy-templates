@@ -19,7 +19,5 @@ spec:
     - path: /opt/jboss/keycloak/bin/standalone.sh
     matchDirectories:
     - dir: /usr/bin/
-      fromSource:
-      - path: /usr/bin/bash
   action: Allow
 ---
