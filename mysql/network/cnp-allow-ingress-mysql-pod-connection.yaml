@@ -1,0 +1,19 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-allow-ingress-mysql-pod-connection
+  namespace: default        #change namespace to match your namespace
+spec:
+  description: "Allow tcp connections only via 3306 port"
+  endpointSelector:
+    matchLabels:
+      app: mysql            #change label to match your label
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        app: wordpress
+        k8s:io.kubernetes.pod.namespace: wordpress-mysql        #change label to match your label
+    toPorts:
+    - ports:
+      - port: "3306"
+        protocol: TCP
