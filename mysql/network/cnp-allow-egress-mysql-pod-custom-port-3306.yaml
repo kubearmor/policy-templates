@@ -1,0 +1,19 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-allow-egress-mysql-pod-custom-port-3306
+  namespace: default   #change namespace to match your namespace
+spec:
+  description: "Allow only Egress communication via 3306 port Mysql pod"
+  endpointSelector:
+    matchLabels:
+      app: wordpress             #change label to match your label
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        app: mysql                #change label to match your label
+        k8s:io.kubernetes.pod.namespace: wordpress-mysql
+    toPorts:
+    - ports:
+      - port: "3306"
+        protocol: TCP
