@@ -17,8 +17,6 @@ spec:
   process:
     matchPaths:
     - path: /bin/uname
-      fromSource:
-      - path: /bin/dash
     - path: /usr/local/openjdk-11/bin/java
     - path: /usr/local/tomee/bin/catalina.sh
   action: Allow
