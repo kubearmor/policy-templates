@@ -17,30 +17,15 @@ spec:
   file:
     matchPaths:
     - path: /dev/null
-      fromSource:
-      - path: /bin/dash
     - path: /dev/urandom
-      fromSource:
-      - path: /usr/bin/python2.7
     - path: /etc/ld.so.cache
-      fromSource:
-      - path: /bin/bash
-      - path: /usr/local/openjdk-11/bin/java
     - path: /etc/localtime
-      fromSource:
-      - path: /usr/bin/python2.7
     - path: /etc/nsswitch.conf
-      fromSource:
-      - path: /bin/bash
     - path: /etc/passwd
-      fromSource:
-      - path: /bin/bash
     - path: /etc/timezone
       fromSource:
       - path: /usr/local/openjdk-11/bin/java
     - path: /usr/bin
-      fromSource:
-      - path: /usr/bin/python2.7
     - path: /usr/lib/locale/C.UTF-8/LC_ADDRESS
       fromSource:
       - path: /usr/bin/dirname
@@ -50,10 +35,6 @@ spec:
     - path: /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
       fromSource:
       - path: /bin/uname
-      - path: /usr/bin/python2.7
-    - path: /usr/local/lib/python2.7/dist-packages
-      fromSource:
-      - path: /usr/bin/python2.7
     - path: /usr/local/openjdk-11/lib/libzip.so
       fromSource:
       - path: /usr/local/openjdk-11/bin/java
