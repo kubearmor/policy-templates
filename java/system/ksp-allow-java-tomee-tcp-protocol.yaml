@@ -18,7 +18,6 @@ spec:
     matchProtocols:
     - protocol: tcp
       fromSource:
-      - path: /bin/bash
       - path: /usr/local/openjdk-11/bin/java
   action: Allow
 ---
