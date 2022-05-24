@@ -4,6 +4,7 @@ metadata:
   name: autopol-ingress-nodejs-allow-ingress-only-tcp-3000
   namespace: default
 spec:
+  description: "Allow ingress through port 3000"
   endpointSelector:
     matchLabels:
       app: nodejs
