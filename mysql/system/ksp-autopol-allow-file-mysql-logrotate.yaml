@@ -1,0 +1,57 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-allow-file-mysql-logrotate
+  namespace: default
+spec:
+  tags: ["mysql", "system", "allow", "file", "log"]
+  message: "Allow logrotate files for MySQL workload"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: dev-mysql
+  file:
+    matchPaths:
+    - path: /dev/null
+      fromSource:
+      - path: /usr/bin/go-cron
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/find
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /etc/passwd
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /opt/percona/logrotate/logrotate-mysql.conf
+      fromSource:
+      - path: /usr/sbin/logrotate
+    - path: /opt/percona/logrotate/logrotate.status.tmp
+      fromSource:
+      - path: /usr/sbin/logrotate
+    - path: /opt/percona/logrotate/logrotate.status
+      fromSource:
+      - path: /usr/sbin/logrotate
+    - path: /var/lib/mysql
+      fromSource:
+      - path: /usr/sbin/logrotate
+    matchDirectories:
+    - dir: /etc/
+      fromSource:
+      - path: /usr/sbin/logrotate
+    - dir: /lib64/
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/find
+      - path: /usr/sbin/logrotate
+    - dir: /proc/
+      fromSource:
+      - path: /usr/bin/find
+      - path: /usr/sbin/logrotate
+  action: Allow

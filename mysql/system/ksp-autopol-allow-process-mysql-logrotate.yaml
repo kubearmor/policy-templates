@@ -1,0 +1,28 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-allow-process-mysql-logrotate
+  namespace: default
+spec:
+  tags: ["mysql", "system", "allow", "process", "log"]
+  message: "Allow processes for MySQL workload"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: dev-mysql
+  process:
+    matchPaths:
+    - path: /usr/bin/find
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /usr/bin/sh
+      fromSource:
+      - path: /usr/bin/go-cron
+    - path: /usr/sbin/logrotate
+      fromSource:
+      - path: /usr/bin/bash
+  action: Allow

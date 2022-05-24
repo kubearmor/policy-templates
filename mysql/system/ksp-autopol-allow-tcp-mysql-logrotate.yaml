@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-allow-tcp-mysql-logrotate
+  namespace: default
+spec:
+  tags: ["mysql", "system", "allow", "protocol", "log"]
+  message: "Allow protocol for MySQL logrotate"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: dev-mysql
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/sbin/logrotate
+  action: Allow
