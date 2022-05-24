@@ -1,0 +1,29 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-java-tomee-gnu
+  namespace: default # Change your namespace
+spec:
+  tags: [ "java", "tomee", "processes", "openjdk" ]
+  message: "Alert! The gnu files is allowed" 
+  severity: 1
+  selector:
+    matchLabels:
+      name: java-synopsis # Change your matchLabels
+  file:
+    matchDirectories:
+    - dir: /lib/x86_64-linux-gnu/
+    - dir: /sys/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - dir: /usr/lib/locale/C.UTF-8/
+    - dir: /usr/lib/python2.7/
+    - dir: /usr/local/tomee/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+  action: Allow
+---
