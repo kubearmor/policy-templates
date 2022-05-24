@@ -1,0 +1,104 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-file-percona-allow-from-sources
+  namespace: default
+spec:
+  tags: ["MySQL", "system", "allow", "file", "percona"]
+  message: "Allowed files only from specific sources"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: pxc
+      app.kubernetes.io/instance: dev-mysql
+      app.kubernetes.io/managed-by: percona-xtradb-cluster-operator
+      app.kubernetes.io/name: percona-xtradb-cluster
+      app.kubernetes.io/part-of: percona-xtradb-cluster
+  file:
+    matchPaths:
+    - path: /dev/null
+      fromSource:
+      - path: /usr/bin/awk
+      - path: /usr/bin/bash
+      - path: /usr/bin/gawk
+    - path: /etc/hosts
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /usr/bin/awk
+      - path: /usr/bin/bash
+      - path: /usr/bin/cat
+      - path: /usr/bin/coreutils
+      - path: /usr/sbin/mysql
+    - path: /etc/mysql/mysql-users-secret/monitor
+      fromSource:
+      - path: /usr/bin/cat
+      - path: /usr/bin/coreutils
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /etc/passwd
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /lib64/libc.so.6
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/grep
+      - path: /usr/bin/hostname
+    - path: /lib64/libcap.so.2
+      fromSource:
+      - path: /usr/bin/tr
+    - path: /lib64/libdl.so.2
+      fromSource:
+      - path: /usr/bin/tr
+    - path: /lib64/libnss_files.so.2
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /lib64/libpthread.so.0
+      fromSource:
+      - path: /usr/local/bin/mysql
+      - path: /usr/local/sbin/mysql
+    - path: /lib64/librt.so.1
+      fromSource:
+      - path: /usr/bin/tr
+    - path: /usr/share/percona-xtradb-cluster/charsets/Index.xml
+      fromSource:
+      - path: /usr/bin/mysql
+    - path: /var/lib/mysql/liveness-check.sh
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /var/lib/mysql/readiness-check.sh
+      fromSource:
+      - path: /usr/bin/bash
+    matchDirectories:
+    - dir: /etc/
+      fromSource:
+      - path: /usr/bin/mysql
+    - dir: /etc/my.cnf.d/
+      fromSource:
+      - path: /usr/bin/mysql
+    - dir: /etc/percona-xtradb-cluster.conf.d/
+      fromSource:
+      - path: /usr/bin/mysql
+    - dir: /lib64/
+      fromSource:
+      - path: /usr/bin/awk
+      - path: /usr/bin/cat
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/gawk
+      - path: /usr/bin/mysql
+      - path: /usr/bin/sed
+      - path: /usr/bin/timeout
+    - dir: /proc/
+      fromSource:
+      - path: /usr/bin/cat
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/gawk
+      - path: /var/lib/mysql/liveness-check.sh
+      - path: /var/lib/mysql/readiness-check.sh
+  action: Allow
