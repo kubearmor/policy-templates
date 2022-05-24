@@ -9,6 +9,7 @@ metadata:
   namespace: default #change your namespace
 spec:
   tags: ["Node.js", "Allow Policy", "Binary", "tcp", "protocol", "nodejs"]
+  message: "Allow tcp protocol only from node source"
   severity: 1
   selector:
     matchLabels:
