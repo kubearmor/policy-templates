@@ -7,7 +7,7 @@ kind: KubeArmorPolicy
 metadata:
   name: ksp-autopol-file-allow-proc-dir-from-source
   namespace: default
-spec:"
+spec:
   tags: ["MySQL", "system", "allow", "file", "percona", "percona-xtradb-cluster-operator"]
   message: "Allow access to proc dir only from percona source directory"
   severity: 1
