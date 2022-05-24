@@ -17,18 +17,11 @@ spec:
   file:
     matchDirectories:
     - dir: /lib/x86_64-linux-gnu/
-      fromSource:
-      - path: /bin/bash
     - dir: /sys/
       fromSource:
       - path: /usr/local/openjdk-11/bin/java
     - dir: /usr/lib/locale/C.UTF-8/
-      fromSource:
-      - path: /bin/bash
-      - path: /bin/uname
     - dir: /usr/lib/python2.7/
-      fromSource:
-      - path: /usr/bin/python2.7
     - dir: /usr/local/tomee/
       fromSource:
       - path: /usr/local/openjdk-11/bin/java
