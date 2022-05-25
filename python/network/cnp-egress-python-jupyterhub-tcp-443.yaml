@@ -1,0 +1,21 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-python-jupyterhub-tcp-443
+  namespace: default
+spec:
+  description: "JupyterHub only allow egress TCP connection from 443 port"
+  endpointSelector:
+    matchLabels:
+      app: jupyterhub
+      component: image-puller
+      controller-uid: cf06bf37-0ac9-4885-aaa2-0ce2ad9ad673
+      job-name: hook-image-awaiter
+      release: jupyter-hub
+  egress:
+  - toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
+    toCIDR:
+    - {}
