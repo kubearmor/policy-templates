@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-ingress-java-currency-exchange-tcp-protocol
+  namespace: default # Change your namespace
+spec:
+  description: "Allow tcp connections only through 8080 port"
+  endpointSelector:
+    matchLabels:
+      app: java-currency-exchange # Change your matchLabels
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+    fromEntities:
+    - world
