@@ -1,0 +1,43 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-python-libcudata
+  namespace: default
+spec:
+  tags: ["PYTHON", "SYSTEM"]
+  message: "Alert! python can only access libcudata"
+  severity: 1
+  selector:
+    matchLabels:
+      app: python
+  file:
+    matchPaths:
+    - path: /usr/lib/x86_64-linux-gnu/libicudata.so.55
+      fromSource:
+      - path: /usr/sbin/nginx
+    - path: /usr/lib/x86_64-linux-gnu/libicui18n.so.55
+      fromSource:
+      - path: /usr/sbin/php-fpm7.0
+    - path: /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+      fromSource:
+      - path: /usr/sbin/nginx
+    - path: /usr/local/bin/rpl
+      fromSource:
+      - path: /usr/bin/python2.7
+    - path: /usr/local/lib/python2.7/dist-packages
+      fromSource:
+      - path: /usr/bin/python2.7
+    - path: /usr/share/locale/locale.alias
+      fromSource:
+      - path: /bin/bash
+      - path: /bin/sed
+      - path: /opt/docker/bin/service.d/nginx.sh
+      - path: /usr/bin/env
+      - path: /usr/bin/python2.7
+      - path: /usr/bin/xargs
+      - path: /usr/sbin/dnsmasq
+  action: Allow
