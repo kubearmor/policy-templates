@@ -1,0 +1,40 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-adoveo-allow-jre
+  namespace: default # Change your namespace
+spec:
+  severity: 1
+  selector:
+    matchLabels:
+      app: java-adoveo # Change your matchLabels
+  file:
+    matchPaths:
+    - path: /dev/random
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
+    - path: /dev/urandom
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
+    - path: /etc/hosts
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
+    - path: /tmp/tomcat.3595747383441567545.8080
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
+    - dir: /sys/
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
+    - dir: /usr/lib/jvm/java-1.8-openjdk/jre/lib/
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
+  action: Allow
+---

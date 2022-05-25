@@ -1,0 +1,143 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-malkinfedor-allow-shell
+  namespace: default # Change your namespace
+spec:
+  tags: ["java", "tomcat", "framework", "jshell", "libraries"]
+  message: "Allow access to the files from shell"
+  severity: 1
+  selector:
+    matchLabels:
+      app: malkinfedor # Change your matchLabels
+  process:
+    matchPaths:
+    - path: /usr/bin/tty
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /usr/java/openjdk-14/bin/jshell
+  file:
+    matchPaths:
+    - path: /dev/random
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /dev/urandom
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /usr/bin/tty
+      - path: /usr/java/openjdk-14/bin/java
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /etc/passwd
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+    - path: /lib/x86_64-linux-gnu/libc.so.6
+      fromSource:
+      - path: /usr/bin/tty
+      - path: /usr/java/openjdk-14/lib/jspawnhelper
+    - path: /lib/x86_64-linux-gnu/libcrypt.so.1
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - path: /lib/x86_64-linux-gnu/libm.so.6
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+    - path: /lib/x86_64-linux-gnu/librt.so.1
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+    - path: /root/.java/.userPrefs/.user.lock.root
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /root/.java/.userPrefs/.userRootModFile.root
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /root/.java/.userPrefs/tool/prefs.tmp
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /tmp/remote14375251672356563574error
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /tmp/remote4581995275816775750error
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /tmp/remote6738930231355297900output
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /usr/java/openjdk-14/conf/net.properties
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /usr/java/openjdk-14/conf/security/java.security
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /usr/lib/locale/C.UTF-8/LC_CTYPE
+      fromSource:
+      - path: /usr/bin/tty
+    - path: /usr/lib/locale/C.UTF-8/LC_IDENTIFICATION
+      fromSource:
+      - path: /usr/bin/tty
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /usr/lib/locale/C.UTF-8/LC_MONETARY
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /usr/lib/locale/C.UTF-8/LC_TELEPHONE
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /usr/lib/x86_64-linux-gnu/libapr-1.so.0
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    matchDirectories:
+    - dir: /etc/
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+    - dir: /lib/x86_64-linux-gnu/
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+    - dir: /proc/
+      fromSource:
+      - path: /usr/bin/tty
+      - path: /usr/java/openjdk-14/bin/java
+      - path: /usr/java/openjdk-14/bin/jshell
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /sys/
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+      - path: /usr/java/openjdk-14/bin/jshell
+    - dir: /usr/java/openjdk-14/lib/
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+      - path: /usr/java/openjdk-14/bin/jshell
+    - dir: /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - dir: /usr/lib/locale/C.UTF-8/
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+    - dir: /usr/local/tomcat/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+  network:
+    matchProtocols:
+    - protocol: raw
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - protocol: tcp
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+      - path: /usr/java/openjdk-14/bin/jshell
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - protocol: udp
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+      - path: /usr/java/openjdk-14/bin/jshell
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+  action: Allow
+---

@@ -1,0 +1,31 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-currency-exchange-allow-lib-file
+  namespace: default # Change your namespace
+spec:
+  tags: ["java", "lib", "files", "policy", "jre"]
+  message: "Allow acces to jre library files"
+  severity: 1
+  selector:
+    matchLabels:
+      app: java-currency-exchange # Change your matchLabels
+  file:
+    matchPaths:
+    - path: /usr/local/openjdk-8/jre/lib/amd64/libzip.so
+      fromSource:
+      - path: /usr/local/openjdk-8/bin/java
+    - path: /usr/local/openjdk-8/jre/lib/security/java.policy
+      fromSource:
+      - path: /usr/local/openjdk-8/bin/java
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/local/openjdk-8/bin/java
+  action: Allow
+---
