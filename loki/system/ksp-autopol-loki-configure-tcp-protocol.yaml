@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-loki-configure-tcp-protocol
+  namespace: default
+spec:
+  tags: ["grafana","loki", "system", "allow", "protocol"]
+  message: "Allowed access to tcp from only loki process"
+  severity: 1
+  selector:
+    matchLabels:
+      app: loki
+      name: loki
+      release: loki
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/bin/loki
+  action: Allow
