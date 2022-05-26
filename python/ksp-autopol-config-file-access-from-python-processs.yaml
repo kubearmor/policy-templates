@@ -1,0 +1,36 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-config-file-access-from-python-processs
+  namespace: default 
+spec:
+  tags: ["python", "system", "allow", "file", "config"]
+  message: "Allow access to config files only from python process"
+  severity: 1
+  selector:
+    matchLabels:
+      app: anomaly-detection-publisher-core
+      environment: dev
+      team: vaespade
+  file:
+    matchPaths:
+    - path: /etc/hosts
+      fromSource:
+      - path: /usr/bin/python3.8
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /usr/bin/python3.8
+    - path: /etc/resolv.conf
+      fromSource:
+      - path: /usr/bin/python3.8
+    - path: /home/container/Projects/containersec/containersec-publisher/models/image_168_372_cert-manager_quay_io_jetstack_cert_manager_webhook_sha256_41eacd93a30b566b780a6ae525b2547d2a87f1ec5f067fc02840a220aeb0c3f7.pth
+      fromSource:
+      - path: /usr/bin/python3.8
+    - path: /home/container/Projects/containersec/containersec-publisher/models/image_168_372_ingress-nginx_k8s_gcr_io_ingress_nginx_controller_sha256_0bc88eb15f9e7f84e8e56c14fa5735aaa488b840983f87bd79b1054190e660de.pth
+      fromSource:
+      - path: /usr/bin/python3.8
+  action: Allow
