@@ -9,7 +9,7 @@ metadata:
   namespace: default    #change to your namespace
 spec:
   message: "User related details are read/modified"
-  tags: ["pci-dss", "10.2.1", "user", "system", "mysql"]
+  tags: ["pci-dss", "10.2.1", "user", "system", "MySQL"]
   selector:
     matchLabels:
       app: mysql    #change to your own label

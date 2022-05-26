@@ -4,7 +4,7 @@ metadata:
   name: ksp-pci-dss-10.2.3-access-to-all-audit-log-paths
   namespace: default
 spec:
-  tags: ["PCI-DSS", "logs", "10.2.3"]
+  tags: ["PCI-DSS-10.2.3", "MySQL"]
   message: "Alert! someone tried to modify log files "
   selector:
     matchLabels:

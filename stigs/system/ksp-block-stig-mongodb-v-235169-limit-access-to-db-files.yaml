@@ -8,8 +8,8 @@ metadata:
   name: ksp-stig-block-mongodb-v-235169-limit-access-to-db-files
   namespace: default # Change your namespace
 spec:
-  tags: ["STIG", "MYSQL"]
-  message: "Alert! mysql configuration files access has been denied"
+  tags: ["STIG", "MySQL"]
+  message: "Alert! MySQL configuration files access has been denied"
   selector:
     matchLabels:
       container: mysql-1 # Change your match labels

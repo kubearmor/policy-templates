@@ -9,7 +9,7 @@ metadata:
   name: ksp-block-stig-v-235114-restrict-access-to-mysql-logs
   namespace: default # Change your namespace
 spec:
-  tags: ["STIG", "MYSQL", "V-235114", "Unauthorized-Acess", "Privileges","Log-Files"]
+  tags: ["STIG", "MySQL", "V-235114", "Unauthorized-Acess", "Privileges","Log-Files"]
   message: "Alert! Modification to log files are blocked"
   selector:
     matchLabels:
