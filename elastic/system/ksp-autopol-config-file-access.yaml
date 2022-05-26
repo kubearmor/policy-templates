@@ -1,0 +1,100 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-config-file-access
+  namespace: default
+spec:
+  tags: ["elasticsearch", "system", "allow", "file"]
+  message: "Allow access to elasticsearch system files and dir only from specific source process"
+  severity: 1
+  selector:
+    matchLabels:
+      common.k8s.elastic.co/type: elasticsearch
+      elasticsearch.k8s.elastic.co/cluster-name: elasticsearch
+      elasticsearch.k8s.elastic.co/http-scheme: https
+  file:
+    matchPaths:
+    - path: /dev/null
+      fromSource:
+      - path: /usr/bin/curl
+    - path: /etc/crypto-policies/back-ends/openssl.config
+      fromSource:
+      - path: /usr/bin/curl
+    - path: /etc/crypto-policies/back-ends/opensslcnf.config
+      fromSource:
+      - path: /usr/bin/curl
+    - path: /etc/group
+      fromSource:
+      - path: /usr/share/elasticsearch/bin/bash
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/cut
+      - path: /usr/bin/grep
+      - path: /usr/bin/tr
+      - path: /usr/sbin/bash
+    - path: /etc/localtime
+      fromSource:
+      - path: /usr/bin/curl
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/sbin/bash
+    - path: /etc/passwd
+      fromSource:
+      - path: /mnt/elastic-internal/scripts/..2022_05_01_21_58_10.228352224/readiness-probe-script.sh
+    - path: /etc/pki/tls/certs/ca-bundle.crt
+      fromSource:
+      - path: /usr/bin/curl
+    - path: /etc/pki/tls/openssl.cnf
+      fromSource:
+      - path: /usr/bin/curl
+    - path: /lib64/libc.so.6
+      fromSource:
+      - path: /usr/bin/grep
+      - path: /usr/sbin/bash
+    - path: /lib64/libpcre.so.1
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /lib64/libpthread.so.0
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /lib64/libtinfo.so.6
+      fromSource:
+      - path: /usr/sbin/bash
+    - path: /mnt/elastic-internal/downward-api/labels
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /mnt/elastic-internal/scripts/readiness-probe-script.sh
+      fromSource:
+      - path: /usr/bin/bash
+    matchDirectories:
+    - dir: /lib64/
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/curl
+      - path: /usr/bin/cut
+      - path: /usr/bin/tr
+    - dir: /proc/
+      fromSource:
+      - path: /mnt/elastic-internal/scripts/..2022_05_01_22_02_46.606817330/readiness-probe-script.sh
+      - path: /mnt/elastic-internal/scripts/readiness-probe-script.sh
+      - path: /usr/bin/bash
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/curl
+      - path: /usr/bin/env
+      - path: /usr/local/bin/bash
+      - path: /usr/local/sbin/bash
+      - path: /usr/share/elasticsearch/bin/bash
+    - dir: /usr/share/elasticsearch/config/
+      fromSource:
+      - path: /usr/share/elasticsearch/jdk/bin/java
+    - dir: /usr/share/elasticsearch/data/nodes/0/indices/OzKpS1ecQDGQWEoOwxbOkA/0/index/
+      fromSource:
+      - path: /usr/share/elasticsearch/jdk/bin/java
+  action: Allow

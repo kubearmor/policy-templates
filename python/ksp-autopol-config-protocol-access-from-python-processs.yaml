@@ -1,0 +1,26 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-config-protocol-access-from-python-processs
+  namespace: default 
+spec:
+  tags: ["python", "system", "allow", "protocol", "tcp", "udp"]
+  message: "Allow protocol tcp/udp access only from python processs"
+  severity: 1
+  selector:
+    matchLabels:
+      app: anomaly-detection
+      environment: dev
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/bin/python3.8
+    - protocol: udp
+      fromSource:
+      - path: /usr/bin/python3.8
+  action: Allow
