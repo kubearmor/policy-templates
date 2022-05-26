@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-configure-access-to-kibana-files
+  namespace: default
+spec:
+  tags: ["elasticsearch", "system", "allow", "file", "kibana", "logging"]
+  message: "Allow access to kibana system files and dir only from kibana source process"
+  severity: 1
+  selector:
+    matchLabels:
+      common.k8s.elastic.co/type: kibana
+      kibana.k8s.elastic.co/name: kibana
+      kibana.k8s.elastic.co/version: 7.13.1
+  file:
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /usr/share/kibana/node/bin/node
+    - dir: /sys/
+      fromSource:
+      - path: /usr/share/kibana/node/bin/node
+  action: Allow
