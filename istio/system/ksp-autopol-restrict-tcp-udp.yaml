@@ -1,0 +1,28 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-restrict-tcp-udp 
+  namespace: default 
+spec:
+  tags: ["istio", "system", "allow", "protocol"]
+  message: "Allow access to protocol only from istio processes"
+  severity: 1
+  selector:
+    matchLabels:
+      app: cluster-onboarding-service
+      environment: dev
+      security.istio.io/tlsMode: istio
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/local/bin/pilot-agent
+    - protocol: udp
+      fromSource:
+      - path: /usr/local/bin/envoy
+      - path: /usr/local/bin/pilot-agent
+  action: Allow
