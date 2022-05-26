@@ -1,0 +1,84 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-configure-access-to-zookeeper-files
+  namespace: default
+spec:
+  tags: ["zookeeper", "system", "allow", "file", "bitnami"]
+  message: "Access to zookeeper system files and dir allowd only from specific source processes"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: zookeeper
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: zookeeper
+      helm.sh/chart: zookeeper-7.0.0
+  file:
+    matchPaths:
+    - path: /bitnami/zookeeper/data/version-2/log.c00039fa1
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+    - path: /bitnami/zookeeper/data/version-2/snapshot.c00039f9f
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+    - path: /etc/host.conf
+      fromSource:
+      - path: /bin/nc
+      - path: /opt/bitnami/java/bin/nc
+      - path: /opt/bitnami/zookeeper/bin/nc
+    - path: /etc/hosts
+      fromSource:
+      - path: /usr/sbin/nc
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /bin/grep
+      - path: /opt/bitnami/common/bin/nc
+      - path: /opt/bitnami/java/bin/nc
+      - path: /usr/bin/timeout
+      - path: /usr/local/bin/nc
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /bin/nc
+      - path: /usr/local/sbin/nc
+    - path: /etc/resolv.conf
+      fromSource:
+      - path: /bin/nc
+    - path: /lib/x86_64-linux-gnu/libc.so.6
+      fromSource:
+      - path: /bin/bash
+      - path: /bin/grep
+      - path: /bin/nc
+      - path: /bin/nc.traditional
+      - path: /sbin/nc
+      - path: /usr/bin/nc
+    - path: /lib/x86_64-linux-gnu/libnss_files.so.2
+      fromSource:
+      - path: /bin/bash
+      - path: /bin/nc
+      - path: /bin/nc.traditional
+      - path: /opt/bitnami/zookeeper/bin/nc
+    - path: /lib/x86_64-linux-gnu/libpthread.so.0
+      fromSource:
+      - path: /bin/grep
+    - path: /lib/x86_64-linux-gnu/librt.so.1
+      fromSource:
+      - path: /usr/bin/timeout
+    - path: /lib/x86_64-linux-gnu/libtinfo.so.6
+      fromSource:
+      - path: /bin/bash
+    matchDirectories:
+    - dir: /etc/
+      fromSource:
+      - path: /bin/bash
+      - path: /bin/nc.traditional
+    - dir: /proc/
+      fromSource:
+      - path: /bin/bash
+    - dir: /sys/
+      fromSource:
+      - path: /opt/bitnami/java/bin/java
+  action: Allow
