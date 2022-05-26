@@ -8,8 +8,8 @@ metadata:
   name: ksp-block-stig-restrict-access-to-mysql-config-directory
   namespace: default # Change your namespace
 spec:
-  tags: ["STIG", "MYSQL"]
-  message: "Alert! Access to the mysql config files (/etc/mysql/) has been denied"
+  tags: ["STIG", "MySQL"]
+  message: "Alert! Access to the MySQL config files (/etc/mysql/) has been denied"
   selector:
     matchLabels:
       container: mysql # <--- add your own match labels

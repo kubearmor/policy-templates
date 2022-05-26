@@ -9,8 +9,8 @@ metadata:
   name: ksp-audit-stig-v-235114-detect-access-to-mysql-configuration-file
   namespace: default # Change your namespace
 spec:
-  tags: ["STIG", "MYSQL", "V-235114", "Configuration-Files", "privileges"]
-  message: "Alert! Access to mysql configuration files is audited"
+  tags: ["STIG", "MySQL", "V-235114", "Configuration-Files", "privileges"]
+  message: "Alert! Access to MySQL configuration files is audited"
   selector:
     matchLabels:
       app: mysql8 # Change your matchLabels

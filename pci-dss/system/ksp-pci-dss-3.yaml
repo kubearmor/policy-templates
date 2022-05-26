@@ -9,7 +9,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   severity: 5
-  tags: ["PCI-DSS", "MYSQL"]
+  tags: ["PCI-DSS", "MySQL"]
   message: "Access to MySQL Files is Denied"
   selector:
     matchLabels:

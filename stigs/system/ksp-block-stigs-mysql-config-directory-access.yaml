@@ -8,8 +8,8 @@ metadata:
   name: ksp-block-stig-mysql-config-directory-access
   namespace: default # Change your namespace
 spec:
-  tags: ["STIG", "MYSQL"]
-  message: "Alert! Access to mysql conf files has been denied"
+  tags: ["STIG", "MySQL"]
+  message: "Alert! Access to MySQL conf files has been denied"
   selector:
     matchLabels:
       pod: mysql-1 # Change your match labels

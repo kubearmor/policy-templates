@@ -8,7 +8,7 @@ metadata:
   name: ksp-pci-dss-8-database-log-cannot-be-modified
   namespace: default # Change your namespace
 spec:
-  tags: ["PCI-DSS"] 
+  tags: ["PCI-DSS", "MySQL"] 
   message: "Database log cannot be modified or removed"
   selector:
     matchLabels:
