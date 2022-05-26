@@ -1,0 +1,85 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-config-entity-operator-file-access
+  namespace: default
+spec:
+  tags: ["kafka", "system", "allow", "file", "entity-operator"]
+  message: "Access allowed to kafka entity-operator files from source processes only"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: dev-kafka
+      app.kubernetes.io/managed-by: strimzi-cluster-operator
+      app.kubernetes.io/name: entity-operator
+      app.kubernetes.io/part-of: strimzi-dev-kafka
+      strimzi.io/cluster: dev-kafka
+      strimzi.io/kind: Kafka
+      strimzi.io/name: dev-kafka-entity-operator
+  file:
+    matchPaths:
+    - path: /etc/group
+      fromSource:
+      - path: /usr/bin/env
+    - path: /etc/hosts
+      fromSource:
+      - path: /usr/bin/stunnel
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/netstat
+      - path: /usr/bin/stunnel
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /usr/bin/stunnel
+    - path: /etc/passwd
+      fromSource:
+      - path: /opt/stunnel/stunnel_healthcheck.sh
+      - path: /usr/bin/bash
+      - path: /usr/bin/coreutils
+    - path: /lib64/libattr.so.1
+      fromSource:
+      - path: /usr/local/bin/bash
+    - path: /lib64/libcap.so.2
+      fromSource:
+      - path: /usr/local/bin/bash
+    - path: /lib64/libdl.so.2
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/local/bin/bash
+    - path: /lib64/libnss_dns.so.2
+      fromSource:
+      - path: /usr/bin/stunnel
+    - path: /lib64/libpcre.so.1
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /lib64/libpthread.so.0
+      fromSource:
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/grep
+    - path: /lib64/librt.so.1
+      fromSource:
+      - path: /usr/bin/coreutils
+    - path: /lib64/libtinfo.so.6
+      fromSource:
+      - path: /usr/bin/bash
+    matchDirectories:
+    - dir: /lib64/
+      fromSource:
+      - path: /usr/bin/netstat
+      - path: /usr/local/sbin/bash
+    - dir: /proc/
+      fromSource:
+      - path: /opt/stunnel/stunnel_healthcheck.sh
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/env
+      - path: /usr/bin/netstat
+      - path: /usr/local/bin/bash
+      - path: /usr/local/sbin/bash
+      - path: /usr/sbin/bash
+  action: Allow
