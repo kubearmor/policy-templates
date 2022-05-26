@@ -1,0 +1,30 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-restrict-access-to-rm-process
+  namespace: default
+spec:
+  tags: ["kafka", "system", "allow", "process"]
+  message: "Allow rm process only from trusted source process"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: dev-kafka
+      app.kubernetes.io/managed-by: strimzi-cluster-operator
+      app.kubernetes.io/name: kafka
+      app.kubernetes.io/part-of: strimzi-dev-kafka
+      strimzi.io/cluster: dev-kafka
+      strimzi.io/kind: Kafka
+      strimzi.io/name: dev-kafka-kafka
+  process:
+    matchPaths:
+    - path: /usr/bin/bash
+    - path: /usr/bin/rm
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/coreutils
+  action: Allow
