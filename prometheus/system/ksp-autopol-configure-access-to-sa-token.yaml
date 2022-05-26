@@ -1,0 +1,29 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-configure-access-to-sa-token
+  namespace: default
+spec:
+  tags: ["prometheus", "system", "allow", "file", "monitoring", "prometheus-operator"]
+  message: "Access to service accounnt token allowd only for prometheus operator process"
+  severity: 1
+  selector:
+    matchLabels:
+      app: kube-prometheus-stack-operator
+      app.kubernetes.io/instance: prometheusmetrics
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 19.2.2
+      chart: kube-prometheus-stack-19.2.2
+      heritage: Helm
+      release: prometheusmetrics
+  file:
+    matchPaths:
+    - path: /var/run/secrets/kubernetes.io/serviceaccount/token
+      fromSource:
+      - path: /bin/operator
+  action: Allow
