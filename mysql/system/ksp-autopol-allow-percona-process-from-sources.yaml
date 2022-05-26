@@ -1,0 +1,55 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-allow-percona-process-from-sources
+  namespace: default
+spec:
+  tags: ["MySQL", "system", "allow", "process", "percona"]
+  message: "Allow processes only from specific sources"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: pxc
+      app.kubernetes.io/instance: dev-mysql
+      app.kubernetes.io/managed-by: percona-xtradb-cluster-operator
+      app.kubernetes.io/name: percona-xtradb-cluster
+      app.kubernetes.io/part-of: percona-xtradb-cluster
+  process:
+    matchPaths:
+    - path: /usr/bin/awk
+      fromSource:
+      - path: /usr/bin/grep
+      - path: /usr/bin/hostname
+    - path: /usr/bin/cat
+      fromSource:
+      - path: /usr/bin/gawk
+      - path: /usr/bin/mysql
+      - path: /usr/bin/sed
+    - path: /usr/bin/hostname
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /usr/bin/mysql
+      fromSource:
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/timeout
+    - path: /usr/bin/sed
+      fromSource:
+      - path: /var/lib/mysql/readiness-check.sh
+    - path: /usr/bin/timeout
+      fromSource:
+      - path: /usr/bin/sed
+      - path: /var/lib/mysql/readiness-check.sh
+    - path: /var/lib/mysql/liveness-check.sh
+    - path: /var/lib/mysql/readiness-check.sh
+      fromSource:
+      - path: /usr/bin/hostname
+      - path: /usr/bin/sed
+    matchDirectories:
+    - dir: /usr/bin/
+      fromSource:
+      - path: /usr/bin/bash
+  action: Allow
