@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-configure-kubewatch-protocols-access
+  namespace: default
+spec:
+  tags: ["kubewatch", "system", "allow", "protocol", "k8s"]
+  message: "Accessed allowed to protocols only from kubewatch processes"
+  severity: 1
+  selector:
+    matchLabels:
+      app: kubewatch
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /bin/kubewatch
+    - protocol: udp
+      fromSource:
+      - path: /bin/kubewatch
+  action: Allow

@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-kube-state-metrics-configure-access-to-sa-token
+  namespace: default
+spec:
+  tags: ["kube-state-metrics", "system", "allow", "file", "monitoring"]
+  message: "Access to service accounnt token allowd only for kube-state-metrics process"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: metrics
+      app.kubernetes.io/name: kube-state-metrics
+      app.kubernetes.io/part-of: kube-state-metrics
+  file:
+    matchPaths:
+    - path: /var/run/secrets/kubernetes.io/serviceaccount/token
+      fromSource:
+      - path: /kube-state-metrics
+  action: Allow
