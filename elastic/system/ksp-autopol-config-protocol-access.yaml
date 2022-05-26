@@ -1,0 +1,39 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-config-protocol-access
+  namespace: default
+spec:
+  tags: ["elasticsearch", "system", "allow", "protocol"]
+  message: "Allow access to protocols from specific source process"
+  severity: 1
+  selector:
+    matchLabels:
+      common.k8s.elastic.co/type: elasticsearch
+      elasticsearch.k8s.elastic.co/cluster-name: elasticsearch
+      elasticsearch.k8s.elastic.co/http-scheme: https
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /mnt/elastic-internal/scripts/..2022_05_01_21_58_10.228352224/readiness-probe-script.sh
+      - path: /mnt/elastic-internal/scripts/..2022_05_01_22_02_46.606817330/readiness-probe-script.sh
+      - path: /mnt/elastic-internal/scripts/readiness-probe-script.sh
+      - path: /usr/bin/bash
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/curl
+      - path: /usr/bin/env
+      - path: /usr/local/bin/bash
+      - path: /usr/local/sbin/bash
+      - path: /usr/sbin/bash
+      - path: /usr/share/elasticsearch/bin/bash
+      - path: /usr/share/elasticsearch/jdk/bin/java
+    - protocol: udp
+      fromSource:
+      - path: /usr/bin/curl
+      - path: /usr/share/elasticsearch/jdk/bin/java
+  action: Allow

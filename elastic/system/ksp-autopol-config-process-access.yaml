@@ -1,0 +1,35 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-config-process-access
+  namespace: default
+spec:
+  tags: ["elasticsearch", "system", "allow", "process"]
+  message: "Allow access to elastic processes only from its source process"
+  severity: 1
+  selector:
+    matchLabels:
+      common.k8s.elastic.co/type: elasticsearch
+      elasticsearch.k8s.elastic.co/cluster-name: elasticsearch
+      elasticsearch.k8s.elastic.co/http-scheme: https
+  process:
+    matchPaths:
+    - path: /mnt/elastic-internal/scripts/readiness-probe-script.sh
+    - path: /usr/bin/bash
+    - path: /usr/bin/curl
+      fromSource:
+      - path: /mnt/elastic-internal/scripts/readiness-probe-script.sh
+      - path: /usr/bin/bash
+    - path: /usr/bin/cut
+      fromSource:
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/grep
+    - path: /usr/bin/grep
+      fromSource:
+      - path: /usr/bin/coreutils
+      - path: /usr/bin/curl
+  action: Allow
