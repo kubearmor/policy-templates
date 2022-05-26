@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-configure-tcp-protocol
+  namespace: default
+spec:
+  tags: ["MySQL", "system", "allow", "protocol", "bitnami", "tcp"]
+  message: "Allow tcp protocol to specific processes only"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: primary
+      app.kubernetes.io/instance: mysql
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: mysql
+      helm.sh/chart: mysql-8.6.1
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /bin/bash
+      - path: /opt/bitnami/mysql/bin/mysqladmin
+  action: Allow
