@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name:ksp-allow-elastic-access-file-sys-proc
+  name: ksp-allow-elastic-access-file-sys-proc
   namespace: default        #change namespace to match your namespace
 spec:
   tags: ["Elastic", "Allow Policy", "Baseline-policy"]
