@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["PYTHON", "JUPYTERHUB","API"]
-  message: "Alert! Python has only access to urandom and dash"
+  message: "Alert! Access allowed to urandom and dash are only from JupyterHub python process."
   severity: 1
   selector:
     matchLabels:
