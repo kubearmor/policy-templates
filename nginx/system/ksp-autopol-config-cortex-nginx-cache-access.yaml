@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-config-cortex-nginx-cache-access
+  namespace: default 
+spec:
+  tags: ["Nginx", "system", "allow", "file", "cortex"]
+  message: "Allow access to cache dir only from nginx process"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: nginx
+      app.kubernetes.io/instance: cortex
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: cortex
+      app.kubernetes.io/version: v1.11.1
+      helm.sh/chart: cortex-1.4.0
+  file:
+    matchDirectories:
+    - dir: /var/cache/nginx/client_temp/
+      fromSource:
+      - path: /usr/sbin/nginx
+  action: Allow
