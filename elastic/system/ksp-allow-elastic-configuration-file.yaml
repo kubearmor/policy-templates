@@ -1,0 +1,32 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-elastic-configuration-file
+  namespace: default                       #change label to match your label
+spec:
+  tags: ["elastic", "configuration", "elastic-operator", "cert"]
+  message: "Elastic configuration or cert file accessed"
+  severity: 1
+  selector:
+    matchLabels:
+      app: elasticsearch                    #change label to match your label
+  file:
+    matchPaths:
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /elastic-operator
+    - path: /etc/resolv.conf
+      fromSource:
+      - path: /elastic-operator
+    - path: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      fromSource:
+      - path: /elastic-operator
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /elastic-operator
+  action: Allow
