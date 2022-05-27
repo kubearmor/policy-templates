@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name:ksp-allow-elastic-access-file-etc-lib
+  name: ksp-allow-elastic-access-file-etc-lib
   namespace: default        #change namespace to match your namespace
 spec:
   tags: ["Elastic", "Allow Policy", "Baseline-policy"]
@@ -14,7 +14,6 @@ spec:
   selector:
     matchLabels:
       app: elastic     #change label to match your label
-
   file:
    matchDirectories:
     - dir: /etc/
