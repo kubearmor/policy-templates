@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["PYTHON", "JUPYTERHUB","API"]
-  message: "Alert! JupyterHub is  only has access to gconv modules and alembic"
+  message: "Alert! Access allowed to gconv modules and alembic files only from JupyterHub python process."
   severity: 1
   selector:
     matchLabels:
