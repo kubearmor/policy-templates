@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-config-pulsar-function-mesh-sa-token-access
+  namespace: default 
+spec:
+  tags: ["pulsar", "function-mesh", "system", "allow", "file"]
+  message: "Allow access to sa token file only from manager process"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: controller-manager
+      app.kubernetes.io/instance: pulsar-mesh
+      app.kubernetes.io/name: function-mesh-operator
+  file:
+    matchPaths:
+    - path: /var/run/secrets/kubernetes.io/serviceaccount/token
+      fromSource:
+      - path: /manager
+  action: Allow
