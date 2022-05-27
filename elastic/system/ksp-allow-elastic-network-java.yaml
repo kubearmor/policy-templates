@@ -5,11 +5,11 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-allow-elastic-jar-network
+  name: ksp-allow-elastic-network-java
   namespace: default                       #change label to match your label
 spec:
   tags: ["elastic", "jdk", "java"]
-  message: "Elastic JAR files accessed"
+  message: "network accessed by Elastic Binary"
   severity: 1
   selector:
     matchLabels:
