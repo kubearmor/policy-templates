@@ -9,7 +9,7 @@ metadata:
   namespace: default        #change namespace to match your namespace
 spec:
   tags: ["Elastic", "Allow Policy", "Baseline policy", "Bitnami"]
-  message: "Allows! The elastic bitnami files"
+  message: "Alert! Bitnami files accessed by Elasticsearch "
   severity: 1
   selector:
     matchLabels:
