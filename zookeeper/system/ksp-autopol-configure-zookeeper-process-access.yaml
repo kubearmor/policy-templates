@@ -1,0 +1,31 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-configure-zookeeper-process-access
+  namespace: default
+spec:
+  tags: ["zookeeper", "system", "allow", "process", "bitnami"]
+  message: "Access to zookeeper processes are configured"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: zookeeper
+      app.kubernetes.io/name: zookeeper
+      helm.sh/chart: zookeeper-7.0.0
+  process:
+    matchPaths:
+    - path: /bin/bash
+    - path: /bin/grep
+      fromSource:
+      - path: /bin/bash
+    - path: /bin/nc
+      fromSource:
+      - path: /usr/bin/timeout
+    - path: /usr/bin/timeout
+      fromSource:
+      - path: /bin/bash
+  action: Allow
