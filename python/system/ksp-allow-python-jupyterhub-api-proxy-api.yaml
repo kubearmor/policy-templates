@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["PYTHON", "JUPYTERHUB","API"]
-  message: "Alert! JupyterHub is only has access to proxy-api and cryptKeeper"
+  message: "Alert! Access allowed to proxy-api and CryptoKeeper only from JupyterHub python process."
   severity: 1
   selector:
     matchLabels:
