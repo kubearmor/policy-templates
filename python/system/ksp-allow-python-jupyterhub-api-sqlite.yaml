@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["PYTHON", "JUPYTERHUB","API"]
-  message: "Alert! jupyterhub is only has access to sqlite and core libraries"
+  message: "Alert! Access allowed to sqlite and core libraries are only from JupyterHub python process."
   severity: 1
   selector:
     matchLabels:
