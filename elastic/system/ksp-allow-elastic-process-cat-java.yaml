@@ -9,7 +9,7 @@ metadata:
   namespace: default                       #change label to match your label
 spec:
   tags: ["elastic", "jdk", "java"]
-  message: "cat or java process performed by elastic binary"
+  message: "Alert! Elasticsearch binaries accessed"
   severity: 1
   selector:
     matchLabels:
