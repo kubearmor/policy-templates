@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["PYTHON", "JUPYTERHUB","NOTEBOOK", "API"]
-  message: "Alert! Python has only access to uname"
+  message: "Alert! Access allowed to uname are only from JupyterHub conda python process."
   severity: 1
   selector:
     matchLabels:
