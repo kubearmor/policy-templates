@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["PYTHON", "JUPYTERHUB","API"]
-  message: "Alert! JupyterHub and ldconfig.real are only has access to ldconfig and python"
+  message: "Alert! Access allowed to JupyterHub and ldconfig.real files are only from ldconfig python process."
   severity: 1
   selector:
     matchLabels:
