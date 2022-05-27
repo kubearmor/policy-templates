@@ -5,16 +5,15 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name:ksp-allow-elastic-access-process-ldconfig-java-bincontroller
+  name: ksp-allow-elastic-access-process-ldconfig-java-bincontroller
   namespace: default        #change namespace to match your namespace
 spec:
   tags: ["Elastic", "Allow Policy", "Baseline-policy", "JAVA"]
-  message: "java or config process accessed by Elastic Binary"
+  message: "java or config process performed by Elastic Binary"
   severity: 1
   selector:
     matchLabels:
       app: elastic     #change label to match your label
-
   process:
     matchPaths:
     - path: /sbin/ldconfig
