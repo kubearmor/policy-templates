@@ -1,0 +1,74 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-jboss-allow-switchyard
+  namespace: default  # Change your namespace
+spec:
+  tags: ["java", "jre", "jvm", "hosts", "open-jdk"]
+  message: "Allow access to the files from jboss"
+  severity: 1
+  selector:
+    matchLabels:
+      app: jboss-switchyard # Change your matchLabels
+  file:
+    matchDirectories:
+    - dir: /opt/jboss/wildfly/modules/system/layers/base/org/jboss/
+      fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+    - dir: /proc/
+      fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+    - dir: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/jre/lib/
+      fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+    matchPaths:
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/modules/system/layers/base/io/undertow/core/main/module.xml
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/modules/system/layers/base/io/undertow/core/main/undertow-core-1.0.15.Final.jar
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/modules/system/layers/base/org/picketbox/main/module.xml
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/modules/system/layers/base/org/picketbox/main/picketbox-4.0.21.Beta1.jar
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/modules/system/layers/base/org/picketbox/main/picketbox-commons-1.0.0.final.jar
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/modules/system/layers/base/org/wildfly/security/manager/main/module.xml
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/modules/system/layers/base/org/wildfly/security/manager/main/wildfly-security-manager-1.0.0.Final.jar
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/modules/system/layers/base/sun/jdk/main/module.xml
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/modules/system/layers/base/sun/jdk/main/service-loader-resources/META-INF/services
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/standalone/configuration/logging.properties
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/standalone/log/server.log
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /usr/share/javazi/Etc/UTC
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      path: /usr/share/javazi/ZoneInfoMappings
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.201-2.6.16.1.el7_6.x86_64/bin/java
+      protocol: tcp
+  action: Allow    
+---

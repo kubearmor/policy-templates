@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-jsboss-allow-jre-tcp
+  namespace: default # Change your namespace
+spec:
+  tags: ["java", "jboss", "protocols", "open-jdk"]
+  message: "Allow access to tcp protocol"
+  severity: 1
+  selector:
+    matchLabels:
+      app: jboss-workbench  # Change your matchLabels
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      protocol: tcp
+  action: Allow    
+---

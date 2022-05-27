@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-jsboss-allow-jre-bin
+  namespace: default # Change your namespace
+spec:
+  tags: ["java", "jboss", "files"]
+  message: "Allow access to the jvm files"
+  severity: 1
+  selector:
+    matchLabels:
+      app: jboss-workbench  # Change your matchLabels
+  process:
+    matchPaths:
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      path: /usr/bin/sh
+  action: Allow    
+---

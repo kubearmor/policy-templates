@@ -1,0 +1,75 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-jsboss-allow-xml-configuration
+  namespace: default # Change your namespace
+spec:
+  tags: ["java", "jboss", "jvm", "password", "files"]
+  message: "Allow jboss to acess the java and openjdk files"
+  severity: 1
+  selector:
+    matchLabels:
+      app: jboss-workbench  # Change your matchLabels
+  file:
+    matchDirectories:
+    - dir: /lib64/
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+    - dir: /opt/jboss/wildfly/modules/system/layers/base/
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+    - dir: /proc/
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+    - dir: /sys/
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+    - dir: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/jre/lib/
+      fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+    matchPaths:
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      path: /dev/random
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      path: /dev/urandom
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      path: /etc/hosts
+    - fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      path: /etc/ld.so.cache
+    - fromSource:
+      - path: /usr/bin/bash
+      path: /etc/passwd
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/bin/product.conf
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/standalone/configuration/logging.properties
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/standalone/configuration/standalone-full-drools.xml
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/standalone/data/kernel/process-uuid
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      path: /opt/jboss/wildfly/standalone/log/server.log
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      path: /tmp
+    - fromSource:
+      - path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/bin/java
+      path: /var/tmp
+  action: Allow    
+---
