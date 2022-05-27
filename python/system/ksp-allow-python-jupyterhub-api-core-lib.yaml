@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["PYTHON", "JUPYTERHUB","API"]
-  message: "Alert! JupyterHub is only has access to dist-packages and locale"
+  message: "Alert! Access allowed to dist-packages and locale files only from JupyterHub python process"
   severity: 1
   selector:
     matchLabels:
