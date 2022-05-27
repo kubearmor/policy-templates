@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["PYTHON", "JUPYTERHUB","NOTEBOOK", "API"]
-  message: "Alert! Python has only access to localtime and uname"
+  message: "Alert! Access allowed to localtime and uname are only from JupyterHub python process."
   severity: 1
   selector:
     matchLabels:
