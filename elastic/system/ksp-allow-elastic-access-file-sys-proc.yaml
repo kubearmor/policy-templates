@@ -14,7 +14,6 @@ spec:
   selector:
     matchLabels:
       app: elastic     #change label to match your label
-
   file:
    matchDirectories:
     - dir: /sys/
