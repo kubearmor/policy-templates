@@ -1,0 +1,29 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-configure-file-access-from-prometheus-binary
+  namespace: default
+spec:
+  tags: ["prometheus", "system", "allow", "file", "monitoring"]
+  message: "Allowed access to ca.crt and serviceaccount token from prometheus process"
+  severity: 1
+  selector:
+    matchLabels:
+      app: prometheus
+      chart: prometheus-14.3.0
+      component: server
+      heritage: Helm
+      release: prometheus-pinot
+  file:
+    matchPaths:
+    - path: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      fromSource:
+      - path: /bin/prometheus
+    - path: /var/run/secrets/kubernetes.io/serviceaccount/token
+      fromSource:
+      - path: /bin/prometheus
+  action: Allow
