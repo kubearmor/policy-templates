@@ -1,0 +1,36 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-config-zookeeper-protocol-access
+  namespace: default
+spec:
+  tags: ["zookeeper", "system", "allow", "protocol", "bitnami"]
+  message: "tcp access allowed only to zookeeper processes"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: zookeeper
+      app.kubernetes.io/instance: accuknox-dev-pinot
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: zookeeper
+      helm.sh/chart: zookeeper-7.0.0
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /bin/bash
+      - path: /bin/nc
+      - path: /bin/nc.traditional
+      - path: /opt/bitnami/common/bin/nc
+      - path: /opt/bitnami/java/bin/nc
+      - path: /opt/bitnami/zookeeper/bin/nc
+      - path: /sbin/nc
+      - path: /usr/bin/nc
+      - path: /usr/local/bin/nc
+      - path: /usr/local/sbin/nc
+      - path: /usr/sbin/nc
+  action: Allow

@@ -1,0 +1,38 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-configure-elastic-operator-file-access
+  namespace: default
+spec:
+  tags: ["elasticsearch", "system", "allow", "file", "elastic-operator"]
+  message: "Access allowed to elastic-operator system files and dir only from elastic-operator process"
+  severity: 1
+  selector:
+    matchLabels:
+      control-plane: elastic-operator
+  file:
+    matchPaths:
+    - path: /etc/os-release
+      fromSource:
+      - path: /elastic-operator
+    - path: /etc/redhat-release
+      fromSource:
+      - path: /elastic-operator
+    - path: /tmp/k8s-webhook-server/serving-certs/tls.key
+      fromSource:
+      - path: /elastic-operator
+    - path: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      fromSource:
+      - path: /elastic-operator
+    - path: /var/run/secrets/kubernetes.io/serviceaccount/token
+      fromSource:
+      - path: /elastic-operator
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /elastic-operator
+  action: Allow

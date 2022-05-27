@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-file-configure-sys-dir-access
+  namespace: default 
+spec:
+  tags: ["java", "system", "allow", "file"]
+  message: "Allow access to sys dir only from java process"
+  severity: 1
+  selector:
+    matchLabels:
+      app: data-protection-core
+      environment: dev
+  file:
+    matchDirectories:
+    - dir: /sys/
+      fromSource:
+      - path: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+  action: Allow

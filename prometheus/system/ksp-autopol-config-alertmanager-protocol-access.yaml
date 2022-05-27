@@ -1,0 +1,29 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-config-alertmanager-protocol-access
+  namespace: default
+spec:
+  tags: ["prometheus", "system", "allow", "protocol", "monitoring", "alertmanager", "prometheus-alertmanager"]
+  message: "only alertmanager can use use tcp and udp protocols "
+  severity: 1
+  selector:
+    matchLabels:
+      app: prometheus
+      chart: prometheus-14.3.0
+      component: alertmanager
+      heritage: Helm
+      release: prometheus-pinot
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /bin/alertmanager
+    - protocol: udp
+      fromSource:
+      - path: /bin/alertmanager
+  action: Allow

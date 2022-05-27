@@ -1,0 +1,28 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-configure-consul-process-access
+  namespace: default
+spec:
+  tags: ["consul", "system", "allow", "process"]
+  message: "Access to consul processes are configured"
+  severity: 1
+  selector:
+    matchLabels:
+      chart: consul-3.9.6
+      component: consul-consul
+      heritage: Helm
+      release: consul
+  process:
+    matchPaths:
+    - path: /bin/consul
+      fromSource:
+      - path: /usr/bin/getconf
+    - path: /usr/bin/getconf
+      fromSource:
+      - path: /bin/consul
+  action: Allow

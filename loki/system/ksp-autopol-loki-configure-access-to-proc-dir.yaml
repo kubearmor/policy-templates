@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-loki-configure-access-to-proc-dir
+  namespace: default
+spec:
+  tags: ["grafana", "system", "allow", "file", "loki"]
+  message: "Access allowd to loki proc dir only from loki process"
+  severity: 1
+  selector:
+    matchLabels:
+      app: loki
+      name: loki
+      release: loki
+  file:
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /usr/bin/loki
+  action: Allow
