@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name:ksp-allow-elastic-access=file-passwd-labels-ldsocache
+  name: ksp-allow-elastic-access=file-passwd-labels-ldsocache
   namespace: default        #change namespace to match your namespace
 spec:
   tags: ["Elastic", "Allow Policy", "Baseline-policy", "passwd"]
@@ -13,8 +13,7 @@ spec:
   severity: 1
   selector:
     matchLabels:
-      app: elastic     #change label to match your label
-    
+      app: elastic     #change label to match your label  
   file:
    matchPaths:
     - path: /etc/passwd
