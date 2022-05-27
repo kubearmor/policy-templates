@@ -9,7 +9,7 @@ metadata:
   namespace: default                       #change label to match your label
 spec:
   tags: ["elastic", "jdk", "java"]
-  message: "cat process performed by elastic binary"
+  message: "cat or java or binary process performed by elastic"
   severity: 1
   selector:
     matchLabels:
