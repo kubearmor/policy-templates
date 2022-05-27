@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-pulsar-configure-bin-access
+  namespace: default
+spec:
+  tags: ["pulsar", "system", "allow", "process"]
+  message: "Access to pulsar processes are configured"
+  severity: 1
+  process:
+    matchPaths:
+    - path: /usr/bin/bash
+      fromSource:
+      - path: /usr/bin/timeout
+    - path: /usr/bin/grep
+      fromSource:
+      - path: /usr/bin/bash
+    - path: /usr/bin/timeout
+  action: Allow

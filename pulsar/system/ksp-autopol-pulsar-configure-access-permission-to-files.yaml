@@ -1,0 +1,52 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-pulsar-configure-access-permission-to-files
+  namespace: default 
+spec:
+  tags: ["pulsar", "system", "allow", "file"]
+  message: "Configured access permission to pulsar files"
+  severity: 1
+  file:
+    matchPaths:
+    - path: /etc/gai.conf
+      fromSource:
+      - path: /usr/bin/nc
+      - path: /usr/bin/nc.openbsd
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/nc
+      - path: /usr/local/bin/bash
+      - path: /usr/local/sbin/bash
+    - path: /etc/nsswitch.conf
+      fromSource:
+      - path: /usr/bin/nc
+    - path: /lib/x86_64-linux-gnu/libc.so.6
+      fromSource:
+      - path: /usr/bin/timeout
+      - path: /usr/sbin/bash
+    - path: /lib/x86_64-linux-gnu/libdl.so.2
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /lib/x86_64-linux-gnu/libnss_files.so.2
+      fromSource:
+      - path: /usr/bin/nc
+    - path: /lib/x86_64-linux-gnu/libpcre.so.3
+      fromSource:
+      - path: /usr/bin/grep
+    - path: /lib/x86_64-linux-gnu/libpthread.so.0
+      fromSource:
+      - path: /usr/bin/timeout
+    - path: /lib/x86_64-linux-gnu/librt.so.1
+      fromSource:
+      - path: /usr/bin/timeout
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+  action: Allow

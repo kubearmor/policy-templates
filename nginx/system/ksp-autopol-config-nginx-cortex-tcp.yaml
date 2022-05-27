@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-config-nginx-cortex-tcp
+  namespace: default
+spec:
+  tags: ["Nginx", "cortex", "system", "allow", "protocol"]
+  message: "tcp allowed only from Nginx binary"
+  severity: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: nginx
+      app.kubernetes.io/instance: cortex
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: cortex
+      app.kubernetes.io/version: v1.11.1
+      helm.sh/chart: cortex-1.4.0
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/sbin/nginx
+  action: Allow

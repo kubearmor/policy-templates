@@ -1,0 +1,26 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-pulsar-configure-tcp-udp-permission
+  namespace: default
+spec:
+  tags: ["pulsar", "system", "allow", "protocol"]
+  message: "tcp/udp access permissions configured"
+  severity: 1
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/bin/bash
+      - path: /usr/bin/nc
+      - path: /usr/bin/nc.openbsd
+      - path: /usr/sbin/bash
+    - protocol: udp
+      fromSource:
+      - path: /usr/bin/nc
+      - path: /usr/bin/nc.openbsd
+  action: Allow

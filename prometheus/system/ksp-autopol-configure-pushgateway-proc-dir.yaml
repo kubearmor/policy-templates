@@ -1,0 +1,26 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-configure-pushgateway-proc-dir
+  namespace: default
+spec:
+  tags: ["prometheus", "system", "allow", "file", "monitoring", "pushgateway"]
+  message: "Access to /proc dir.allowed only from pushgateway process"
+  severity: 1
+  selector:
+    matchLabels:
+      app: prometheus
+      chart: prometheus-14.3.0
+      component: pushgateway
+      heritage: Helm
+      release: prometheus-pinot
+  file:
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /bin/pushgateway
+  action: Allow

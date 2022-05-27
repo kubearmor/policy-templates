@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-autopol-pulsar-configure-access-to-proc-dir
+  namespace: default 
+spec:
+  tags: ["pulsar", "system", "allow", "file"]
+  message: "Configured access permission to /proc directory"
+  severity: 1
+  selector:
+    matchLabels:
+      app: pulsar
+      cluster: pulsar
+      component: bookie
+      release: pulsar
+  file:
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+  action: Allow
