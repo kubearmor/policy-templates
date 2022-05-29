@@ -1,0 +1,19 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-allow-egress-fluentd-elasticsearch-pod-connection
+  namespace: default            #change namespace to match your namespace
+spec:
+  description: "Allow egress communication between fluentd and elasticsearch pod via port 9200"
+   endpointSelector:
+    matchLabels:
+      app: fluentd                                  #change label to match your label
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        app: elasticsearch                            #change label to match your label
+        k8s:io.kubernetes.pod.namespace: default      #change namespace to match your namespace
+    toPorts:
+    - ports:
+      - port: "9200"
+        protocol: TCP
