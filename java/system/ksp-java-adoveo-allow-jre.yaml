@@ -8,6 +8,8 @@ metadata:
   name: ksp-java-adoveo-allow-jre
   namespace: default # Change your namespace
 spec:
+  tags: ["java", adoveo", "frameworks", "jre", "tomcat"]
+  message: "Allow only jre files "
   severity: 1
   selector:
     matchLabels:
