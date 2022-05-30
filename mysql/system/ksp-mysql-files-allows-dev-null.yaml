@@ -1,0 +1,111 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mysql-files-allows-dev-null
+  namespace: default    #change namespace to match your namespace
+spec:
+  tags: ["MySQL","Allow policy" ]
+  message: "Files accessed by MySQL binary"
+  severity: 1
+  selector:
+    matchLabels:
+      name: mysql         #change label to match your label  
+  file:
+    matchPaths:
+    - path: /dev/null
+      fromSource:
+      - path: /usr/bin/mysql
+    - path: /etc/ld.so.cache
+      fromSource:
+      - path: /bin/mkdir
+    - path: /etc/mysql/conf.d/docker.cnf
+      fromSource:
+      - path: /usr/bin/mysql
+    - path: /etc/mysql/conf.d/mysql.cnf
+      fromSource:
+      - path: /usr/bin/mysql
+    - path: /lib/x86_64-linux-gnu/libaio.so.1
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - path: /lib/x86_64-linux-gnu/libnss_files.so.2
+      fromSource:
+      - path: /usr/bin/mysql
+    - path: /lib/x86_64-linux-gnu/libpthread.so.0
+      fromSource:
+      - path: /bin/mkdir
+    - path: /lib/x86_64-linux-gnu/librt.so.1
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - path: /lib/x86_64-linux-gnu/libselinux.so.1
+      fromSource:
+      - path: /bin/mkdir
+    - path: /tmp/sh-thd-151959818
+      fromSource:
+      - path: /usr/bin/mysql
+    - path: /usr/share/mysql/charsets/Index.xml
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - path: /usr/share/mysql/english/errmsg.sys
+      fromSource:
+      - path: /usr/sbin/mysqld
+    matchDirectories:
+    - dir: /etc/
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - dir: /etc/mysql/mysql.conf.d/
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - dir: /proc/
+      fromSource:
+      - path: /bin/mkdir
+      - path: /usr/sbin/mysqld
+    - dir: /sys/
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - dir: /tmp/
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - dir: /usr/share/zoneinfo/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Atlantic/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Brazil/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/Chile/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/America/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/America/North_Dakota/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/Antarctica/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/posix/Europe/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/America/Indiana/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/America/North_Dakota/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /usr/share/zoneinfo/right/SystemV/
+      fromSource:
+      - path: /usr/bin/mysql_tzinfo_to_sql
+    - dir: /var/lib/mysql/
+      fromSource:
+      - path: /usr/sbin/mysqld
+    - dir: /var/lib/mysql/mysql/
+      fromSource:
+      - path: /usr/sbin/mysqld
+  action: Allow
