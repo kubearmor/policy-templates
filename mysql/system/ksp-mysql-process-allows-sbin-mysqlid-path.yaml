@@ -8,7 +8,7 @@ metadata:
   name: ksp-mysql-process-allows-sbin-mysqlid-path
   namespace: default    #change namespace to match your namespace
 spec:
-  tags: ["mysql","Allow policy" ]
+  tags: ["MySQL","Allow policy" ]
   message: "Process accessed by MySQL binary"
   severity: 1
   selector:
