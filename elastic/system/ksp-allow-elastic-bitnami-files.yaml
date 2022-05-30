@@ -1,0 +1,42 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-elastic-bitnami-files
+  namespace: default        #change namespace to match your namespace
+spec:
+  tags: ["Elastic", "Allow Policy", "Baseline policy", "Bitnami"]
+  message: "Alert! Bitnami files accessed by Elasticsearch "
+  severity: 1
+  selector:
+    matchLabels:
+      app: elastic     #change label to match your label
+
+  file:
+    matchDirectories:
+    - dir: /bitnami/elasticsearch/data/_state/
+      fromSource:
+      - path: /opt/bitnami/elasticsearch/bin/elasticsearch
+    - dir: /lib/x86_64-linux-gnu/
+      fromSource:
+      - path: /bin/cp
+    - dir: /opt/bitnami/scripts/
+      fromSource:
+      - path: /opt/bitnami/scripts/elasticsearch/healthcheck.sh
+    - dir: /proc/
+      fromSource:
+      - path: /bin/cp
+      - path: /opt/bitnami/scripts/elasticsearch/healthcheck.sh
+      - path: /usr/bin/id
+    - dir: /sys/
+      fromSource:
+      - path: /opt/bitnami/common/bin/yq
+      - path: /opt/bitnami/elasticsearch/bin/elasticsearch
+      - path: /opt/bitnami/java/bin/java
+    - dir: /tmp/
+      fromSource:
+      - path: /bin/cp
+  action: Allow
