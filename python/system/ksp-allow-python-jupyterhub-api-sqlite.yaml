@@ -1,0 +1,40 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-python-jupyterhub-api-sqlite
+  namespace: default
+spec:
+  tags: ["PYTHON", "JUPYTERHUB","API"]
+  message: "Alert! Access allowed to sqlite and core libraries are only from JupyterHub python process."
+  severity: 1
+  selector:
+    matchLabels:
+      app: jupyterhub
+      component: hub
+      hub.jupyter.org/network-access-proxy-api: "true"
+      hub.jupyter.org/network-access-proxy-http: "true"
+      hub.jupyter.org/network-access-singleuser: "true"
+      release: jupyter-hub
+  file:
+    matchPaths:
+    - path: /etc/mime.types
+      fromSource:
+      - path: /usr/bin/python3.8
+    - path: /lib/x86_64-linux-gnu/libc.so.6
+      fromSource:
+      - path: /usr/bin/uname
+    - path: /sbin/ldconfig
+      fromSource:
+      - path: /sbin/ldconfig.real
+      - path: /usr/sbin/ldconfig.real
+    - path: /srv/jupyterhub/jupyterhub.sqlite-journal
+      fromSource:
+      - path: /usr/bin/python3.8
+    - path: /srv/jupyterhub/jupyterhub.sqlite
+      fromSource:
+      - path: /usr/bin/python3.8
+  action: Allow

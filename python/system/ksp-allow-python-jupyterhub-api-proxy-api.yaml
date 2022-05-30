@@ -1,0 +1,36 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-python-jupyterhub-api-proxy-api
+  namespace: default
+spec:
+  tags: ["PYTHON", "JUPYTERHUB","API"]
+  message: "Alert! Access allowed to proxy-api and CryptoKeeper only from JupyterHub python process."
+  severity: 1
+  selector:
+    matchLabels:
+      app: jupyterhub
+      component: hub
+      hub.jupyter.org/network-access-proxy-api: "true"
+      hub.jupyter.org/network-access-proxy-http: "true"
+      hub.jupyter.org/network-access-singleuser: "true"
+      release: jupyter-hub
+  file:
+    matchPaths:
+    - path: /usr/local/etc/jupyterhub/config/proxy-api
+      fromSource:
+      - path: /usr/bin/python3.8
+    - path: /usr/local/etc/jupyterhub/jupyterhub_config.py
+      fromSource:
+      - path: /usr/bin/python3.8
+    - path: /usr/local/etc/jupyterhub/secret/hub.config.CryptKeeper.keys
+      fromSource:
+      - path: /usr/bin/python3.8
+    - path: /usr/local/etc/jupyterhub/secret/values.yaml
+      fromSource:
+      - path: /usr/bin/python3.8
+  action: Allow
