@@ -9,7 +9,7 @@ metadata:
   namespace: default   #change namespace to match your namespace
 spec:
   tags: ["mysql","mysql-operator" ]
-  message: "Allows only mysql process"
+  message: "Allows only mysql pgrep process"
   severity: 1
   selector:
     matchLabels:
