@@ -28,4 +28,3 @@ spec:
       fromSource:
       - path: /usr/local/openjdk-8/bin/java
   action: Allow
----
