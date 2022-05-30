@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-allow-elastic-access-file-lib-config
+  namespace: default        #change namespace to match your namespace
+spec:
+  tags: ["Elastic", "Allow Policy", "Baseline-policy"]
+  message: "object files and libraries or configuration files accessed by Elastic Binary"
+  severity: 1
+  selector:
+    matchLabels:
+      app: elastic     #change label to match your label
+  file:
+   matchDirectories:
+    - dir: /lib64/
+      fromSource:
+      - path: /mnt/elastic-internal/scripts/readiness-probe-script.sh
+      - path: /usr/bin/cut
+      - path: /usr/bin/tr
+    - dir: /usr/share/elasticsearch/config/
+      fromSource:
+      - path: /usr/share/elasticsearch/jdk/bin/java
+  action: Allow
