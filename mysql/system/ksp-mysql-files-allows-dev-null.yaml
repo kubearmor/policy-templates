@@ -8,7 +8,7 @@ metadata:
   name: ksp-mysql-files-allows-dev-null
   namespace: default    #change namespace to match your namespace
 spec:
-  tags: ["mysql","Allow policy" ]
+  tags: ["MySQL","Allow policy" ]
   message: "Files accessed by MySQL binary"
   severity: 1
   selector:
