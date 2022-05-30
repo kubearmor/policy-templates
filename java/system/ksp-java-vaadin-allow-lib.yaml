@@ -124,4 +124,3 @@ spec:
       - path: /usr/local/openjdk-11/bin/java
       path: /usr/local/openjdk-11/conf/security/java.security
   action: Allow
----
