@@ -53,4 +53,3 @@ spec:
       fromSource:
       - path: /usr/local/openjdk-11/bin/java
   action: Allow
----
