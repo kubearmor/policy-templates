@@ -1,0 +1,23 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-python-jupyterhub-udp-53
+  namespace: default
+spec:
+  description: "JupyterHub only allow egress UDP connection from 53 port"
+  endpointSelector:
+    matchLabels:
+      app: jupyterhub
+      component: image-puller
+      controller-uid: cf06bf37-0ac9-4885-aaa2-0ce2ad9ad673
+      job-name: hook-image-awaiter
+      release: jupyter-hub
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        k8s-app: kube-dns
+        k8s:io.kubernetes.pod.namespace: kube-system
+    toPorts:
+    - ports:
+      - port: "53"
+        protocol: UDP

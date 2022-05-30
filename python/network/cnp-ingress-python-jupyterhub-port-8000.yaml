@@ -1,0 +1,23 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-ingress-python-jupyterhub-port-8000
+  namespace: default
+spec:
+  description: "JupyterHub only allow ingress TCP connection from 8000 port for world"
+  endpointSelector:
+    matchLabels:
+      app: jupyterhub
+      component: proxy
+      hub.jupyter.org/network-access-hub: "true"
+      hub.jupyter.org/network-access-singleuser: "true"
+      release: jupyter-hub
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "8000"
+        protocol: TCP
+    fromEntities:
+    - host
+    - world
+    - remote-node

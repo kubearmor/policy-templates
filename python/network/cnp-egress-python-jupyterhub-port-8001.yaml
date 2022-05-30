@@ -1,0 +1,28 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-python-jupyterhub-port-8001
+  namespace: default
+spec:
+  description: "JupyterHub only allow egress TCP connection from 8001 port"
+  endpointSelector:
+    matchLabels:
+      app: jupyterhub
+      component: hub
+      hub.jupyter.org/network-access-proxy-api: "true"
+      hub.jupyter.org/network-access-proxy-http: "true"
+      hub.jupyter.org/network-access-singleuser: "true"
+      release: jupyter-hub
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        app: jupyterhub
+        component: proxy
+        hub.jupyter.org/network-access-hub: "true"
+        hub.jupyter.org/network-access-singleuser: "true"
+        k8s:io.kubernetes.pod.namespace: default
+        release: jupyter-hub
+    toPorts:
+    - ports:
+      - port: "8001"
+        protocol: TCP

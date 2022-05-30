@@ -1,0 +1,22 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-ingress-python-jupyterhub-port-8081
+  namespace: default
+spec:
+  description: "JupyterHub only allow ingress TCP connection from 8081 port"
+  endpointSelector:
+    matchLabels:
+      app: jupyterhub
+      component: hub
+      hub.jupyter.org/network-access-proxy-api: "true"
+      hub.jupyter.org/network-access-proxy-http: "true"
+      hub.jupyter.org/network-access-singleuser: "true"
+      release: jupyter-hub
+  ingress:
+  - toPorts:
+    - ports:
+      - port: "8081"
+        protocol: TCP
+    fromEntities:
+    - host
