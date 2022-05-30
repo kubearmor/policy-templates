@@ -23,5 +23,3 @@ spec:
       - path: /usr/local/bin/mvn-entrypoint.sh
       - path: /usr/local/openjdk-11/bin/java
   action: Allow
----
-
