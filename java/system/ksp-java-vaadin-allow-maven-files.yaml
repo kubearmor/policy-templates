@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-vaadin-allow-maven-files
+  namespace: default # Change your namespace
+spec:
+  tags: ["java", vaadin", "script", "files"]
+  message: "Allow only maven files to acess script files"
+  severity: 1
+  selector:
+    matchLabels:
+      app: vaadin-dspublisher
+  process:
+    matchDirectories:
+      - dir: /usr/bin/
+        fromSource:
+          - path: /bin/dash
+    matchPaths:
+      - path: /usr/local/bin/mvn-entrypoint.sh
+      - path: /usr/local/openjdk-11/bin/java
+  action: Allow

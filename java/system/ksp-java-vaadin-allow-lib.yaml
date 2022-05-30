@@ -1,0 +1,126 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-vaadin-allow-lib
+  namespace: default # Change your namespace
+spec:
+  tags: ["java", "vaadin", "jvm", "hosts", "open-jdk"]
+  message: "Allow vaadin to acess the library files"
+  severity: 1
+  selector:
+    matchLabels:
+      app: vaadin-dspublisher 
+  file:
+    matchDirectories:
+    - dir: /lib/x86_64-linux-gnu/
+    - dir: /proc/
+      fromSource:
+      - path: /jdk/bin/java
+      - path: /usr/local/openjdk-11/bin/java
+    - dir: /sys/
+      fromSource:
+      - path: /jdk/bin/java
+      - path: /usr/local/openjdk-11/bin/java
+    - dir: /usr/lib/locale/C.UTF-8/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - dir: /usr/local/openjdk-11/lib/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - dir: /usr/share/maven/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    matchPaths:
+    - fromSource:
+      - path: /bin/ls
+      path: /etc/group
+    - fromSource:
+      path: /etc/ld.so.cache
+    - fromSource:
+      - path: /bin/ls
+      path: /etc/localtime
+    - fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      path: /etc/passwd
+    - fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      path: /etc/timezone
+    - fromSource:
+      - path: /jdk/bin/java
+      path: /jdk/jre/lib/amd64/libnet.so
+    - fromSource:
+      - path: /jdk/bin/java
+      path: /jdk/jre/lib/resources.jar
+    - fromSource:
+      path: /lib/x86_64-linux-gnu/libc.so.6
+    - fromSource:
+      - path: /lib/x86_64-linux-gnu/libc.so.6
+      path: /lib/x86_64-linux-gnu/libdl.so.2
+    - fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      path: /lib/x86_64-linux-gnu/libgcc_s.so.1
+    - fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      path: /lib/x86_64-linux-gnu/libm.so.6
+    - fromSource:
+      - path: /usr/bin/find
+      path: /lib/x86_64-linux-gnu/libpthread.so.0
+    - fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      path: /lib/x86_64-linux-gnu/librt.so.1
+    - fromSource:
+      - path: /usr/bin/find
+      path: /lib/x86_64-linux-gnu/libselinux.so.1
+    - fromSource:
+      - path: /bin/dash
+      path: /root/.m2/copy_reference_file.log
+    - fromSource:
+      - path: /usr/bin/find
+      path: /root/.m2/repository
+    - fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      path: /tmp/jansi-2.4.0-c7055c990980c7f8-libjansi.so
+    - fromSource:
+      - path: /bin/touch
+      path: /usr/lib/locale/C.UTF-8/LC_CTYPE
+    - fromSource:
+      - path: /bin/date
+      path: /usr/lib/locale/C.UTF-8/LC_IDENTIFICATION
+    - fromSource:
+      - path: /bin/touch
+      path: /usr/lib/locale/C.UTF-8/LC_MEASUREMENT
+    - fromSource:
+      - path: /bin/date
+      path: /usr/lib/locale/C.UTF-8/LC_NAME
+    - fromSource:
+      - path: /bin/touch
+      path: /usr/lib/locale/C.UTF-8/LC_NUMERIC
+    - fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      path: /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+    - fromSource:
+      - path: /bin/cp
+      path: /usr/lib/x86_64-linux-gnu/libacl.so.1
+    - fromSource:
+      - path: /bin/cp
+      path: /usr/lib/x86_64-linux-gnu/libattr.so.1
+    - fromSource:
+      - path: /usr/bin/expr
+      path: /usr/lib/x86_64-linux-gnu/libgmp.so.10
+    - fromSource:
+      - path: /bin/mkdir
+      path: /usr/lib/x86_64-linux-gnu/libpcre2-8.so.0
+    - fromSource:
+      - path: /bin/dash
+      path: /usr/local/bin/mvn-entrypoint.sh
+    - fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      path: /usr/local/openjdk-11/conf/logging.properties
+    - fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+      path: /usr/local/openjdk-11/conf/security/java.security
+  action: Allow
