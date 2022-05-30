@@ -9,7 +9,7 @@ metadata:
   namespace: default        #change namespace to match your namespace
 spec:
   tags: ["Elastic", "Allow Policy", "Baseline policy"]
-  message: "network accessed by Elastic Binary"
+  message: "Network accessed by Elastic Binary"
   severity: 1
   selector:
     matchLabels:
