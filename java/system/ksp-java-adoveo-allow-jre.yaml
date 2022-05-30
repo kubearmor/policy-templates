@@ -37,4 +37,3 @@ spec:
       fromSource:
       - path: /usr/lib/jvm/java-1.8-openjdk/jre/bin/java
   action: Allow
----
