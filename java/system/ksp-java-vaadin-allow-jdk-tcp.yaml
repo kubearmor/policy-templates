@@ -21,4 +21,3 @@ spec:
       - path: /usr/local/openjdk-11/bin/java
       protocol: tcp
   action: Allow
----
