@@ -4,7 +4,7 @@ metadata:
   name: cnp-ingress-elastic-tcp-protocol
   namespace: default                    # Change your namespace
 spec:
-  description: "Allow tcp connections only via 9300 port"
+  description: "Allow all endpoints with the label env=elasticsearch to recieve traffic from the host that is serving the particular endpoint using TCP on port 9300"
   endpointSelector:
     matchLabels:
       app: elasticsearch                # Change your matchLabels
