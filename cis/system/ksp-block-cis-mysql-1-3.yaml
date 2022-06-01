@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-cis-mysql-1-2
+  namespace: default
+spec:
+  tags: ["MySQL", "CIS"]
+  message: "Alert! mysql history file access denied!"
+  selector:
+    matchLabels:
+      app: mysql
+  process:
+    severity: 1
+    matchPatterns:
+    # mysql history file should be accessed by anyone
+    - pattern: /*.mysql history
+    - pattern: /*.mysql_history
+    - pattern: /*.mysqlsh/history
+    action: Block
