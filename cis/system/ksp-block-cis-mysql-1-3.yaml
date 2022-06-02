@@ -16,7 +16,6 @@ spec:
   process:
     severity: 1
     matchPatterns:
-    # mysql history file should be accessed by anyone
     - pattern: /*.mysql history
     - pattern: /*.mysql_history
     - pattern: /*.mysqlsh/history
