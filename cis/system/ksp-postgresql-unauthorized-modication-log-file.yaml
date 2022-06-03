@@ -1,0 +1,24 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-postgresql-unauthorized-modication-log-file
+  namespace: default
+spec:
+  tags: ["PostgreSQL", "CIS"] 
+  message: "Alert! postgres log file access "
+  selector:
+    matchLabels:
+      app: postgresql
+  file:
+    severity: 4
+    matchDirectories:
+      - dir: /var/log/postgresql/
+        recursive: true
+        readOnly: false
+        fromSource:
+        - path: /usr/bin/touch
+        - path: /usr/bin/chmod
+        - path: /usr/bin/nano
+        - path: /usr/bin/cat
+        - path: /usr/bin/vi
+    action: Audit
