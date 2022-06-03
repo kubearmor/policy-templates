@@ -21,6 +21,4 @@ spec:
     - path: /usr/local/tomcat/webapps.dist/docs/WEB-INF/web.xml
     - path: /usr/local/tomcat/webapps.dist/docs/appdev/sample/web/WEB-INF/web.xml
     - path: /usr/local/tomcat/webapps.dist/examples/jsp/security/protected/error.jsp
-    action: Audit
-
-    
+    action: Audit   
