@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-postgresql-unauthorized-modication-log-file
+  name: ksp-audit-cis-postgres-1-1
   namespace: default
 spec:
   tags: ["PostgreSQL", "CIS"] 
