@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-cis-postgresql-1-4
+  namespace: default
+spec:
+  tags: ["PostgreSQL", "CIS"]
+  message: "Alert! postgresql history file access denied!"
+  selector:
+    matchLabels:
+      app: postgresql
+  process:
+    severity: 1
+    matchPatterns:
+    - pattern: /*.psql_history
+    action: Block
