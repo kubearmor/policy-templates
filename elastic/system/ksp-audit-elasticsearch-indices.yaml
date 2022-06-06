@@ -9,7 +9,7 @@ metadata:
   namespace: default 
 spec:
   tags: ["Elasticsearch", "system", "audit", "file"]
-  message: "Audit indices directory"
+  message: "Access to elasticsearch indices directory is detected"
   severity: 1
   selector:
     matchLabels:
