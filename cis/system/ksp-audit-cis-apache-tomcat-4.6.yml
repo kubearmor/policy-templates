@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-apache-tomcat-4.6
+  namespace: default  # Change your namespace
+spec:
+  tags: ["Apache-Tomcat", "CIS", "rule-4.6", "binary-files", "permissions"]
+  message: "Access to Tomcat binaries is detected. Possible violation of cis-rule-number"
+  selector:
+    matchLabels:
+      app: apache-tomcat # Change your matchLabels
+  file:
+    severity: 2
+    matchDirectories:
+    - dir: /usr/local/tomcat/bin/
+      recurive: true
+      ownerOnly: true
+    action: Audit 
