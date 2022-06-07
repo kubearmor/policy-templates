@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-apache-tomcat-4.1
+  namespace: default  # Change your namespace
+spec:
+  tags: ["Apache-Tomcat", "CIS", "rule-4.1", "Restrict-acess", "Permissions"]
+  message: "Access to catalina home folders is detected"
+  selector:
+    matchLabels:
+      app: apache-tomcat # Change your matchLabels
+  file:
+    severity: 4
+    matchDirectories:
+    - dir: /usr/local/tomcat/
+      ownerOnly: true
+    - dir: /root/
+      ownerOnly: true
+    action: Audit
