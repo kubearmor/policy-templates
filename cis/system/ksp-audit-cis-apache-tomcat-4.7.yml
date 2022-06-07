@@ -8,8 +8,8 @@ metadata:
   name: ksp-audit-cis-apache-tomcat-4.7
   namespace: default  # Change your namespace
 spec:
-  tags: ["Apache-Tomcat", "CIS", "web-applications", "ownership"]
-  message: "Webapps files are acessed."
+  tags: ["Apache-Tomcat", "CIS", "rule-4.7", "web-applications", "ownership"]
+  message: "Access to tomcat web application directory detected. Possible violation of cis-rule-number."
   selector:
     matchLabels:
       app: apache-tomcat # Change your matchLabels
@@ -18,4 +18,5 @@ spec:
     matchDirectories:
     - dir: /usr/local/tomcat/webapps/
       recursive: true
+      ownerOnly: true
     action: Audit 
