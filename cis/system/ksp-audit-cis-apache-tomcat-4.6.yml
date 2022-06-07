@@ -8,8 +8,8 @@ metadata:
   name: ksp-audit-cis-apache-tomcat-4.6
   namespace: default  # Change your namespace
 spec:
-  tags: ["Apache-Tomcat", "CIS", "binary-files", "permissions"]
-  message: "Someone Accessed to Tomcat binaries directory. Check logs"
+  tags: ["Apache-Tomcat", "CIS", "4.6", "binary-files", "permissions"]
+  message: "Access to Tomcat binaries is detected. Possible violation of cis-rule-number"
   selector:
     matchLabels:
       app: apache-tomcat # Change your matchLabels
@@ -18,4 +18,5 @@ spec:
     matchDirectories:
     - dir: /usr/local/tomcat/bin/
       recurive: true
+      ownerOnly: true
     action: Audit 
