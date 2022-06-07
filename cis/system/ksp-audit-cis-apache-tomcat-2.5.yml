@@ -8,8 +8,8 @@ metadata:
   name: ksp-audit-cis-apache-tomcat-2.5
   namespace: default # Change your namespace
 spec:
-  tags: ["Apache-Tomcat", "CIS", "Debugging", "Information"]
-  message: "Alert! server file is accessed "
+  tags: ["Apache-Tomcat", "CIS", "rule-2.5","Debugging", "Information"]
+  message: "Access to debugging information file is detected"
   selector:
     matchLabels:
       app: apache-tomcat # Change your matchLabels
