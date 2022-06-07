@@ -5,11 +5,11 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-cis-apache-tomcat-2.1
+  name: ksp-audit-cis-apache-tomcat-1.2
   namespace: default  # Change your namespace
 spec:
-  tags: ["Apache-Tomcat", "CIS", "rule-2.1", "Information", "Exposure"]
-  message: "ALert, server information is viewed"
+  tags: ["Apache-Tomcat", "CIS", "rule-1.2", "Information", "Exposure"]
+  message: "Alert, Acess to server information file is detected"
   selector:
     matchLabels:
       app: apache-tomcat # Change your matchLabels
