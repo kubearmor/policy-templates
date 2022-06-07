@@ -8,8 +8,8 @@ metadata:
   name: ksp-audit-cis-apache-tomcat-4.5
   namespace: default  # Change your namespace
 spec:
-  tags: ["Apache-Tomcat", "CIS", "temp-files"]
-  message: "Restrict access to Tomcat temp directory"
+  tags: ["Apache-Tomcat", "CIS", "4.5", "temp-files"]
+  message: "Access to apache tomcat temp folder detected. Possible violation of cis-rule-4.5"
   selector:
     matchLabels:
       app: apache-tomcat # Change your matchLabels
@@ -17,4 +17,5 @@ spec:
     severity: 5
     matchDirectories:
     - dir: /usr/local/tomcat/temp/
+      ownerOnly: true
     action: Audit 
