@@ -8,8 +8,8 @@ metadata:
   name: ksp-audit-cis-apache-tomcat-4.8
   namespace: default  # Change your namespace
 spec:
-  tags: ["Apache-Tomcat", "CIS", "Property-files", "catalina"]
-  message: "Alert! configuration files is accessed "
+  tags: ["Apache-Tomcat", "CIS", "4.8", "Property-files", "catalina"]
+  message: "Access to configuration file is detected. Possible violation of cis-rule-number "
   selector:
     matchLabels:
       app: apache-tomcat # Change your matchLabels
@@ -17,4 +17,5 @@ spec:
     severity: 4
     matchPaths:
     - path: /usr/local/tomcat/conf/catalina.properties 
+      ownerOnly: true
     action: Audit 
