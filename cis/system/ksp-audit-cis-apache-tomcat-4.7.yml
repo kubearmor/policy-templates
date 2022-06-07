@@ -9,7 +9,7 @@ metadata:
   namespace: default  # Change your namespace
 spec:
   tags: ["Apache-Tomcat", "CIS", "rule-4.7", "web-applications", "ownership"]
-  message: "Access to tomcat web application directory detected. Possible violation of cis-rule-number."
+  message: "Access to tomcat web application directory detected. Possible violation of cis-rule-number"
   selector:
     matchLabels:
       app: apache-tomcat # Change your matchLabels
