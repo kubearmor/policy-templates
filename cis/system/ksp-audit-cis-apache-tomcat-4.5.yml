@@ -8,7 +8,7 @@ metadata:
   name: ksp-audit-cis-apache-tomcat-4.5
   namespace: default  # Change your namespace
 spec:
-  tags: ["Apache-Tomcat", "CIS", "4.5", "temp-files"]
+  tags: ["Apache-Tomcat", "CIS", "rule-4.5", "temp-files"]
   message: "Access to apache tomcat temp folder detected. Possible violation of cis-rule-4.5"
   selector:
     matchLabels:
