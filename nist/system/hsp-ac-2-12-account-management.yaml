@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: hsp-ac-2-12-account-management
+  name: hsp-ac-2-12-account-management-temp-1
 spec:
   tags: ["NIST", "AC-2"]
   message: "Notification! user has been added"

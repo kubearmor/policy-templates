@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-ac-2-12-account-management
+  name: ksp-ac-2-12-account-management-temp-1
   namespace: default # Change your namespace 
 spec:
   tags: ["NIST", "AC-2"]
