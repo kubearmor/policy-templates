@@ -4,7 +4,7 @@ metadata:
   name: cnp-allow-egress-elasticsearch-pod-kibana-connection
   namespace: default                                  #change namespace to match your namespace
 spec:
-  description: "Allow egress communication between elasticsearch pod and kibana via port 9200"
+  description: "All endpoints with the label app=elasticsearch to communicate with all endpoints with the labels k8s-app=kibana and k8s:io.kubernetes.pod.namespace=default, but they must communicate using TCP on port 9200."
   endpointSelector:
     matchLabels:
       app: elasticsearch                              #change label to match your label
