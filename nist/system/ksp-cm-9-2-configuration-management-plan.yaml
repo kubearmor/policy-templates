@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: cm-9-1-configuration-management
+  name: cm-9-1-configuration-management-temp-1
   namespace: default # Change your namespace
 spec:
   tags: ["NIST", "CM-9-1"]

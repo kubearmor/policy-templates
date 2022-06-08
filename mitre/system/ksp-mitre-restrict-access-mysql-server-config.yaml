@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-restrict-access-mysql-server-config
+  name: ksp-restrict-access-mysql-server-config-temp-1
   namespace: default # Change your namespace
 spec:
   tags: ["MySQL", "MITRE", "system"]
