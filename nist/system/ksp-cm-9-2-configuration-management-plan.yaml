@@ -5,11 +5,11 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: cm-9-1-configuration-management-temp-1
+  name: ksp-cm-9-2-configuration-management
   namespace: default # Change your namespace
 spec:
-  tags: ["NIST", "CM-9-1"]
-  message: "Important libraries is Audited"
+  tags: ["NIST", "CM-9-2"]
+  message: "Important libraries are being Audited"
   selector:
     matchLabels:
       pod: ubuntu #Replace pod: ubuntu with your own labels
