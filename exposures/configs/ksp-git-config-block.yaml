@@ -14,6 +14,9 @@ spec:
     matchLabels:
       app: frontend # Use your own frontend pod label here
    file:
+    matchDirectories:
+    - dir: /src/static/.git/
+      recursive: true
     matchPatterns:
     - pattern: /**/.git/
     - pattern: /**/.git/*
