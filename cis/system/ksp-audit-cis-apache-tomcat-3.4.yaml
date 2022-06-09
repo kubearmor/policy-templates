@@ -12,7 +12,7 @@ spec:
   message: "Access to sudoers file is detected"
   selector:
     matchLabels:
-      app: apache-tomcat # Change your matchLabels
+      app: cassandra # Change your matchLabels
   file:
     severity: 3
     matchPaths:
