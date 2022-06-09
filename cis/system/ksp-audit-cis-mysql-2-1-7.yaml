@@ -8,7 +8,7 @@ metadata:
   name: ksp-audit-cis-mysql-2-17
   namespace: default
 spec:
-  tags: ["MySQL", "CIS"]
+  tags: ["MySQL", "CIS","rule-2.17", "v8", "v7", "Control-3.10", "Control-14.4"]
   message: "Notification! ssl certificates has been accessed"
   selector:
     matchLabels:
