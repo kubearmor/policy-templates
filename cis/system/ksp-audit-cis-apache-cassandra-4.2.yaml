@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-apache-cassandra-4.2
+  namespace: default  # Change your namespace
+spec:
+  tags: ["Apache-Cassandra", "CIS", "rule-4.2", "log-files", "verifying"]
+  message: "Access to apache cassandra dse yaml file is detected "
+  selector:
+    matchLabels:
+      app: cassandra # Change your matchLabels
+  file:
+    severity: 3
+    matchPatterns:
+    - pattern: /**/dse.yaml
+      ownerOnly: true
+    action: Audit     
