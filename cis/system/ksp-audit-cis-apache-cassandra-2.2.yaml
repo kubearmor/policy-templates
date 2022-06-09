@@ -8,7 +8,7 @@ metadata:
   name: ksp-audit-cis-apache-cassandra-2.2
   namespace: default  # Change your namespace
 spec:
-  tags: ["Apache-Cassandra", "CIS", "rule-2", "Database", "authentication"]
+  tags: ["Apache-Cassandra", "CIS", "rule-2.2", "Database", "authentication"]
   message: "Access to apache cassandra yaml file detected"
   selector:
     matchLabels:
