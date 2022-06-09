@@ -18,5 +18,4 @@ spec:
     matchPatterns:
     - pattern: /**/cassandra.yaml
       ownerOnly: true
-      recursive: true
     action: Audit 
