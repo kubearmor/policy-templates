@@ -8,7 +8,7 @@ metadata:
   name: ksp-audit-cis-mysql-4-4
   namespace: default
 spec:
-  tags: ["MySQL", "CIS"]
+  tags: ["MySQL", "CIS","rule-4.4", "v8", "v7", "Control-4.8", "Control-4.7"]
   message: "Notification! /my/local/data/ has been accessed local_infile may have been modified."
   selector:
     matchLabels:
