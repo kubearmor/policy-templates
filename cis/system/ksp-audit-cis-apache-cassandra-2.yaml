@@ -12,7 +12,7 @@ spec:
   message: "Access to apache cassandra configuration folder detected. Possible violation of cis-rule-number"
   selector:
     matchLabels:
-      app: apache-tomcat # Change your matchLabels
+      app: cassandra # Change your matchLabels
   file:
     severity: 2
     matchDirectories:
