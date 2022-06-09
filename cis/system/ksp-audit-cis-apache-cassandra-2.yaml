@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-apache-cassandra-2
+  namespace: default  # Change your namespace
+spec:
+  tags: ["Apache-Cassandra", "CIS", "rule-2", "configurations", "authentication"]
+  message: "Access to apache cassandra configuration folder detected. Possible violation of cis-rule-number"
+  selector:
+    matchLabels:
+      app: apache-tomcat # Change your matchLabels
+  file:
+    severity: 2
+    matchDirectories:
+    - dir: /etc/cassandra/
+      ownerOnly: true
+      recursive: true
+    action: Audit 
