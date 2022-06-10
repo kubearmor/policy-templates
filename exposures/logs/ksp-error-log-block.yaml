@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-logs-common-web-sever
+  name: ksp-block-logs-common-web-sever
   namespace: default        #change default namespace to match your namespace
 spec:
   tags: ["logs","common","web server"]

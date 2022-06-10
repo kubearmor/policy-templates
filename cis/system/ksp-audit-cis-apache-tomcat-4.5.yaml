@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-apache-tomcat-4.5
+  namespace: default  # Change your namespace
+spec:
+  tags: ["Apache-Tomcat", "CIS", "rule-4.5", "temp-files"]
+  message: "Access to apache tomcat temp folder detected. Possible violation of cis-rule-4.5"
+  selector:
+    matchLabels:
+      app: apache-tomcat # Change your matchLabels
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /usr/local/tomcat/temp/
+      ownerOnly: true
+    action: Audit 
