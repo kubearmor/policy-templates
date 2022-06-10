@@ -1,0 +1,28 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-redhat-openshift-1.1.9
+  namespace: default # Change your namespace
+spec:
+  tags: ["Redhat-Openshift", "CIS", "rule-1.1.9", "network-file"]
+  message: "Access to redhat openshift cni files is detected"
+  selector:
+    matchLabels:
+      app: redhat-openshift # Change your matchLabels
+  file:
+    severity: 2
+    matchPaths:
+      - path: /host/etc/cni/net.d
+      - path: /host/var/run/multus/cni/net.d
+      - path: /host/etc/cni/net.d/multus.conf
+    matchDirectories:
+      - dir: /var/lib/cni/networks/openshift-sdn/
+      - dir: /var/run/openshift-sdn/
+      - dir: /var/run/openvswitch/
+      - dir: /etc/openvswitch/
+      - dir: /run/openvswitch/
+    action: Audit

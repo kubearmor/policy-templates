@@ -1,0 +1,19 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-audit-cis-redhat-openshift-1.1.19
+spec:
+  tags: ["CIS", "1.1.5", "redhat", "openshift", "pki-certificates"]
+  message: "Access to pki certificate files is detected."
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: redhat-openshift # Change your node
+  file:
+    severity: 5
+    matchDirectory:
+      - dir: /etc/kubernetes/static-pod-certs/
+    action: Audit
