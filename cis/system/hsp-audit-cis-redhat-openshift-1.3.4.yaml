@@ -1,0 +1,19 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-audit-cis-redhat-openshift-1.3.4 #change your namespace
+spec:
+  tags: ["CIS", "1.1.1", "redhat", "private-key", "controller"]
+  message: "Access to service account key is detected."
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: redhat-openshift # Change your node
+  file:
+    severity: 4
+    matchPaths:
+      - path: /etc/kubernetes/static-pod-resources/secrets/service-account-privatekey/service-account.key
+    action: Audit 
