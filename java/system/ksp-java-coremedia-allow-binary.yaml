@@ -1,0 +1,55 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-coremedia-allow-binary
+  namespace: default # Change your namespace
+spec:
+  tags: ["java", "microservice", "framework", "binaries", "jdbc"]
+  message: "Allow access to the files from java binary"
+  severity: 1
+  selector:
+    matchLabels:
+      app: coremedia-java  # Change your matchLabels
+  file:
+    matchPaths:
+    - path: /dev/urandom
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /etc/host.conf
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /etc/hosts
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /etc/resolv.conf
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /home/cnb/.sdb/jdbctrace.shm
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - path: /usr/local/openjdk-11/conf/security/java.security
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    matchDirectories:
+    - dir: /proc/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - dir: /sys/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - dir: /usr/local/openjdk-11/lib/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+    - dir: /workspace/tomcat/
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+  network:
+    matchProtocols:
+    - protocol: tcp
+      fromSource:
+      - path: /usr/local/openjdk-11/bin/java
+  action: Allow

@@ -1,0 +1,39 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-java-malkinfedor-allow-raw
+  namespace: default # Change your namespace
+spec:
+  tags: ["java", "tcp", "udp", "protocols", "open-jdk"]
+  message: "Allow tcp,udp protocols"
+  severity: 1
+  selector:
+    matchLabels:
+      app: malkinfedor # Change your matchLabels
+  process:
+    matchPaths:
+    - path: /usr/bin/tty
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/jshell
+    - path: /usr/java/openjdk-14/bin/jshell
+  network:
+    matchProtocols:
+    - protocol: raw
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - protocol: tcp
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+      - path: /usr/java/openjdk-14/bin/jshell
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    - protocol: udp
+      fromSource:
+      - path: /usr/java/openjdk-14/bin/java
+      - path: /usr/java/openjdk-14/bin/jshell
+      - path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+  action: Allow
