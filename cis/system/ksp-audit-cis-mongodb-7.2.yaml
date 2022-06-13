@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-cis-mongodb-7-2
+  name: ksp-audit-cis-mongodb-7.2
   namespace: default # Change your namespace
 spec:
   tags: ["CIS", "MONGODB"]
