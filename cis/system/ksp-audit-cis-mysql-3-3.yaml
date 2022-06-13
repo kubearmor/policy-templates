@@ -17,4 +17,5 @@ spec:
     severity: 1
     matchPaths:
     - path: /usr/local/mysql/data/mysqld.local.err
+      ownerOnly: true
     action: Audit
