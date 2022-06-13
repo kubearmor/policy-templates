@@ -9,13 +9,18 @@ metadata:
   namespace: default
 spec:
   tags: ["MySQL", "CIS", "rule-3.10", "v8", "v7", "Control-3.3", "Control-14.6"]
-  message: "Notification! /etc/mysql/my.cnf has been accessed! keyrings may have been modified."
+  message: "Notification! mysql key-ring has been accessed! keyrings may have been modified."
   selector:
     matchLabels:
       app: mysql 
   file:
     severity: 1
     matchPaths:
-    - path: /etc/mysql/my.cnf
+    - path: /var/lib/mysql-keyring/keyring
+      ownerOnly: true
+    - path: /var/lib/mysql-keyring/keyring_encrypted
+      ownerOnly: true
+    matchDirectories:
+    - dir: /usr/local/mysql/mysql-keyring/
       ownerOnly: true
     action: Audit
