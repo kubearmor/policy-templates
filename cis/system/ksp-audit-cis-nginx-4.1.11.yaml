@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-nginx-4.1.11
+  namespace: default  # Change your namespace
+spec:
+  tags: ["Nginx", "CIS"," Trusted Certificates"]
+  message: " Alert! unauthorized modification trusted certificate files "
+  selector:
+    matchLabels:
+      app: nginx # Change your matchLabels
+  file:
+    severity: 4
+    matchPaths:
+    - path:  /etc/ca-certificates.conf
+    - path:  /etc/nginx/trusted_ca_cert.crt
+    action: Audit
