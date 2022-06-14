@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-postgres-6-8
+  namespace: default # Change your namespace
+spec:
+  tags: ["CIS","PostgreSQL","rule-6.8"]
+  message: "Alert! PostgreSQL's TLS or SSL file has been Accessed."
+  selector:
+    matchLabels:
+      app: postgres # Change your match labels
+  file:
+    severity: 5
+    matchFiles:
+    - dir: /etc/ssl/openssl.cnf
+      ownerOnly: true
+    - dir: /var/lib/pgsql/data/root.crt  
+      ownerOnly: true
+    - dir: /var/lib/pgsql/data/server.crt
+      ownerOnly: true
+    - dir: /var/lib/pgsql/data/server.key  
+      ownerOnly: true
+    action: Audit
