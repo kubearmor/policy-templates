@@ -1,10 +1,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-cis-postgres-1-1
+  name: ksp-audit-cis-postgres-3-1-6
   namespace: default
 spec:
-  tags: ["PostgreSQL", "CIS"] 
+  tags: ["PostgreSQL", "CIS", "rule-3.1.6"] 
   message: "Alert! postgres log file access "
   selector:
     matchLabels:
