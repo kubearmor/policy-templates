@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-cis-postgresql-1-4
+  name: ksp-block-cis-postgresql-4-4
   namespace: default
 spec:
-  tags: ["PostgreSQL", "CIS"]
+  tags: ["PostgreSQL", "CIS", "rule-4.4"]
   message: "Alert! postgresql history file access denied!"
   selector:
     matchLabels:
