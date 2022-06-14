@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-cis-postgresql-1-2
+  name: ksp-audit-cis-postgresql-4-2
   namespace: default
 spec:
-  tags: ["PostgreSQL", "CIS"]
+  tags: ["PostgreSQL", "CIS" "rule-4.2"]
   message: "Notification! useradd and groupadd command is accessed!"
   selector:
     matchLabels:
