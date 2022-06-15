@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-nginx-2.3.2
+  namespace: default  # Change your namespace
+spec:
+  tags: ["Nginx", "CIS","Restrict-acess", "Permissions","cis-nginx-2.3.2"]
+  message: " Alert! unauthorized modification in home directory "
+  selector:
+    matchLabels:
+      app: nginx # Change your matchLabels
+  file:
+    severity: 4
+    matchDirectories:
+    - dir: /etc/nginx/
+      ownerOnly: true
+      recursive: true
+    - dir: /root/
+      ownerOnly: true
+      recursive: true
+    action: Audit
