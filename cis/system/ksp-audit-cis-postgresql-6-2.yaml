@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-cis-postgresql-6-4
+  name: ksp-audit-cis-postgresql-6-2
   namespace: default
 spec:
-  tags: ["PostgreSQL", "CIS", "rule-6.4"]
+  tags: ["PostgreSQL", "CIS", "rule-6.2"]
   message: "Alert! PostgreSQL's Configuration file accessed"
   selector:
     matchLabels:
