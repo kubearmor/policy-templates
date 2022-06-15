@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-postgresql-2-1
+  namespace: default
+spec:
+  tags: ["PostgreSQL", "CIS", "rule-2.1"]
+  message: "Notification! Postgersql bash file or profile accessed"
+  selector:
+    matchLabels:
+      app: postgres 
+  file:
+    severity: 1
+    matchPatterns:
+    - pattern: bash_profile
+    - pattern: bash_profile
+    - pattern: profile
+    action: Audit
