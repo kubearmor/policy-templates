@@ -1,0 +1,16 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: vm-hsp-audit-cis-centos-8-1-1-1-3
+spec:
+  file:
+    matchPaths:
+    - path: /etc/modprobe.d/udf.conf
+      fromSource:
+      - path: /bin/false
+      readOnly: true
+    action: Audit
