@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-redhat-openshift-5.7.2
+  namespace: default # Change your namespace
+spec:
+  tags: ["Redhat-Openshift", "CIS", "rule-5.7.2", "json-file"]
+  message: "Access to redhat seccomp file is detected"
+  selector:
+    matchLabels:
+      app: redhat-openshift # Change your matchLabels
+  file:
+    severity: 3
+    matchPaths:
+      - path: /etc/crio/seccomp.json
+    action: Audit

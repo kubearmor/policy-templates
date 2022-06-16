@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-redhat-openshift-5.2.7
+  namespace: default   #change the namespace your requirement 
+spec:
+  tags: ["CIS", "rule-5.2.7", "redhat", "openshift", "constraint"]
+  message: "The netraw command has been invoked"
+  selector:
+    matchLabels:
+      app: redhat-openshift    #change label app: ubuntu-pod to your label
+  capabilities:
+    severity: 5
+    matchCapabilities:
+    - capability: net_raw
+  action:
+    Block
