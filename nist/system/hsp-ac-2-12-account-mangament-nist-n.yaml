@@ -5,18 +5,16 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: hsp-ac-2-12-account-management
+  name: hsp-ac-2-12-account-management-atypical-usage
 spec:
-  tags: ["NIST", "AC-2"]
-  message: "Notification! user and password added/changed"
+  tags: ["NIST","NIST-800-53-r5", "AC-2(12)", "Atypical Usage"]
+  message: "Notification! Atypical usage of system accounts found. Possible violation of NIST Controls"
   nodeSelector:
     matchLabels:
      kubernetes.io/hostname: gke-ubuntu # Change your matchLabels
   process:
     severity: 5
     matchPaths:
-    - path: /usr/sbin/useradd
-    - path: /sbin/useradd
     - path: /usr/bin/passwd
     - path: /bin/passwd
     - path: /usr/sbin/usermod
@@ -25,9 +23,9 @@ spec:
     - path: /sbin/userdel
     - path: /usr/bin/chage
     - path: /bin/chage
-    action: Block
+    action: Audit
   file:
-    severity: 4
+    severity: 5
     matchPaths:
     - path: /etc/sudoers
       readOnly: true
