@@ -1,0 +1,26 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-allow-only-internal-connection-elastic
+  namespace: default  #change default namespace to match your namespace
+spec:
+  description: "To block all external connections from elastic pod"
+  endpointSelector:
+    matchLabels:
+      app: elasticsearch      #change app: elasticsearch to match your label
+  egress:
+    - toEndpoints:
+        - {}
+    - toEntities:
+        - cluster
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+          rules:
+            dns:
+              - matchPattern: "*"
