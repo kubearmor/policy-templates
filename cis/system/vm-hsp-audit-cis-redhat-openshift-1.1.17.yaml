@@ -1,0 +1,17 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: vm-hsp-audit-cis-redhat-openshift-1.1.17 #change your namespace
+spec:
+  tags: ["CIS", "1.1.17", "redhat", "openshift", "kubelete-certificate" ]
+  message: "Access to kubelet certificate file is detected."
+  file:
+    severity: 4
+    matchPaths:
+      - path: /etc/kubernetes/static-pod-resources/configmaps/kubelet-serving-ca/cabundle.crt
+        ownerOnly: true
+    action: Audit
