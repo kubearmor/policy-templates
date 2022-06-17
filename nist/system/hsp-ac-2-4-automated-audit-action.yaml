@@ -1,0 +1,31 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-ac-2-4-automated-audit-action
+spec:
+  tags: ["NIST","system","account","NIST-800-53-r5","AC-2(4)","Automated audit"]
+  message: "Alert! use of user account create/edit commands found. Possible violation of NIST controls"
+  nodeSelector:
+    matchLabels:
+     kubernetes.io/hostname: gke-ubuntu # Change your matchLabels
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/passwd
+    - path: /etc/shadow
+    - path: /etc/group
+    action: Audit
+  process:
+    severity: 5
+    matchPaths:
+    - path: /bin/useradd
+    - path: /usr/sbin/useradd
+    - path: /bin/adduser
+    - path: /usr/sbin/adduser
+    - path: /usr/sbin/userdel
+    - path: /bin/userdel
+    action: Audit

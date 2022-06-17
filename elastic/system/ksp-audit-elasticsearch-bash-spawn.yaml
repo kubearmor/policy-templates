@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-elasticsearch-bash-spawn
+  namespace: default # Change your name space
+spec:
+  tags: ["Elasticsearch", "Audit-policy", "bash-spawn"]
+  message: "Alert! bash shell spawned on elasticsearch pod"
+  selector:
+    matchLabels:
+      app: elasticsearch # Change your matchLabels
+  process:
+    severity: 5
+    matchPaths:
+    - path: /bin/bash
+    - path: /bin/sh
+    - path: /sbin/sh
+    - path: /bin/csh
+  action: Audit
