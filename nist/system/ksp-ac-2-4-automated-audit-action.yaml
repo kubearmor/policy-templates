@@ -5,24 +5,28 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: automatically-audit-account-creation-modification
+  name: ksp-ac-2-4-automated-audit-action
   namespace: default # Change your namespace
 spec:
-  tags: ["NIST","system","account","Block","ksp"]
-  message: "Alert! account credential files and user account create/edit commands denied"
+  tags: ["NIST","system","account","NIST-800-53-r5","AC-2(4)","Automated audit"]
+  message: "Alert! use of user account create/edit commands found. Possible violation of NIST controls"
   selector:
     matchLabels:
       app: test # Change your match labels
   file:
-    severity: 3
+    severity: 5
     matchPaths:
     - path: /etc/passwd
     - path: /etc/shadow
     - path: /etc/group
-    action: Block
+    action: Audit
   process:
-    severity: 3
+    severity: 5
     matchPaths:
     - path: /bin/useradd
+    - path: /usr/sbin/useradd
     - path: /bin/adduser
-    action: Block
+    - path: /usr/sbin/adduser
+    - path: /usr/sbin/userdel
+    - path: /bin/userdel
+    action: Audit
