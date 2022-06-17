@@ -1,0 +1,29 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-ingress-allow-only-internal-connection-elastic
+  namespace: default  #change default namespace to match your namespace
+spec:
+  description: "To block all external connections to elastic pod"
+  endpointSelector:
+    matchLabels:
+      app: elasticsearch      #change app: elasticsearch to match your label
+  ingress:
+    - fromEntities:
+        - cluster
+      toPorts:
+        - ports:
+            - port: "9200"      #change port values to match your ports
+        - ports:
+            - port: "9300"      #change port values to match your ports
+    - fromEntities:
+        - cluster
+    - fromEndpoints:
+        - {}
+      toPorts:
+        - ports:
+            - port: "9200"      #change port values to match your ports
+        - ports:
+            - port: "9300"      #change port values to match your ports
+    - fromEndpoints:
+        - {}
