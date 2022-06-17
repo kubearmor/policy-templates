@@ -1,0 +1,17 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: vm-hsp-audit-cis-redhat-openshift-1.1.13
+spec:
+  tags: ["CIS", "1.1.13", "redhat", "openshift", "configuration-file" ]
+  message: "Access to admin configuration file is detected."
+  file:
+    severity: 5
+    matchPaths:
+      - path: /etc/kubernetes/kubeconfig/admin.conf
+        ownerOnly: true
+    action: Audit
