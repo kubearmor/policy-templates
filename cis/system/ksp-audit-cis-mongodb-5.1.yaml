@@ -8,7 +8,7 @@ metadata:
   name: ksp-audit-cis-mongodb-5.1
   namespace: default # Change your namespace
 spec:
-  tags: ["CIS","MONGODB"]
+  tags: ["CIS","MONGODB","5.1"]
   message: "Alert! Audit Log file has been Accessed"
   selector:
     matchLabels:
