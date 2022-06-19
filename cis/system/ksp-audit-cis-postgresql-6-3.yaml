@@ -5,19 +5,18 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-audit-cis-postgresql-6-2
+  name: ksp-audit-cis-postgresql-6-3
   namespace: default
 spec:
-  tags: ["PostgreSQL", "CIS", "rule-6.2"]
+  tags: ["PostgreSQL", "CIS", "rule-6.3"]
   message: "Alert! PostgreSQL's Configuration file accessed"
   selector:
     matchLabels:
       app: postgresql
   file:
-    severity: 1
-    matchPaths:
-    - path: /var/lib/postgresql/data/pgdata/postgresql.auto.conf
-    - path: /var/lib/postgresql/data/pgdata/pg_hba.conf 
-    - path: /var/lib/postgresql/data/pgdata/pg_ident.conf
-    - path: /var/lib/postgresql/data/pgdata/postgresql.conf
+    severity: 4
+    matchPatterns:
+    - pattern: /var/lib/pgsql/**/data/postgresql.conf
+    - pattern: /var/lib/pgsql/**/data/pg_hba.conf
+    - pattern: /var/lib/pgsql/**/data/pg_ident.conf
     action: Audit 
