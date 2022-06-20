@@ -19,4 +19,9 @@ spec:
     - pattern: /var/lib/pgsql/**/data/postgresql.conf
     - pattern: /var/lib/pgsql/**/data/pg_hba.conf
     - pattern: /var/lib/pgsql/**/data/pg_ident.conf
+    matchPaths::
+    - path: /var/lib/postgresql/data/pgdata/postgresql.conf
+    - path: /var/lib/postgresql/data/pgdata/pg_hba.conf
+    - path: /var/lib/postgresql/data/pgdata/pg_ident.conf
+    - path: /var/lib/postgresql/data/pgdata/postgresql.auto.conf
     action: Audit 
