@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-ac-18-1-network-audit
+  namespace: default # Change namespace
+spec:
+  tags: ["NIST-800", "AC-18(1)", "Networking", "Access"]
+  message: "Auditing the network files."
+  selector:
+    matchLabels:
+      container: ubuntu # Change your match labels
+  file:
+    severity: 3
+    matchPaths:
+      - path: /etc/hostapd/hostapd.conf
+      - path: /etc/network/interfaces
+    action: Audit
