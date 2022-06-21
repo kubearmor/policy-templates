@@ -1,0 +1,60 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-ac-3-11-access-enforcement-restrict-access-to-specific-information-types
+  namespace: default
+spec:
+  tags: ["NIST","NIST-800-53-r5","AC-3(11)","File Rules","Restrict Access To Specific Information Types","Access Enforcement"]
+  message: "Alert! Unauthorized file access detected. Possible violation of NIST AC-3(11) Restrict Access To Specific Information Types"
+  selector:
+    matchLabels:
+      app: demo-app                      #change app: demo-app to your label
+  file:
+    severity: 5
+    matchPaths:
+    - path: /proc/cmdline                #change path to protected files and add more if needed
+      ownerOnly: true
+    - path: /etc/bash.bashrc             #change path to protected files and add more if needed
+      ownerOnly: true
+    - path: /root/.bash_profile          #change path to protected files and add more if needed
+      ownerOnly: true
+    - path: /root/.bash_login            #change path to protected files and add more if needed
+      ownerOnly: true
+    - path: /root/.profile               #change path to protected files and add more if needed
+      ownerOnly: true
+    - path: /root/.bashrc                #change path to protected files and add more if needed
+      ownerOnly: true
+    action: Block
+    matchPatterns:
+    - pattern: /home/*/.bash_profile        #change path to protected files and add more if needed
+      ownerOnly: true
+    - pattern: /home/*/.bash_login          #change path to protected files and add more if needed
+      ownerOnly: true
+    - pattern: /home/*/.profile             #change path to protected files and add more if needed
+      ownerOnly: true
+    - pattern: /home/*/.bashrc              #change path to protected files and add more if needed
+      ownerOnly: true
+    - pattern: /*/cmdline                   #change path to protected files and add more if needed
+      ownerOnly: true
+    - pattern: /etc/rc*.*/**                #change path to protected files and add more if needed
+      ownerOnly: true
+    - pattern: /etc/init.*/**               #change path to protected files and add more if needed
+      ownerOnly: true
+    - pattern: /home/*/.ssh/**              #change path to protected files and add more if needed
+      ownerOnly: true
+    action: Block
+    matchDirectories:
+    - dir: /etc/systemd/                    #change path to protected files and add more if needed
+      ownerOnly: true
+      recursive: true
+    - dir: /etc/profile.d/                  #change path to protected files and add more if needed
+      ownerOnly: true
+      recursive: true
+    - dir: /root/.ssh/                      #change path to protected files and add more if needed
+      ownerOnly: true
+      recursive: true
+    action: Block
