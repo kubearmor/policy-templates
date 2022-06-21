@@ -1,0 +1,30 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-nist-ac-4-2-egress-deny-access-to-cloud-metadata-service-from-container
+  namespace: default                                                                    #change with your namespace
+spec:
+  description: "NIST AC-4(2) Deny contact to cloud metadata service from container"
+  endpointSelector:
+    matchLabels:
+      pod: testpod                                                                      #change app: demo-app with your label
+  egress:
+    - toCIDRSet:
+        - cidr: 0.0.0.0/0
+          except:
+            - 169.254.169.254/32
+    - toEntities:
+        - cluster
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+          rules:
+            dns:
+              - matchPattern: "*"
+    - toEndpoints:
+        - {}
