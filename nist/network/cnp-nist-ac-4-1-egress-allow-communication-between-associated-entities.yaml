@@ -1,0 +1,14 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-nist-ac-4-1-egress-allow-communication-between-associated-entities
+  namespace: default                                                                    #change with your namespace
+spec:
+  description: "NIST AC-4(1) Allow data transfer between associated entities outbound"
+  endpointSelector:
+    matchLabels:
+      app: secret-receiver                                                              #change demo label with your label
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            app: secret                                                                 #change demo label with your label
