@@ -1,0 +1,19 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-audit-cis-docker-1.1.4
+spec:
+  tags: ["CIS", "1.1.4", "Docker", "Audit"]
+  message: "Access to Docker file is detected."
+  nodeSelector:
+    matchLabels:
+      beta.kubernetes.io/os: linux      # Change with your node label
+  file:
+    severity: 5
+    matchDirectories:
+    - path: /usr/bin/dockerd/
+    action: Audit
