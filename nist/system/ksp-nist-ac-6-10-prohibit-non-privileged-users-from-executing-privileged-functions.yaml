@@ -1,0 +1,103 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-ac-6-10-prohibit-non-privileged-users-from-executing-privileged-functions
+  namespace: default                                                                                                                    #change with your namespace
+spec:
+  tags: ["NIST","NIST-800-53-r5","AC-6(10)", "Least Privilege" ,"Prohibit Non-privileged Users from Executing Privileged Functions"]
+  message: "Alert! Execution of Prvileged Functions Detected. Possible violation of NIST AC-6(10)"
+  severity: 5
+  selector:
+    matchLabels:
+      app: demo-app                                                                                                                     #change app: frontend with your label
+  process:
+    matchPaths:
+    - path: /usr/bin/chmod
+    - path: /usr/bin/nc
+    - path: /usr/bin/dig
+    - path: /usr/bin/ncat
+    - path: /usr/bin/nmap
+    - path: /usr/sbin/tcpdump
+    - path: /usr/bin/tcpdump
+    - path: /usr/bin/tshark
+    - path: /usr/bin/ngrep
+    - path: /usr/bin/telnet
+    - path: /usr/bin/mitmproxy
+    - path: /usr/bin/socat
+    - path: /usr/sbin/zmap
+    - path: /usr/bin/login
+    - path: /usr/bin/su
+    - path: /usr/sbin/nologin
+    - path: /usr/bin/faillog
+    - path: /usr/bin/lastlog
+    - path: /usr/bin/newgrp
+    - path: /usr/bin/sg
+    - path: /usr/sbin/shadowconfig
+    - path: /usr/sbin/grpck
+    - path: /usr/sbin/pwunconv
+    - path: /usr/sbin/grpconv
+    - path: /usr/sbin/pwck
+    - path: /usr/sbin/groupmod
+    - path: /usr/sbin/vipw
+    - path: /usr/sbin/pwconv
+    - path: /usr/sbin/useradd
+    - path: /usr/sbin/newusers
+    - path: /usr/sbin/cppw
+    - path: /usr/sbin/chpasswd
+    - path: /usr/sbin/usermod
+    - path: /usr/sbin/groupadd
+    - path: /usr/sbin/groupdel
+    - path: /usr/sbin/grpunconv
+    - path: /usr/sbin/chgpasswd
+    - path: /usr/sbin/userdel
+    - path: /usr/bin/chage
+    - path: /usr/bin/chsh
+    - path: /usr/bin/gpasswd
+    - path: /usr/bin/chfn
+    - path: /usr/bin/expiry
+    - path: /usr/bin/passwd 
+    - path: /usr/sbin/vigr
+    - path: /usr/sbin/cpgr
+    - path: /usr/sbin/adduser 
+    - path: /usr/sbin/addgroup
+    - path: /usr/sbin/deluser
+    - path: /usr/sbin/delgroup
+    - path: /usr/bin/chage
+    - path: /usr/bin/gpasswd
+    - path: /usr/bin/lastlog
+    - path: /usr/bin/newgrp
+    - path: /usr/bin/sg
+    - path: /usr/sbin/adduser 
+    - path: /usr/sbin/deluser
+    - path: /usr/sbin/chpasswd
+    - path: /usr/sbin/groupadd
+    - path: /usr/sbin/groupdel
+    - path: /usr/sbin/addgroup
+    - path: /usr/sbin/delgroup
+    - path: /usr/sbin/groupmems
+    - path: /usr/sbin/groupmod
+    - path: /usr/sbin/grpck
+    - path: /usr/sbin/grpconv
+    - path: /usr/sbin/grpunconv
+    - path: /usr/sbin/newusers
+    - path: /usr/sbin/pwck
+    - path: /usr/sbin/pwconv
+    - path: /usr/sbin/pwunconv
+    - path: /usr/sbin/useradd
+    - path: /usr/sbin/userdel
+    - path: /usr/sbin/usermod
+    - path: /usr/sbin/vigr
+    - path: /usr/sbin/vipw
+    - path: /usr/sbin/unix_chkpwd
+    - path: /usr/bin/openssl
+    - path: /usr/sbin/update-ca-certificates
+  action: Audit
+  file:
+    matchDirectories:
+    - dir: /dev/
+    - dir: /root/
+  action: Audit
