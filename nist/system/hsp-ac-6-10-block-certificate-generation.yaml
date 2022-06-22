@@ -3,7 +3,7 @@
 # https://www.accuknox.com/kubearmor/
 
 apiVersion: security.kubearmor.com/v1
-kind: KubeArmorPolicy
+kind: KubeArmorHostPolicy
 metadata:
   name: hsp-nist-ac-6-10-prohibit-non-privileged-users-from-executing-privileged-functions
   namespace: default                                                                                                                    #change with your namespace
