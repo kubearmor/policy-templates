@@ -15,5 +15,5 @@ spec:
   file:
     severity: 5
     matchDirectories:
-    - path: /usr/bin/dockerd/
+    - path: /run/containerd/
     action: Audit
