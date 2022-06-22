@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-cis-centos-8-1-1-4-1
+  namespace: default
+spec:
+  tags: ["CIS", "CENTOS", "rule-1-1-4-1", "Control-3.3", "Control-14.6"]
+  message: "Alert! auditd used in tmp directory blocked"
+  selector:
+    matchLabels:
+      run: centos
+  file:
+    severity: 1
+    matchDirectories:
+    - dir: /var/tmp/
+      fromSource:
+      - path: /usr/bin/auditd
+      - path: /bin/auditd
+      - path: /sbin/auditd
+    action: Block
