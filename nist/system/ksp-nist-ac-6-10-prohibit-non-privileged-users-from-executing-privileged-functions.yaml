@@ -13,7 +13,7 @@ spec:
   severity: 5
   selector:
     matchLabels:
-      app: demo-app                                                                                                                     #change app: frontend with your label
+      app: demo-app                                                                                                                     #change label with your label values
   process:
     matchPaths:
     - path: /usr/bin/chmod
