@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-centos-8-1-1-2-1
+  namespace: default
+spec:
+  tags: ["CIS", "CENTOS", "rule-1-1-2-1", "Control-4.8", "Control-9.2"]
+  message: "Alert! fstab file entry detected"
+  selector:
+    matchLabels:
+      run: centos
+  file:
+    severity: 1
+    matchPaths:
+    - path: /etc/fstab
+    - path: /usr/lib/systemd/system/tmp.mount
+    action: Audit
