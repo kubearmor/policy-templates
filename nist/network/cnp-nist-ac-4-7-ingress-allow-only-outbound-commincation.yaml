@@ -1,0 +1,11 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-nist-ac-4-7-ingress-deny-all-inbound-commincation
+  namespace: default                                              #change namespace with your namespace value
+spec:
+  endpointSelector:
+    matchLabels:
+      app: demo-app                                              #change label with your label values
+  ingress:
+    - {}
