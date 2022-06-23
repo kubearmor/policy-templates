@@ -19,4 +19,5 @@ spec:
       - path: /etc/my.cnf
       - path: /etc/profile
       - path: /etc/X11/xorg.conf
+      - path: /etc/sudoers
     action: Audit
