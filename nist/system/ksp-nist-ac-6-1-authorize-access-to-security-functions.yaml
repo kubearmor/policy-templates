@@ -1,0 +1,35 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-ac-6-1-authorize-access-to-security-functions
+  namespace: default                                                                                                                    #change with your namespace
+spec:
+  tags: ["NIST","NIST-800-53-r5","AC-6(1)", "Least Privilege" ,"Authorize Access to Security Functions"]
+  message: "Alert! Unauthorize Access to Security Functions Detected. Possible violation of NIST AC-6(1)"
+  severity: 5
+  selector:
+    matchLabels:
+      app: demo-app                                                                                                                     #change label with your label values
+  process:
+    matchPaths:
+    - path: /usr/bin/chmod  
+      ownerOnly: true  
+    - path: /usr/bin/getfacl
+      ownerOnly: true
+    - path: /usr/bin/setfacl
+      ownerOnly: true
+  action: Allow
+  file:
+    matchPaths:
+    - path: /etc/resolv.conf
+      ownerOnly: true
+    matchDirectories:
+    - dir: /root/.ssh/
+      recursive: true
+    matchPatterns:
+    - pattern: /home/*/.ssh/**
+  action: Allow
