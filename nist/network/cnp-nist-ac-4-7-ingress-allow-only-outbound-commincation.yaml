@@ -1,0 +1,12 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-nist-ac-4-7-ingress-deny-all-inbound-commincation
+  namespace: default                                              #change namespace with your namespace value
+spec:
+  description: "NIST AC-4(7) Information Flow Enforcement | One-way Flow Mechanisms | allow only egress"
+  endpointSelector:
+    matchLabels:
+      app: demo-app                                              #change label with your label values
+  ingress:
+    - {}
