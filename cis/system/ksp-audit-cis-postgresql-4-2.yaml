@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-postgresql-4-2
+  namespace: default
+spec:
+  tags: ["PostgreSQL", "CIS" "rule-4.2"]
+  message: "Notification! useradd and groupadd command is accessed!"
+  selector:
+    matchLabels:
+      app: postgresql
+  process:
+    severity: 1
+    matchPaths:
+    - path: /usr/bin/psql
+    - path: /usr/sbin/groupadd
+    - path: /usr/sbin/adduser
+    - path: /usr/sbin/useradd
+    ownerOnly: true
+    action: Audit
