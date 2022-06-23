@@ -102,4 +102,4 @@ spec:
       recursive: true
     - dir: /root/
       recursive: true
-  action: Audit
+  action: Block
