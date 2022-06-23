@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-ac-3-4-access-enforcement-discretionary-access-control-file
+  namespace: default
+spec:
+  tags: ["NIST","NIST-800-53-r5","AC-3(4)","File","Discretionary Access Control","Access Enforcement"]
+  message: "Alert! Unauthorized file access detected. Possible violation of NIST Discretionary Access Control"
+  selector:
+    matchLabels:
+      app: demo-app                     #change app: demo-app to your label
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/passwd                #change path to protected files and add more if needed
+      ownerOnly: true
+    action: Allow
