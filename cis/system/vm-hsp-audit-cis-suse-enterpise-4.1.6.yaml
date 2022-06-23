@@ -7,7 +7,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: vm-hsp-audit-cis-suse-enterpise-4.1.6
 spec:
-  tags: ["CIS", "rule-4.1.6", "suse", ""]
+  tags: ["CIS", "rule-4.1.6", "suse", "selinux"]
   message: "Access to SELinux files or directories detected ."
   file:
     severity: 4
