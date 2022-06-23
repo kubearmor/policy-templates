@@ -1,0 +1,19 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-nist-ac-4-17-egress-allow-only-authorized-service-and-port
+  namespace: default                                                                                #change with your namespace
+spec:
+  description: "NIST AC-4(17) Allow only authorized service and port communication outbound "
+  endpointSelector:
+    matchLabels:
+      app: frontend
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            app: demo-app                                                                           #change app: demo-app with your label
+      toPorts:
+        - ports:
+            - port: "443"                                                                           #change port number your ports
+        - ports:
+            - port: "80"                                                                            #change port number your ports
