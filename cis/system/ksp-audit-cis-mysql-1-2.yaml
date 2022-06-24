@@ -8,7 +8,7 @@ metadata:
   name: ksp-audit-cis-mysql-1-2
   namespace: default
 spec:
-  tags: ["MySQL", "CIS"]
+  tags: ["MySQL", "CIS", "rule-1-2"]
   message: "Notification! useradd and groupadd command is accessed!"
   selector:
     matchLabels:
@@ -19,5 +19,5 @@ spec:
     - path: /usr/bin/mysql
     - path: /usr/sbin/groupadd
     - path: /usr/sbin/useradd
-    ownerOnly: true
+      ownerOnly: true
     action: Audit
