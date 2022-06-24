@@ -8,7 +8,7 @@ metadata:
   name: ksp-audit-cis-mysql-1-1
   namespace: default
 spec:
-  tags: ["MySQL", "CIS"]
+  tags: ["MySQL", "CIS", "rule-1-1"]
   message: "Notification! mysqld service accessed!"
   selector:
     matchLabels:
@@ -16,8 +16,8 @@ spec:
   file:
     severity: 1
     matchDirectories:
-    - path: /var/lib/mysql/
-    - path: /media/mysql/
+    - dir: /var/lib/mysql/
+    - dir: /media/mysql/
     action: Audit
   process:
     severity: 1
