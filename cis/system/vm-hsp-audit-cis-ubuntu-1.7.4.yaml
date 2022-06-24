@@ -1,0 +1,18 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: vm-hsp-audit-cis-ubuntu-1.7.4
+spec:
+  tags: ["CIS", "rule-1.7.4", "Ubuntu", "data-access-control"]
+  message: "Unauthorised Access to /etc/motd files detected"
+  file:
+    severity: 2
+    matchPaths:
+    - path: /etc/motd
+    - path: /etc/update-motd.d
+    ownerOnly: true
+    action: Audit
