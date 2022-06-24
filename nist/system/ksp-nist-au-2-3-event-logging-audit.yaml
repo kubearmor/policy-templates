@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-nist-au-2-event-logging-audit
+  name: ksp-nist-au-2-3-event-logging-audit
   namespace: default # Change namespace
 spec:
-  tags: ["NIST-800", "AC-2", "event-files"]
+  tags: ["NIST-800", "AU-2-3", "event-files"]
   message: "Auditing all the event files."
   selector:
     matchLabels:
