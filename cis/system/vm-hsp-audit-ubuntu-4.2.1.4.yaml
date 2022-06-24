@@ -1,0 +1,17 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: vm-hsp-audit-ubuntu-4.2.1.4
+spec:
+  tags: ["CIS", "rule-4.2.1.4", "Ubuntu", "rsyslog"]
+  message: "Unauthorised modification or access to rsyslog files detected ."
+  file:
+    severity: 1
+    matchPatterns:
+    - pattern: /etc/rsyslog.d/*.conf
+    ownerOnly: true
+    action: Audit
