@@ -1,0 +1,17 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: vm-hsp-block-ubuntu-6.2.9
+spec:
+  tags: ["CIS", "rule-6.2.9", "Ubuntu", "forward"]
+  message: "Unauthorised modification or access to forward files detected ."
+  file:
+    severity: 1
+    matchPatterns:
+    - pattern: /**/**/.forward
+    - pattern: /**/.forward
+    action: Block
