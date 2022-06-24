@@ -1,0 +1,26 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-au-2-event-logging-audit
+  namespace: default # Change namespace
+spec:
+  tags: ["NIST-800", "AC-2", "event-files"]
+  message: "Auditing all the event files."
+  selector:
+    matchLabels:
+      container: ubuntu # Change your match labels
+  file:
+    severity: 3
+    matchPaths:
+      - path: /var/log/auth.log
+      - path: /var/log/daemon.log
+      - path: /var/log/debug
+      - path: /var/log/debug
+      - path: /var/log/syslog
+      - path: /var/log/faillog
+      - path: /var/log/lastlog
+    action: Audit
