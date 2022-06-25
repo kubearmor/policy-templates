@@ -1,0 +1,16 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-nist-ac-4-10-ingress-deny-nodeport-communication
+  namespace: default                                                    #change with your namespace
+spec:
+  description: "NIST AC-4(10) Deny nodeport communications"
+  endpointSelector:
+    matchLabels:
+      app: frontend                                                     #change app: frontend with your label
+  ingressDeny:
+    - fromCIDRSet:
+        - cidr: 0.0.0.0/0
+      toPorts:
+        - ports:
+            - port: "32767"                                             #add more nodeports if necessary
