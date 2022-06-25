@@ -1,0 +1,97 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-ac-17-4-remote-privileged-commands-audit
+  namespace: default #change with your namespace
+spec:
+  tags: ["NIST", "AC-17-4", "Privileges"]
+  message: "Auditing the privileges commands"
+  selector:
+    matchLabels:
+      pod: ubuntu #change this label with your label
+  process:
+    severity: 2
+    matchPaths:
+      - path: /usr/bin/ssh
+        ownerOnly: true
+      - path: /bin/ssh
+        ownerOnly: true
+      - path: /usr/bin/sudo
+        ownerOnly: true
+      - path: /bin/sudo
+        ownerOnly: true
+      - path: /usr/sbin/visudo
+        ownerOnly: true
+      - path: /sbin/visudo
+        ownerOnly: true
+      - path: /usr/bin/last
+        ownerOnly: true
+      - path: /bin/last
+        ownerOnly: true
+      - path: /usr/bin/find
+        ownerOnly: true
+      - path: /bin/find
+        ownerOnly: true
+      - path: /usr/bin/file
+        ownerOnly: true
+      - path: /usr/bin/ss
+        ownerOnly: true
+      - path: /usr/sbin/ufw
+        ownerOnly: true
+      - path: /usr/sbin/iptables
+        ownerOnly: true
+      - path: /usr/bin/passwd
+        ownerOnly: true
+      - path: /usr/sbin/pwck
+        ownerOnly: true
+      - path: /usr/bin/setfacl
+        ownerOnly: true
+      - path: /usr/bin/getfacl
+        ownerOnly: true
+      - path: /usr/sbin/sestatus
+        ownerOnly: true
+      - path: /usr/bin/lshw
+        ownerOnly: true
+      - path: /bin/lshw
+        ownerOnly: true
+      - path: /usr/bin/lscpu
+        ownerOnly: true
+      - path: /bin/lscpu
+        ownerOnly: true
+      - path: /usr/bin/lsblk
+        ownerOnly: true
+      - path: /bin/lsblk
+        ownerOnly: true
+      - path: /usr/bin/lsusb
+        ownerOnly: true
+      - path: /bin/lsusb
+        ownerOnly: true
+      - path: /usr/bin/lspci
+        ownerOnly: true
+      - path: /bin/lspci
+        ownerOnly: true
+      - path: /usr/bin/lsscsi
+        ownerOnly: true
+      - path: /bin/lsscsi
+        ownerOnly: true
+      - path: /usr/sbin/hdparm
+        ownerOnly: true
+      - path: /sbin/hdparm
+        ownerOnly: true
+      - path: /usr/sbin/fdisk
+        ownerOnly: true
+      - path: /sbin/fdisk
+        ownerOnly: true
+      - path: /usr/sbin/dmidecode
+        ownerOnly: true
+      - path: /sbin/dmidecode
+        ownerOnly: true
+      - path: /usr/bin/wget
+        ownerOnly: true
+      - path: /bin/wget
+        ownerOnly: true
+    action: Audit
