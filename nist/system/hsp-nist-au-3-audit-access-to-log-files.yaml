@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: hsp-nist-au-3-audit-access-to-log-files
+  namespace: default
+spec:
+  tags: ["NIST", "NIST-800", "AU-3", "AU-3(1), "log", "file"]
+  message: "Alert! Access to log files detected."
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: gke-cluster-1-default-pool-318479ef-fgqr                    #change to your labels
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /var/log/
+      recursive: true  
+    action: Audit
