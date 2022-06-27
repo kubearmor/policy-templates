@@ -8,7 +8,7 @@ metadata:
   name: hsp-nist-au-3-audit-access-to-log-files
   namespace: default
 spec:
-  tags: ["NIST", "NIST-800", "AU-3", "AU-3(1), "log", "file"]
+  tags: ["NIST", "NIST-800", "AU-3", "AU-3(1)", "log", "file"]
   message: "Alert! Access to log files detected."
   nodeSelector:
     matchLabels:
