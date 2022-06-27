@@ -17,7 +17,9 @@ spec:
   process:
     matchPaths:
     - path: /usr/bin/chmod  
-      ownerOnly: true  
+      ownerOnly: true
+    - path: /bin/chmod  
+      ownerOnly: true
     - path: /usr/bin/getfacl
       ownerOnly: true
     - path: /usr/bin/setfacl
