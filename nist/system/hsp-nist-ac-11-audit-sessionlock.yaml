@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-nist-ac-11-audit-sessionlock
+  namespace: default
+spec:
+  tags: ["NIST","NIST-800-53-r5","AC-11","File","sessionlock","logout", "gnome"]
+  message: "Alert! session lock is detected. Possibly NIST AC-11 control has been installed."
+  nodeSelector:
+    matchLabels:
+      node: ubuntu                     #change to your labels
+  file:
+    severity: 5
+    matchPaths:
+      - path: /etc/dconf/db/local.d/00-screensaver #ref https://help.gnome.org/admin/system-admin-guide/stable/desktop-lockscreen.html https://www.thegeekdiary.com/how-to-customize-the-screensaver-options-in-gnome-on-centos-rhel-7/
+    action: Audit
