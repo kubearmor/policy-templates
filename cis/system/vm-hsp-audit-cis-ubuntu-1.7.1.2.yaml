@@ -1,0 +1,17 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: vm-hsp-audit-cis-ubuntu-1.7.1.2
+spec:
+  tags: ["CIS", "rule-1.7.1.2", "ubuntu"]
+  message: "Unauthorised Access to /etc/issue detected ."
+  file:
+    severity: 7
+    matchPaths:
+    - path: /etc/issue
+    ownerOnly: true
+    action: Audit
