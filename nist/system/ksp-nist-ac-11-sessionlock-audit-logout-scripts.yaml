@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-ac-11-sessionlock-audit-logout-scripts
+  namespace: default
+spec:
+  tags: ["NIST","NIST-800-53-r5","AC-11","File","sessionlock","logout", "bash logout"]
+  message: "Alert! Logout script is detected. Possibly NIST AC-11 control has been installed."
+  selector:
+    matchLabels:
+      app: ubuntu                     #change to your labels
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/profile.d/autologout.sh
+    - path: etc/profile.d/bash_autologout.sh     #ref https://www.debuntu.org/how-to-automatically-logout-idle-bash-session/ https://www.debuntu.org/how-to-automatically-logout-idle-bash-session/       
+    action: Audit
