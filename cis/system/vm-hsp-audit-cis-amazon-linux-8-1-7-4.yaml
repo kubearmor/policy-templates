@@ -1,0 +1,15 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: vm-hsp-audit-cis-amazon-linux-8-1-7-4
+spec:
+  process:
+    severity: 1
+    matchPaths:
+    - path: /etc/motd
+      ownerOnly: true
+    action: Audit
