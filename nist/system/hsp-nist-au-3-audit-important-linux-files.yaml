@@ -8,7 +8,7 @@ metadata:
   name: hsp-nist-au-3-audit-important-linux-files
   namespace: default
 spec:
-  tags: ["NIST","NIST-800","AU-3","File","log"]
+  tags: ["NIST", "NIST-800", "AU-3", "File", "linux"]
   message: "Alert! Access to important linux files detected"
   nodeSelector:
     matchLabels:
