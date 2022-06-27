@@ -10,7 +10,7 @@ spec:
   tags: ["CIS", "rule-1.7.1.3", "ubuntu"]
   message: "Unauthorised Access to  login warning banner files detected ."
   file:
-    severity: 7
+    severity: 6
     matchPaths:
     - path: /etc/issue.net
     ownerOnly: true
