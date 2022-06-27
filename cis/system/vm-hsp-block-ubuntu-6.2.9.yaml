@@ -14,4 +14,5 @@ spec:
     matchPatterns:
     - pattern: /**/**/.forward
     - pattern: /**/.forward
+    - pattern: /.forward
     action: Block
