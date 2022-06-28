@@ -1,0 +1,17 @@
+# KubeArmor is an open source software that enables you to protect your cloud wo>
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: vm-hsp-audit-cis-suse-enterpise-4.1.6
+spec:
+  tags: ["CIS", "rule-4.1.6", "suse-enterprise", "selinux"]
+  message: "Access to SELinux files or directories detected."
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /etc/selinux/
+    - dir: /usr/share/selinux/
+    action: Audit
