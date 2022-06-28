@@ -1,0 +1,28 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-au-3-block-removal-of-log-files
+  namespace: default #change to your namespace
+spec:
+  tags: ["NIST", "NIST-800", "AU-11", "File", "log"]
+  message: "Alert! Removal of log files are blocked."
+  selector:
+    matchLabels:
+      app: ubuntu  #change to your labels
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /var/log/
+    recursive: true
+    fromSource: 
+    - path: /usr/bin/rm
+    - path: /bin/rm
+    - path: /usr/bin/rmdir
+    - path: /bin/rmdir
+    - path: /usr/bin/unlink
+    - path: /bin/unlink
+    action: Block
