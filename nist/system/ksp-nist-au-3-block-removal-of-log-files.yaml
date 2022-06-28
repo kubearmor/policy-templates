@@ -17,12 +17,12 @@ spec:
     severity: 5
     matchDirectories:
     - dir: /var/log/
-    recursive: true
-    fromSource: 
-    - path: /usr/bin/rm
-    - path: /bin/rm
-    - path: /usr/bin/rmdir
-    - path: /bin/rmdir
-    - path: /usr/bin/unlink
-    - path: /bin/unlink
+      recursive: true
+      fromSource: 
+      - path: /usr/bin/rm
+      - path: /bin/rm
+      - path: /usr/bin/rmdir
+      - path: /bin/rmdir
+      - path: /usr/bin/unlink
+      - path: /bin/unlink
     action: Block
