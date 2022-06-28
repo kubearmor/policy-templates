@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["NIST", "AU-8-1", "LINUX", "TIMESTAMPS"]
-  message: "Alert! editing timezone files are not allowed!"
+  message: "Alert! Editing timezone files are not allowed!"
   selector:
     matchLabels:
       os: linux
