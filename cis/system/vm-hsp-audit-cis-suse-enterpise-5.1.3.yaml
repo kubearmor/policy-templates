@@ -1,0 +1,17 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: vm-hsp-audit-cis-suse-enterpise-5.1.3
+spec:
+  tags: ["CIS", "rule-5.1.3", "suse-enterprise"]
+  message: "Unauthorised modification to /etc/cron.hourly detected."
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /etc/cron.hourly/
+    ownerOnly: true
+    action: Audit
