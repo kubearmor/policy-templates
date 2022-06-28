@@ -8,7 +8,7 @@ metadata:
   name: vm-hsp-audit-cis-suse-enterpise-5.1.4
 spec:
   tags: ["CIS", "rule-5.1.4", "suse-enterprise"]
-  message: "Unauthorised modification or access to /etc/cron.daily detected."
+  message: "Unauthorised modification to /etc/cron.daily detected."
   file:
     severity: 5
     matchDirectories:
