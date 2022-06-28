@@ -1,0 +1,43 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-au-12-audit-write-below-monitored-directories
+  namespace: default
+spec:
+  tags: ["NIST","NIST-800-53-r5","AU-12","File Rules","Audit Generation","Write below monitored directories"]
+  message: "Alert! Read/Write below monitored directories detected! Possible violation of NIST AU-12"
+  selector:
+    matchLabels:
+      app: test-app                                                                                                           #change labels with your label values
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /boot/
+      ownerOnly: true
+      recursive: true
+    - dir: /lib/
+      ownerOnly: true
+      recursive: true
+    - dir: /lib64/
+      ownerOnly: true
+      recursive: true
+    - dir: /usr/lib/
+      ownerOnly: true
+      recursive: true
+    - dir: /usr/local/lib/
+      ownerOnly: true
+      recursive: true
+    - dir: /usr/local/sbin/
+      ownerOnly: true
+      recursive: true
+    - dir: /usr/local/bin/
+      ownerOnly: true
+      recursive: true
+    - dir: /root/.ssh/
+      ownerOnly: true
+      recursive: true
+    action: Audit
