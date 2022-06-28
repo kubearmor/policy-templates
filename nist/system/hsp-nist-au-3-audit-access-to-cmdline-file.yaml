@@ -3,7 +3,7 @@
 # https://www.accuknox.com/kubearmor/
 
 apiVersion: security.kubearmor.com/v1
-kind: KubeArmorPolicy
+kind: KubeArmorHostPolicy
 metadata:
   name: hsp-nist-au-3-audit-access-to-cmdline-file
   namespace: default
