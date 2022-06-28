@@ -8,7 +8,7 @@ metadata:
   name: vm-hsp-audit-cis-suse-enterpise-5.1.6
 spec:
   tags: ["CIS", "rule-5.1.6", "suse-enterprise"]
-  message: "Unauthorised modification or access to /etc/cron.monthly detected."
+  message: "Unauthorised modification to /etc/cron.monthly detected."
   file:
     severity: 5
     matchDirectories:
