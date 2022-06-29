@@ -8,7 +8,7 @@ metadata:
   name: vm-hsp-audit-cis-suse-enterpise-5.2.2
 spec:
   tags: ["CIS", "rule-5.2.2", "suse-enterprise"]
-  message: "Unauthorised modification to SSH private host key files detected"
+  message: "Unauthorised modification or Access to SSH private host key files detected"
   file:
     severity: 3
     matchPaths:
