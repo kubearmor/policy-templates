@@ -8,7 +8,7 @@ metadata:
   name: vm-hsp-audit-cis-docker-1.1.6
 spec:
   tags: ["CIS", "rule-1.1.6", "Docker"]
-  message: "Access to docker files or directories detected ."
+  message: "Access to docker files or directories is detected. Possible violation of CIS rule-1.1.17"
   file:
     severity: 4
     matchDirectories:
