@@ -11,6 +11,6 @@ spec:
   message: "Access to Docker file is detected. Possible violation of CIS rule-1.1.10."
   file:
     severity: 5
-    matchDirectories:
-    - dir: /etc/default/docker/
+    matchPaths:
+    - path: /etc/default/docker
     action: Audit
