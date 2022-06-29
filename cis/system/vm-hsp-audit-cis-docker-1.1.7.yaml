@@ -8,7 +8,7 @@ metadata:
   name: vm-hsp-audit-cis-docker-1.1.7
 spec:
   tags: ["CIS", "rule-1.1.7", "Docker"]
-  message: "Access to Docker.service is detected."
+  message: "Access to docker.service file is detected. Possible violation of CIS rule-1.1.7"
   file:
     severity: 5
     matchPaths:

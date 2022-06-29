@@ -8,7 +8,7 @@ metadata:
   name: vm-hsp-audit-cis-docker-1.1.12
 spec:
   tags: ["CIS", "rule-1.1.12", "Docker"]
-  message: "Access to config.toml is detected."
+  message: "Access to config.toml is detected. Possible violation of CIS rule-1.1.12"
   file:
     severity: 5
     matchPaths:

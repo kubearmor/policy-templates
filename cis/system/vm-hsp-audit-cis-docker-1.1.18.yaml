@@ -8,7 +8,7 @@ metadata:
   name: vm-hsp-audit-cis-docker-1.1.18
 spec:
   tags: ["CIS", "rule-1.1.18", "Docker"]
-  message: "Access to runc is detected."
+  message: "Access to runc is detected. Possible violation of CIS rule-1.1.18"
   process:
     severity: 5
     matchPaths:

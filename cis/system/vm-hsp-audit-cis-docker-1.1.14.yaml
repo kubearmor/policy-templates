@@ -8,7 +8,7 @@ metadata:
   name: vm-hsp-audit-cis-docker-1.1.14
 spec:
   tags: ["CIS", "rule-1.1.14", "Docker"]
-  message: "Access to containerd is detected."
+  message: "Access to containerd is detected. Possible violation of CIS rule-1.1.14"
   process:
     severity: 5
     matchPaths:

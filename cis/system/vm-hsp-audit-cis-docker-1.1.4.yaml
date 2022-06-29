@@ -8,7 +8,7 @@ metadata:
   name: vm-hsp-audit-cis-suse-enterpise-1.1.4
 spec:
   tags: ["CIS", "rule-1.1.4", "Docker"]
-  message: "Access to containerd files or directories detected."
+  message: "Access to containerd file and directory is detected. Possible violation of CIS rule-1.1.4"
   file:
     severity: 4
     matchDirectories:

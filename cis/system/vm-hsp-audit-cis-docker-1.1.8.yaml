@@ -8,10 +8,10 @@ metadata:
   name: vm-hsp-audit-cis-docker-1.1.8
 spec:
   tags: ["CIS", "rule-1.1.8", "Docker"]
-  message: "Access to containerd.sock is detected."
+  message: "Access to containerd.sock is detected. Possible violation of CIS rule-1.1.8"
   file:
     severity: 5
     matchPaths:
     - path: /etc/containerd/config.toml
-    - path: /var/run/docker.sock
+    - path: /run/containerd/containerd.sock
     action: Audit

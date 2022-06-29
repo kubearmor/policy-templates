@@ -8,7 +8,7 @@ metadata:
   name: vm-hsp-audit-cis-docker-1.1.17
 spec:
   tags: ["CIS", "rule-1.1.17", "Docker"]
-  message: "Access to containerd-shim-runc-v2 is detected."
+  message: "Access to containerd-shim-runc-v2 is detected. Possible violation of CIS rule-1.1.17"
   process:
     severity: 5
     matchPaths:

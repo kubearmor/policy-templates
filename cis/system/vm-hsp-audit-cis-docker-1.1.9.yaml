@@ -8,7 +8,7 @@ metadata:
   name: vm-hsp-audit-cis-docker-1.1.9
 spec:
   tags: ["CIS", "rule-1.1.9", "Docker"]
-  message: "Access to docker.socket is detected."
+  message: "Access to docker.socket is detected. Possible violation of CIS rule-1.1.9"
   file:
     severity: 5
     matchPaths:

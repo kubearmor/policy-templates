@@ -8,9 +8,9 @@ metadata:
   name: vm-hsp-audit-cis-docker-1.1.10
 spec:
   tags: ["CIS", "rule-1.1.10", "Docker"]
-  message: "Access to Docker is detected."
-  process:
+  message: "Access to Docker file is detected. Possible violation of CIS rule-1.1.10."
+  file:
     severity: 5
-    matchPaths:
-    - path: /etc/default/docker
+    matchDirectories:
+    - dir: /etc/default/docker/
     action: Audit

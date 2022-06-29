@@ -8,7 +8,7 @@ metadata:
   name: vm-hsp-audit-cis-docker-1.1.11
 spec:
   tags: ["CIS", "rule-1.1.11", "Docker"]
-  message: "Access to daemon.json is detected."
+  message: "Access to daemon.json is detected. Possible violation of CIS rule-1.1.11"
   file:
     severity: 5
     matchPaths:
