@@ -17,6 +17,9 @@ spec:
     severity: 5
     matchPaths:
       - path: /var/log/audispd.log
+        readOnly: true
       - path: /etc/audit/audit.rules
+        readOnly: true
       - path: /var/log/auth.log
+        readOnly: true
     action: Audit
