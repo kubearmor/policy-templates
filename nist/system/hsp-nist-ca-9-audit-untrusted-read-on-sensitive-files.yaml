@@ -1,0 +1,38 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-nist-ca-9-audit-untrusted-read-on-sensitive-files
+  namespace: default
+spec:
+  tags: ["NIST","NIST-800-53-r5","CA-9","File Rules","Internal System Connections"]
+  message: "Alert! Sensitive file opened for reading by non-trusted program! Possible violation of NIST CA-9"
+  nodeSelector:
+    matchLabels:
+     kubernetes.io/hostname: gke-ubuntu                                                                           # Change your matchLabels
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /etc/sudoers.d/
+      ownerOnly: true
+      recursive: true
+    - dir: /etc/pam.d/ 
+      ownerOnly: true
+      recursive: true
+    - dir: /etc/
+      ownerOnly: true
+      recursive: true
+    action: Audit
+    matchPaths:
+    - path: /etc/shadow
+      ownerOnly: true
+    - path: /etc/sudoers
+      ownerOnly: true
+    - path: /etc/pam.conf
+      ownerOnly: true
+    - path: /etc/security/pwquality.conf
+      ownerOnly: true
+    action: Audit
