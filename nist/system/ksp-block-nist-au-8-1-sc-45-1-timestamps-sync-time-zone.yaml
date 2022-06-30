@@ -1,7 +1,7 @@
 # KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
 # To learn more about KubeArmor visit:
 # https://www.accuknox.com/kubearmor/
-# NIST 800-53 rev5 withdrew the controls AU-8(1) to SC-45(1).
+# NIST 800-53 rev5 withdrew the controls AU-8(1) moved to SC-45(1).
 
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
