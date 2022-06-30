@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-au-6-7-permitted-actions-audit
+  namespace: default # Change namespace
+spec:
+  tags: ["NIST-800", "AC-6(7)", "auditing", "logs"]
+  message: "Auditing the log files."
+  selector:
+    matchLabels:
+      container: ubuntu # Change your match labels
+  file:
+    severity: 5
+    matchPaths:
+      - path: /var/log/audispd.log
+        readOnly: true
+      - path: /etc/audit/audit.rules
+        readOnly: true
+      - path: /var/log/auth.log
+        readOnly: true
+    action: Audit
