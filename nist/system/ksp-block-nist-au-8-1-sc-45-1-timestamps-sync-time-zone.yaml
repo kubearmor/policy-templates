@@ -1,0 +1,31 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# NIST 800-53 rev5 withdrew the controls AU-8(1) moved to SC-45(1).
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-nist-au-8-1-sc-45-1-timestamps-sync-time-zone
+  namespace: default
+spec:
+  tags: ["NIST", "AU-8-1","SC-45-1" "LINUX", "TIMESTAMPS"]
+  message: "Alert! Editing timezone files are not allowed!"
+  selector:
+    matchLabels:
+      os: linux
+  file:
+    severity: 1
+    matchDirectories:
+    - dir: /usr/share/zoneinfo/
+      readOnly: true
+      ownerOnly: true
+    action: Block
+  process:
+    severity: 1
+    matchPaths:
+    - path: /usr/bin/timedatectl
+      ownerOnly: true
+    - path: /etc/localtime
+      ownerOnly: true
+    action: Block
