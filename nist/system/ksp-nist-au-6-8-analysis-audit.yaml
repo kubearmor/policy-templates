@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-nist-au-6-8-permitted-actions-audit
+  name: ksp-nist-au-6-8-analysis-audit
   namespace: default # Change namespace
 spec:
   tags: ["NIST-800", "AC-6(8)", "auditing", "key-file"]
