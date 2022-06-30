@@ -1,0 +1,29 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-nist-ca-1-allow-only-internal-connections
+  namespace: default        #change default namespace to match your namespace
+spec:
+  description: "Allow only internal connections. Block external connections."
+  endpointSelector:
+    matchLabels:
+      app: mysql      #change app: mysql to match your label
+  egressDeny:
+  - toEntities:
+    - "world"
+  egress:
+  - toEndpoints:
+    - {}  
+    
+#only allow workloads with role: backend
+#  egress
+#  - toEndpoints:
+#    - matchLabels:
+#        role: backend
+
+#only allow specific IPs
+#egress:
+#- toCIDR:
+#    - 20.1.1.1/32   ---replace with your IP
+   
+    
