@@ -30,5 +30,4 @@ spec:
       ownerOnly: true
     - path: /usr/lib/systemd/systemd-timesyncd
       ownerOnly: true
-      readOnly: true
     action: Block
