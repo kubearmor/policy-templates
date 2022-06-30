@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-nist-au-8-2-secondary-sync-time-zone
+  name: ksp-block-nist-au-8-2-sc-45-2-secondary-sync-time-zone
   namespace: default
 spec:
-  tags: ["NIST", "AU-8-2", "LINUX", "TIMESTAMPS"]
+  tags: ["NIST", "AU-8-2","SC-45-2", "LINUX", "TIMESTAMPS"]
   message: "Alert! systemd-timesyncd process access not allowed!"
   selector:
     matchLabels:
