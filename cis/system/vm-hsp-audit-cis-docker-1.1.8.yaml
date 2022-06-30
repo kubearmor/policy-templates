@@ -1,0 +1,17 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: vm-hsp-audit-cis-docker-1.1.8
+spec:
+  tags: ["CIS", "rule-1.1.8", "Docker"]
+  message: "Access to containerd.sock is detected. Possible violation of CIS rule-1.1.8"
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/containerd/config.toml
+    - path: /run/containerd/containerd.sock
+    action: Audit
