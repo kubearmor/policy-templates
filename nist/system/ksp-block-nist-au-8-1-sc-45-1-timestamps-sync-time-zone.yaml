@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-block-nist-au-8-1-timestamps-sync-time-zone
+  name: ksp-block-nist-au-8-1-sc-45-1-timestamps-sync-time-zone
   namespace: default
 spec:
-  tags: ["NIST", "AU-8-1", "LINUX", "TIMESTAMPS"]
+  tags: ["NIST", "AU-8-1","SC-45-1" "LINUX", "TIMESTAMPS"]
   message: "Alert! Editing timezone files are not allowed!"
   selector:
     matchLabels:
