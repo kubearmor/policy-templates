@@ -1,0 +1,33 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# NIST 800-53 rev5 withdrew the controls AU-8(2) and moved to SC-45(2).
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-nist-au-8-2-sc-45-2-secondary-sync-time-zone
+  namespace: default
+spec:
+  tags: ["NIST", "AU-8-2","SC-45-2", "LINUX", "TIMESTAMPS"]
+  message: "Alert! systemd-timesyncd process access not allowed!"
+  selector:
+    matchLabels:
+      os: linux
+  file:
+    severity: 1
+    matchDirectories:
+    - dir: /usr/share/zoneinfo/
+      readOnly: true
+      ownerOnly: true
+    action: Block
+  process:
+    severity: 1
+    matchPaths:
+    - path: /usr/bin/timedatectl
+      ownerOnly: true
+    - path: /etc/timezone
+      ownerOnly: true
+    - path: /usr/lib/systemd/systemd-timesyncd
+      ownerOnly: true
+    action: Block
