@@ -1,0 +1,50 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+# NIST 800-53 rev5 CM-5(3) SIGNED COMPONENTS moved to CM-14 SIGNED COMPONENTS
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-cm-5-3-cm-14-signed-components
+  namespace: default
+spec:
+  tags: ["NIST","NIST-800-53-r5","CM-5(3)","CM-14","ACCESS RESTRICTIONS FOR CHANGE","SIGNED COMPONENTS"]
+  message: "Alert! Package management process launched in container. Possible violation of NIST CM-5(3)/CM-14"
+  selector:
+    matchLabels:
+      app: test-app                                                                                                           #change labels with your label values
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/sbin/alternatives  
+    - path: /usr/bin/dnf
+    - path: /usr/bin/rpm
+    - path: /usr/bin/yum
+    - path: /usr/bin/rpmkeys
+    - path: /bin/dnf
+    - path: /bin/rpm
+    - path: /bin/yum
+    - path: /bin/rpmkeys
+    - path: /usr/bin/dpkg
+    - path: /bin/dpkg
+    - path: /usr/bin/dpkg-divert
+    - path: /bin/dpkg-divert
+    - path: /usr/bin/apt
+    - path: /bin/apt
+    - path: /usr/bin/apt-get
+    - path: /bin/apt-get
+    - path: /usr/bin/apt-key
+    - path: /bin/apt-key
+    - path: /usr/bin/apt-config
+    - path: /bin/apt-config
+    - path: /usr/bin/apt-cache
+    - path: /bin/apt-cache
+    - path: /usr/bin/gem
+    - path: /bin/gem
+    - path: /usr/bin/pip
+    - path: /bin/pip
+    - path: /usr/bin/pip3
+    - path: /bin/pip3
+    action: Block
