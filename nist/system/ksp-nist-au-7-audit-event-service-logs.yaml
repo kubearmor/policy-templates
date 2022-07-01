@@ -17,4 +17,5 @@ spec:
     severity: 5
     matchDirectories:
     - dir: /var/log/
+      recursive: true
     action: Audit
