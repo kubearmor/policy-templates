@@ -1,0 +1,29 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-cm-5-1-access-restrictions-for-change-automated-access-enforcement-and-audit-records
+  namespace: default
+spec:
+  tags: ["NIST","NIST-800-53-r5","CM-5(1)","ACCESS RESTRICTIONS FOR CHANGE","AUTOMATED ACCESS ENFORCEMENT AND AUDIT RECORDS"]
+  message: "Alert! Package management process launched in container. Possible violation of NIST CM-5(3)/CM-14"
+  selector:
+    matchLabels:
+      app: test-app                                                                                                           #change labels with your label values
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /var/log/
+      recursive: true
+      fromSource:
+      - path: /usr/bin/shred  
+      - path: /bin/shred
+      - path: /usr/bin/rm
+      - path: /bin/rm
+      - path: /usr/bin/mv
+      - path: /bin/mv
+    action: Audit
