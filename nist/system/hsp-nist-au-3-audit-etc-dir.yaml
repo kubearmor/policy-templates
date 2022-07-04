@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-nist-au-3-audit-etc-dir
+  namespace: default
+spec:
+  tags: ["NIST", "NIST-800", "AU-3", "File", "linux"]
+  message: "Alert! Access to etc dir detected"
+  nodeSelector:
+    matchLabels:
+      node: ubuntu                     #change to your labels
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /etc/
+      recursive: true
+      ownerOnly: true
+    action: Audit
