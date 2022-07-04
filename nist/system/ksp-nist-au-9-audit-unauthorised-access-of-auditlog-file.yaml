@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-au-9-audit-unauthorised-access-of-auditlog-file
+  namespace: default #change to your namespace
+spec:
+  tags: ["NIST", "NIST-800", "AU-9", "Audit-log"]
+  message: "Alert! Unauthorised access to audit log files not permitted."
+  selector:
+    matchLabels:
+      app: ubuntu  #change to your labels
+  file:
+    severity: 5
+    matchDirectoris:
+    - dir: /var/log/audit
+     ownerOnly: true
+    matchPath:
+     - path: /var/log/audit/audit.log
+      ownerOnly: true
+    action: Audit
