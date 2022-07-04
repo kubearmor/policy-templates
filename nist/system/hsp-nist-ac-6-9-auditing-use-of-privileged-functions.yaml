@@ -6,7 +6,6 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
   name: hsp-nist-ac-6-9-auditing-use-of-privileged-functions
-  namespace: default                                                                                                                    #change with your namespace
 spec:
   tags: ["NIST","NIST-800-53-r5","AC-6(9)", "Least Privilege" ,"Auditing Use of Privileged Functions"]
   message: "Alert! Execution of Prvileged Functions Detected. Possible violation of NIST AC-6(9)"

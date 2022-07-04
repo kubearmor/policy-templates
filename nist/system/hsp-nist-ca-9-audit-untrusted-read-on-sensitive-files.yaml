@@ -6,7 +6,6 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
   name: hsp-nist-ca-9-audit-untrusted-read-on-sensitive-files
-  namespace: default
 spec:
   tags: ["NIST","NIST-800-53-r5","CA-9","File Rules","Internal System Connections"]
   message: "Alert! Sensitive file opened for reading by non-trusted program! Possible violation of NIST CA-9"
