@@ -15,10 +15,10 @@ spec:
       app: ubuntu  #change to your labels
   file:
     severity: 5
-    matchDirectoris:
+    matchDirectories:
     - dir: /var/log/audit/
-     ownerOnly: true
-    matchPath:
-     - path: /var/log/audit/audit.log
+      ownerOnly: true
+    matchPaths:
+    - path: /var/log/audit/audit.log
       ownerOnly: true
     action: Audit
