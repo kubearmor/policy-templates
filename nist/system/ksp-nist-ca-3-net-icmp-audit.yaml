@@ -3,7 +3,7 @@
 # https://www.accuknox.com/kubearmor/
 
 apiVersion: security.kubearmor.com/v1
-kind: KubeArmorHostPolicy
+kind: KubeArmorPolicy
 metadata:
   name: ksp-nist-ca-3-net-icmp-audit
   namespace: default
