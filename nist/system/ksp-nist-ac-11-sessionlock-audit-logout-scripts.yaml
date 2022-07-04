@@ -17,5 +17,5 @@ spec:
     severity: 5
     matchPaths:
     - path: /etc/profile.d/autologout.sh
-    - path: etc/profile.d/bash_autologout.sh     #ref https://www.debuntu.org/how-to-automatically-logout-idle-bash-session/ https://www.debuntu.org/how-to-automatically-logout-idle-bash-session/       
+    - path: /etc/profile.d/bash_autologout.sh     #ref https://www.debuntu.org/how-to-automatically-logout-idle-bash-session/ https://www.debuntu.org/how-to-automatically-logout-idle-bash-session/       
     action: Audit
