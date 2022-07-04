@@ -1,0 +1,33 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-au-12-audit-read-write-on-shell-configuration-files
+  namespace: default
+spec:
+  tags: ["NIST","NIST-800-53-r5","AU-12","File Rules","Audit Generation","Audit Read/Write on Shell Configuration Files"]
+  message: "Alert! Read/Write on Shell Configuration Files detected! Possible violation of NIST AU-12"
+  selector:
+    matchLabels:
+      app: test-app                                                                                                           #change labels with your label values
+  file:
+    severity: 5
+    matchPaths:
+    - path: /root/.bashrc 
+    - path: /root/.bash_profile 
+    - path: /root/.bash_history 
+    - path: /root/.bash_login 
+    - path: /root/.bash_logout 
+    - path: /root/.inputrc 
+    - path: /root/.profile
+    - path: /home/*/.bashrc 
+    - path: /home/*/.bash_profile 
+    - path: /home/*/.bash_history 
+    - path: /home/*/.bash_login 
+    - path: /home/*/.bash_logout 
+    - path: /home/*/.inputrc 
+    - path: /home/*/.profile
+    action: Audit
