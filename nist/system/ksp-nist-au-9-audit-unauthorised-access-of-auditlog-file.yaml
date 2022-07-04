@@ -16,7 +16,7 @@ spec:
   file:
     severity: 5
     matchDirectoris:
-    - dir: /var/log/audit
+    - dir: /var/log/audit/
      ownerOnly: true
     matchPath:
      - path: /var/log/audit/audit.log
