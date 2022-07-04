@@ -10,7 +10,7 @@ metadata:
 spec:
   tags: ["NIST", "NIST-800", "AU-3", "File", "linux"]
   message: "Alert! Access to file cmdline is detected"
-  nodeSselector:
+  nodeSelector:
     matchLabels:
       node: ubuntu                     #change to your labels
   file:
