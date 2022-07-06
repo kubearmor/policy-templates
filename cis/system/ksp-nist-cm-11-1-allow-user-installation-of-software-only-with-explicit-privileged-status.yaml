@@ -6,7 +6,6 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
   name: vm-hsp-nist-cm-11-1-allow-user-installation-of-software-only-with-explicit-privileged-status
-  namespace: default # Change your namespace
 spec:
   tags : ["NIST","NIST-800","CM11-(2)"] 
   message: "Alert! installation of software without root permission detected, Possible violation of NIST CM-11(2)."
