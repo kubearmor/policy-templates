@@ -10,7 +10,7 @@ metadata:
 spec:
   tags : ["NIST","NIST-800","CM11-(2)"] 
   message: "Alert! installation of software without root permission detected, Possible violation of NIST CM-11(2)."
-  selector:
+  nodeSelector:
     matchLabels:
      kubernetes.io/hostname: gke-ubuntu    
   process:
