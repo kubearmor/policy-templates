@@ -6,7 +6,6 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
   name: hsp-nist-cm-3-5-configuration-change-control-automated-security-response 
-  namespace: default
 spec:
   tags: ["NIST","NIST-800-53-r5","CM-3(5)","CONFIGURATION CHANGE CONTROL","AUTOMATED SECURITY RESPONSE"]
   message: "Alert! Baseline configurations change. Explicit mount detected. Possible violation of NIST CM-3(5)"

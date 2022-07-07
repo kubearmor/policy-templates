@@ -6,7 +6,6 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
   name: hsp-nist-au-3-audit-etc-dir
-  namespace: default
 spec:
   tags: ["NIST", "NIST-800", "AU-3", "File", "linux"]
   message: "Alert! Access to etc dir detected"
