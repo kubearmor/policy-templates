@@ -1,0 +1,41 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-cm-1-configuration-management-policy-and-procedures
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST","NIST-800-53-r5", "CM-1", "Configuration Management Policy and Procedures", "Baseline Configuration Policies"]
+  message: "Alert! NIST CM-1 Baseline configuration violation detected. "
+  selector:
+    matchLabels:
+      container: ubuntu-1 # Change your match labels
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /dev/
+      recursive: true
+      readOnly: true
+      ownerOnly: true
+    - dir: /tmp/
+      recursive: true
+      readOnly: true
+      ownerOnly: true
+    matchPaths:
+    - path: /etc/ld.so.preload
+      ownerOnly: true
+      readOnly: true
+    action: Block
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/rsync
+    - path: /usr/bin/scp
+    - path: /usr/bin/sftp
+    - path: /bin/rsync
+    - path: /bin/scp
+    - path: /bin/sftp
+    action: Block
