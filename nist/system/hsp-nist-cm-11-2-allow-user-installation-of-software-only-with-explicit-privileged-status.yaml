@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: hsp-nist-cm-11-1-allow-user-installation-of-software-only-with-explicit-privileged-status
+  name: hsp-nist-cm-11-2-allow-user-installation-of-software-only-with-explicit-privileged-status
   namespace: default # Change your namespace
 spec:
   tags : ["NIST","NIST-800","CM11-(2)"] 
