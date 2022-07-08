@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-cm-8-3-configuration-change-control-automated-security-response 
+  namespace: default
+spec:
+  tags: ["NIST","NIST-800-53-r5","cm-8","cm-8-3","UNAUTHORIZED SOFTWARE"]
+  message: "Alert! Package management process launched. Possible violation of NIST CM-8(3)"
+  selector:
+    matchLabels:
+      app: test-app               #change labels with your label values
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/apt
+    - path: /usr/bin/wget
+    - path: /usr/bin/curl
+    - path: /usr/bin/http
+    - path: /usr/bin/zypp
+    - path: /usr/bin/yum
+    action: Audit
