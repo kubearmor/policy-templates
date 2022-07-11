@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-nist-cm-8-3-configuration-change-control-automated-security-response 
+  name: ksp-nist-cm-8-3-automated-unauthorized-component-detection
   namespace: default
 spec:
   tags: ["NIST","NIST-800-53-r5","cm-8","cm-8-3","UNAUTHORIZED SOFTWARE"]
