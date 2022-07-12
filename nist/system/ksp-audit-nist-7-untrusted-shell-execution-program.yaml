@@ -1,0 +1,48 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-nist-7-untrusted-shell-execution-program
+  namespace: default # Change your namespace
+spec:
+  tags : ["NIST", "CM-7(2)", "Unix Shell"] 
+  message: "Bash shells have been accessed"
+  selector:
+    matchLabels:
+      container: ubuntu    # change to your labels
+  process:
+    severity: 2 # Higher severity for processes 
+    matchPaths:
+    - path: /bin/bash
+    - path: /bin/sh
+    - path: /usr/bin/bash
+    - path: /usr/bin/env
+    - path: /usr/bin/shell
+    - path: /bin/ksh
+    - path: /etc/init.d      
+    - path: /dev/tty 
+    - path: /bin/zsh
+    - path: /bin/tcsh
+    - path: /bin/csh
+      ownerOnly: true
+    action: Audit   
+  file:
+    severity: 10  # lowest severity for processes invoked as child process of bash
+    matchPaths:
+    - path: /bin/bash
+    - path: /bin/sh
+    - path: /usr/bin/bash
+    - path: /usr/bin/env
+    - path: /usr/bin/shell
+    - path: /bin/ksh
+    - path: /etc/init.d      
+    - path: /dev/tty 
+    - path: /bin/zsh
+    - path: /bin/tcsh
+    - path: /bin/csh
+      fromSource:
+      - path: /bin/bash
+    action: Audit
