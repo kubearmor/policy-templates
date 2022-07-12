@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-ca-7-4-continuous-monitoring-automation-support-for-monitoring
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST","NIST-800-53-r5", "CA-7(4)", "CONTINUOUS MONITORING", "AUTOMATION SUPPORT FOR MONITORING"]
+  message: "Notification! Sensitive files/directories were accessed. Enforcing NIST CA-7(4) Automation Support For Monitoring"
+  selector:
+    matchLabels:
+      container: ubuntu-1                                                                                       # Change labels with your label values
+  file:
+    severity: 6
+    matchPaths:
+    - path: /etc/sudoers
+      readOnly: true
+    - path: /etc/passwd
+    - path: /etc/shadow
+    - path: /root/.bashrc
+    matchDirectories:
+    - dir: /var/log/
+      recursive: true
+    action: Audit
