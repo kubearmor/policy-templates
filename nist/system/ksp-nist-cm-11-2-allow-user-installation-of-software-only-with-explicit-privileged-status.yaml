@@ -1,0 +1,28 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-cm-11-2-allow-user-installation-of-software-only-with-explicit-privileged-status
+  namespace: default # Change your namespace
+spec:
+  tags : ["NIST","NIST-800-53-r5","CM11-(2)"] 
+  message: "Alert! installation of software without root permission detected, Possible violation of NIST CM-11(2)."
+  selector:
+    matchLabels:
+      app: nginx   # Change your label
+  process:
+    severity: 5 
+    matchPaths:
+    - path: /usr/bin/apt
+    - path: /usr/bin/wget
+    - path: /usr/bin/curl
+    - path: /usr/bin/http
+    - path: /usr/bin/shell
+    - path: /usr/bin/zypp
+    - path: /usr/bin/yum      
+    - path: /usr/bin/zypper 
+      ownerOnly: true # allow access for root only
+    action: Audit
