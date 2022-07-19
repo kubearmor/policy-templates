@@ -14,7 +14,7 @@ spec:
     matchLabels:
       app: testpod  #change app
   file:
-    matchPath:      
+    matchPaths:      
     - path: /etc/securetty
     severity: 5
     action: Audit
