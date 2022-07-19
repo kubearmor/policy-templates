@@ -1,0 +1,12 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "cnp-nist-ia-3-1-device-identification-and-crytographic-bidirectional-authentication"
+spec:
+  endpointSelector:
+    matchLabels:
+      spiffe://example.org/app1: ""   #change this label with your label
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        spiffe://example.org/app2: ""   #change this label with your label
