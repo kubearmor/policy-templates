@@ -1,0 +1,26 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-si-3-8-malicious-code-protection-detect-unautorised-command
+  namespace: default # Change your namespace
+spec:
+  tags: ["nist", "nist-800", "si-3-8", "malicious-command"]
+  message: "Alert! Unauthorized Malicious Command execution detected "
+  selector:
+    matchLabels:
+      app: ubuntu # Change your labels
+  process:
+    matchPatterns:
+    - pattern: /*/rm -rf *
+    - pattern: /*/chmod -R 777 /
+    - pattern: /*/dd if=/dev/zero of=/dev/sda
+    - pattern: /*/dd if *
+    - pattern: /*/mv * /dev/null
+    - pattern: /*/*/crontab -r 
+    - pattern: /*/mkfs.ext4 /dev/*
+    - pattern: /*/gunzip *
+    action: Audit
