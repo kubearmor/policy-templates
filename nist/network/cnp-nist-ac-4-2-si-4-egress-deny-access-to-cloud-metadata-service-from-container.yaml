@@ -4,7 +4,7 @@ metadata:
   name: cnp-nist-ac-4-2-si-4-egress-deny-access-to-cloud-metadata-service-from-container
   namespace: default                                                                    #change with your namespace
 spec:
-  description: "NIST AC-4(2) Deny contact to cloud metadata service from container"
+  description: "NIST AC-4(2) SI-4 Deny contact to cloud metadata service from container"
   endpointSelector:
     matchLabels:
       pod: testpod                                                                      #change app: demo-app with your label
