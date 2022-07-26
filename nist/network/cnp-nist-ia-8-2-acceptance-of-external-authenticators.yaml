@@ -1,0 +1,57 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-nist-ia-8-2-acceptance-of-external-authenticators
+  namespace: default                                                                    #change with your namespace
+spec:
+  description: "NIST IA-8(2) This Policy will Protect from External Access to and from unknown malicious IPs"
+  endpointSelector:
+    matchLabels:
+      pod: testpod                                                                      #change pod: testpod with your label
+  ingress:
+    - fromCIDRSet:
+        - cidr: 0.0.0.0/0                                                               # Change this to your CIDR set
+          except:
+            - 103.25.89.94/32
+            - 112.66.243.123/32
+            - 45.117.143.105/32
+            - 186.128.35.127/32
+            - 176.124.192.66/32
+            - 117.50.187.221/32
+            - 101.69.5.131/32
+            - 103.50.87.158/32
+            - 117.26.222.64/32
+            - 185.199.159.181/32
+            - 103.40.127.136/32
+    - fromEntities:
+        - cluster
+    - fromEndpoints:
+        - {}
+  egress:
+    - toCIDRSet:
+        - cidr: 0.0.0.0/0                                                               # Change this to your CIDR set
+          except:
+            - 45.117.143.105/32
+            - 186.128.35.127/32
+            - 176.124.192.66/32
+            - 117.50.187.221/32
+            - 101.69.5.131/32
+            - 103.50.87.158/32
+            - 117.26.222.64/32
+            - 185.199.159.181/32
+            - 103.40.127.136/32
+    - toEntities:
+        - cluster
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+          rules:
+            dns:
+              - matchPattern: "*"
+    - toEndpoints:
+        - {}
