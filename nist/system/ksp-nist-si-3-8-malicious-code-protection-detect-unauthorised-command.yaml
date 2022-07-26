@@ -1,0 +1,35 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-si-3-8-malicious-code-protection-detect-unauthorised-command
+  namespace: default # Change your namespace
+spec:
+  tags: ["nist", "nist-800", "si-3-8", "malicious-command"]
+  message: "Alert! Unauthorized Malicious Command execution detected "
+  selector:
+    matchLabels:
+      app: ubuntu # Change your labels
+  process:
+    matchPatterns:
+    - pattern: /*/rm -rf *                                      #recursively force delete
+    - pattern: /*/*/rm -rf *
+    - pattern: /*/chmod -R 777 /                                #readable, writable and executable to all users
+    - pattern: /*/*/chmod -R 777 /
+    - pattern: /*/dd if=/dev/zero of=/dev/sda 			            #random data bein written to your drive
+    - pattern: /*/*/dd if=/dev/zero of=/dev/sda
+    - pattern: /*/dd if *
+    - pattern: /*/*/dd if *
+    - pattern: /*/mv * /dev/null				                        #destroys any data that you move to the file's location-black hole
+    - pattern: /*/*/mv * /dev/null
+    - pattern: /*/*/crontab -r 				                          #crontjobs removal
+    - pattern: /*/mkfs.ext4 /dev/*				                      #formats the specified partition
+    - pattern: /*/*/mkfs.ext4 /dev/*
+    - pattern: /*/gunzip *					                            #unzipping possible malicious archive
+    - pattern: /*/*/gunzip * 
+    - pattern: /*/chattr -ia /etc/*				                      #change file attributes in etc folder
+    - pattern: /*/*/chattr -ia /etc/*
+    action: Audit
