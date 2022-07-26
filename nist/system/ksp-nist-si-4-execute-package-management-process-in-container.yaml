@@ -17,6 +17,8 @@ spec:
     severity: 5
     matchPaths:
     - path: /usr/bin/apt
+    - path: /usr/bin/apt-get
+    - path: /bin/apt-get
     - path: /bin/apt
     - path: /usr/bin/dpkg
     - path: /bin/dpkg
