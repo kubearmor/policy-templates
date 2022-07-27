@@ -8,14 +8,19 @@ metadata:
   name: ksp-mitre-tactic-execution-remote-code-exec-in-container
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE", "T1210"]
+  tags: ["MITRE", "T1210", "NIST", "SI-4"]
   message: "Netcat runs inside a container that allows remote code execution"
   selector:
-      matchLabels:
-          app: testpod # Change your matchLabels
+    matchLabels:
+      app: testpod # Change your matchLabels
   process:
     severity: 6
     matchPaths: 
     - path: /usr/bin/nc
     - path: /usr/bin/ncat
+    matchPatterns:
+    - pattern: /*/nc
+    - pattern: /*/*/nc
+    - pattern: /*/ncat
+    - pattern: /*/*/ncat
     action: Audit
