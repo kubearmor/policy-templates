@@ -8,15 +8,25 @@ metadata:
   name: ksp-detect-k8s-client-exec-in-container
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE", "T1609"]
+  tags: ["MITRE", "T1609", "NIST", "SI-4"]
   message: "k8s client execution detected within container!"
   selector:
     matchLabels:
       app: testpod #change with your own label
   process:
     matchPaths:
-      - path: /usr/bin/docker
-      - path: /usr/bin/cri-ctl
-      - path: /usr/bin/kubectl
+    - path: /usr/bin/docker
+    - path: /usr/bin/cri-ctl
+    - path: /usr/bin/kubectl
+    matchPatterns:
+    - pattern: /*/*/*/kubectl
+    - pattern: /*/*/kubectl
+    - pattern: /*/kubectl
+    - pattern: /*/*/*/cri-ctl
+    - pattern: /*/*/cri-ctl  
+    - pattern: /*/cri-ctl
+    - pattern: /*/*/*/docker
+    - pattern: /*/*/docker
+    - pattern: /*/docker
     action: Audit
     severity: 4
