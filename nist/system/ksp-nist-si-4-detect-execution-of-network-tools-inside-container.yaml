@@ -1,0 +1,41 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-si-4-detect-execution-of-network-tools-inside-container
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST", "SI-4", "network-tools"]
+  message: "Alert! Detected use of network tools inside container"
+  selector:
+    matchLabels:
+      app: nginx-test    #change this label with your label
+  process:
+    severity: 5
+    matchPatterns:
+    - pattern: /*/*/tcpdump
+    - pattern: /*/tcpdump
+    - pattern: /*/*/nc
+    - pattern: /*/nc
+    - pattern: /*/*/ncat
+    - pattern: /*/ncat
+    - pattern: /*/*/nmap
+    - pattern: /*/nmap
+    - pattern: /*/*/dig
+    - pattern: /*/dig
+    - pattern: /*/*/tshark
+    - pattern: /*/tshark
+    - pattern: /*/*/ngrep
+    - pattern: /*/ngrep
+    - pattern: /*/*/telnet
+    - pattern: /*/telnet
+    - pattern: /*/*/mitmproxy
+    - pattern: /*/mitmproxy
+    - pattern: /*/*/socat
+    - pattern: /*/socat
+    - pattern: /*/*/zmap
+    - pattern: /*/zmap
+    action: Audit
