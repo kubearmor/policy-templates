@@ -9,7 +9,7 @@ metadata:
   namespace: default
 spec:
   tags: ["NIST","NIST-800","SI-4","File","/dev"]
-  message: "Alert! File creation in /dev/ dir is detected. Some rootkits hide files in /dev."
+  message: "Alert! File creation in /dev/ dir is detected. Possible violation of NIST SI-4"
   selector:
     matchLabels:
       app: nginx-test                   #change to your labels
