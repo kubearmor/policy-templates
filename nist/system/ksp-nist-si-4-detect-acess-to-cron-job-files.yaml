@@ -1,0 +1,29 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-si-4-detect-acess-to-cron-job-files
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST", "SI-4", "cron job"]
+  message: "Alert! Access to cron job files/directories detected."
+  selector:
+    matchLabels:
+      app: nginx-test    #change this label with your label
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /var/spool/cron/
+      recursive: true
+    - dir: /var/cron/
+    - dir: /etc/cron.d/
+    - dir: /etc/cron.daily/
+    - dir: /etc/cron.hourly/
+    - dir: /etc/cron.monthly/
+    - dir: /etc/cron.weekly/
+    matchPaths:
+    - path: /etc/crontab
+    action: Audit
