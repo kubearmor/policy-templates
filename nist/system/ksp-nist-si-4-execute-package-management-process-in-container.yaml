@@ -1,0 +1,49 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-execute-package-management-process-in-container
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST", "CM-7(5)", "SI-4", "Package Manager"]
+  message: "Alert! Execution of package management process inside container is detected"
+  selector:
+    matchLabels:
+      pod: testpod    #change this label with your label
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/apt
+    - path: /usr/bin/apt-get
+    - path: /bin/apt-get
+    - path: /bin/apt
+    - path: /usr/bin/dpkg
+    - path: /bin/dpkg
+    - path: /usr/bin/gdebi
+    - path: /bin/gdebi
+    - path: /usr/bin/make
+    - path: /bin/make
+    - path: /usr/bin/yum
+    - path: /bin/yum
+    - path: /usr/bin/rpm
+    - path: /bin/rpm
+    - path: /usr/bin/dnf
+    - path: /bin/dnf
+    - path: /usr/bin/pacman
+    - path: /usr/sbin/pacman
+    - path: /bin/pacman
+    - path: /sbin/pacman
+    - path: /usr/bin/makepkg
+    - path: /usr/sbin/makepkg
+    - path: /bin/makepkg
+    - path: /sbin/makepkg
+    - path: /usr/bin/yaourt
+    - path: /usr/sbin/yaourt
+    - path: /bin/yaourt
+    - path: /sbin/yaourt
+    - path: /usr/bin/zypper
+    - path: /bin/zypper
+    action: Audit
