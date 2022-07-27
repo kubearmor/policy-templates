@@ -14,6 +14,7 @@ spec:
     matchLabels:
       app: ubuntu # Change your labels
   process:
+    severity: 1
     matchPatterns:
     - pattern: /*/rm -rf *                                      #recursively force delete
     - pattern: /*/*/rm -rf *
