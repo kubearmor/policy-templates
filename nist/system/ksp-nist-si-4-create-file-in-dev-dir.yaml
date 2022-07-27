@@ -21,10 +21,4 @@ spec:
       fromSource:
       - path: /usr/bin/touch
       - path: /bin/touch
-      - path: /bin/echo
-      - path: /usr/bin/echo
-      - path: /usr/bin/printf
-      - path: /bin/printf
-      - path: /bin/cat
-      - path: /usr/bin/cat
     action: Audit
