@@ -1,0 +1,46 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-si-7-7-software-irmware-information-integrity-detection-response
+  namespace: default # Change your namespace
+spec:
+  tags: ["nist", "nist-800", "si-7-7"]
+  message: "Alert! unauthorized access to established configuration settings detected"
+  selector:
+    matchLabels:
+      app: ubuntu # Change your labels
+  file:
+    severity: 3
+    matchPaths:
+    - path: /etc/udev/                         #udev(Dynamic device management) related configuration
+      ownerOnly: true
+    - path: /etc/fstab                         #file system config file
+      ownerOnly: true
+    - path: /etc/mtab                          #/proc/mount changes
+      ownerOnly: true
+    - path: /etc/mtools.conf	                 #configuration for all the operations
+      ownerOnly: true
+    - path: /etc/lilo.conf                     #system's default boot command line
+      ownerOnly: true
+    - path: /etc/inittab                       #first configuration file in UNIX
+      ownerOnly: true
+    - path: /etc/conf.modules                  #configuration file for kerneld
+      ownerOnly: true
+    - path: /etc/modules.conf                  #configuration file for kerneld
+      ownerOnly: true
+    - path: /etc/cups                          #common UNIX Printing System config files
+      ownerOnly: true
+    - path: /etc/xdg                           #global configs for applications
+      ownerOnly: true
+    - path: /etc/apparmor.d/                   #contains config files for the AppArmor system
+      ownerOnly: true
+    - path: /etc/mkinitcpio.conf               #RAM disk init
+      ownerOnly: true
+    - path: /etc/mkinitcpio.d/linux.preset     #RAM disk init
+      ownerOnly: true
+    
+    action: Audit
