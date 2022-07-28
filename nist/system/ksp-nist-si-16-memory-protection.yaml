@@ -19,6 +19,8 @@ spec:
     - pattern: ^/proc/\*/mem$
     - pattern: /*/mv * /dev/null
     - pattern: /*/mkfs.ext4 /dev/*
-    - pattern: /*/proc/meminfo
-    - pattern: /*/proc/mounts
+  file:
+    matchPaths:
+    - path: /proc/meminfo
+    - path: /proc/mounts
     action: Audit
