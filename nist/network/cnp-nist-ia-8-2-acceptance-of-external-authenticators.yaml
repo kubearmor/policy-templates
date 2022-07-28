@@ -4,7 +4,7 @@ metadata:
   name: cnp-nist-ia-8-2-acceptance-of-external-authenticators
   namespace: default                                                                    #change with your namespace
 spec:
-  description: "NIST IA-8(2) This Policy will Protect from External Access to and from unknown malicious IPs"
+  description: "NIST IA-8(2)/SI-4(4) This Policy will Protect from External Access to and from unknown malicious IPs"
   endpointSelector:
     matchLabels:
       pod: testpod                                                                      #change pod: testpod with your label
