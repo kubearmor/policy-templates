@@ -8,7 +8,7 @@ metadata:
   name: ksp-nist-si-7-1-software-firmware-information-integrity-check
   namespace: default # Change your namespace
 spec:
-  tags: ["nist", "nist-800", "si-7-1"]
+  tags: ["NIST", "NIST-800", "SI-7-1"]
   message: "Alert! Installation of new hardware, software, or firmware detected"
   selector:
     matchLabels:
