@@ -5,11 +5,11 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-nist-si-7-7-software-irmware-information-integrity-detection-response
+  name: ksp-nist-si-7-7-software-firmware-information-integrity-detection-response
   namespace: default # Change your namespace
 spec:
-  tags: ["nist", "nist-800", "si-7-7"]
-  message: "Alert! unauthorized access to established configuration settings detected"
+  tags: ["NIST", "NIST-800", "SI-7-7"]
+  message: "Alert! Unauthorized access to established configuration settings detected"
   selector:
     matchLabels:
       app: ubuntu # Change your labels
@@ -42,5 +42,4 @@ spec:
       ownerOnly: true
     - path: /etc/mkinitcpio.d/linux.preset     #RAM disk init
       ownerOnly: true
-    
     action: Audit
