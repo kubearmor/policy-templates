@@ -12,17 +12,15 @@ spec:
   message: "Alert! Unauthorized access to established configuration settings detected"
   selector:
     matchLabels:
-      app: ubuntu # Change your labels
+      container: ubuntu # Change your labels
   file:
-    severity: 3
+    severity: 4
     matchPaths:
-    - path: /etc/udev/                         #udev(Dynamic device management) related configuration
-      ownerOnly: true
     - path: /etc/fstab                         #file system config file
       ownerOnly: true
     - path: /etc/mtab                          #/proc/mount changes
       ownerOnly: true
-    - path: /etc/mtools.conf	                 #configuration for all the operations
+    - path: /etc/mtools.conf	               #configuration for all the operations
       ownerOnly: true
     - path: /etc/lilo.conf                     #system's default boot command line
       ownerOnly: true
@@ -34,12 +32,18 @@ spec:
       ownerOnly: true
     - path: /etc/cups                          #common UNIX Printing System config files
       ownerOnly: true
-    - path: /etc/xdg                           #global configs for applications
-      ownerOnly: true
-    - path: /etc/apparmor.d/                   #contains config files for the AppArmor system
-      ownerOnly: true
     - path: /etc/mkinitcpio.conf               #RAM disk init
       ownerOnly: true
     - path: /etc/mkinitcpio.d/linux.preset     #RAM disk init
       ownerOnly: true
+    matchDirectories:
+    - dir: /etc/udev/                         #udev(Dynamic device management) related configuration
+      ownerOnly: true
+      recursive: true
+    - dir: /etc/apparmor.d/                   #contains config files for the AppArmor system
+      ownerOnly: true
+      recursive: true
+    - dir: /etc/xdg                           #global configs for applications
+      ownerOnly: true
+      recursive: true 
     action: Audit
