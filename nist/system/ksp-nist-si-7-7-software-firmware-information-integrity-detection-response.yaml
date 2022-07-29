@@ -1,0 +1,49 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-si-7-7-software-firmware-information-integrity-detection-response
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST", "NIST-800", "SI-7-7"]
+  message: "Alert! Unauthorized access to established configuration settings detected"
+  selector:
+    matchLabels:
+      container: ubuntu # Change your labels
+  file:
+    severity: 4
+    matchPaths:
+    - path: /etc/fstab                         #file system config file
+      ownerOnly: true
+    - path: /etc/mtab                          #/proc/mount changes
+      ownerOnly: true
+    - path: /etc/mtools.conf	               #configuration for all the operations
+      ownerOnly: true
+    - path: /etc/lilo.conf                     #system's default boot command line
+      ownerOnly: true
+    - path: /etc/inittab                       #first configuration file in UNIX
+      ownerOnly: true
+    - path: /etc/conf.modules                  #configuration file for kerneld
+      ownerOnly: true
+    - path: /etc/modules.conf                  #configuration file for kerneld
+      ownerOnly: true
+    - path: /etc/cups                          #common UNIX Printing System config files
+      ownerOnly: true
+    - path: /etc/mkinitcpio.conf               #RAM disk init
+      ownerOnly: true
+    - path: /etc/mkinitcpio.d/linux.preset     #RAM disk init
+      ownerOnly: true
+    matchDirectories:
+    - dir: /etc/udev/                         #udev(Dynamic device management) related configuration
+      ownerOnly: true
+      recursive: true
+    - dir: /etc/apparmor.d/                   #contains config files for the AppArmor system
+      ownerOnly: true
+      recursive: true
+    - dir: /etc/xdg/                          #global configs for applications
+      ownerOnly: true
+      recursive: true 
+    action: Audit
