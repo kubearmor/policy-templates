@@ -43,7 +43,7 @@ spec:
     - dir: /etc/apparmor.d/                   #contains config files for the AppArmor system
       ownerOnly: true
       recursive: true
-    - dir: /etc/xdg                           #global configs for applications
+    - dir: /etc/xdg/                          #global configs for applications
       ownerOnly: true
       recursive: true 
     action: Audit
