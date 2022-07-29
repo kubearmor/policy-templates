@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-si-16-memory-protection
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST", "NIST-800", "SI-16", "unauthorized-code-execution"]
+  message: "Alert! unauthorized code execution detected "
+  selector:
+    matchLabels:
+      container: ubuntu # Change your labels
+  process:
+    matchPatterns:
+    - pattern: ^/proc/\*/maps$
+    - pattern: ^/proc/\*/mem$
+    - pattern: /*/mv * /dev/null
+    - pattern: /*/*/mv * /dev/null
+    - pattern: /*/mkfs.ext4 /dev/*
+  file:
+    matchPaths:
+    - path: /proc/meminfo
+    - path: /proc/mounts
+    action: Audit
