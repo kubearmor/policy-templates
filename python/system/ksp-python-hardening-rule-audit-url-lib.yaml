@@ -1,0 +1,33 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-python-hardening-rule-audit-url-lib
+  namespace: default 																		# Change your namespace
+spec:
+  tags: ["Python", "Hardening Rules", "Audit urllib"]
+  message: "URL Lib installation/access detected. Python hardening rules violated."
+  selector:
+    matchLabels:
+      app: python 																			#change app: python to match your label
+  process:
+    severity: 5
+    matchPatterns:
+    - pattern: /*/*/*/python -m pip install urllib3*
+    - pattern: /*/*/python -m pip install urllib3*
+    - pattern: /*/python -m pip install urllib3*
+    - pattern: /*/*/*/pip install urllib3*
+    - pattern: /*/*/pip install urllib3*
+    - pattern: /*/pip install urllib3*
+    action: Audit																
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /usr/local/lib/python3.10/site-packages/urllib3/									      #change python version (/python3.10/) to match your version
+      recursive: true
+    - dir: /usr/local/lib/python3.10/site-packages/pip/_vendor/urllib3/						#change python version (/python3.10/) to match your version
+      recursive: true
+    action: Audit
