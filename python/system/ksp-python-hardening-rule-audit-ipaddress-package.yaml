@@ -6,13 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-python-hardening-rule-audit-ipaddress-package
-  namespace: default 																		# Change your namespace
+  namespace: default 										# Change your namespace
 spec:
   tags: ["Python", "Hardening Rules", "Audit ipaddress"]
   message: "ipaddress installation/access detected. Python hardening rules violated."
   selector:
     matchLabels:
-      app: python 																			#change app: python to match your label
+      app: python 											#change app: python to match your label
   process:
     severity: 5
     matchPatterns:
@@ -26,6 +26,6 @@ spec:
   file:
     severity: 5
     matchDirectories:
-    - dir: /usr/local/lib/python3.10/site-packages/ 										#change python version (/python3.10/) to match your version
+    - dir: /usr/local/lib/python3.10/site-packages/ 		#change python version (/python3.10/) to match your version
       recursive: true
     action: Audit
