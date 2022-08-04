@@ -1,0 +1,31 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-python-hardening-rule-audit-pillow-package
+  namespace: default    # Change your namespace
+spec:
+  tags: ["Python", "Hardening Rules", "Audit Pillow"]
+  message: "Pillow installation/access detected. Python hardening rules violated."
+  selector:
+    matchLabels:
+      app: python     #change app: python to match your label
+  process:
+    severity: 5
+    matchPatterns:
+    - pattern: /*/*/*/python -m pip install Pillow*
+    - pattern: /*/*/python -m pip install Pillow*
+    - pattern: /*/python -m pip install Pillow*
+    - pattern: /*/*/*/pip install Pillow*
+    - pattern: /*/*/pip install Pillow*
+    - pattern: /*/pip install Pillow*
+    action: Audit
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /usr/local/lib/python3.10/site-packages/PIL/     #change python version (/python3.10/) to match your version
+      recursive: true
+    action: Audit
