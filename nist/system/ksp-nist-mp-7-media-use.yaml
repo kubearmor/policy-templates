@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-mp-7-media-use
+  namespace: default # Change your namespace
+spec:
+  tags: ["nist", "nist-800", "mp-7"]
+  message: "Alert! New potable device detected"
+  selector:
+    matchLabels:
+      app: ubuntu # Change your labels
+  process:
+    severity: 9
+    matchDirectories:
+    - dir: /proc/bus/usb/                               #usb device folder
+    - dir: /media/
+      recursive: true                       
+    action: Audit
