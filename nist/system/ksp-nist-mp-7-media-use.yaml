@@ -8,7 +8,7 @@ metadata:
   name: ksp-nist-mp-7-media-use
   namespace: default # Change your namespace
 spec:
-  tags: ["nist", "nist-800", "mp-7"]
+  tags: ["nist", "nist-800", "mp-7", "NIST"]
   message: "Alert! New potable device detected"
   selector:
     matchLabels:
