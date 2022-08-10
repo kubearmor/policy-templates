@@ -1,0 +1,28 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-pe-7-access-control-for-output-devices
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST", "NIST-800", "NIST-800-53-r5", "PE-7"]
+  message: "Info! Changes made to Output Devices Detected"
+  selector:
+    matchLabels:
+      container: ubuntu # Change your labels
+  file:
+    severity: 9
+    matchPaths:
+    - path: /dev/lp0                         #printerdevices
+    - path: /dev/lp1
+    - path: /dev/lp2
+    - path: /dev/lp3
+    - path: /dev/usb/lp0
+    - path: /dev/usb/lp1
+    - path: /dev/usb/lp2
+    - path: /dev/mixer                      #audiodevices 
+    - path: /dev/parport0                   #parallelport
+  action: Audit
