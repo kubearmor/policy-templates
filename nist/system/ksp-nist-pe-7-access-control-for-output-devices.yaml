@@ -8,7 +8,7 @@ metadata:
   name: ksp-nist-pe-7-access-control-for-output-devices
   namespace: default # Change your namespace
 spec:
-  tags: ["NIST", "NIST-800", "PE-7"]
+  tags: ["NIST", "NIST-800", "NIST-800-53-r5", "PE-7"]
   message: "Info! Changes made to Output Devices Detected"
   selector:
     matchLabels:
