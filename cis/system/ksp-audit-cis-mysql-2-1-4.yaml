@@ -8,7 +8,7 @@ metadata:
   name: ksp-audit-cis-mysql-2-1-4
   namespace: default
 spec:
-  tags: ["MySQL", "CIS"]
+  tags: ["MySQL", "CIS", "2.1.4"]
   message: "Notification! backup directories changed process accessed!"
   selector:
     matchLabels:
