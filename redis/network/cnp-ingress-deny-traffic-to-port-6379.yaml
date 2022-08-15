@@ -1,0 +1,15 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: cnp-ingress-deny-traffic-to-port-6379
+spec:
+  description: "Don’t allow any outside traffic to the Redis port"
+  nodeSelector:
+    matchLabels:
+      type: redis
+   ingressDeny:
+    - fromCIDRSet:
+        - cidr: 0.0.0.0/0
+      toPorts:
+        - ports:
+            - port: "6379" 
