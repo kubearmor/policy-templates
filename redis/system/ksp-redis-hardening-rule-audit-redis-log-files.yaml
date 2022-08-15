@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-redis-hardening-rule-audit-redis-log-files
+  namespace: default 																		# Change your namespace
+spec:
+  tags: ["Redis", "Hardening Rules", "AuditLog"]
+  message: "Unauthorised Redis Log file Accessed"
+  selector:
+    matchLabels:
+      app: redis 																			#change app: redis to match your label
+  file:
+    severity: 8
+    matchDirectories:
+    - dir: /var/opt/redislabs/log/
+    ownerOnly: true
+    matchPattern:
+    - pattern: /var/log/**.log
+    - pattern: /var/*/*.log
+    ownerOnly: true
+    action: Audit
