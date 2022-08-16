@@ -6,20 +6,20 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-redis-hardening-rule-audit-redis-log-files
-  namespace: default 																		# Change your namespace
+  namespace: default 		       #change your namespace
 spec:
   tags: ["Redis", "Hardening Rules", "AuditLog"]
-  message: "Unauthorised Redis Log file Accessed"
+  message: "Unauthorised Accessed to Redis Logs file detected"
   selector:
     matchLabels:
-      app: redis 																			#change app: redis to match your label
+      app: redis                      #change app:redis to match your label
   file:
     severity: 8
     matchDirectories:
     - dir: /var/opt/redislabs/log/
-    ownerOnly: true
-    matchPattern:
+      ownerOnly: true
+    matchPatterns:
     - pattern: /var/log/**.log
     - pattern: /var/*/*.log
-    ownerOnly: true
+      ownerOnly: true
     action: Audit
