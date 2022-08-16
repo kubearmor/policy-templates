@@ -1,0 +1,15 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-django-allow-only-tcp-80
+  namespace: default      #change your namespace
+spec:
+  description: "Allow connection only via tcp port 80"
+  endpointSelector:
+    matchLabels:
+      app: django       #change your labels
+  egress:
+  - toPorts:
+    - ports:
+      - port: "80"
+        protocol: TCP
