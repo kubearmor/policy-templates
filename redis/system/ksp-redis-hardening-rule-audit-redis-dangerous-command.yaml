@@ -6,13 +6,13 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-redis-hardening-rule-audit-redis-dangerous-command
-  namespace: default # Change your namespace
+  namespace: default                                                      #change your namespace
 spec:
-  tags: [["Redis", "Hardening Rules", "Dangerous Commands"]
+  tags: ["Redis", "Hardening Rules", "Dangerous Commands"]
   message: "Alert! Unauthorized Dangerous Command execution detected in redis workload "
   selector:
     matchLabels:
-      app: redis # Change your labels
+      app: redis                                                           #change your labels
   process:
     severity: 2
     matchPatterns:
@@ -44,6 +44,5 @@ spec:
     - pattern: /*/*/RENAME
     - pattern: /*/DEBUG				                      
     - pattern: /*/*/DEBUG
-    ownerOnly: true
+      ownerOnly: true
     action: Audit
-    
