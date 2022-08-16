@@ -1,0 +1,15 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-django-allow-only-tcp-443
+  namespace: default      #change your namespace
+spec:
+  description: "Allow connections only via tcp port 443"
+  endpointSelector:
+    matchLabels:
+      app: django     #change your lables
+  egress:
+  - toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
