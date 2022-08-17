@@ -1,0 +1,48 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-redis-hardening-rule-audit-redis-dangerous-command
+  namespace: default                                                      #change your namespace
+spec:
+  tags: ["Redis", "Hardening Rules", "Dangerous Commands"]
+  message: "Alert! Unauthorized Dangerous Command execution detected in redis workload "
+  selector:
+    matchLabels:
+      app: redis                                                           #change your labels
+  process:
+    severity: 2
+    matchPatterns:
+    - pattern: /*/FLUSHDB                                      
+    - pattern: /*/*/FLUSHDB
+    - pattern: /*/FLUSHALL                                
+    - pattern: /*/*/FLUSHALL
+    - pattern: /*/KEYS 			           
+    - pattern: /*/*/KEYS
+    - pattern: /*/PEXPIRE
+    - pattern: /*/*/PEXPIRE
+    - pattern: /*/DEL				                      
+    - pattern: /*/*/DEL 				                         
+    - pattern: /*/CONFIG				                      
+    - pattern: /*/*/CONFIG
+    - pattern: /*/SHUTDOWN					                           
+    - pattern: /*/*/SHUTDOWN 
+    - pattern: /*/BGREWRITEAOF				                      
+    - pattern: /*/*/BGREWRITEAOF
+    - pattern: /*/BGSAVE				                      
+    - pattern: /*/*/BGSAVE
+    - pattern: /*/SAVE				                      
+    - pattern: /*/*/SAVE
+    - pattern: /*/STOP				                      
+    - pattern: /*/*/STOP
+    - pattern: /*/SREM				                      
+    - pattern: /*/*/SREM
+    - pattern: /*/RENAME				                      
+    - pattern: /*/*/RENAME
+    - pattern: /*/DEBUG				                      
+    - pattern: /*/*/DEBUG
+      ownerOnly: true
+    action: Audit
