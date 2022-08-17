@@ -1,0 +1,16 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-redis-ingress-deny-traffic-to-port-6379
+  namespace: default                                                    #change with your namespace
+spec:
+  description: "Don’t allow any outside traffic to the Redis port"
+  endpointSelector:
+    matchLabels:
+      app: redis                                                     #change app:redis with your label
+  ingressDeny:
+    - fromCIDRSet:
+        - cidr: 0.0.0.0/0					                                  #change your set of CIDR if necessary
+      toPorts:
+        - ports:
+            - port: "6379"   
