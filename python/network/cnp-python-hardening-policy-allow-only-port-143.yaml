@@ -1,0 +1,20 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-python-hardening-policy-allow-only-port-143
+  namespace: default                #change namespace
+spec:
+  description: "Python hardening rule to allow IMAP4 Fetching email via port 143"
+  endpointSelector:
+    matchLabels:
+      app: python                   #change labels
+  ingress:
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "143"
+    - fromEndpoints:
+        - {}
+    - fromEntities:
+        - cluster
