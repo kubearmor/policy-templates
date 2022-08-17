@@ -1,0 +1,20 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-python-hardening-policy-allow-only-port-119
+  namespace: default                #change namespace
+spec:
+  description: "Python hardening rule to allow NNTP Usenet news via port 119"
+  endpointSelector:
+    matchLabels:
+      app: python                   #change labels
+  ingress:
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "119"
+    - fromEndpoints:
+        - {}
+    - fromEntities:
+        - cluster
