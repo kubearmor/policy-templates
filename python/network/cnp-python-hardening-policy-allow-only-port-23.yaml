@@ -1,0 +1,20 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-python-hardening-policy-allow-only-port-23
+  namespace: default                #change namespace
+spec:
+  description: "Python hardening rule to allow Telnet Command lines via port 23"
+  endpointSelector:
+    matchLabels:
+      app: python                   #change labels
+  ingress:
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "23"
+    - fromEndpoints:
+        - {}
+    - fromEntities:
+        - cluster
