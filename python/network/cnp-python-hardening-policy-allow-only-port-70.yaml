@@ -1,0 +1,20 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-python-hardening-policy-allow-only-port-70
+  namespace: default                #change namespace
+spec:
+  description: "Python hardening rule to allow Gopher Document transfers via port 70"
+  endpointSelector:
+    matchLabels:
+      app: python                   #change labels
+  ingress:
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "70"
+    - fromEndpoints:
+        - {}
+    - fromEntities:
+        - cluster
