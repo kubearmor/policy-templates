@@ -1,0 +1,19 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-django-allow-only-udp-53
+  namespace: default    #change your namespace
+spec:
+  description: "Allow only UDP connection via port 53"
+  endpointSelector:
+    matchLabels:
+      app: django   #change your labels
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        k8s-app: kube-dns
+        k8s:io.kubernetes.pod.namespace: kube-system
+    toPorts:
+    - ports:
+      - port: "53"
+        protocol: UDP
