@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-django-hardening-rule-audit-tcp-connection-from-pod
+  namespace: default        #change your namespace
+spec:
+  tags: ["PYTHON", "DJANGO","Hardening Rules", "TCP connection"]
+  message: "Alert! TCP connection initiated from Django pod"
+  severity: 1
+  selector:
+    matchLabels:
+      app: django       #change your lables
+  network:
+    matchProtocols:
+    - protocol: tcp
+  action: Audit
