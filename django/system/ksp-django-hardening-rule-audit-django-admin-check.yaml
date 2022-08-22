@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-django-hardening-rule-audit-django-admin-check
+  namespace: default # Change your namespace
+spec:
+  tags: ["Django", "Hardening Rules", "Audit django-admin check"]
+  message: "django-admin check command execution detected. Possible violation of hardening rules."
+  selector:
+    matchLabels:
+      app: django #change app: django to match your label
+  process:
+    severity: 5
+    matchPatterns:
+    - pattern: /*/*/*/django-admin check*
+    - pattern: /*/*/django-admin check*
+    - pattern: /*/django-admin check*
+    - pattern: /django-admin check*
+    action: Audit
