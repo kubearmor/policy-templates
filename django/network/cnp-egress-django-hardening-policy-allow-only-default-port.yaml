@@ -1,0 +1,28 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-django-hardening-policy-allow-only-default-port
+  namespace: default         # Change namespace
+spec:
+  endpointSelector:
+    matchLabels:
+      app: django            # Change labels
+  egress:
+    - toEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "8000"
+    - toEndpoints:
+        - {}
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+          rules:
+            dns:
+              - matchPattern: "*"
