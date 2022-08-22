@@ -1,0 +1,18 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-ingress-nginx-hardening-policy-allow-only-head-on-port-80
+  namespace: default       # Change namespace
+spec:
+  description: "Allow HTTP HEAD on Port 80"
+  endpointSelector:
+    matchLabels:
+      app: my-nginx        # Change labels
+  ingress: 
+  - toPorts:
+    - ports:
+      - port: "80"
+        protocol: TCP
+      rules:
+        http:
+        - method: "HEAD"
