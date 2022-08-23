@@ -9,7 +9,7 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["elastic search", "kibana panel", "exposed panel"]
-  message: "Alert! exposed kibana panel "
+  message: "Alert! Access to kibana panel is detected "
   selector:
     matchLabels:
       container: elastic # Change your labels
