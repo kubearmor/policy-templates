@@ -1,0 +1,33 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-sc-2-1-interfaces-for-non-privileged-users-deny-network-admin-privilege
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST","system","Non-Privileged User","NIST-800-53-r5","SC-2(1)","Deny Network Admin privilege"]
+  message: "Alert! Network Admin privileged commands detected. Possible violation of NIST controls"
+  selector:
+    matchLabels:
+      app: test # Change your match labels
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/nsswitch.conf
+    - path: /etc/hosts
+    - path: /run/systemd/resolve/stub-resolv.conf
+    - path: /etc/resolv.conf
+    - path: /etc/netplan/99_config.yaml
+    action: Audit
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/ip
+    - path: /bin/ip
+    - path: /usr/sbin/ethtool
+    - path: /usr/bin/lshw
+    - path: /bin/lshw
+    action: Block
