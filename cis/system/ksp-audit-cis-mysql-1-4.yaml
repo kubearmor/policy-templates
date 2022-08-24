@@ -17,4 +17,7 @@ spec:
     severity: 1
     matchPatterns:
     - pattern: /proc/*/environ
+    - pattern: /*/grep MYSQL_PWD /proc/*/environ
+    - pattern: /*/*/grep MYSQL_PWD /proc/*/environ
+    - pattern: /*/*/*/grep MYSQL_PWD /proc/*/environ
     action: Audit
