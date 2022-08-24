@@ -1,0 +1,23 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-django-hardening-rule-block-user-addition-to-group
+  namespace: default # Change your namespace
+spec:
+  tags: ["Python","Django", "Hardening Rules", "Block User Addition to Group"]
+  message: "groupadd command execution detected. Django hardening rule violated."
+  selector:
+    matchLabels:
+      app: django #change app: django to match your label
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/sbin/groupadd
+    - path: /usr/local/bin/groupadd
+    - path: /bin/groupadd
+    - path: /usr/bin/groupadd
+    action: Block
