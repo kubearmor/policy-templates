@@ -1,0 +1,29 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-egress-nginx-hardening-rule-allow-only-port-123
+  namespace: default       # Change namespace
+spec:
+  description: "Allow only NTP Port 123"
+  endpointSelector:
+    matchLabels:
+      app: my-nginx        # Change labels
+  egress:
+    - toEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "123"
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+          rules:
+            dns:
+              - matchPattern: "*"
+    - toEndpoints:
+        - {}
