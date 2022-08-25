@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nginx-hardening-rule-monitor-cache-access
+  namespace: default 
+spec:
+  tags: ["Nginx", "system", "file", "cache access"]
+  message: "Alert! cache dir access from other sources detected. Possible violation of nginx hardening policy"
+  severity: 1
+  selector:
+    matchLabels:
+      app: nginx
+  file:
+    matchDirectories:
+    - dir: /var/cache/nginx/client_temp/
+      fromSource:
+      - path: /usr/sbin/nginx
+    action: Audit
