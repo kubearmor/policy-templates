@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: hsp-nist-au-3-audit-access-to-log-files
+  name: hsp-audit-access-to-log-files
   namespace: default
 spec:
-  tags: ["NIST", "NIST-800", "AU-3", "AU-3(1)", "log", "file"]
+  tags: ["NIST", "NIST-800", "AU-3", "AU-3(1)", "log", "file", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
   message: "Alert! Access to log files detected."
   nodeSelector:
     matchLabels:
