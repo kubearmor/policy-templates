@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nginx-hardening-rule-deny-iptable-binary
+  namespace: default 
+spec:
+  tags: ["Nginx", "system", "file", "IPtables"]
+  message: "Alert! iptables binary access detected. Possible violation of nginx hardening policy"
+  severity: 1
+  selector:
+    matchLabels:
+      app: nginx
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/sbin/iptables
+    - path: /sbin/iptables
+    action: Block
