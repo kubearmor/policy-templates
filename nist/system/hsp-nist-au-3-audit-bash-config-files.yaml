@@ -7,7 +7,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-nist-au-3-audit-bash-config-files
 spec:
-  tags: ["NIST", "NIST-800", "AU-3", "File", "linux"]
+  tags: ["NIST", "NIST-800", "AU-3", "File", "linux", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
   message: "Alert! Access to bash config files detected."
   nodeSelector:
     matchLabels:
