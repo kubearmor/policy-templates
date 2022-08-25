@@ -8,8 +8,8 @@ metadata:
   name: ksp-nist-au-12-audit-write-below-monitored-directories
   namespace: default
 spec:
-  tags: ["NIST","NIST-800-53-r5","AU-12","File Rules","Audit Generation","Write below monitored directories"]
-  message: "Alert! Read/Write below monitored directories detected! Possible violation of NIST AU-12"
+  tags: ["NIST","NIST-800-53-r5","AU-12","File Rules","Audit Generation","Write below monitored directories", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
+  message: "Alert! Read/Write below monitored directories detected! Possible violation of NIST AU-12 SA-20"
   selector:
     matchLabels:
       app: test-app                                                                                                           #change labels with your label values
