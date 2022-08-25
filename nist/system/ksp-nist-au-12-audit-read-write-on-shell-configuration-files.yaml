@@ -8,8 +8,8 @@ metadata:
   name: ksp-nist-au-12-audit-read-write-on-shell-configuration-files
   namespace: default
 spec:
-  tags: ["NIST","NIST-800-53-r5","AU-12","File Rules","Audit Generation","Audit Read/Write on Shell Configuration Files"]
-  message: "Alert! Read/Write on Shell Configuration Files detected! Possible violation of NIST AU-12"
+  tags: ["NIST","NIST-800-53-r5","AU-12","File Rules","Audit Generation","Audit Read/Write on Shell Configuration Files", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
+  message: "Alert! Read/Write on Shell Configuration Files detected! Possible violation of NIST AU-12 SA-20"
   selector:
     matchLabels:
       app: test-app                                                                                                           #change labels with your label values
