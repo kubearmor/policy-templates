@@ -1,0 +1,26 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-sc-6-audit-resource-allocation
+  namespace: default     #change to your labels
+spec:
+  tags: ["NIST", "NIST-800", "SC-6","Resource-allocation", "NIST_SC", "NIST_SC-6","Denial of Service"]
+  message: "Alert! Access to system resource allocation."
+  selector:
+    matchLabels:
+      container: ubuntu   #change to your labels
+  process:
+    severity: 5
+    matchPatterns:
+    - pattern: /etc/systemd/system/*.service
+    - pattern: /etc/systemd/system/*.service.d/*CPUShares.conf 
+  file:
+    matchPaths:
+    - path: /usr/bin/md5sum
+    - path: /dev/zero
+    - path: /usr/bin/sha1sum
+    action: Audit
