@@ -8,8 +8,8 @@ metadata:
   name: ksp-nist-ac-18-1-network-audit
   namespace: default # Change namespace
 spec:
-  tags: ["NIST-800", "AC-18(1)", "Networking", "Access"]
-  message: "Auditing the network files."
+  tags: ["NIST-800", "AC-18(1)", "Networking", "Access", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
+  message: "Access to network files detected. Possible violation of NIST Controls"
   selector:
     matchLabels:
       container: ubuntu # Change your match labels
