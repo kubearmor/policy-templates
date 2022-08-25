@@ -1,0 +1,16 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: cnp-nist-sc-5-egress-deny
+spec:
+  description: "Blocking particular subnet will prevent DDos attack"
+  endpointSelector:
+    matchLabels:
+      app: myService
+  egressDeny:
+  - toCIDR:
+    - 20.1.1.1/32        # Change CIDR according to your setup
+  - toCIDRSet:
+    - cidr: 10.0.0.0/8   # Change CIDR according to your setup
+      except:
+      - 10.96.0.0/12     # Change CIDR according to your setup
