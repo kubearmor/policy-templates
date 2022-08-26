@@ -8,7 +8,7 @@ metadata:
   name: hsp-mitre-t1548-setuid-setgid
 spec:
   message: Blocked the setuid or setgid flag files
-  tags : ["MITRE", "Privilege Escalation", "S-Bit"]
+  tags : ["MITRE", "Privilege Escalation", "S-Bit","NIST","NIST-800-53-r5","SC-2","Separation of System and User Functionality"]
   nodeSelector:
     matchLabels:
         kubernetes.io/hostname: ubuntu  # use your own label here

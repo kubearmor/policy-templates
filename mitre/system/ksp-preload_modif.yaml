@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-tactic-privilege-escalation-shared-object
   namespace: default  #change with your namespace
 spec:
-  tags: ["MITRE"]
+  tags: ["MITRE","NIST","NIST-800-53-r5","SC-2","Separation of System and User Functionality"]
   message: "ld.so.preload file accessed by unknown process"
   selector:
     matchLabels:
