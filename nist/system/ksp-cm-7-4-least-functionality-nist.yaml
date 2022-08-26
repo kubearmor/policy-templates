@@ -8,7 +8,7 @@ metadata:
   name: ksp-cm-7-4-least-functionality-nist
   namespace: default # Change your namespace
 spec:
-  tags: ["NIST", "CM-7"] 
+  tags: ["NIST", "CM-7", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components"] 
   message: "Package Manager and Remote File Copy is now blocked "
   selector:
     matchLabels:
