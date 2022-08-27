@@ -1,0 +1,14 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-nist-sc-7-5-ingress-allow-communication-between-associated-entities
+  namespace: default                                                                    #change with your namespace
+spec:
+  description: "NIST-SC-7(5), Allow data transfer between associated entities inbound"
+  endpointSelector:
+    matchLabels:
+      app: secret-receiver                                                              #change demo label with your label
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app: secret                                                                 #change demo label with your label
