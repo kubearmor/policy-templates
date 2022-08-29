@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-sc-4-2-unauthorized-information-transfer
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST","system","NIST-800-53-r5","SC-4","SC-4-2","Information Disclosure"]
+  message: "Alert! File Transfer detected. Possible violation of NIST controls"
+  selector:
+    matchLabels:
+      app: test # Change your match labels
+  process:
+    severity: 5
+    matchPaths:
+    - path: /usr/bin/scp
+    - path: /usr/bin/sftp
+    - path: /usr/bin/rsync
+    - path: /usr/bin/ftp
+    - path: /usr/bin/readlink
+    action: Audit
