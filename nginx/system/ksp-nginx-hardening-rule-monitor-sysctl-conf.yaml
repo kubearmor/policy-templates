@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nginx-hardening-rule-monitor-sysctl-conf
+  namespace: default 
+spec:
+  tags: ["Nginx", "system", "file", "sysctl.conf"]
+  message: "Alert! sysctl.conf file access detected. Possible violation of nginx hardening policy"
+  severity: 1
+  selector:
+    matchLabels:
+      app: nginx
+  file:
+    matchPaths:
+    - path: /etc/sysctl.conf
+    action: Audit
