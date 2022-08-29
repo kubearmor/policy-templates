@@ -1,0 +1,12 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: cnp-nist-sc-7-11-restrict-incoming-communications-traffic
+  namespace: default                                              #change namespace with your namespace value
+spec:
+  description: "NIST-SC-7(11), Restricting incoming communications traffic"
+  endpointSelector:
+    matchLabels:
+      app: demo-app                                              #change label with your label values
+  ingress:
+    - {}
