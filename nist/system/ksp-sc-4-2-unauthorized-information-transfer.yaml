@@ -19,6 +19,6 @@ spec:
     - path: /usr/bin/scp
     - path: /usr/bin/sftp
     - path: /usr/bin/rsync
-    - path: /var/www/ftp
+    - path: /usr/bin/ftp
     - path: /usr/bin/readlink
     action: Audit
