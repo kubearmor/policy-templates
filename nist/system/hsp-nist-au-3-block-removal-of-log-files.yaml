@@ -7,7 +7,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-nist-au-3-block-removal-of-log-files
 spec:
-  tags: ["NIST", "NIST-800", "AU-11", "File", "log"]
+  tags: ["NIST", "NIST-800", "AU-11", "File", "log", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components"]
   message: "Alert! Removal of log files are blocked."
   nodeSelector:
     matchLabels:
