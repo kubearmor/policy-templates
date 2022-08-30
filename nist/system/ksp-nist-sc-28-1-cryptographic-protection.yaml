@@ -1,0 +1,29 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-sc-28-1-cryptographic-protection
+  namespace: default  #change with your namespace
+spec:
+  tags: ["NIST", "NIST-800", "SC-28(1)", "Cryptographic Protection"]
+  message: "Alert, Someone decoded file information"
+  selector:
+    matchLabels:
+      app: testpod #change with your own label
+  process:
+    severity: 3
+    matchPaths:
+      - path: /usr/bin/base32
+      - path: /usr/bin/base16
+      - path: /usr/bin/base32plain
+      - path: /usr/bin/base32hex
+      - path: /usr/bin/openssl
+      - path: /usr/bin/gpg
+      - path: /usr/bin/zip
+      - path: /usr/bin/bcrypt
+      - path: /usr/bin/ccencrypt
+      - path: /usr/bin/7za
+    action: Audit
