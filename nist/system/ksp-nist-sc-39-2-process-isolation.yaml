@@ -5,7 +5,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-nist-39-2-process-isolation
+  name: ksp-nist-sc-39-2-process-isolation
   namespace: default    # Change your namespace
 spec:
   tags: ["NIST","NIST-800-SC-39-2","SC-39","Process Isolation"]
