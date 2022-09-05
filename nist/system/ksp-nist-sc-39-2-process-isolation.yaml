@@ -13,15 +13,6 @@ spec:
   selector:
     matchLabels:
       app: testpod    #change with your own label
-  process:
-    severity: 5
-    matchDirectories:
-      - dir: /etc/systemd/system/
-        recursive: true
-      - dir: /usr/lib/systemd/
-        recursive: true
-      - dir: /lib/systemd/system/
-        recursive: true
   file:
     matchDirectories:
       - dir: /etc/systemd/system/
