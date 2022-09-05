@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-sc-39-2-process-isolation
+  namespace: default    # Change your namespace
+spec:
+  tags: ["NIST","NIST-800-SC-39-2","SC-39","Process Isolation"]
+  message: "Warning! someone created or Modified the system process"
+  selector:
+    matchLabels:
+      app: testpod    #change with your own label
+  file:
+    matchDirectories:
+      - dir: /etc/systemd/system/
+        recursive: true
+        readOnly: false
+      - dir: /usr/lib/systemd/
+        recursive: true
+        readOnly: false
+      - dir: /lib/systemd/system/
+        recursive: true
+        readOnly: false
+    action: Audit
