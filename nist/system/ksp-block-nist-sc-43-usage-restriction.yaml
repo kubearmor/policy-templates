@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-block-nist-sc-43=usage-restriction
+  namespace: default
+spec:
+  tags: ["NIST", "SC-43", "LINUX"]
+  message: "Alert! Access to cups-browsed disabled"
+  selector:
+    matchLabels:
+      os: linux
+  process:
+    severity: 1
+    matchPaths:
+    - path: /etc/cups/cups-browsed.conf
+      ownerOnly: true
+    action: Block
+  file:
+    severity: 1
+    matchPaths:
+    - path: /etc/cups/cups-browsed.conf
+    ownerOnly: true
+    action: Block
