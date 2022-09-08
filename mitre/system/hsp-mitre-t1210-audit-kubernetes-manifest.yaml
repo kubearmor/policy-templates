@@ -7,7 +7,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-mitre-t1210-audit-kubernetes-manifest
 spec:
-  tags: ["MITRE", "T1210"] 
+  tags: ["MITRE", "T1210","NIST","NIST-800-53-r5", "SC-11", "Trusted Path"] 
   message: "Kubernetes folder accessed by unknown process -- possible lateral movement "
   nodeSelector:
     matchLabels:

@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-t1210-audit-hostname-env-token-discovery
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE", "T1210"]
+  tags: ["MITRE", "T1210","NIST","NIST-800-53-r5", "SC-11", "Trusted Path"]
   message: "Hostname, env or k8s token accessed by unknown -- possible lateral movement "
   selector:
     matchLabels:
