@@ -8,8 +8,8 @@ metadata:
   name: ksp-nist-ac-12-1-sessions-audit
   namespace: default # Change namespace
 spec:
-  tags: ["NIST-800", "AC-12(1)", "Logging", "session-files"]
-  message: "Auditing the sensitive,db files."
+  tags: ["NIST-800", "AC-12(1)", "Logging", "session-files", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
+  message: "Auditing the sensitive,db files. Possible violation of NIST controls"
   selector:
     matchLabels:
       container: ubuntu # Change your match labels

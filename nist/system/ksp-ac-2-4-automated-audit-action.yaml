@@ -8,7 +8,7 @@ metadata:
   name: ksp-ac-2-4-automated-audit-action
   namespace: default # Change your namespace
 spec:
-  tags: ["NIST","system","account","NIST-800-53-r5","AC-2(4)","Automated audit"]
+  tags: ["NIST", "system", "account", "NIST-800-53-r5", "AC-2(4)", "Automated audit", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
   message: "Alert! use of user account create/edit commands found. Possible violation of NIST controls"
   selector:
     matchLabels:

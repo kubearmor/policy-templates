@@ -7,7 +7,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-nist-ac-6-9-auditing-use-of-privileged-functions
 spec:
-  tags: ["NIST","NIST-800-53-r5","AC-6(9)", "Least Privilege" ,"Auditing Use of Privileged Functions"]
+  tags: ["NIST","NIST-800-53-r5","AC-6(9)", "Least Privilege" ,"Auditing Use of Privileged Functions", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
   message: "Alert! Execution of Prvileged Functions Detected. Possible violation of NIST AC-6(9)"
   severity: 5
   nodeSelector:

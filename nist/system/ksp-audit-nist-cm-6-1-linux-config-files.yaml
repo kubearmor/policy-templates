@@ -8,8 +8,8 @@ metadata:
   name: ksp-audit-nist-cm-6-1-linux-config-files
   namespace: default
 spec:
-  tags: ["NIST", "CM-6-1"]
-  message: "Alert! config files are accessed!"
+  tags: ["NIST", "CM-6-1", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
+  message: "Alert! config files are accessed! Possible violation of NIST controls."
   selector:
     matchLabels:
       os: linux

@@ -8,8 +8,8 @@ metadata:
   name: ksp-nist-au-12-block-modification-of-shell-configuration-files
   namespace: default
 spec:
-  tags: ["NIST","NIST-800-53-r5","AU-12","File Rules","Audit Generation","Deny Modification of Shell Configuration Files"]
-  message: "Alert! Modification of Shell Configuration Files detected! Possible violation of NIST AU-12"
+  tags: ["NIST","NIST-800-53-r5","AU-12","File Rules","Audit Generation","Deny Modification of Shell Configuration Files", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
+  message: "Alert! Modification of Shell Configuration Files detected! Possible violation of NIST AU-12 SA-20"
   selector:
     matchLabels:
       app: test-app                                                                                                           #change labels with your label values

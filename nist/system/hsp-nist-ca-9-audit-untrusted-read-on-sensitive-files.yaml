@@ -7,8 +7,8 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-nist-ca-9-audit-untrusted-read-on-sensitive-files
 spec:
-  tags: ["NIST","NIST-800-53-r5","CA-9","File Rules","Internal System Connections"]
-  message: "Alert! Sensitive file opened for reading by non-trusted program! Possible violation of NIST CA-9"
+  tags: ["NIST","NIST-800-53-r5","CA-9","File Rules","Internal System Connections", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
+  message: "Alert! Sensitive file opened for reading by non-trusted program! Possible violation of NIST CA-9 SA-20"
   nodeSelector:
     matchLabels:
      kubernetes.io/hostname: gke-ubuntu                                                                           # Change your matchLabels

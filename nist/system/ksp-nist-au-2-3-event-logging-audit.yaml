@@ -8,8 +8,8 @@ metadata:
   name: ksp-nist-au-2-3-event-logging-audit
   namespace: default # Change namespace
 spec:
-  tags: ["NIST-800", "AU-2-3", "event-files"]
-  message: "Auditing all the event files."
+  tags: ["NIST-800", "AU-2-3", "event-files", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
+  message: "Access to event files dtected. Possible violation of NIST controls "
   selector:
     matchLabels:
       container: ubuntu # Change your match labels

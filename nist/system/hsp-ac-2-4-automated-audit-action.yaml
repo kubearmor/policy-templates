@@ -7,7 +7,7 @@ kind: KubeArmorHostPolicy
 metadata:
   name: hsp-ac-2-4-automated-audit-action
 spec:
-  tags: ["NIST","system","account","NIST-800-53-r5","AC-2(4)","Automated audit"]
+  tags: ["NIST","system","account","NIST-800-53-r5","AC-2(4)","Automated audit", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components"]
   message: "Alert! use of user account create/edit commands found. Possible violation of NIST controls"
   nodeSelector:
     matchLabels:

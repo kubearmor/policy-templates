@@ -8,8 +8,8 @@ metadata:
   name: ksp-nist-au-12-audit-write-below-binary-directories
   namespace: default
 spec:
-  tags: ["NIST","NIST-800-53-r5","AU-12","Process Rules","Audit Generation","Write below binary directories"]
-  message: "Alert! Write below binary directories detected! Possible violation of NIST AU-12"
+  tags: ["NIST","NIST-800-53-r5","AU-12","Process Rules","Audit Generation","Write below binary directories", "NIST_SA", "NIST_SA-20", "NIST_SA-20-Customized Development of Critical Components", "SA"]
+  message: "Alert! Write below binary directories detected! Possible violation of NIST AU-12 SA-20"
   selector:
     matchLabels:
       app: test-app                                                                                                           #change labels with your label values
