@@ -1,0 +1,36 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-sc-30-3-access-restrictions-for-change-processing-and-storage-locations
+  namespace: default   #change labels with your label values
+spec:
+  tags: ["NIST","NIST-800-SC-30-3","SC-30","Change Processing and Storage Locations"]
+  message: "Alert! Change Processing and Storage Locations file deleteion detected. Possible violation of NIST SC-30(3)"
+  selector:
+    matchLabels:
+      app: ubuntu                  #change labels with your label values
+  process:
+    severity: 5
+    matchPaths:
+    - path: /root/.bash_history
+      fromSource:
+      - path: /usr/bin/shred  
+      - path: /bin/shred
+      - path: /usr/bin/rm
+      - path: /bin/rm
+      - path: /usr/bin/mv
+      - path: /bin/mv
+    - path: /home/*/.bash_history
+      fromSource:
+      - path: /usr/bin/shred  
+      - path: /bin/shred
+      - path: /usr/bin/rm
+      - path: /bin/rm
+      - path: /usr/bin/mv
+      - path: /bin/mv
+    action: Block
