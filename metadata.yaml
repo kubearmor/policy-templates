@@ -1,0 +1,176 @@
+- name: maintenance-tool-access
+  precondition: 
+  - /sbin/*
+  description:
+    refs:
+    - name: MITRE-TTP
+      url:
+      - https://attack.mitre.org/techniques/T1553/
+    tldr: Restrict access to maintenance tools (apk, mii-tool, ...)
+    detailed: Container images might contain maintenance tools which should ideally
+      never be used in prod env, or if used, should be used only in certain time frames.
+      Examples include, dynamic package management tools, mii-tool, iptables etc
+  spec:
+    action: Audit
+    file:
+      matchDirectories:
+      - dir: /sbin/
+        recursive: true
+    message: restricted maintenance tool access attempted
+    selector:
+      matchLabels:
+        kubearmor.io/container.name: alpine
+    severity: 1
+    tags:
+    - PCI-DSS
+    - MITRE
+- name: mysql-mysqldump-access
+  precondition: 
+  - /etc/mysql/*
+  - /usr/bin/mysqldump
+  description:
+    refs:
+    - name: MITRE-TTP
+      url:
+      - https://attack.mitre.org/techniques/T1074/001/
+    tldr: Deny access to mysqldump process
+    detailed: Adversaries may stage collected data in a central location or directory 
+       on the local system prior to Exfiltration. Data may be kept in separate files or 
+       combined into one file through techniques such as Archive Collected Data. 
+       Interactive command shells may be used, and common functionality within cmd and 
+       bash may be used to copy data into a staging location.
+  spec:
+    action: Block 
+    process:
+      matchPaths:
+      - path: /usr/bin/mysqldump
+    message: mysqldump tool action denied
+    severity: 1
+    tags:
+    - MySQL
+    - MITRE
+- name: deny-package-tool-access
+  precondition: 
+  - /usr/bin/apt
+  - /usr/bin/apt-get
+  description:
+    refs:
+    - name: MITRE-TTP
+      url:
+      - https://attack.mitre.org/techniques/T1059/004/
+    tldr: Deny package manager execution
+    detailed: Adversaries may abuse Unix shell commands and scripts for execution. 
+        Unix shells are the primary command prompt on Linux and macOS systems, though many 
+        variations of the Unix shell exist (e.g. sh, bash, zsh, etc.) depending on the specific 
+        OS or distribution.[1][2] Unix shells can control every aspect of a system, with certain 
+        commands requiring elevated privileges.
+  spec:
+    action: Block 
+    process:
+      matchPaths:
+      - path: /usr/bin/apt
+      - path: /usr/bin/apt-get
+    message: package manager action denied
+    severity: 1
+    tags:
+    - Package Manager
+    - MITRE
+    - Linux
+- name: allow-mysql-tcp-access
+  precondition: 
+  - /usr/sbin/mysqld 
+  description:
+    refs:
+    - name: ""
+      url:
+      - ""
+    tldr: Allow mysqld to send TCP packets
+    detailed: Programs such as ‘mysql’ and ‘mysqldump’, that use MySQL client library have the 
+        support of MySQL connection to server with the help of many transport protocols, such 
+        as TCP/IP, Unix socket file, named pipe, shared memory, and so on.
+  spec:                                 
+    action: Allow              
+    network:                            
+      matchProtocols:                   
+      - fromSource:                     
+        - path: /usr/sbin/mysqld        
+        protocol: tcp                   
+    selector:                           
+      matchLabels:                      
+        app: mysql                      
+    severity: 1  
+    tags:
+    - MySQL
+    - TCP
+    - Linux
+- name: allow-wordpress-network-access
+  precondition: 
+  - /usr/sbin/apache2
+  - /usr/local/bin/php
+  - /usr/local/bin/apache2-foreground
+  description:
+    refs:
+    - name: ""
+      url:
+      - ""
+    tldr: Allow wordpress to send network packets
+    detailed: The logical network packet at the generic level consists of information about 
+        the source, destination, and data payload. Each logical network offers varying degrees 
+        of features and interfaces (protocols). 
+  spec:
+    action: Allow
+    network:
+      matchProtocols:
+      - fromSource:
+        - path: /usr/sbin/apache2
+        protocol: raw
+      - fromSource:
+        - path: /usr/local/bin/apache2-foreground
+        - path: /usr/local/bin/php
+        - path: /usr/sbin/apache2
+        protocol: tcp
+      - fromSource:
+        - path: /usr/local/bin/php
+        - path: /usr/sbin/apache2
+        protocol: udp
+    selector:
+      matchLabels:
+        app: wordpress
+    severity: 1
+    tags:
+    - Wordpress
+    - TCP
+    - UDP
+    - RAW
+    - Network
+- name: block-serviceaccount-access
+  precondition: 
+  - /run/secrets/kubernetes.io/serviceaccount
+  description:
+    refs:
+    - name: "Unsecured Credentials: Container API"
+      url:
+      - "https://attack.mitre.org/techniques/T1552/007/"
+    tldr: Deny access to serviceaccount files
+    detailed: Adversaries may gather credentials via APIs within a containers environment. 
+        APIs in these environments, such as the Docker API and Kubernetes APIs, allow a user to 
+        remotely manage their container resources and cluster components. An adversary may access the 
+        Docker API to collect logs that contain credentials to cloud, container, and various 
+        other resources in the environment. An adversary with sufficient permissions, such as 
+        via a pod's service account, may also use the Kubernetes API to retrieve credentials from 
+        the Kubernetes API server. These credentials may include those needed for Docker API 
+        authentication or secrets from Kubernetes cluster components. 
+  spec:
+    severity: 7
+    selector:
+      matchLabels:
+        app: wordpress
+    file:
+      matchDirectories:
+      - dir: /run/secrets/kubernetes.io/serviceaccount/
+        recursive: true
+    action:
+      Block
+    tags:
+    - Kubernetes
+    - serviceaccount
