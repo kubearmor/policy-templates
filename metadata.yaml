@@ -78,73 +78,6 @@ policyRules:
     - Package Manager
     - MITRE
     - Linux
-- name: allow-mysql-tcp-access
-  precondition: 
-  - /usr/sbin/mysqld 
-  description:
-    refs:
-    - name: ""
-      url:
-      - ""
-    tldr: Allow mysqld to send TCP packets
-    detailed: Programs such as ‘mysql’ and ‘mysqldump’, that use MySQL client library have the 
-        support of MySQL connection to server with the help of many transport protocols, such 
-        as TCP/IP, Unix socket file, named pipe, shared memory, and so on.
-  spec:                                 
-    action: Allow              
-    network:                            
-      matchProtocols:                   
-      - fromSource:                     
-        - path: /usr/sbin/mysqld        
-        protocol: tcp                   
-    selector:                           
-      matchLabels:                      
-        app: mysql                      
-    severity: 1  
-    tags:
-    - MySQL
-    - TCP
-    - Linux
-- name: allow-wordpress-network-access
-  precondition: 
-  - /usr/sbin/apache2
-  - /usr/local/bin/php
-  - /usr/local/bin/apache2-foreground
-  description:
-    refs:
-    - name: ""
-      url:
-      - ""
-    tldr: Allow wordpress to send network packets
-    detailed: The logical network packet at the generic level consists of information about 
-        the source, destination, and data payload. Each logical network offers varying degrees 
-        of features and interfaces (protocols). 
-  spec:
-    action: Allow
-    network:
-      matchProtocols:
-      - fromSource:
-        - path: /usr/sbin/apache2
-        protocol: raw
-      - fromSource:
-        - path: /usr/local/bin/apache2-foreground
-        - path: /usr/local/bin/php
-        - path: /usr/sbin/apache2
-        protocol: tcp
-      - fromSource:
-        - path: /usr/local/bin/php
-        - path: /usr/sbin/apache2
-        protocol: udp
-    selector:
-      matchLabels:
-        app: wordpress
-    severity: 1
-    tags:
-    - Wordpress
-    - TCP
-    - UDP
-    - RAW
-    - Network
 - name: block-serviceaccount-access
   precondition: 
   - /run/secrets/kubernetes.io/serviceaccount
@@ -176,3 +109,24 @@ policyRules:
     tags:
     - Kubernetes
     - serviceaccount
+- name: cert-access
+  precondition: 
+  - /etc/ssl/.*
+  description:
+    refs:
+    - name: MITRE-TTP
+      url:
+      - https://attack.mitre.org/techniques/T1553/
+    tldr: Restrict access to trusted certificated bundles in the OS image
+    detailed: Operating systems maintain a list of trusted certificates (often called
+      trust bundles) in file system. These bundles decides which authorities are trusted.
+      Subverting these trust controls would essentially allow an adversary to operate
+      as a trusted entity. Adversaries may undermine security controls that will either
+      warn users of untrusted activity or prevent execution of untrusted programs.
+      Operating systems and security products may contain mechanisms to identify programs
+      or websites as possessing some level of trust. Examples of such features would
+      include a program being allowed to run because it is signed by a valid code
+      signing certificate, a program prompting the user with a warning because it
+      has an attribute set from being downloaded from the Internet, or getting an
+      indication that you are about to connect to an untrusted site.
+  yaml: mitre/system/ksp-unsecured_credentials_access.yaml
