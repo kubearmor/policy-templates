@@ -1,3 +1,5 @@
+version: v0.1.1
+policyRules:
 - name: maintenance-tool-access
   precondition: 
   - /sbin/*
