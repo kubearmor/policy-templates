@@ -46,4 +46,4 @@ spec:
     - path: /sbin/yaourt
     - path: /usr/bin/zypper
     - path: /bin/zypper
-    action: Audit
+    action: Block
