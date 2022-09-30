@@ -126,7 +126,7 @@ policyRules:
       for example, by observing audit activities in real time or by observing other system aspects 
       such as access patterns, characteristics of access, and other actions.
   yaml: nist/system/ksp-nist-si-4-detect-acess-to-cron-job-files.yaml
-- name: east-functionality-execute-package-management-process-in-container
+- name: least-functionality-execute-package-management-process-in-container
   precondition: 
   - /etc/nginx
   - /usr/sbin/nginx
