@@ -44,17 +44,6 @@ policyRules:
     tldr: The MySQL Database Server must enforce access restrictions associated with changes to the configuration of the MySQL Database Server or database(s).
     detailed: Failure to provide logical access restrictions associated with changes to configuration may have significant effects on the overall security of the system. When dealing with access restrictions pertaining to change control, it should be noted that any changes to the hardware, software, and/or firmware components of the information system can potentially have significant effects on the overall security of the system. Accordingly, only qualified and authorized individuals should be allowed to obtain access to system components for the purposes of initiating changes, including upgrades and modifications.
   yaml: stigs/system/ksp-block-stig-mysql-files-access.yaml
-- name: ksp-block-stig-mysql-config-directory-access
-  precondition: 
-  - /etc/mysql/*
-  description:
-    refs:
-    - name: STIG
-      url:
-      - https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235153/
-    tldr: Restrict access to database files.
-    detailed: 
-  yaml: stigs/system/ksp-block-stigs-mysql-config-directory-access.yaml
 - name: ksp-audit-mysql-stig-v-235153
   precondition: 
   - /etc/mysql/*
