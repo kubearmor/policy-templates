@@ -1,0 +1,188 @@
+version: v0.1.2
+policyRules:
+- name: restrict-access-to-mysql-config-mysqldump
+  precondition: 
+  - /etc/mysql/*
+  - /usr/bin/mysqldump
+  description:
+    refs:
+    - name: MITRE-TTP
+      url:
+      - https://attack.mitre.org/techniques/T1553/
+    tldr: Restrict access to trusted certificated bundles in the OS image
+    detailed: Operating systems maintain a list of trusted certificates (often called
+      trust bundles) in file system. These bundles decides which authorities are trusted.
+      Subverting these trust controls would essentially allow an adversary to operate
+      as a trusted entity. Adversaries may undermine security controls that will either
+      warn users of untrusted activity or prevent execution of untrusted programs.
+      Operating systems and security products may contain mechanisms to identify programs
+      or websites as possessing some level of trust. Examples of such features would
+      include a program being allowed to run because it is signed by a valid code
+      signing certificate, a program prompting the user with a warning because it
+      has an attribute set from being downloaded from the Internet, or getting an
+      indication that you are about to connect to an untrusted site.
+  yaml: MySQL/system/ksp-restrict-access-mysql-server-config-files.yaml
+- name: ksp-audit-mysql-stig-v-235153
+  precondition: 
+  - /etc/mysql/*
+  description:
+    refs:
+    - name: STIG
+      url:
+      - https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235153/
+    tldr: Restrict access to database files.
+    detailed: Applications, including DBMSs, must prevent unauthorized and unintended information transfer via shared system resources. Permitting only DBMS processes and authorized, administrative users to have access to the files where the database resides helps ensure that those files are not shared inappropriately and are not open to backdoor access and manipulation. As a general rule, distributed files and resources should follow the principal of least privilege, which requires that users, processes, programs, and other system components only have access to information and resources required for their legitimate purpose.
+  yaml: stigs/system/ksp-audit-mysql-stig-v-235153.yaml
+- name: ksp-block-stig-mysql-files-access
+  precondition: 
+  - /etc/mysql/*
+  description:
+    refs:
+    - name: STIG
+      url:
+      - https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235169/
+    tldr: The MySQL Database Server must enforce access restrictions associated with changes to the configuration of the MySQL Database Server or database(s).
+    detailed: Failure to provide logical access restrictions associated with changes to configuration may have significant effects on the overall security of the system. When dealing with access restrictions pertaining to change control, it should be noted that any changes to the hardware, software, and/or firmware components of the information system can potentially have significant effects on the overall security of the system. Accordingly, only qualified and authorized individuals should be allowed to obtain access to system components for the purposes of initiating changes, including upgrades and modifications.
+  yaml: stigs/system/ksp-block-stig-mysql-files-access.yaml
+- name: ksp-block-stig-mysql-config-directory-access
+  precondition: 
+  - /etc/mysql/*
+  description:
+    refs:
+    - name: STIG
+      url:
+      - https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235153/
+    tldr: Restrict access to database files.
+    detailed: 
+  yaml: stigs/system/ksp-block-stigs-mysql-config-directory-access.yaml
+- name: ksp-audit-mysql-stig-v-235153
+  precondition: 
+  - /etc/mysql/*
+  description:
+    refs:
+    - name: STIG
+      url:
+      - https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235153/
+    tldr: Restrict access to database files.
+    detailed: Applications, including DBMSs, must prevent unauthorized and unintended information transfer via shared system resources. Permitting only DBMS processes and authorized, administrative users to have access to the files where the database resides helps ensure that those files are not shared inappropriately and are not open to backdoor access and manipulation. As a general rule, distributed files and resources should follow the principal of least privilege, which requires that users, processes, programs, and other system components only have access to information and resources required for their legitimate purpose.
+  yaml: stigs/system/ksp-block-stig-mongodb-v-235153-limit-access-to-db-files.yaml
+- name: ksp-audit-cis-mysql-3-10
+  precondition: 
+  - /etc/mysql/*
+  description:
+    refs:
+    - name: CIS
+      url:
+      - https://learn.cisecurity.org/l/799323/2022-05-31/28qr86/
+    tldr: Audit access to MySQL key-ring  files.
+    detailed: When configured to use a Keyring plugin, internal MySQL components and plugins may securely store sensitive information for later retrieval. Associated files for the selected keyring type should have proper permissions.
+  yaml: cis/system/ksp-audit-cis-mysql-3-10.yaml
+- name: mysql-stig-v-235099-unauthorized-read-access
+  precondition: 
+  - /usr/local/mysql/*
+  description:
+    refs:
+    - name: STIG
+      url:
+      - https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235099/
+    tldr: The audit information produced by the MySQL Database Server must be protected from unauthorized read access.
+    detailed: If audit data were to become compromised, then competent forensic analysis and discovery of the true source of potentially malicious system activity is difficult, if not impossible, to achieve. In addition, access to audit records provides information an attacker could potentially use to their advantage. To ensure the veracity of audit data, the information system and/or the application must protect audit information from any and all unauthorized access. This includes read, write, copy, etc. This requirement can be achieved through multiple methods, which will depend upon system architecture and design. Some commonly employed methods include ensuring log files enjoy the proper file system permissions utilizing file system protections and limiting log data location. Additionally, applications with user interfaces to audit records should not allow for the unfettered manipulation of or access to those records via the application. If the application provides access to the audit data, the application becomes accountable for ensuring that audit information is protected from unauthorized access. Audit information includes all information (e.g., audit records, audit settings, and audit reports) needed to successfully audit information system activity. If the value of audit_log_file is a relative path name, the plugin interprets it relative to the data directory. If the value is a full path name, the plugin uses the value as is. A full path name may be useful if it is desirable to locate audit files on a separate file system or directory. For security reasons, write the audit log file to a directory accessible only to the MySQL server and to users with a legitimate reason to view the log.
+  yaml: stigs/system/ksp-audit-mysql-stig-v-235099-unauthorized-read-access.yaml
+- name: audit-mysql-v-235149-mysql-access
+  precondition: 
+  - /usr/local/mysql/*
+  description:
+    refs:
+    - name: STIG
+      url:
+      - https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-02-08/finding/V-235149/
+    tldr: The MySQL Database Server must uniquely identify and authenticate non-organizational users (or processes acting on behalf of non-organizational users).
+    detailed: Non-organizational users include all information system users other than organizational users, which include organizational employees or individuals the organization deems to have equivalent status of employees (e.g., contractors, guest researchers, individuals from allied nations). Non-organizational users will be uniquely identified and authenticated for all accesses other than those accesses explicitly identified and documented by the organization when related to the use of anonymous access, such as accessing a web server. Accordingly, a risk assessment is used in determining the authentication needs of the organization. Scalability, practicality, and security are simultaneously considered in balancing the need to ensure ease of use for access to federal information and information systems with the need to protect and adequately mitigate risk to organizational operations, organizational assets, individuals, other organizations, and the Nation.
+  yaml: stigs/system/ksp-audit-mysql-v-235149-mysql-access.yaml
+- name: cis-mysql-1-3
+  precondition: 
+  - /etc/mysql/*
+  description:
+    refs:
+    - name: CIS
+      url:
+      - https://learn.cisecurity.org/l/799323/2022-05-31/28qr86/
+    tldr: Restrict access to MySQL Client and MySQL Shell command history files.
+    detailed: On Linux/UNIX, the MySQL client and MySQL Shell log statements executed interactively to a history file. The default MySQL Client file is named .mysql_history in the user's home directory. The files are split by language and named history.sql, history.js and history.py. Most interactive commands run in the MySQL client application are saved to a history file. The MySQL command history should be disabled. By default, the MySQL Shell does not save history between sessions.
+  yaml: cis/system/ksp-block-cis-mysql-1-3.yaml
+- name: cis-mysql-1-4
+  precondition: 
+  - /etc/mysql/*
+  description:
+    refs:
+    - name: CIS
+      url:
+      - https://learn.cisecurity.org/l/799323/2022-05-31/28qr86/
+    tldr: Verify That the MYSQL_PWD Environment Variable is Not in Use.
+    detailed: MySQL can read a default database password from an environment variable called MYSQL_PWD. Avoiding use of this environment variable can better safeguard the confidentiality of MySQL credentials.
+  yaml: cis/system/ksp-audit-cis-mysql-1-4.yaml
+- name: mysql-v-235149-mysql-network
+  precondition: 
+  - /etc/mysql/*
+  description:
+    refs:
+    - name: STIG
+      url:
+      - https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-02-08/finding/V-235149/
+    tldr: The MySQL Database Server must uniquely identify and authenticate non-organizational users (or processes acting on behalf of non-organizational users).
+    detailed: Non-organizational users include all information system users other than organizational users, which include organizational employees or individuals the organization deems to have equivalent status of employees (e.g., contractors, guest researchers, individuals from allied nations). Non-organizational users will be uniquely identified and authenticated for all accesses other than those accesses explicitly identified and documented by the organization when related to the use of anonymous access, such as accessing a web server. Accordingly, a risk assessment is used in determining the authentication needs of the organization. Scalability, practicality, and security are simultaneously considered in balancing the need to ensure ease of use for access to federal information and information systems with the need to protect and adequately mitigate risk to organizational operations, organizational assets, individuals, other organizations, and the Nation.
+  yaml: stigs/system/ksp-audit-mysql-v-235149-mysql-network.yaml
+- name: cis-mysql-1-1
+  precondition: 
+  - /etc/mysql/*
+  description:
+    refs:
+    - name: CIS
+      url:
+      - https://learn.cisecurity.org/l/799323/2022-05-31/28qr86/
+    tldr: Restrict access to database files.
+    detailed: It is generally accepted that host operating systems should include different filesystem partitions for different purposes. One set of filesystems is typically called system partitions, and these are generally reserved for host system/application operation. The other set of filesystems is typically called "non-system partitions", and such locations are generally reserved for storing data.
+  yaml: cis/system/ksp-audit-cis-mysql-1-1.yaml
+- name: audit-stig-v-235114-detect-access-to-mysql-configuration-file
+  precondition: 
+  - /etc/mysql/*
+  description:
+    refs:
+    - name: STIG
+      url:
+      - https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235114/
+    tldr: The MySQL Database Server must generate audit records when unsuccessful attempts to modify privileges/permissions occur.
+    detailed: Failed attempts to change the permissions, privileges, and roles granted to users and roles must be tracked. Without an audit trail, unauthorized attempts to elevate or restrict individual and group privileges could go undetected. In an SQL environment, modifying permissions is typically done via the GRANT, REVOKE, and DENY commands. To aid in diagnosis, it is necessary to keep track of failed attempts in addition to the successful ones.
+  yaml: stigs/system/ksp-audit-stig-mysql-configuration-v-235114.yaml
+- name: audit-cis-mysql-1-2
+  precondition: 
+  - /usr/bin/mysql
+  description:
+    refs:
+    - name: CIS
+      url:
+      - https://learn.cisecurity.org/l/799323/2022-05-31/28qr86//
+    tldr: Audit access to useradd and groupadd command!
+    detailed: Utilizing a least privilege account for MySQL to execute as needed may reduce the impact of a MySQL-born vulnerability. A restricted account will be unable to access resources unrelated to MySQL, such as operating system configurations.
+  yaml: cis/system/ksp-audit-cis-mysql-1-2.yaml
+- name: audit-cis-mysql-3-3
+  precondition: 
+  - /usr/local/mysql/*
+  description:
+    refs:
+    - name: CIS
+      url:
+      - https://learn.cisecurity.org/l/799323/2022-05-31/28qr86/
+    tldr: Limiting the accessibility of these objects will protect the confidentiality, integrity, and availability of the MySQL logs.
+    detailed: MySQL can operate using a variety of log files, each used for different purposes. These
+are the binary log (which can be encrypted), error log, slow query log, relay log, general
+log, and in the enterprise edition, the audit log (which can be encrypted). Because these
+are files on the host operating system, they are subject to the permissions and
+ownership structure provided by the host and may be accessible by users other than the
+MySQL user. Additionally, using secure key management and at rest MySQL encryption
+can further protect data from OS users.
+Much of the information about the state of MySQL exists in MySQL, the MySQL
+performance_schema or informations_schema. In cases where the information you need
+is within a running MySQL, use these methods as they are more secure as they do not
+require OS login and access.
+  yaml: cis/system/ksp-audit-cis-mysql-3-3.yaml
