@@ -163,15 +163,5 @@ policyRules:
       url:
       - https://learn.cisecurity.org/l/799323/2022-05-31/28qr86/
     tldr: Limiting the accessibility of these objects will protect the confidentiality, integrity, and availability of the MySQL logs.
-    detailed: MySQL can operate using a variety of log files, each used for different purposes. These
-are the binary log (which can be encrypted), error log, slow query log, relay log, general
-log, and in the enterprise edition, the audit log (which can be encrypted). Because these
-are files on the host operating system, they are subject to the permissions and
-ownership structure provided by the host and may be accessible by users other than the
-MySQL user. Additionally, using secure key management and at rest MySQL encryption
-can further protect data from OS users.
-Much of the information about the state of MySQL exists in MySQL, the MySQL
-performance_schema or informations_schema. In cases where the information you need
-is within a running MySQL, use these methods as they are more secure as they do not
-require OS login and access.
+    detailed: MySQL can operate using a variety of log files, each used for different purposes. These are the binary log (which can be encrypted), error log, slow query log, relay log, general log, and in the enterprise edition, the audit log (which can be encrypted). Because these are files on the host operating system, they are subject to the permissions and ownership structure provided by the host and may be accessible by users other than the MySQL user. Additionally, using secure key management and at rest MySQL encryption can further protect data from OS users. Much of the information about the state of MySQL exists in MySQL, the MySQL performance_schema or informations_schema. In cases where the information you need is within a running MySQL, use these methods as they are more secure as they do not require OS login and access.
   yaml: cis/system/ksp-audit-cis-mysql-3-3.yaml
