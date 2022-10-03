@@ -1,0 +1,75 @@
+version: v0.1.2
+policyRules:
+- name: elastic-cve-2021-22145
+  precondition: 
+  - /bulk
+  description:
+    refs:
+    - name: CVE-2021-22145
+      url:
+      - https://nvd.nist.gov/vuln/detail/CVE-2021-22145
+    tldr: Generation of Error Message Containing Sensitive Information
+    detailed: A memory disclosure vulnerability was identified in Elasticsearch 7.10.0 to 7.13.3 
+      error reporting. A user with the ability to submit arbitrary queries to Elasticsearch could submit a malformed query that would result in an error message returned containing 
+      previously used portions of a data buffer. This buffer could contain sensitive information such 
+      as Elasticsearch documents or authentication details.
+  yaml: elastic/system/ksp-audit-elastic-cve-2021-22145.yaml
+- name: elastic-exposed-panel
+  precondition: 
+  - /login
+  - /app/kibana
+  description:
+    refs:
+    - name: ELASTIC KIBANA PANEL EXPOSED 
+      url:
+      - https://securityaffairs.co/wordpress/83215/breaking-news/exposed-kibana-installs.html
+    tldr: Elastic inbound loopback address allow admin access from unsecured kibana app
+    detailed: Elasticsearch is bound to 127.0.0.1 or localhost, or whatever kind of 
+      loopback address, an unprotected Kibana app running on top of the elasticsearch stack 
+      can compromise your server operativity and allow unauthenticated users to access Kibana 
+      dashboard (with admin privileges),thus gifting a strong foothold in 
+      further privilege escalation attacks to malicious entities
+  yaml: elastic/system/ksp-audit-elastic-exposed-panel.yaml
+- name: elastic-search-bash-pawn
+  precondition: 
+  - /bin/bash
+  - /bin/sh
+  - /bin/csh
+  - /usr/bin/auditbeat
+  description:
+    refs:
+    - name: ELASTIC BASH PAWN
+      url:
+      - https://www.elastic.co/guide/en/security/current/potential-shell-via-web-server.html
+    tldr: Remote shell access via malicious input
+    detailed: Identifies suspicious commands executed via a web server, 
+      which may suggest a vulnerability and remote shell access.
+  yaml: elastic/system/ksp-audit-elasticsearch-bash-spawn.yaml
+- name: elastic-cve-2019-7609
+  precondition: 
+  - /timelion/run
+  - /timelion/run
+  - /api/timelion/run
+  description:
+    refs:
+    - name: CVE-2019-7609
+      url:
+      - https://nvd.nist.gov/vuln/detail/cve-2019-7609
+    tldr: Improper Control of Generation of Code ('Code Injection')
+    detailed: Kibana versions before 5.6.15 and 6.6.1 contain an arbitrary code execution 
+      flaw in the Timelion visualizer. An attacker with access to the Timelion application 
+      could send a request that will attempt to execute javascript code. 
+      This could possibly lead to an attacker executing arbitrary commands with 
+      permissions of the Kibana process on the host system.
+  yaml: elastic/system/ksp-audit-elasticsearch-cve-2019-7609.yaml
+- name: elastic-search-indices-insecure-directory
+  precondition: 
+  - /usr/share/elasticsearch/data/nodes/0/indices/
+  description:
+    refs:
+    - name: ELASTIC SEARCH INDICES INSECURE 
+      url:
+      - https://www.elastic.co/guide/en/elasticsearch/reference/current/security-settings.html
+    tldr: Elastic search indices directory contains vulnerable and insecure information
+    detailed: Elastic directory contains insecure information that leads to security vulnerbility. 
+  yaml: /elastic/system/ksp-audit-elasticsearch-indices.yaml
