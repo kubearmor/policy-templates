@@ -2,9 +2,9 @@ version: v0.1.2
 policyRules:
 - name: system-recovery-and-reconstitution
   precondition: 
-  - /*/redis-cli
-  - /*/redis-server
-  - /*/redis
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
   description:
     refs:
     - name: NIST-CP-10-2
@@ -17,9 +17,9 @@ policyRules:
   yaml: nist/system/ksp-cp-10-2-system-recovery-and-reconstitution-transaction-recovery.yaml
 - name: system-owner-discovery
   precondition: 
-  - /*/redis-cli
-  - /*/redis-server
-  - /*/redis
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
   description:
     refs:
     - name: MITRE-TTP-T1082
@@ -33,9 +33,9 @@ policyRules:
   yaml: mitre/system/ksp-mitre-system-owner-user-discovery.yaml
 - name: system-monitoring-mkdir-under-bin-directory
   precondition: 
-  - /*/redis-cli
-  - /*/redis-server
-  - /*/redis
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
   description:
     refs:
     - name: NIST-SI-4
@@ -50,9 +50,9 @@ policyRules:
   yaml: nist/system/ksp-nist-si-4-mkdir-bin-dir.yaml
 - name: system-monitoring-create-file-in-dev-dir
   precondition: 
-  - /*/redis-cli
-  - /*/redis-server
-  - /*/redis
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
   description:
     refs:
     - name: NIST-SI-4
@@ -67,9 +67,9 @@ policyRules:
   yaml: nist/system/ksp-nist-si-4-create-file-in-dev-dir.yaml
 - name: system-monitoring-detect-access-to-cronjob-files
   precondition: 
-  - /*/redis-cli
-  - /*/redis-server
-  - /*/redis
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
   description:
     refs:
     - name: NIST-SI-4
@@ -84,9 +84,9 @@ policyRules:
   yaml: nist/system/ksp-nist-si-4-detect-acess-to-cron-job-files.yaml
 - name: least-functionality-execute-package-management-process-in-container
   precondition: 
-  - /*/redis-cli
-  - /*/redis-server
-  - /*/redis
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
   description:
     refs:
     - name: NIST-CM-7-5
