@@ -8,7 +8,7 @@ metadata:
   name: ksp-cp-10-2-system-recovery-and-reconstitution
   namespace: default # Change your namespace
 spec:
-  tags: ["NIST", "Cp-10-2", "MySQL"]
+  tags: ["NIST", "Cp-10-2", "MySQL","Redis","Cassandra","Postgresql"]
   message: "Database Manager System Paths is Audited"
   selector:
     matchLabels:
@@ -19,14 +19,24 @@ spec:
       - dir: /var/lib/mysql/
         recursive: true
       - dir: /var/lib/postgresql/
-        recursive: true   
+        recursive: true
+      - dir: /var/lib/redis/
+        recursive: true
+      - dir: /var/lib/cassandra/
+        recursive: true
       - dir: /etc/mysql/
         recursive: true
       - dir: /etc/postgres/
-        recursive: true   
+        recursive: true  
+      - dir: /etc/redis/
+        recursive: true
       - dir: /var/log/mysql/
         recursive: true   
       - dir: /var/log/postgresql/
-        recursive: true           
+        recursive: true  
+      - dir: /var/log/redis/
+        recursive: true
+      - dir: /var/log/cassandra/
+        recursive: true
     action: 
       Audit
