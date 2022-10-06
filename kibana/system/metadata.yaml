@@ -1,0 +1,13 @@
+version: v0.1.2
+policyRules:
+- name: elastic-kibana-panel-exposed
+  precondition: 
+  - /usr/share/kibana
+  description:
+    refs:
+    - name: MITRE-TTP
+      url:
+      - https://securityaffairs.co/wordpress/83215/breaking-news/exposed-kibana-installs.html
+    tldr: Elastic inbound loopback address allow admin access from unsecured kibana app
+    detailed: Elasticsearch is bound to 127.0.0.1 or localhost, or whatever kind of loopback address, an unprotected Kibana app running on top of the elasticsearch stack can compromise your server operativity and allow unauthenticated users to access Kibana dashboard (with admin privileges),thus gifting a strong foothold in further privilege escalation attacks to malicious entities.
+  yaml: ksp-audit-elastic-exposed-panel.yaml

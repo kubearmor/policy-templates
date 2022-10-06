@@ -1,0 +1,20 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-elasticsearch-log-file-access
+  namespace: default # Change your name space
+spec:
+  tags: ["ElasticSearch", "file"]
+  message: "Alert! Logs file access detected"
+  selector:
+    matchLabels:
+      app: elasticsearch # Change your matchLabels
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /var/log/elasticsearch/
+  action: audit

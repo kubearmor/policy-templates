@@ -1,0 +1,17 @@
+version: v0.1.2
+policyRules:
+- name: system-recovery-and-reconstitution
+  precondition: 
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
+  description:
+    refs:
+    - name: NIST-CP-10-2
+      url:
+      - https://csf.tools/reference/nist-sp-800-53/r4/cp/cp-10/cp-10-2/
+    tldr: Database Manager System Paths is Audited.
+    detailed: Transaction-based information systems include, for example, database management 
+              systems and transaction processing systems. Mechanisms supporting transaction recovery include, for example, 
+              transaction rollback and transaction journaling.
+  yaml: ksp-cp-10-2-system-recovery-and-reconstitution.yaml

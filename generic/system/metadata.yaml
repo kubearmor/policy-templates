@@ -1,0 +1,110 @@
+version: v0.1.2
+policyRules:
+- name: maintenance-tool-access
+  precondition:
+  - /sbin/*
+  description:
+    refs:
+    - name: MITRE-TTP
+      url:
+      - https://attack.mitre.org/techniques/T1553/
+    tldr: Restrict access to maintenance tools (apk, mii-tool, ...)
+    detailed: Container images might contain maintenance tools which should ideally
+      never be used in prod env, or if used, should be used only in certain time frames.
+      Examples include, dynamic package management tools, mii-tool, iptables etc
+  yaml: ksp-audit-maintenance-tool-access.yaml
+- name: cert-access
+  precondition: 
+  - /etc/ssl/.*
+  description:
+    refs:
+    - name: MITRE-TTP
+      url:
+      - https://attack.mitre.org/techniques/T1553/
+    tldr: Restrict access to trusted certificated bundles in the OS image
+    detailed: Operating systems maintain a list of trusted certificates (often called
+      trust bundles) in file system. These bundles decides which authorities are trusted.
+      Subverting these trust controls would essentially allow an adversary to operate
+      as a trusted entity. Adversaries may undermine security controls that will either
+      warn users of untrusted activity or prevent execution of untrusted programs.
+      Operating systems and security products may contain mechanisms to identify programs
+      or websites as possessing some level of trust. Examples of such features would
+      include a program being allowed to run because it is signed by a valid code
+      signing certificate, a program prompting the user with a warning because it
+      has an attribute set from being downloaded from the Internet, or getting an
+      indication that you are about to connect to an untrusted site.
+  yaml: ksp-unsecured_credentials_access.yaml
+- name: system-owner-discovery
+  precondition: 
+  - /usr/bin/who
+  description:
+    refs:
+    - name: MITRE-TTP-T1082
+      url:
+      - https://attack.mitre.org/techniques/T1082/
+    tldr: System Information Discovery - block system owner discovery commands
+    detailed: An adversary may attempt to get detailed information about the operating system and hardware, including
+      version, patches, hotfixes, service packs, and architecture. Adversaries may use the information from System
+      Information Discovery during automated discovery to shape follow-on behaviors, including whether or not the
+      adversary fully infects the target and/or attempts specific actions.
+  yaml: ksp-mitre-system-owner-user-discovery.yaml
+- name: system-monitoring-deny-write-under-bin-directory
+  precondition: 
+  - /bin/*
+  description:
+    refs:
+    - name: NIST-SI-4
+      url:
+      - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
+    tldr: System and Information Integrity - System Monitoring make directory under /bin/
+    detailed: System monitoring includes external and internal monitoring. External monitoring
+      includes the observation of events occurring at system boundaries. Internal monitoring
+      includes the observation of events occurring within the system. Organizations monitor systems,
+      for example, by observing audit activities in real time or by observing other system aspects 
+      such as access patterns, characteristics of access, and other actions.
+  yaml: ksp-nist-si-4-mkdir-bin-dir.yaml
+- name: system-monitoring-write-under-dev-directory
+  precondition: 
+  - /dev/*
+  description:
+    refs:
+    - name: NIST-SI-4
+      url:
+      - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
+    tldr: System and Information Integrity - System Monitoring make files under /dev/
+    detailed: System monitoring includes external and internal monitoring. External monitoring
+      includes the observation of events occurring at system boundaries. Internal monitoring
+      includes the observation of events occurring within the system. Organizations monitor systems,
+      for example, by observing audit activities in real time or by observing other system aspects 
+      such as access patterns, characteristics of access, and other actions.
+  yaml: ksp-nist-si-4-create-file-in-dev-dir.yaml
+- name: system-monitoring-detect-access-to-cronjob-files
+  precondition: 
+  - /var/cron/*
+  description:
+    refs:
+    - name: NIST-SI-4
+      url:
+      - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
+    tldr: System and Information Integrity - System Monitoring Detect access to cronjob files
+    detailed: System monitoring includes external and internal monitoring. External monitoring
+      includes the observation of events occurring at system boundaries. Internal monitoring
+      includes the observation of events occurring within the system. Organizations monitor systems,
+      for example, by observing audit activities in real time or by observing other system aspects 
+      such as access patterns, characteristics of access, and other actions.
+  yaml: ksp-nist-si-4-detect-access-to-cron-job-files.yaml
+- name: least-functionality-execute-package-management-process-in-container
+  precondition: 
+  - /bin/*
+  description:
+    refs:
+    - name: NIST-CM-7-5
+      url:
+      - https://csf.tools/reference/nist-sp-800-53/r5/cm/cm-7/cm-7-5/
+    tldr: System and Information Integrity - Least Functionality deny execution of package manager process in container
+    detailed: Authorized software programs can be limited to specific versions or from a specific source. To facilitate
+      a comprehensive authorized software process and increase the strength of protection for attacks that bypass
+      application level authorized software, software programs may be decomposed into and monitored at different 
+      levels of detail. These levels include applications, application programming interfaces, application modules,
+      scripts, system processes, system services, kernel functions, registries, drivers, and dynamic link libraries. 
+  yaml: ksp-nist-si-4-execute-package-management-process-in-container.yaml

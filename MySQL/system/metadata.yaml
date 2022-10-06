@@ -1,0 +1,26 @@
+version: v0.1.2
+policyRules:
+- name: cis-mysql-1-2
+  precondition: 
+  - /usr/bin/mysql
+  - /usr/sbin/groupadd
+  - /usr/sbin/useradd
+  description:
+    refs:
+    - name: CIS
+      url:
+      - https://learn.cisecurity.org/l/799323/2022-05-31/28qr86//
+    tldr: Audit access to useradd and groupadd command!
+    detailed: Utilizing a least privilege account for MySQL to execute as needed may reduce the impact of a MySQL-born vulnerability. A restricted account will be unable to access resources unrelated to MySQL, such as operating system configurations.
+  yaml: ksp-audit-cis-mysql-1-2.yaml
+- name: audit-access-to-mysqldump
+  precondition: 
+  - /usr/bin/mysqldump
+  description:
+    refs:
+    - name: MYSQL
+      url:
+      - https://www.oracle.com/security-alerts/cpuapr2017.html
+    tldr: Monitor access to mysqldump process
+    detailed: mysqldump is used to create a MySQL databases logical backup. From the imported dump file, an attacker can manufacture malicious table names to implement arbitrary SQL statements to query and shell command execution purposes. 
+  yaml: ksp-restrict-access-mysqldump.yaml
