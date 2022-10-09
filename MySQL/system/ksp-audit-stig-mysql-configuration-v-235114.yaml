@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+# https://www.stigviewer.com/stig/oracle_mysql_8.0/2021-12-10/finding/V-235114
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-stig-v-235114-detect-access-to-mysql-configuration-file
+  namespace: default # Change your namespace
+spec:
+  tags: ["STIG", "MySQL", "V-235114", "Configuration-Files", "privileges"]
+  message: "Alert! Access to MySQL configuration files is audited"
+  selector:
+    matchLabels:
+      app: mysql8 # Change your matchLabels
+  file:
+    severity: 5
+    matchPaths:
+    - path: /etc/mysql/my.cnf #mysql configuration file  
+        ownerOnly: true
+    action: Audit
