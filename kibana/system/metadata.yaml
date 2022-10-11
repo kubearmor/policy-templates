@@ -10,23 +10,7 @@ policyRules:
       - https://securityaffairs.co/wordpress/83215/breaking-news/exposed-kibana-installs.html
     tldr: Elastic inbound loopback address allow admin access from unsecured kibana app
     detailed: Elasticsearch is bound to 127.0.0.1 or localhost, or whatever kind of loopback address, an unprotected Kibana app running on top of the elasticsearch stack can compromise your server operativity and allow unauthenticated users to access Kibana dashboard (with admin privileges),thus gifting a strong foothold in further privilege escalation attacks to malicious entities.
-  spec:
-    action: Audit
-    process:
-      matchPaths:
-      - path: /usr/share/kibana
-      - path: /usr/share/kibana/bin/kibana
-    network:
-      matchProtocols:
-      - protocol: tcp
-      - protocol: udp
-    message: Alert! Access to kibana panel is detected
-    selector:
-      matchLabels:
-        kubearmor.io/container.name: alpine
-    severity: 1
-    tags:
-    - MITRE
+  yaml: ksp-audit-elastic-exposed-panel.yaml
 - name: maintenance-tool-access
   precondition: 
   - /sbin/*
@@ -39,17 +23,4 @@ policyRules:
     detailed: Container images might contain maintenance tools which should ideally
       never be used in prod env, or if used, should be used only in certain time frames.
       Examples include, dynamic package management tools, mii-tool, iptables etc
-  spec:
-    action: Audit
-    file:
-      matchDirectories:
-      - dir: /sbin/
-        recursive: true
-    message: restricted maintenance tool access attempted
-    selector:
-      matchLabels:
-        kubearmor.io/container.name: alpine
-    severity: 1
-    tags:
-    - PCI-DSS
-    - MITRE
+  yaml: ksp-audit-maintenance-tool-access.yaml
