@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-audit-cis-mysql-1-2
+  namespace: default
+spec:
+  tags: ["MySQL", "CIS", "rule-1-2"]
+  message: "Notification! useradd and groupadd command is accessed!"
+  selector:
+    matchLabels:
+      app: mysql
+  process:
+    severity: 1
+    matchPaths:
+    - path: /usr/sbin/groupadd
+    - path: /usr/sbin/useradd
+    action: Block
