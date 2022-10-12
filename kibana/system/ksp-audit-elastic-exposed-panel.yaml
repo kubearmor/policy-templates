@@ -1,0 +1,26 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata: 
+  name: ksp-elastic-exposed-panel
+  namespace: default
+spec: 
+  message: "Alert! Access to kibana panel is detected "
+  action: Audit
+  process: 
+    matchPaths: 
+      - 
+        path: /usr/share/kibana/bin/kibana
+      - 
+        path: /usr/share/kibana
+    severity: 4
+  network:
+      matchProtocols:
+      - protocol: tcp
+      - protocol: udp
+  selector: 
+    matchLabels: 
+      container: elastic
+  tags: 
+    - "elastic search"
+    - "kibana panel"
+    - "exposed panel"
