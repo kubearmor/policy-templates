@@ -5,11 +5,11 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-restrict-access-to-mysql-config-mysqldump
+  name: ksp-restrict-access-to-mysql-config
   namespace: default # Change your namespace
 spec:
-  tags: ["MySQL", "config-files", "mysqldump"]
-  message: "Alert! MySQL configuration files has been accessed and/or mysqldump command is has been used."
+  tags: ["MySQL", "config-files"]
+  message: "Alert! MySQL configuration files has been accessed."
   selector:
     matchLabels:
       app: mysql8 # Change your labels
@@ -28,8 +28,3 @@ spec:
     - dir: /var/log/mysql/
       recursive: true
     action: Audit
-  process:
-    severity: 10
-    matchPaths:
-    - path: /usr/bin/mysqldump
-    action: Block 
