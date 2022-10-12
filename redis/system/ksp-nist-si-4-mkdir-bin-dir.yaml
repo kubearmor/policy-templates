@@ -17,8 +17,14 @@ spec:
     severity: 5
     matchDirectories:
     - dir: /bin/
+      fromSource:
+      - path: /bin/mkdir
     - dir: /sbin/
+      fromSource:
+      - path: /bin/mkdir
     - dir: /usr/sbin/
+      fromSource:
+      - path: /bin/mkdir
     - dir: /usr/bin/
       fromSource:
       - path: /bin/mkdir
