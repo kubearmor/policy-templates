@@ -7,7 +7,7 @@ spec:
   message: "Alert! Access to kibana panel is detected "
   action: Audit
   process: 
-    matchPath: 
+    matchPaths: 
       - 
         path: /usr/share/kibana/bin/kibana
       - 
