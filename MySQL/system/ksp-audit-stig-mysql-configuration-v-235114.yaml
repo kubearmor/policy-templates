@@ -18,5 +18,5 @@ spec:
     severity: 5
     matchPaths:
     - path: /etc/mysql/my.cnf #mysql configuration file  
-        ownerOnly: true
+      ownerOnly: true
     action: Audit
