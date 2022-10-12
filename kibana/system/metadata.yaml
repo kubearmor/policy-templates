@@ -13,6 +13,7 @@ policyRules:
   yaml: ksp-audit-elastic-exposed-panel.yaml
 - name: maintenance-tool-access
   precondition: 
+  - /usr/share/kibana
   - /sbin/*
   description:
     refs:
