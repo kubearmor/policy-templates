@@ -8,11 +8,11 @@ metadata:
   name: ksp-restrict-access-to-mysqldump
   namespace: default # Change your namespace
 spec:
-  tags: ["MySQL", "config-files", "mysqldump"]
-  message: "Alert! MySQL configuration files has been accessed and/or mysqldump command is has been used."
+  tags: ["MySQL", "mysqldump"]
+  message: "Alert! mysqldump command is has been used."
   selector:
     matchLabels:
-      app: mysql8 # Change your labels
+      app: mysql # Change your labels
   process:
     severity: 10
     matchPaths:
