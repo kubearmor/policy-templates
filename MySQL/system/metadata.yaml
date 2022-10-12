@@ -1,8 +1,19 @@
 version: v0.1.2
 policyRules:
-- name: restrict-access-to-mysql-config-mysqldump
+- name: restrict-access-to-mysql-config
   precondition: 
   - /etc/mysql/*
+  - /var/lib/mysql/*
+  description:
+    refs:
+    - name: MITRE-TTP
+      url:
+      - https://attack.mitre.org/techniques/T1553/
+    tldr: Restrict access to trusted certificated bundles in the OS image
+    detailed: Operating systems maintain a list of trusted certificates (often called trust bundles) in file system. These bundles decides which authorities are trusted. Subverting these trust controls would essentially allow an adversary to operate as a trusted entity. Adversaries may undermine security controls that will either warn users of untrusted activity or prevent execution of untrusted programs. Operating systems and security products may contain mechanisms to identify programs or websites as possessing some level of trust. Examples of such features would include a program being allowed to run because it is signed by a valid code signing certificate, a program prompting the user with a warning because it has an attribute set from being downloaded from the Internet, or getting an indication that you are about to connect to an untrusted site.
+  yaml: ksp-restrict-access-mysql-server-config-files.yaml
+- name: restrict-access-to-mysqldump
+  precondition: 
   - /usr/bin/mysqldump
   description:
     refs:
@@ -10,18 +21,8 @@ policyRules:
       url:
       - https://attack.mitre.org/techniques/T1553/
     tldr: Restrict access to trusted certificated bundles in the OS image
-    detailed: Operating systems maintain a list of trusted certificates (often called
-      trust bundles) in file system. These bundles decides which authorities are trusted.
-      Subverting these trust controls would essentially allow an adversary to operate
-      as a trusted entity. Adversaries may undermine security controls that will either
-      warn users of untrusted activity or prevent execution of untrusted programs.
-      Operating systems and security products may contain mechanisms to identify programs
-      or websites as possessing some level of trust. Examples of such features would
-      include a program being allowed to run because it is signed by a valid code
-      signing certificate, a program prompting the user with a warning because it
-      has an attribute set from being downloaded from the Internet, or getting an
-      indication that you are about to connect to an untrusted site.
-  yaml: ksp-restrict-access-mysql-server-config-files.yaml
+    detailed: Operating systems maintain a list of trusted certificates (often called trust bundles) in file system. These bundles decides which authorities are trusted. Subverting these trust controls would essentially allow an adversary to operate as a trusted entity. Adversaries may undermine security controls that will either warn users of untrusted activity or prevent execution of untrusted programs. Operating systems and security products may contain mechanisms to identify programs or websites as possessing some level of trust. Examples of such features would include a program being allowed to run because it is signed by a valid code signing certificate, a program prompting the user with a warning because it has an attribute set from being downloaded from the Internet, or getting an indication that you are about to connect to an untrusted site.
+  yaml: ksp-restrict-access-mysqldump.yaml
 - name: ksp-audit-mysql-stig-v-235153
   precondition: 
   - /etc/mysql/*
