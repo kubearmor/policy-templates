@@ -14,7 +14,7 @@ policyRules:
     detailed: Transaction-based information systems include, for example, database management 
               systems and transaction processing systems. Mechanisms supporting transaction recovery include, for example, 
               transaction rollback and transaction journaling.
-  yaml: ksp-cp-10-2-system-recovery-and-reconstitution-transaction-recovery.yaml
+  yaml: ksp-cp-10-2-system-recovery-and-reconstitution.yaml
 - name: system-owner-discovery
   precondition: 
   - /usr/local/bin/redis-cli
@@ -30,7 +30,7 @@ policyRules:
       version, patches, hotfixes, service packs, and architecture. Adversaries may use the information from System
       Information Discovery during automated discovery to shape follow-on behaviors, including whether or not the
       adversary fully infects the target and/or attempts specific actions.
-  yaml: ksp-mitre-system-owner-user-discovery.yaml
+  yaml: generic/system/ksp-mitre-system-owner-user-discovery.yaml
 - name: system-monitoring-mkdir-under-bin-directory
   precondition: 
   - /usr/local/bin/redis-cli
@@ -47,7 +47,7 @@ policyRules:
       includes the observation of events occurring within the system. Organizations monitor systems,
       for example, by observing audit activities in real time or by observing other system aspects 
       such as access patterns, characteristics of access, and other actions.
-  yaml: ksp-nist-si-4-mkdir-bin-dir.yaml
+  yaml: generic/system/ksp-nist-si-4-mkdir-bin-dir.yaml
 - name: system-monitoring-create-file-in-dev-dir
   precondition: 
   - /usr/local/bin/redis-cli
@@ -64,7 +64,7 @@ policyRules:
       includes the observation of events occurring within the system. Organizations monitor systems,
       for example, by observing audit activities in real time or by observing other system aspects 
       such as access patterns, characteristics of access, and other actions.
-  yaml: ksp-nist-si-4-create-file-in-dev-dir.yaml
+  yaml: generic/system/ksp-nist-si-4-create-file-in-dev-dir.yaml
 - name: system-monitoring-detect-access-to-cronjob-files
   precondition: 
   - /usr/local/bin/redis-cli
@@ -81,7 +81,7 @@ policyRules:
       includes the observation of events occurring within the system. Organizations monitor systems,
       for example, by observing audit activities in real time or by observing other system aspects 
       such as access patterns, characteristics of access, and other actions.
-  yaml: ksp-nist-si-4-detect-acess-to-cron-job-files.yaml
+  yaml: generic/system/ksp-nist-si-4-detect-access-to-cron-job-files.yaml
 - name: least-functionality-execute-package-management-process-in-container
   precondition: 
   - /usr/local/bin/redis-cli
@@ -98,4 +98,4 @@ policyRules:
       application level authorized software, software programs may be decomposed into and monitored at different 
       levels of detail. These levels include applications, application programming interfaces, application modules,
       scripts, system processes, system services, kernel functions, registries, drivers, and dynamic link libraries. 
-  yaml: ksp-nist-si-4-execute-package-management-process-in-container.yaml
+  yaml: generic/system/ksp-nist-si-4-execute-package-management-process-in-container.yaml
