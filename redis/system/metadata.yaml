@@ -1,0 +1,101 @@
+version: v0.1.2
+policyRules:
+- name: system-recovery-and-reconstitution
+  precondition: 
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
+  description:
+    refs:
+    - name: NIST-CP-10-2
+      url:
+      - https://csf.tools/reference/nist-sp-800-53/r4/cp/cp-10/cp-10-2/
+    tldr: Database Manager System Paths is Audited.
+    detailed: Transaction-based information systems include, for example, database management 
+              systems and transaction processing systems. Mechanisms supporting transaction recovery include, for example, 
+              transaction rollback and transaction journaling.
+  yaml: ksp-cp-10-2-system-recovery-and-reconstitution.yaml
+- name: system-owner-discovery
+  precondition: 
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
+  description:
+    refs:
+    - name: MITRE-TTP-T1082
+      url:
+      - https://attack.mitre.org/techniques/T1082/
+    tldr: System Information Discovery - block system owner discovery commands
+    detailed: An adversary may attempt to get detailed information about the operating system and hardware, including
+      version, patches, hotfixes, service packs, and architecture. Adversaries may use the information from System
+      Information Discovery during automated discovery to shape follow-on behaviors, including whether or not the
+      adversary fully infects the target and/or attempts specific actions.
+  yaml: generic/system/ksp-mitre-system-owner-user-discovery.yaml
+- name: system-monitoring-mkdir-under-bin-directory
+  precondition: 
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
+  description:
+    refs:
+    - name: NIST-SI-4
+      url:
+      - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
+    tldr: System and Information Integrity - System Monitoring make directory under /bin/
+    detailed: System monitoring includes external and internal monitoring. External monitoring
+      includes the observation of events occurring at system boundaries. Internal monitoring
+      includes the observation of events occurring within the system. Organizations monitor systems,
+      for example, by observing audit activities in real time or by observing other system aspects 
+      such as access patterns, characteristics of access, and other actions.
+  yaml: generic/system/ksp-nist-si-4-mkdir-bin-dir.yaml
+- name: system-monitoring-create-file-in-dev-dir
+  precondition: 
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
+  description:
+    refs:
+    - name: NIST-SI-4
+      url:
+      - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
+    tldr: System and Information Integrity - System Monitoring make files under /dev/
+    detailed: System monitoring includes external and internal monitoring. External monitoring
+      includes the observation of events occurring at system boundaries. Internal monitoring
+      includes the observation of events occurring within the system. Organizations monitor systems,
+      for example, by observing audit activities in real time or by observing other system aspects 
+      such as access patterns, characteristics of access, and other actions.
+  yaml: generic/system/ksp-nist-si-4-create-file-in-dev-dir.yaml
+- name: system-monitoring-detect-access-to-cronjob-files
+  precondition: 
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
+  description:
+    refs:
+    - name: NIST-SI-4
+      url:
+      - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
+    tldr: System and Information Integrity - System Monitoring Detect access to cronjob files
+    detailed: System monitoring includes external and internal monitoring. External monitoring
+      includes the observation of events occurring at system boundaries. Internal monitoring
+      includes the observation of events occurring within the system. Organizations monitor systems,
+      for example, by observing audit activities in real time or by observing other system aspects 
+      such as access patterns, characteristics of access, and other actions.
+  yaml: generic/system/ksp-nist-si-4-detect-access-to-cron-job-files.yaml
+- name: least-functionality-execute-package-management-process-in-container
+  precondition: 
+  - /usr/local/bin/redis-cli
+  - /usr/local/bin/redis-server
+  - /usr/local/bin/redis
+  description:
+    refs:
+    - name: NIST-CM-7-5
+      url:
+      - https://csf.tools/reference/nist-sp-800-53/r5/cm/cm-7/cm-7-5/
+    tldr: System and Information Integrity - Least Functionality deny execution of package manager process in container
+    detailed: Authorized software programs can be limited to specific versions or from a specific source. To facilitate
+      a comprehensive authorized software process and increase the strength of protection for attacks that bypass
+      application level authorized software, software programs may be decomposed into and monitored at different 
+      levels of detail. These levels include applications, application programming interfaces, application modules,
+      scripts, system processes, system services, kernel functions, registries, drivers, and dynamic link libraries. 
+  yaml: generic/system/ksp-nist-si-4-execute-package-management-process-in-container.yaml

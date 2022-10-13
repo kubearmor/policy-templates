@@ -1,0 +1,26 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-cp-10-2-system-recovery-and-reconstitution
+  namespace: default # Change your namespace
+spec:
+  tags: ["NIST", "Cp-10-2", "Redis"]
+  message: "Database Manager System Paths is Audited"
+  selector:
+    matchLabels:
+      pod: test           #change pod: test to match your label          
+  file:
+    severity: 5
+    matchDirectories:
+      - dir: /var/lib/redis/
+        recursive: true 
+      - dir: /etc/redis/
+        recursive: true
+      - dir: /var/log/redis/
+        recursive: true
+    action: 
+      Audit
