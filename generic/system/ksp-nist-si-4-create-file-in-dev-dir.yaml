@@ -1,0 +1,22 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit:
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-nist-si-4-create-file-in-dev-dir
+  namespace: default
+spec:
+  tags: ["NIST", "NIST_800-53_AU-2", "NIST_800-53_SI-4" , "MITRE", "MITRE_T1036_masquerading"]
+  message: "Alert! File creation in /dev/ dir is detected. Possible violation of NIST SI-4"
+  selector:
+    matchLabels:
+      app: nginx-test                   #change to your labels
+  file:
+    severity: 5
+    matchDirectories:
+    - dir: /dev/
+      recursive: true
+      readOnly: true
+    action: Audit
