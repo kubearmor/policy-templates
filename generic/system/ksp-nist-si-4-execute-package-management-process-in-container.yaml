@@ -8,7 +8,7 @@ metadata:
   name: ksp-nist-execute-package-management-process-in-container
   namespace: default # Change your namespace
 spec:
-  tags: ["NIST", "NIST_800-53_CM-7(4)", "SI-4", "filesystem","process","NIST_800-53_SI-4"]
+  tags: ["NIST", "NIST_800-53_CM-7(4)", "SI-4", "process","NIST_800-53_SI-4"]
   message: "Alert! Execution of package management process inside container is detected"
   selector:
     matchLabels:
