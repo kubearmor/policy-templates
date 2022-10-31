@@ -9,14 +9,14 @@ metadata:
   namespace: default
 spec:
   tags: ["NIST", "NIST_800-53_AU-2", "NIST_800-53_SI-4" , "MITRE", "MITRE_T1036_masquerading"]
-  message: "Alert! File creation in /dev/ dir is detected. Possible violation of NIST SI-4"
+  message: "Alert! File creation under /dev/ directory detected."
   selector:
     matchLabels:
       app: nginx-test                   #change to your labels
+  severity: 5
   file:
-    severity: 5
     matchDirectories:
     - dir: /dev/
       recursive: true
       readOnly: true
-    action: Audit
+  action: Audit

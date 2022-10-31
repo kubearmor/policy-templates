@@ -13,8 +13,8 @@ spec:
   selector:
     matchLabels:
       pod: test           #change pod: test to match your label          
+  severity: 5
   file:
-    severity: 5
     matchDirectories:
       - dir: /var/lib/redis/
         recursive: true 
@@ -22,5 +22,4 @@ spec:
         recursive: true
       - dir: /var/log/redis/
         recursive: true
-    action: 
-      Audit
+  action: Audit

@@ -6,13 +6,13 @@ metadata:
 spec: 
   message: "Alert! Access to kibana panel is detected "
   action: Audit
+  severity: 4
   process: 
     matchPaths: 
       - 
         path: /usr/share/kibana/bin/kibana
       - 
         path: /usr/share/kibana
-    severity: 4
   network:
       matchProtocols:
       - protocol: tcp

@@ -4,7 +4,7 @@ metadata:
   name: maintenance-tool-access
   namespace: default
 spec: 
-  message: "restricted maintenance tool access attempted"
+  message: "restricted maintenance tool access attempt detected"
   selector: 
     matchLabels: 
       kubearmor.io/container.name: alpine

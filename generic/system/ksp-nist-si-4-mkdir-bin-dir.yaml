@@ -9,12 +9,12 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["NIST", "NIST_800-53_AU-2", "NIST_800-53_SI-4" , "MITRE", "MITRE_T1036_masquerading"]
-  message: "Alert! An attempt to create a directory below a binary directory is detected. Possible violation of NIST SI-4"
+  message: "Alert! An attempt to write below system binary directories denied."
   selector:
     matchLabels:
       app: nginx-test    #change this label with your label
+  severity: 5
   file:
-    severity: 5
     matchDirectories:
     - dir: /bin/
       recursive: true
@@ -28,4 +28,4 @@ spec:
     - dir: /usr/bin/
       recursive: true
       readOnly: true
-    action: Block
+  action: Block
