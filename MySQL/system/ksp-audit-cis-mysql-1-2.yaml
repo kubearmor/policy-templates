@@ -9,13 +9,13 @@ metadata:
   namespace: default
 spec:
   tags: ["MySQL", "CIS"]
-  message: "Notification! useradd and groupadd command is accessed!"
+  message: "Notification! useradd and groupadd command executions denied!"
   selector:
     matchLabels:
       app: mysql
+  severity: 1
   process:
-    severity: 1
     matchPaths:
     - path: /usr/sbin/groupadd
     - path: /usr/sbin/useradd
-    action: Block
+  action: Block

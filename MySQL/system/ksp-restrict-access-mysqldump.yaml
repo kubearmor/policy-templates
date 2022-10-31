@@ -9,12 +9,12 @@ metadata:
   namespace: default # Change your namespace
 spec:
   tags: ["MySQL", "mysqldump","process"]
-  message: "Alert! mysqldump command is has been used."
+  message: "Alert! mysqldump command execution detected."
   selector:
     matchLabels:
       app: mysql # Change your labels
+  severity: 10
   process:
-    severity: 10
     matchPaths:
     - path: /usr/bin/mysqldump
-    action: Audit
+  action: Audit

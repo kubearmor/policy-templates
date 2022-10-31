@@ -13,8 +13,8 @@ spec:
   selector:
     matchLabels:
       app: elasticsearch # Change your matchLabels
+  severity: 5
   file:
-    severity: 5
     matchDirectories:
     - dir: /var/log/elasticsearch/
   action: audit

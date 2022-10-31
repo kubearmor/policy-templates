@@ -13,8 +13,8 @@ spec:
   selector:
     matchLabels:
       app: nginx-test    #change this label with your label
+  severity: 5
   file:
-    severity: 5
     matchDirectories:
     - dir: /var/spool/cron/
       recursive: true
@@ -32,4 +32,4 @@ spec:
       recursive: true
     matchPaths:
     - path: /etc/crontab
-    action: Audit
+  action: Audit
