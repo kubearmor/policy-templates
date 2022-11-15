@@ -1,4 +1,4 @@
-version: v0.1.4
+version: v0.1.5
 policyRules:
 - name: cis-mysql-1-2
   precondition: 
