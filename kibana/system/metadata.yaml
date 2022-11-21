@@ -1,4 +1,4 @@
-version: v0.1.5
+version: v0.1.6
 policyRules:
 - name: elastic-kibana-panel-exposed
   precondition: 
