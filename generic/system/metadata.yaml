@@ -1,8 +1,9 @@
-version: v0.1.5
+version: v0.1.6
 policyRules:
 - name: maintenance-tool-access
   precondition:
   - /sbin/*
+  - OPTSCAN
   description:
     refs:
     - name: MITRE-TTP
@@ -16,6 +17,7 @@ policyRules:
 - name: cert-access
   precondition: 
   - /etc/ssl/.*
+  - OPTSCAN
   description:
     refs:
     - name: MITRE-TTP
@@ -37,6 +39,7 @@ policyRules:
 - name: system-owner-discovery
   precondition: 
   - /usr/bin/who
+  - OPTSCAN
   description:
     refs:
     - name: MITRE-TTP-T1082
@@ -51,6 +54,7 @@ policyRules:
 - name: system-monitoring-deny-write-under-bin-directory
   precondition: 
   - /bin/*
+  - OPTSCAN
   description:
     refs:
     - name: NIST-SI-4
@@ -66,6 +70,7 @@ policyRules:
 - name: system-monitoring-write-under-dev-directory
   precondition: 
   - /dev/*
+  - OPTSCAN
   description:
     refs:
     - name: NIST-SI-4
@@ -81,6 +86,7 @@ policyRules:
 - name: system-monitoring-detect-access-to-cronjob-files
   precondition: 
   - /var/cron/*
+  - OPTSCAN
   description:
     refs:
     - name: NIST-SI-4
@@ -96,6 +102,7 @@ policyRules:
 - name: least-functionality-execute-package-management-process-in-container
   precondition: 
   - /bin/*
+  - OPTSCAN
   description:
     refs:
     - name: NIST-CM-7-5
@@ -108,3 +115,62 @@ policyRules:
       levels of detail. These levels include applications, application programming interfaces, application modules,
       scripts, system processes, system services, kernel functions, registries, drivers, and dynamic link libraries. 
   yaml: ksp-nist-si-4-execute-package-management-process-in-container.yaml
+- name: deny-k8s-client-tool-execution-inside container
+  precondition: 
+  - /usr/local/bin/kubectl
+  description:
+    refs:
+    - name: MITRE_T1609_container_administration_command
+      url:
+      - https://attack.mitre.org/techniques/T1609/
+    tldr: Adversaries may abuse a container administration service to execute commands within a container.
+    detailed: Adversaries may abuse a container administration service to execute commands within a container. A container administration service such as the Docker daemon, the Kubernetes API server, or the kubelet may allow remote management of containers within an environment.
+  yaml: ksp-deny-k8s-client-tool-execution-inside container.yaml
+- name: deny-remote-file-copy
+  precondition: 
+  - /usr/bin/rsync
+  - OPTSCAN
+  description:
+    refs:
+    - name: MITRE_TA0010_exfiltration
+      url:
+      - https://attack.mitre.org/tactics/TA0010/
+    tldr: The adversary is trying to steal data.
+    detailed: Exfiltration consists of techniques that adversaries may use to steal data from your network. Once they’ve collected data, adversaries often package it to avoid detection while removing it. This can include compression and encryption. Techniques for getting data out of a target network typically include transferring it over their command and control channel or an alternate channel and may also include putting size limits on the transmission.
+  yaml: ksp-deny-remote-file-copy.yaml
+- name: deny-write-in-shm-folder
+  precondition: 
+  - /dev/shm*
+  - OPTSCAN
+  description:
+    refs:
+    - name: MITRE_execution
+      url:
+      - https://attack.mitre.org/tactics/TA0002/
+    tldr: The adversary is trying to write under shm folder
+    detailed: The adversary is trying to run malicious code. Execution consists of techniques that result in adversary-controlled code running on a local or remote system. Techniques that run malicious code are often paired with techniques from all other tactics to achieve broader goals, like exploring a network or stealing data.
+  yaml: ksp-deny-write-in-shm-folder.yaml
+- name: deny-write-under-etc-directory
+  precondition: 
+  - /etc*
+  - OPTSCAN
+  description:
+    refs:
+    - name: MITRE_TA0005_defense_evasion
+      url:
+      - https://attack.mitre.org/tactics/TA0005/
+    tldr: The adversary is trying to avoid being detected.
+    detailed: Defense Evasion consists of techniques that adversaries use to avoid detection throughout their compromise. Techniques used for defense evasion include uninstalling/disabling security software or obfuscating/encrypting data and scripts. Adversaries also leverage and abuse trusted processes to hide and masquerade their malware. Other tactics’ techniques are cross-listed here when those techniques include the added benefit of subverting defenses.
+  yaml: ksp-deny-write-under-etc-directory.yaml
+- name: deny-write-under-etc-directory
+  precondition: 
+  - /root/*_history
+  - OPTSCAN
+  description:
+    refs:
+    - name: MITRE_T1070_indicator_removal
+      url:
+      - https://attack.mitre.org/techniques/T1070/
+    tldr: Adversaries may delete or modify artifacts generated within systems to remove evidence.
+    detailed: Adversaries may delete or modify artifacts generated within systems to remove evidence of their presence or hinder defenses. Various artifacts may be created by an adversary or something that can be attributed to an adversary’s actions. Typically these artifacts are used as defensive indicators related to monitored events, such as strings from downloaded files, logs that are generated from user actions, and other data analyzed by defenders. Location, format, and type of artifact (such as command or login history) are often specific to each platform. Removal of these indicators may interfere with event collection, reporting, or other processes used to detect intrusion activity. This may compromise the integrity of security solutions by causing notable events to go unreported. This activity may also impede forensic analysis and incident response, due to lack of sufficient data to determine what occurred.
+  yaml: ksp-shell-history-modification.yaml
