@@ -1,0 +1,33 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: file-integrity-monitoring
+  namespace: default
+spec:
+  tags: ["NIST", "NIST_800-53_AU-2", "NIST_800-53_SI-4" , "MITRE", "MITRE_T1036_masquerading"]
+  message: "Detected and prevented compromise to File integrity"
+  severity: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  file:
+    matchDirectories:
+    - dir: /sbin/
+      recursive: true
+      readOnly: true
+    - dir: /usr/bin/
+      recursive: true
+      readOnly: true
+    - dir: /usr/lib/
+      recursive: true
+      readOnly: true
+    - dir: /usr/sbin/
+      recursive: true
+      readOnly: true
+    - dir: /bin/
+      recursive: true
+      readOnly: true
+    - dir: /boot/
+      recursive: true
+      readOnly: true
+  action: Block
