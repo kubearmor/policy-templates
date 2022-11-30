@@ -6,12 +6,11 @@ metadata:
 spec:
   tags: ["NIST", "NIST_800-53_AU-2", "NIST_800-53_SI-4" , "MITRE", "MITRE_T1036_masquerading"]
   message: "Detected and prevented compromise to File integrity"
-  severity: 5
+  severity: 1
   selector:
     matchLabels:
       app: wordpress
   file:
-    severity: 1
     matchDirectories:
     - dir: /sbin/
       recursive: true
@@ -31,4 +30,4 @@ spec:
     - dir: /boot/
       recursive: true
       readOnly: true
-    action: Block
+  action: Block
