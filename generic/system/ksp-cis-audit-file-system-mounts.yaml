@@ -1,0 +1,23 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-cis-audit-file-system-mounts
+spec:
+  selector:
+    matchLabels:
+      app: wordpress  
+  action: Audit
+  process:
+    matchPaths:
+    - path: /bin/mount
+    - path: /usr/bin/mount
+    - path: /bin/umount
+    - path: /usr/bin/umount
+  message: Alert! file system mount detected
+  severity: 5
+  tags: 
+    - CIS
+    - CIS_Linux
+    - CIS_4_Logging_and_Aduditing
+    - CIS_4.1.1_Data_Retention
+    - CIS_4.1.14_file_system_mount

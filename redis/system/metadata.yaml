@@ -1,4 +1,4 @@
-version: v0.1.7
+version: v0.1.8
 policyRules:
 - name: redis-sys-path
   precondition: 

@@ -1,0 +1,21 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-cis-deny-changes-to-system-administration-scope
+spec:
+  selector:
+    matchLabels:
+      app: wordpress  
+  action: Block
+  file:
+    matchPaths:
+    - path: /etc/sudoers
+      readOnly: true
+  message: Alert! Modification to changes to system administration scope detected
+  severity: 5
+  tags: 
+    - CIS
+    - CIS_Linux
+    - CIS_4_Logging_and_Aduditing
+    - CIS_4.1.1_Data_Retention
+    - CIS_4.1.16_system_administration_scope
