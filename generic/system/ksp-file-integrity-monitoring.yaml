@@ -4,7 +4,7 @@ metadata:
   name: file-integrity-monitoring
   namespace: default
 spec:
-  tags: ["NIST", "NIST_800-53_AU-2", "NIST_800-53_SI-4" , "MITRE", "MITRE_T1036_masquerading"]
+  tags: ["NIST", "NIST_800-53_AU-2", "NIST_800-53_SI-4" , "MITRE", "MITRE_T1036_masquerading", "MITRE_T1565_data_manipulation"]
   message: "Detected and prevented compromise to File integrity"
   severity: 1
   selector:
