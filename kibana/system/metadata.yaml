@@ -1,6 +1,6 @@
-version: v0.1.6
+version: v0.1.7
 policyRules:
-- name: elastic-kibana-panel-exposed
+- name: kibana-panel
   precondition: 
   - /usr/share/kibana
   description:

@@ -1,6 +1,6 @@
-version: v0.1.6
+version: v0.1.7
 policyRules:
-- name: system-recovery-and-reconstitution
+- name: redis-sys-path
   precondition: 
   - /usr/local/bin/redis-cli
   - /usr/local/bin/redis-server
