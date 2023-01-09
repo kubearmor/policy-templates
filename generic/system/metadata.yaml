@@ -1,6 +1,6 @@
-version: v0.1.6
+version: v0.1.7
 policyRules:
-- name: maintenance-tool-access
+- name: maint-tools-access
   precondition:
   - /sbin/*
   - OPTSCAN
@@ -14,7 +14,7 @@ policyRules:
       never be used in prod env, or if used, should be used only in certain time frames.
       Examples include, dynamic package management tools, mii-tool, iptables etc
   yaml: ksp-audit-maintenance-tool-access.yaml
-- name: cert-access
+- name: trusted-cert-mod
   precondition: 
   - /etc/ssl/.*
   - OPTSCAN
@@ -51,7 +51,7 @@ policyRules:
       Information Discovery during automated discovery to shape follow-on behaviors, including whether or not the
       adversary fully infects the target and/or attempts specific actions.
   yaml: ksp-mitre-system-owner-user-discovery.yaml
-- name: system-monitoring-deny-write-under-bin-directory
+- name: write-under-bin-dir
   precondition: 
   - /bin/*
   - OPTSCAN
@@ -67,7 +67,7 @@ policyRules:
       for example, by observing audit activities in real time or by observing other system aspects 
       such as access patterns, characteristics of access, and other actions.
   yaml: ksp-nist-si-4-mkdir-bin-dir.yaml
-- name: system-monitoring-write-under-dev-directory
+- name: write-under-dev-dir
   precondition: 
   - /dev/*
   - OPTSCAN
@@ -83,7 +83,7 @@ policyRules:
       for example, by observing audit activities in real time or by observing other system aspects 
       such as access patterns, characteristics of access, and other actions.
   yaml: ksp-nist-si-4-create-file-in-dev-dir.yaml
-- name: system-monitoring-detect-access-to-cronjob-files
+- name: cronjob-cfg
   precondition: 
   - /var/cron/*
   - OPTSCAN
@@ -99,7 +99,7 @@ policyRules:
       for example, by observing audit activities in real time or by observing other system aspects 
       such as access patterns, characteristics of access, and other actions.
   yaml: ksp-nist-si-4-detect-access-to-cron-job-files.yaml
-- name: least-functionality-execute-package-management-process-in-container
+- name: pkg-mngr-exec
   precondition: 
   - /bin/*
   - OPTSCAN
@@ -115,7 +115,7 @@ policyRules:
       levels of detail. These levels include applications, application programming interfaces, application modules,
       scripts, system processes, system services, kernel functions, registries, drivers, and dynamic link libraries. 
   yaml: ksp-nist-si-4-execute-package-management-process-in-container.yaml
-- name: deny-k8s-client-tool-execution-inside container
+- name: k8s-client-tool-exec
   precondition: 
   - /usr/local/bin/kubectl
   description:
@@ -126,7 +126,7 @@ policyRules:
     tldr: Adversaries may abuse a container administration service to execute commands within a container.
     detailed: Adversaries may abuse a container administration service to execute commands within a container. A container administration service such as the Docker daemon, the Kubernetes API server, or the kubelet may allow remote management of containers within an environment.
   yaml: ksp-deny-k8s-client-tool-execution-inside container.yaml
-- name: deny-remote-file-copy
+- name: remote-file-copy
   precondition: 
   - /usr/bin/rsync
   - OPTSCAN
@@ -138,7 +138,7 @@ policyRules:
     tldr: The adversary is trying to steal data.
     detailed: Exfiltration consists of techniques that adversaries may use to steal data from your network. Once they’ve collected data, adversaries often package it to avoid detection while removing it. This can include compression and encryption. Techniques for getting data out of a target network typically include transferring it over their command and control channel or an alternate channel and may also include putting size limits on the transmission.
   yaml: ksp-deny-remote-file-copy.yaml
-- name: deny-write-in-shm-folder
+- name: write-in-shm-dir
   precondition: 
   - /dev/shm*
   - OPTSCAN
@@ -150,7 +150,7 @@ policyRules:
     tldr: The adversary is trying to write under shm folder
     detailed: The adversary is trying to run malicious code. Execution consists of techniques that result in adversary-controlled code running on a local or remote system. Techniques that run malicious code are often paired with techniques from all other tactics to achieve broader goals, like exploring a network or stealing data.
   yaml: ksp-deny-write-in-shm-folder.yaml
-- name: deny-write-under-etc-directory
+- name: write-etc-dir
   precondition: 
   - /etc*
   - OPTSCAN
@@ -162,7 +162,7 @@ policyRules:
     tldr: The adversary is trying to avoid being detected.
     detailed: Defense Evasion consists of techniques that adversaries use to avoid detection throughout their compromise. Techniques used for defense evasion include uninstalling/disabling security software or obfuscating/encrypting data and scripts. Adversaries also leverage and abuse trusted processes to hide and masquerade their malware. Other tactics’ techniques are cross-listed here when those techniques include the added benefit of subverting defenses.
   yaml: ksp-deny-write-under-etc-directory.yaml
-- name: deny-write-under-etc-directory
+- name: shell-history-mod
   precondition: 
   - /root/*_history
   - OPTSCAN

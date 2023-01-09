@@ -1,6 +1,6 @@
-version: v0.1.6
+version: v0.1.7
 policyRules:
-- name: elastic-search-indices-insecure-directory
+- name: elasticsearch-indices-dir
   precondition: 
   - /usr/share/elasticsearch/data/nodes/0/indices/
   description:
@@ -11,7 +11,7 @@ policyRules:
     tldr: Elastic search indices directory contains vulnerable and insecure information
     detailed: Elastic directory contains insecure information that leads to security vulnerability. 
   yaml: ksp-audit-elasticsearch-indices.yaml
-- name: elastic-search-log-file-access
+- name: elasticsearch-log-files
   precondition:
   - /var/log/elasticsearch/
   description:

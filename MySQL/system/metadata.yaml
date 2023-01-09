@@ -1,6 +1,6 @@
-version: v0.1.6
+version: v0.1.7
 policyRules:
-- name: cis-mysql-1-2
+- name: user-grp-mod
   precondition: 
   - /usr/bin/mysql
   - /usr/sbin/groupadd
@@ -13,7 +13,7 @@ policyRules:
     tldr: Audit access to useradd and groupadd command!
     detailed: Utilizing a least privilege account for MySQL to execute as needed may reduce the impact of a MySQL-born vulnerability. A restricted account will be unable to access resources unrelated to MySQL, such as operating system configurations.
   yaml: ksp-audit-cis-mysql-1-2.yaml
-- name: audit-access-to-mysqldump
+- name: mysqldump-bin-exec
   precondition: 
   - /usr/bin/mysqldump
   description:
