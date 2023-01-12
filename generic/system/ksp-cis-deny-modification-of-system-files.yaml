@@ -1,0 +1,36 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-cis-deny-modification-of-system-files
+spec:
+  selector:
+    matchLabels:
+      app: wordpress  
+  action: Block
+  file:
+    matchPaths:
+    - path: /etc/group
+      readOnly: true
+    - path: /etc/group-
+      readOnly: true
+    - path: /etc/gshadow
+      readOnly: true
+    - path: /etc/gshadow-
+      readOnly: true
+    - path: /etc/passwd
+      readOnly: true
+    - path: /etc/passwd-
+      readOnly: true
+    - path: /etc/shadow
+      readOnly: true
+    - path: /etc/shadow-
+      readOnly: true
+    - path: /etc/shadow-
+      readOnly: true
+  message: Alert! System file modification detected
+  severity: 2
+  tags: 
+    - CIS
+    - CIS_Linux
+    - CIS_6_System_Maintenance
+    - CIS_6.1_System_File_Permissions

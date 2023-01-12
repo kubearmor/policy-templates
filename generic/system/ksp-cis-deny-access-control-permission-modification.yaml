@@ -1,0 +1,23 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-cis-deny-access-control-permission-modification
+spec:
+  selector:
+    matchLabels:
+      app: wordpress  
+  action: Block
+  process:
+    matchPaths:
+    - path: /usr/bin/chmod
+    - path: /usr/bin/chown
+    - path: /bin/chmod
+    - path: /bin/chown
+  message: Alert! access control permission modification detected
+  severity: 5
+  tags: 
+    - CIS
+    - CIS_Linux
+    - CIS_4_Logging_and_Aduditing
+    - CIS_4.1.1_Data_Retention
+    - CIS_4.1.11_system_access_control_permission

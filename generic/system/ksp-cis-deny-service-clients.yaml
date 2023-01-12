@@ -1,0 +1,21 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-cis-deny-service-clients
+spec:
+  selector:
+    matchLabels:
+      app: wordpress  
+  action: Block
+  process:
+    matchPaths:
+    - path: /usr/bin/talk
+    - path: /usr/bin/telnet
+    - path: /bin/talk
+    - path: /bin/telnet
+  message: Alert! insecure service client binaries invoked
+  severity: 5
+  tags: 
+    - CIS
+    - CIS_Linux
+    - CIS_2.3_Service_Clients

@@ -1,0 +1,28 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-cis-deny-modification-to-system-mandatory-access-controls
+spec:
+  selector:
+    matchLabels:
+      app: wordpress  
+  action: Block
+  file:
+    matchDirectories:
+    - dir: /etc/selinux/
+      readOnly: true
+      recursive: true
+    - dir: /etc/apparmor/
+      readOnly: true
+      recursive: true
+    - dir: /etc/apparmor.d/
+      readOnly: true
+      recursive: true
+  message: Alert! Modification to system mandatory access controls detected
+  severity: 5
+  tags: 
+    - CIS
+    - CIS_Linux
+    - CIS_4_Logging_and_Aduditing
+    - CIS_4.1.1_Data_Retention
+    - CIS_4.1.8_system_mandatory_access_controls
