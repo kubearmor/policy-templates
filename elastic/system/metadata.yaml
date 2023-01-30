@@ -1,4 +1,4 @@
-version: v0.1.8
+version: v0.1.9
 policyRules:
 - name: elasticsearch-indices-dir
   precondition: 
