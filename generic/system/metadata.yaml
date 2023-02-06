@@ -1,4 +1,4 @@
-version: v0.1.8
+version: v0.1.9
 policyRules:
 - name: maint-tools-access
   precondition:
@@ -118,6 +118,7 @@ policyRules:
 - name: k8s-client-tool-exec
   precondition: 
   - /usr/local/bin/kubectl
+  - OPTSCAN
   description:
     refs:
     - name: MITRE_T1609_container_administration_command
@@ -177,7 +178,6 @@ policyRules:
 - name: file-system-mounts
   precondition: 
   - /bin/mount
-  - OPTSCAN
   description:
     refs:
     - name: CIS_4.1.14_file_system_mount
@@ -199,7 +199,6 @@ policyRules:
 - name: cis-commandline-warning-banner
   precondition: 
   - /etc/motd
-  - OPTSCAN
   description:
     refs:
     - name: CIS_1.7.1_Command_Line_Warning_Banners
@@ -212,7 +211,6 @@ policyRules:
 - name: access-ctrl-permission-mod
   precondition: 
   - /bin/chmod
-  - OPTSCAN
   description:
     refs:
     - name: CIS_4.1.11_system_access_control_permission
@@ -233,7 +231,6 @@ policyRules:
 - name: sys-admin-scope-mod
   precondition: 
   - /etc/sudoers
-  - OPTSCAN
   description:
     refs:
     - name: CIS_4.1.16_system_administration_scope
@@ -250,7 +247,6 @@ policyRules:
 - name: system-files-mod
   precondition: 
   - /etc/sudoers
-  - OPTSCAN
   description:
     refs:
     - name: CIS_6.1_System_File_Permissions
@@ -265,7 +261,6 @@ policyRules:
 - name: system-mandatory-access-ctrl-mod
   precondition: 
   - /etc/selinux/
-  - OPTSCAN
   description:
     refs:
     - name: CIS_4.1.8_system_mandatory_access_controls
@@ -281,7 +276,6 @@ policyRules:
 - name: system-network-env-mod
   precondition: 
   - /etc/issue
-  - OPTSCAN
   description:
     refs:
     - name: CIS_4.1.7_system_network_environment
@@ -298,7 +292,6 @@ policyRules:
 - name: service-clients-exec
   precondition: 
   - /usr/bin/telnet
-  - OPTSCAN
   description:
     refs:
     - name: CIS_2.3_Service_Clients
