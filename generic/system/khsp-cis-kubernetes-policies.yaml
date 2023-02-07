@@ -1,0 +1,226 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-deny-modification-of-api-server-config-files
+spec:
+  selector:
+    matchLabels:
+      node: master
+  action: Block
+  file:
+    matchPaths:
+    - path: /etc/kubernetes/manifests/kube-apiserver.yaml
+      readOnly: true
+    - path: /etc/kubernetes/pki/apiserver.*
+      readOnly: true
+    - path: /etc/kubernetes/pki/*.crt
+      readOnly: true
+    - path: /etc/kubernetes/pki/*.key
+      readOnly: true
+    matchDirectories:
+    - dir: /etc/kubernetes/pki/
+      readOnly: true
+  message: Alert! Kubernetes API Server configuration file modification detected
+  severity: 2
+  tags: 
+    - CIS
+    - CIS_Kubernetes
+    - CIS_1.6_Kubernetes_API_Server_Configuration
+    - CIS_1.6.1_Ensure_that_the_API_Server_certificates_are_rotated
+---
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-deny-modification-of-etcd-data
+spec:
+  selector:
+    matchLabels:
+      node: master
+  action: Block
+  file:
+    matchPaths:
+    - path: /var/lib/etcd
+      readOnly: true
+    - path: /etc/kubernetes/manifests/etcd.yaml
+      readOnly: true
+  message: Alert! etcd data modification detected
+  severity: 2
+  tags: 
+    - CIS
+    - CIS_Kubernetes
+    - CIS_1.7_Kubernetes_etcd_Encryption_at_Rest
+    - CIS_1.7.1_Ensure_that_etcd_data_is_encrypted_at_rest
+---
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-ensure-etcd-data-encrypted
+spec:
+  selector:
+    matchLabels:
+      node: master
+  action: Block
+  file:
+    matchPaths:
+    - path: /var/lib/etcd
+      readOnly: false
+  message: Alert! Unencrypted etcd data detected
+  severity: 2
+  tags:
+    - CIS
+    - CIS_Kubernetes
+    - CIS_1_Host_Configuration
+    - CIS_1.1_Encrypt_Data_At_Rest
+---
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-ensure-rbac-enabled-for-api-access
+spec:
+  selector:
+    matchLabels:
+      node: master
+  action: Block
+  file:
+    matchPaths:
+    - path: /api/v1/namespaces
+      readOnly: true
+    - path: /apis/*/v1/*
+      readOnly: true
+    - path: /etc/kubernetes/manifests/kube-apiserver.yaml
+  message: Alert! Unauthorized API access detected
+  severity: 2
+  tags:
+    - CIS
+    - CIS_2_Authentication_Authorization
+    - CIS_2.2_RBAC_Enabled
+---
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-enable-auditing-for-api-server-requests
+spec:
+  selector:
+    matchLabels:
+      node: master
+  action: Block
+  file:
+    matchPaths:
+    - path: /etc/kubernetes/manifests/kube-apiserver.yaml
+      readOnly: true
+    matchDirectories:
+    - dir: /etc/kubernetes/manifests/
+      readOnly: true
+  message: Alert! Auditing for API server requests is not enabled
+  severity: 2
+  tags:
+    - CIS
+    - CIS_Kubernetes
+    - CIS_3_Audit_Configuration
+    - CIS_3.1_Audit_API_Server_Requests
+---
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-ensure-secure-kubelet-authentication
+spec:
+  selector:
+    matchLabels:
+      node: master
+  action: Block
+  file:
+    matchPaths:
+    - path: /var/lib/kubelet/config
+      readOnly: true
+  message: Alert! Insecure kubelet authentication detected
+  severity: 2
+  tags:
+    - CIS
+    - CIS_Kubernetes
+    - CIS_8_Node_Security
+    - CIS_8.1_Kubelet_Authentication
+---
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-ensure-secure-kubelet-authentication
+spec:
+  selector:
+    matchLabels:
+      node: master
+  action: Block
+  file:
+    matchPaths:
+    - path: /var/lib/kubelet/config
+      readOnly: true
+  message: Alert! Insecure kubelet authentication detected
+  severity: 2
+  tags:
+    - CIS
+    - CIS_Kubernetes
+    - CIS_8_Node_Security
+    - CIS_8.1_Kubelet_Authentication
+---
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-ensure-secure-container-network-interface
+spec:
+  selector:
+    matchLabels:
+      node: master
+  action: Block
+  file:
+    matchPaths:
+    - path: /var/lib/cni/networks
+      readOnly: true
+  message: Alert! Container Network Interface file access detected.
+  severity: 2
+  tags:
+    - CIS
+    - CIS_Kubernetes
+    - CIS_1_Container_Security
+    - CIS_1.1.9_Container_Network_Interface
+---
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-admin-conf-file-permission
+spec:
+  selector:
+    matchLabels:
+      node: master
+  action: Block
+  file:
+    matchPaths:
+    - path: /etc/kubernetes/admin.conf
+      readOnly: true
+  message: Alert! admin.conf file permissions are restricted.
+  severity: 2
+  tags:
+    - CIS
+    - CIS_Kubernetes
+    - CIS_1_Config
+    - CIS_1.1.13_Admin_Conf_file
+---
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-cis-apiserver-audit-log
+spec:
+  selector:
+    matchLabels:
+      node: master
+  action: Block
+  file:
+    matchPaths:
+    - path: /var/log/apiserver/audit.log
+      readOnly: true
+  message: Alert! apiserver audit.log file permissions are restricted.
+  severity: 2
+  tags:
+    - CIS
+    - CIS_Kubernetes
+    - CIS_1_Config
+    - CIS_1.2.18_Apiserver_audit_log
+---
