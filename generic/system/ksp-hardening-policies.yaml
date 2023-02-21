@@ -1,0 +1,41 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata: 
+  name: ksp-hardening-policies
+  namespace: default
+spec:
+  selector: 
+    matchLabels: 
+      container: alpine
+  file:
+    matchPaths:
+    - path:
+      readOnly:
+      action:
+      severity:
+      message:
+      tags:
+    matchDirectories:
+    - dir: /sbin/
+      recursive: true
+      readOnly: false
+      action: Audit
+      severity: 1
+      message: "restricted maintenance tool access attempt detected"
+      tags: "PCI_DSS", "MITRE"
+  process:
+    matchPaths:
+    - path:
+      readOnly:
+      action:
+      severity:
+      message:
+      tags:
+    matchDirectories:
+    - dir:
+      recursive:
+      readOnly:
+      action:
+      severity:
+      message:
+      tags:
