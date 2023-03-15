@@ -1,13 +1,13 @@
-# AccuKnox Policies Library
+# Policies Libraries
 A community-owned library of Kubernetes System and Network policies
 
 [![Build Status](https://travis-ci.com/accuknox/KubeArmor.svg?branch=master)](https://travis-ci.com/accuknox/KubeArmor)
-[![Slack](https://kubearmor.herokuapp.com/badge.svg)](https://kubearmor.herokuapp.com)
+[![Slack](https://img.shields.io/badge/Join%20Our%20Community-Slack-green)](https://join.slack.com/t/kubearmor/shared_invite/zt-1ltmqdbc6-rSHw~LM6MesZZasmP2hAcA)
 [![Discussions](https://img.shields.io/badge/Got%20Questions%3F-Chat-Violet)](https://github.com/kubearmor/KubeArmor/discussions)
 [![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/kubearmor/policy-templates/issues)
 
 ----
-## AccuKnox Templates overview
+## Policy Templates overview
 
 Please follow the hierarchy while contribution
 
