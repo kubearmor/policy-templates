@@ -1,0 +1,15 @@
+version: v0.1.9
+policyRules:
+  - name: restrict-automount-sa-token
+    description:
+      refs:
+        - name: Restrict Mounting Service Account Token
+          url:
+            - https://kyverno.io/policies/other/restrict_automount_sa_token/restrict_automount_sa_token/
+      tldr: Don't mount service account token when it is not needed
+      detailed: If the Service Account Token is not used by a pod, then it should not be 
+        automounted. Service account token provide access to the kubeapi-server which potentially
+        increases the surface area of attack.
+    kyvernoPolicyTags:
+      - "AUTOMOUNT_SERVICE_ACCOUNT"
+    yaml: kyverno-automount-service-account-token.yaml
