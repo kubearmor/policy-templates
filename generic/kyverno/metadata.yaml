@@ -6,10 +6,191 @@ policyRules:
         - name: Restrict Mounting Service Account Token
           url:
             - https://kyverno.io/policies/other/restrict_automount_sa_token/restrict_automount_sa_token/
-      tldr: Don't mount service account token when it is not needed
-      detailed: If the Service Account Token is not used by a pod, then it should not be 
-        automounted. Service account token provide access to the kubeapi-server which potentially
-        increases the surface area of attack.
+      tldr: Restrict Auto-Mount of Service Account Tokens
+      detailed: Kubernetes automatically mounts ServiceAccount credentials in each Pod.
+        The ServiceAccount may be assigned roles allowing Pods to access API resources.
+        Blocking this ability is an extension of the least privilege best practice and should
+        be followed if Pods do not need to speak to the API server to function.
+        This policy ensures that mounting of these ServiceAccount tokens is blocked.
     kyvernoPolicyTags:
       - "AUTOMOUNT_SERVICE_ACCOUNT"
     yaml: kyverno-automount-service-account-token.yaml
+  - name: restrict-deprecated-registry
+    description:
+      refs:
+        - name: Restrict Deprecated Registry
+          url:
+            - https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/
+      tldr: Don't use deprecated registry
+      detailed: Legacy k8s.gcr.io container image registry will be frozen in early April 2023
+        k8s.gcr.io image registry will be frozen from the 3rd of April 2023.
+        Images for Kubernetes 1.27 will not be available in the k8s.gcr.io image registry.
+    kyvernoPolicyTags:
+      - "RESTRICT_DEPRECATED_REGISTRY"
+    yaml: kyverno-restrict-deprecated-registry.yaml
+  - name: prevent-cr8escape
+    description:
+      refs:
+        - name: Prevent CR8 Escape
+          url:
+            - https://kyverno.io/policies/other/prevent-cr8escape/prevent-cr8escape/
+      tldr: Prevent cr8escape (CVE-2022-0811)
+      detailed: A vulnerability "cr8escape" (CVE-2022-0811) in CRI-O the container runtime engine
+        underpinning Kubernetes allows attackers to escape from a Kubernetes container
+        and gain root access to the host. The recommended remediation is to disallow
+        sysctl settings with + or = in their value.
+    kyvernoPolicyTags:
+      - "CVE-2022-0811"
+    yaml: kyverno-prevent-cr8escape.yaml
+  - name: check-kernel-version
+    description:
+      refs:
+        - name: Check Kernel Version
+          url:
+            - https://kyverno.io/policies/other/check_node_for_cve_2022_0185/check-node-for-cve-2022-0185/
+      tldr: Check Node for CVE-2022-0185
+      detailed: Linux CVE-2022-0185 can allow a container escape in Kubernetes if left unpatched.
+        The affected Linux kernel versions, at this time, are 5.10.84-1 and 5.15.5-2.
+        For more information, refer to https://security-tracker.debian.org/tracker/CVE-2022-0185.
+        This policy runs in background mode and flags an entry in the ClusterPolicyReport
+        if any Node is reporting one of the affected kernel versions.
+    kyvernoPolicyTags:
+      - "CVE-2022-0185"
+    yaml: kyverno-check-kernel-version.yaml
+  - name: restrict-ingress-defaultbackend
+    description:
+      refs:
+        - name: Restrict Ingress DefaultBackend
+          url:
+            - https://kyverno.io/policies/other/restrict_ingress_defaultbackend/restrict_ingress_defaultbackend/
+      tldr: Restrict Ingress defaultBackend
+      detailed: An Ingress with no rules sends all traffic to a single default backend. The defaultBackend
+        is conventionally a configuration option of the Ingress controller and is not specified in
+        your Ingress resources. If none of the hosts or paths match the HTTP request in the Ingress
+        objects, the traffic is routed to your default backend. In a multi-tenant environment, you
+        want users to use explicit hosts, they should not be able to overwrite the global default backend
+        service. This policy prohibits the use of the defaultBackend field.
+    kyvernoPolicyTags:
+      - "RESTRICT_INGRESS_DEFAULTBACKEND"
+    yaml: kyverno-restrict-ingress-defaultbackend.yaml
+  - name: restrict-nginx-ingress-annotations
+    description:
+      refs:
+        - name: Restrict NGINX Ingress Annotations
+          url:
+            - https://kyverno.io/policies/nginx-ingress/nginx_annotation_checks/restrict-annotations/
+      tldr: Restrict NGINX Ingress annotation values
+      detailed: This policy mitigates CVE-2021-25746 by restricting `metadata.annotations` to safe values.
+        See https://github.com/kubernetes/ingress-nginx/blame/main/internal/ingress/inspector/rules.go.
+        This issue has been fixed in NGINX Ingress v1.2.0. For NGINX Ingress version 1.0.5+ the
+        "annotation-value-word-blocklist" configuration setting is also recommended.
+        Please refer to the CVE for details.
+    kyvernoPolicyTags:
+      - "CVE-2021-25746"
+    yaml: kyverno-restrict-nginx-ingress-annotations.yaml
+  - name: restrict-ingress-paths
+    description:
+      refs:
+        - name: Restrict Ingress Paths
+          url:
+            - https://kyverno.io/policies/nginx-ingress/nginx_path_checks/restrict-path/
+      tldr: Restrict NGINX Ingress path values
+      detailed: This policy mitigates CVE-2021-25745 by restricting `spec.rules[].http.paths[].path` to safe values.
+        Additional paths can be added as required. This issue has been fixed in NGINX Ingress v1.2.0.
+        Please refer to the CVE for details.
+    kyvernoPolicyTags:
+      - "CVE-2021-25745"
+    yaml: kyverno-restrict-ingress-paths.yaml
+  - name: prevent-naked-pods
+    description:
+      refs:
+        - name: Prevent Naked Pods
+          url:
+            - https://kyverno.io/policies/other/prevent-naked-pods/prevent-naked-pods/
+      tldr: Prevent Naked Pods
+      detailed: Pods not created by workload controllers such as Deployments
+        have no self-healing or scaling abilities and are unsuitable for production.
+        This policy prevents such "naked" Pods from being created unless they originate
+        from a higher-level workload controller of some sort.
+    kyvernoPolicyTags:
+      - "PREVENT_NAKED_PODS"
+    yaml: kyverno-prevent-naked-pods.yaml
+  - name: restrict-wildcard-verbs
+    description:
+      refs:
+        - name: Restrict Wildcard Verbs
+          url:
+            - https://kyverno.io/policies/other/restrict-wildcard-verbs/restrict-wildcard-verbs/
+      tldr: Restrict Wildcard Verbs
+      detailed: Wildcards ('*') in verbs grants all access to the resources referenced by it and
+        does not follow the principal of least privilege. As much as possible,
+        avoid such open verbs unless scoped to perhaps a custom API group.
+        This policy blocks any Role or ClusterRole that contains a wildcard entry in
+        the verbs list found in any rule.
+    kyvernoPolicyTags:
+      - "RESTRICT_WILDCARD_VERBS"
+    yaml: kyverno-restrict-wildcard-verbs.yaml
+  - name: restrict-wildcard-resources
+    description:
+      refs:
+        - name: Restrict Wildcard Resources
+          url:
+            - https://kyverno.io/policies/other/restrict-wildcard-resources/restrict-wildcard-resources/
+      tldr: Restrict Wildcard Resources
+      detailed: Wildcards ('*') in resources grants access to all of the resources referenced by
+        the given API group and does not follow the principal of least privilege. As much as possible,
+        avoid such open resources unless scoped to perhaps a custom API group.
+        This policy blocks any Role or ClusterRole that contains a wildcard entry in
+        the resources list found in any rule.
+    kyvernoPolicyTags:
+      - "RESTRICT_WILDCARD_RESOURCES"
+    yaml: kyverno-restrict-wildcard-resources.yaml
+  - name: require-requests-limits
+    description:
+      refs:
+        - name: Require Limits and Requests
+          url:
+            - https://kyverno.io/policies/best-practices/require_pod_requests_limits/require_pod_requests_limits/
+      tldr: Require Limits and Requests
+      detailed: As application workloads share cluster resources, it is important to limit resources
+        requested and consumed by each Pod. It is recommended to require resource requests and
+        limits per Pod, especially for memory and CPU. If a Namespace level request or limit is specified,
+        defaults will automatically be applied to each Pod based on the LimitRange configuration.
+        This policy validates that all containers have something specified for memory and CPU
+        requests and memory limits.
+    kyvernoPolicyTags:
+      - "REQUIRE_REQUESTS_LIMITS"
+    yaml: kyverno-require-requests-limits.yaml
+  - name: require-pod-probes
+    description:
+      refs:
+        - name: Require Pod Probes
+          url:
+            - https://kyverno.io/policies/best-practices/require_probes/require_probes/
+      tldr: Require Pod Probes
+      detailed: Liveness and readiness probes need to be configured to correctly manage a Pod's
+        lifecycle during deployments, restarts, and upgrades. For each Pod, a periodic
+        `livenessProbe` is performed by the kubelet to determine if the Pod's containers
+        are running or need to be restarted. A `readinessProbe` is used by Services
+        and Deployments to determine if the Pod is ready to receive network traffic.
+        This policy validates that all containers have one of livenessProbe, readinessProbe,
+        or startupProbe defined.
+    kyvernoPolicyTags:
+      - "REQUIRE_POD_PROBES"
+    yaml: kyverno-require-pod-probes.yaml
+  - name: drop-cap-net-raw
+    description:
+      refs:
+        - name: Drop CAP_NET_RAW
+          url:
+            - https://kyverno.io/policies/best-practices/require_drop_cap_net_raw/require_drop_cap_net_raw/
+      tldr: Drop CAP_NET_RAW
+      detailed: Capabilities permit privileged actions without giving full root access. The
+        CAP_NET_RAW capability, enabled by default, allows processes in a container to
+        forge packets and bind to any interface potentially leading to MitM attacks.
+        This policy ensures that all containers explicitly drop the CAP_NET_RAW
+        ability. Note that this policy also illustrates how to cover drop entries in any
+        case although this may not strictly conform to the Pod Security Standards.
+    kyvernoPolicyTags:
+      - "DROP_CAP_NET_RAW"
+    yaml: kyverno-drop-cap-net-raw.yaml
