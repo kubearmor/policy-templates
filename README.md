@@ -2,7 +2,10 @@
 
 How to get hardening policies for workloads that are deployed in k8s cluster?
 
-[kubearmor-client](https://github.com/kubearmor/kubearmor-client) has this recommendation feature. `karmor recommend` will scan the workloads deployed in our cluster and recommend policies based on container image, k8s manifest or the actual runtime environment.
+[kubearmor-client](https://github.com/kubearmor/kubearmor-client) has this recommendation feature. `karmor recommend` will scan the workloads deployed in our cluster and recommend policies based on container image, k8s manifest or the actual runtime environment. 
+
+1. [Getting hardening policies for general workloads](https://github.com/kubearmor/policy-templates/tree/release#try-it-out-by-yourself)
+2. [Getting hardening polices for 5G workloads](https://github.com/kubearmor/policy-templates/tree/release#5g-policies)
 
 ## Try it out by yourself
 > Assuming k8s cluster is configured, this can be verified via using `kubectl config current-context` command. If not follow [this](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl)
@@ -259,3 +262,71 @@ kubearmorpolicy.security.kubearmor.com/mysql-mysql-5-6-write-under-dev-dir creat
 ```
 
 **Now we are successfully applied all the hardening policies.**
+
+## 5G Policies
+
+To get hardening policies for 5G workloads use `karmor recommend` with the tag filter
+
+```bash
+$ karmor recommend -n default -t 5G
+```
+
+```console
+karmor recommend -t 5G -n default                                                                    (summary|✚3)
+INFO[0000] Found outdated version of policy-templates    Current Version=v0.2.3
+INFO[0000] Downloading latest version [v0.2.4]          
+INFO[0002] policy-templates updated                      Updated Version=v0.2.4
+INFO[0003] pulling image                                 image=knoxuser/5g-sample
+latest: Pulling from knoxuser/5g-sample
+Digest: sha256:6b06964cdbbc517102ce5e0cef95152f3c6a7ef703e4057cb574539de91f72e6
+Status: Image is up to date for knoxuser/5g-sample:latest
+INFO[0008] dumped image to tar                           tar=/tmp/karmor464060076/PeVhlFGJ.tar
+Distribution debian
+INFO[0008] No runtime policy generated for default/5g-sample/knoxuser/5g-sample 
+created policy out/default-5g-sample/knoxuser-5g-sample-latest-trusted-cert-mod.yaml ...
+created policy out/default-5g-sample/knoxuser-5g-sample-latest-5g-tactic-credentials-from-password-stores.yaml ...
+created policy out/default-5g-sample/knoxuser-5g-sample-latest-impair-defense.yaml ...
+created policy out/default-5g-sample/knoxuser-5g-sample-latest-network-service-scanning.yaml ...
+created policy out/default-5g-sample/knoxuser-5g-sample-latest-remote-services.yaml ...
+local port to be used for port forwarding discovery-engine-56b9499696-m9z2r: 32778 
+INFO[0010] Connected to discovery engine                
+output report in out/report.txt ...
+  Deployment              | default/5g-sample          
+  Container               | knoxuser/5g-sample:latest  
+  OS                      | linux                      
+  Arch                    | amd64                      
+  Distro                  | debian                     
+  Output Directory        | out/default-5g-sample      
+  policy-template version | v0.2.4                     
++------------------------------------+--------------------------------+----------+--------+-----------------------------------+
+|               POLICY               |           SHORT DESC           | SEVERITY | ACTION |               TAGS                |
++------------------------------------+--------------------------------+----------+--------+-----------------------------------+
+| knoxuser-5g-sample-latest-trusted- | Restrict access to trusted     | 1        | Block  | MITRE                             |
+| cert-mod.yaml                      | certificated bundles in the OS |          |        | MITRE_T1552_unsecured_credentials |
+|                                    | image                          |          |        | FGT1555 5G                        |
++------------------------------------+--------------------------------+----------+--------+-----------------------------------+
+| knoxuser-5g-sample-latest-5g-      | Adversaries may search for     | 1        | Block  | MITRE                             |
+| tactic-credentials-from-password-  | common password storage        |          |        | MITRE_T1552_unsecured_credentials |
+| stores.yaml                        | locations to obtain user       |          |        | FGT1555 5G                        |
+|                                    | credentials.                   |          |        |                                   |
++------------------------------------+--------------------------------+----------+--------+-----------------------------------+
+| knoxuser-5g-sample-latest-impair-  | Adversaries may maliciously    | 6        | Audit  | MITRE                             |
+| defense.yaml                       | modify components of a victim  |          |        | FGT1562                           |
+|                                    | environment in order to        |          |        | 5G                                |
+|                                    | hinder or disable defensive    |          |        |                                   |
+|                                    | mechanisms.                    |          |        |                                   |
++------------------------------------+--------------------------------+----------+--------+-----------------------------------+
+| knoxuser-5g-sample-latest-network- | Adversaries may attempt to     | 5        | Audit  | MITRE                             |
+| service-scanning.yaml              | get a listing of services      |          |        | FGT1046                           |
+|                                    | running on remote hosts,       |          |        | 5G                                |
+|                                    | including those that may be    |          |        |                                   |
+|                                    | vulnerable to remote software  |          |        |                                   |
+|                                    | exploitation.                  |          |        |                                   |
++------------------------------------+--------------------------------+----------+--------+-----------------------------------+
+| knoxuser-5g-sample-latest-remote-  | Adversaries may use Valid      | 3        | Audit  | MITRE                             |
+| services.yaml                      | Accounts to log into a service |          |        | 5G                                |
+|                                    | specifically designed to       |          |        | FGT1021                           |
+|                                    | accept remote connections,     |          |        |                                   |
+|                                    | such as telnet, SSH, and VNC.  |          |        |                                   |
++------------------------------------+--------------------------------+----------+--------+-----------------------------------+
+```
