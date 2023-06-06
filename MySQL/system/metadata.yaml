@@ -1,4 +1,4 @@
-version: v0.1.9
+version: v0.2.3
 policyRules:
 - name: user-grp-mod
   precondition: 

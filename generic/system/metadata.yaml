@@ -1,4 +1,4 @@
-version: v0.1.9
+version: v0.2.3
 policyRules:
 - name: maint-tools-access
   precondition:
@@ -35,6 +35,22 @@ policyRules:
       signing certificate, a program prompting the user with a warning because it
       has an attribute set from being downloaded from the Internet, or getting an
       indication that you are about to connect to an untrusted site.
+  yaml: ksp-unsecured_credentials_access.yaml
+- name: credentials-from-password-stores
+  precondition: 
+  - /etc/ssl/.*
+  - OPTSCAN
+  description:
+    refs:
+    - name: MITRE-5G
+      url:
+      - https://fight.mitre.org/techniques/FGT1555
+    tldr: Adversaries may search for common password storage locations to obtain user credentials.
+    detailed: Adversaries may search for common password storage locations to obtain user credentials.
+      Passwords are stored in several places on a system, depending on the operating system or application 
+      holding the credentials. There are also specific applications that store passwords to make it easier 
+      for users manage and maintain. Once credentials are obtained, they can be used to perform lateral movement 
+      and access restricted information.
   yaml: ksp-unsecured_credentials_access.yaml
 - name: system-owner-discovery
   precondition: 
@@ -320,3 +336,49 @@ policyRules:
       expertise and possibly access to specialized software related to the system that would typically be gained
       through a prolonged information gathering campaign in order to have the desired impact.
   yaml: ksp-file-integrity-monitoring.yaml
+- name: impair-defense
+  precondition: 
+  - /etc/*
+  - OPTSCAN
+  description:
+    refs:
+    - name: 5g-tactic-impair-defense
+      url:
+      - https://fight.mitre.org/techniques/FGT1562
+    tldr: Adversaries may maliciously modify components of a victim environment in order to hinder or disable defensive mechanisms.
+    detailed: Adversaries may maliciously modify components of a victim environment in order to hinder or 
+      disable defensive mechanisms. This not only involves impairing preventative defenses, such as firewalls 
+      and anti-virus, but also detection capabilities that defenders can use to audit activity and identify 
+      malicious behavior. This may also span both native defenses as well as supplemental capabilities installed 
+      by users and administrators.
+  yaml: ksp-mitre-5g-tactic-impair-defense.yaml
+- name: network-service-scanning
+  precondition: 
+  - /bin/*
+  - OPTSCAN
+  description:
+    refs:
+    - name: 5g-tactic-network-service-scanning
+      url:
+      - https://fight.mitre.org/techniques/FGT1046
+    tldr: Adversaries may attempt to get a listing of services running on remote hosts, including those that may be vulnerable to remote software exploitation.
+    detailed: Adversaries may attempt to get a listing of services running on remote hosts and local 
+      network infrastructure devices, including those that may be vulnerable to remote software exploitation. 
+      Common methods to acquire this information include port and/or vulnerability scans using tools that are
+      brought onto a system.
+  yaml: ksp-5g-network-service-scanning.yaml
+- name: remote-services
+  precondition: 
+  - /var/*
+  - OPTSCAN
+  description:
+    refs:
+    - name: 5g-tactic-remote-services
+      url:
+      - https://fight.mitre.org/techniques/FGT1021
+    tldr: Adversaries may use Valid Accounts to log into a service specifically designed to accept remote connections, such as telnet, SSH, and VNC.
+    detailed: Legitimate applications (such as Software Deployment Tools and other administrative programs) 
+      may utilize Remote Services to access remote hosts. For example, Apple Remote Desktop (ARD) on macOS 
+      is native software used for remote management. ARD leverages a blend of protocols, including VNC to 
+      send the screen and control buffers and SSH for secure file transfer.
+  yaml: ksp-mitre-5g-remote-services.yaml
