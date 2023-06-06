@@ -1,0 +1,27 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-5g-remote-services
+  namespace: default    # Change your namespace
+spec:
+  tags: ["MITRE", "5G", "FGT1021"]
+  message: "Warning! access sensitive files detected"
+  selector:
+    matchLabels: 
+      app: testpod    #change with your own label
+  file:
+    matchPaths:
+    - path: /var/log/wtmp
+    - path: /var/run/utmp
+    - path: /var/log/auth.log
+    - path: /etc/passwd
+    - path: /etc/shadow
+    matchDirectories:
+    - dir: /etc/ssh/  
+  severity: 3
+  action: Audit
+
