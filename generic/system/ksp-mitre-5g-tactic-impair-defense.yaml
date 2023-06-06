@@ -1,0 +1,25 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-5g-tactic-impair-defense
+  namespace: default  #change with your namespace
+spec:
+  tags: ["MITRE", "FGT1562","5G"]
+  message: "Selinux Files Accessed by Unknown Process"
+  selector:
+    matchLabels:
+      app: testpod #change with your match label
+  severity: 6
+  file:
+    matchPaths:
+    - path: /etc/selinux/semanage.conf
+    matchDirectories:
+    - dir: /etc/apparmor.d/
+      recursive: true
+    - dir: /etc/sysconfig/selinux/
+      recursive: true
+  action: Audit
