@@ -8,7 +8,7 @@ metadata:
   name: ksp-5g-network-service-scanning
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE", "FGT1046","5G"]
+  tags: ["MITRE", "FGT1046","FIGHT"]
   message: "Network service has been scanned!"
   selector:
     matchLabels:
