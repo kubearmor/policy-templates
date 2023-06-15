@@ -23,6 +23,7 @@ policyRules:
     - name: MITRE-TTP
       url:
       - https://attack.mitre.org/techniques/T1553/
+      - https://fight.mitre.org/techniques/FGT1555
     tldr: Restrict access to trusted certificated bundles in the OS image
     detailed: Operating systems maintain a list of trusted certificates (often called
       trust bundles) in file system. These bundles decides which authorities are trusted.
@@ -35,22 +36,6 @@ policyRules:
       signing certificate, a program prompting the user with a warning because it
       has an attribute set from being downloaded from the Internet, or getting an
       indication that you are about to connect to an untrusted site.
-  yaml: ksp-unsecured_credentials_access.yaml
-- name: credentials-from-password-stores
-  precondition: 
-  - /etc/ssl/.*
-  - OPTSCAN
-  description:
-    refs:
-    - name: MITRE-5G
-      url:
-      - https://fight.mitre.org/techniques/FGT1555
-    tldr: Adversaries may search for common password storage locations to obtain user credentials.
-    detailed: Adversaries may search for common password storage locations to obtain user credentials.
-      Passwords are stored in several places on a system, depending on the operating system or application 
-      holding the credentials. There are also specific applications that store passwords to make it easier 
-      for users manage and maintain. Once credentials are obtained, they can be used to perform lateral movement 
-      and access restricted information.
   yaml: ksp-unsecured_credentials_access.yaml
 - name: system-owner-discovery
   precondition: 
