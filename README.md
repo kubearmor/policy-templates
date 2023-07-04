@@ -263,16 +263,16 @@ kubearmorpolicy.security.kubearmor.com/mysql-mysql-5-6-write-under-dev-dir creat
 
 **Now we are successfully applied all the hardening policies.**
 
-## 5G Policies
+## FiGHT Policies
 
-To get hardening policies for 5G workloads use `karmor recommend` with the tag filter
+To get hardening policies for FiGHT workloads use `karmor recommend` with the tag filter
 
 ```bash
-$ karmor recommend -n default -t 5G
+$ karmor recommend -n default -t FIGHT
 ```
 
 ```console
-karmor recommend -t 5G -n default                                                                    (summary|✚3)
+karmor recommend -t FIGHT -n default                                                                    (summary|✚3)
 INFO[0000] Found outdated version of policy-templates    Current Version=v0.2.3
 INFO[0000] Downloading latest version [v0.2.4]          
 INFO[0002] policy-templates updated                      Updated Version=v0.2.4
@@ -303,28 +303,28 @@ output report in out/report.txt ...
 +------------------------------------+--------------------------------+----------+--------+-----------------------------------+
 | knoxuser-5g-sample-latest-trusted- | Restrict access to trusted     | 1        | Block  | MITRE                             |
 | cert-mod.yaml                      | certificated bundles in the OS |          |        | MITRE_T1552_unsecured_credentials |
-|                                    | image                          |          |        | FGT1555 5G                        |
+|                                    | image                          |          |        | FGT1555 FIGHT                     |
 +------------------------------------+--------------------------------+----------+--------+-----------------------------------+
 | knoxuser-5g-sample-latest-5g-      | Adversaries may search for     | 1        | Block  | MITRE                             |
 | tactic-credentials-from-password-  | common password storage        |          |        | MITRE_T1552_unsecured_credentials |
-| stores.yaml                        | locations to obtain user       |          |        | FGT1555 5G                        |
+| stores.yaml                        | locations to obtain user       |          |        | FGT1555 FIGHT                     |
 |                                    | credentials.                   |          |        |                                   |
 +------------------------------------+--------------------------------+----------+--------+-----------------------------------+
 | knoxuser-5g-sample-latest-impair-  | Adversaries may maliciously    | 6        | Audit  | MITRE                             |
 | defense.yaml                       | modify components of a victim  |          |        | FGT1562                           |
-|                                    | environment in order to        |          |        | 5G                                |
+|                                    | environment in order to        |          |        | FIGHT                             |
 |                                    | hinder or disable defensive    |          |        |                                   |
 |                                    | mechanisms.                    |          |        |                                   |
 +------------------------------------+--------------------------------+----------+--------+-----------------------------------+
 | knoxuser-5g-sample-latest-network- | Adversaries may attempt to     | 5        | Audit  | MITRE                             |
 | service-scanning.yaml              | get a listing of services      |          |        | FGT1046                           |
-|                                    | running on remote hosts,       |          |        | 5G                                |
+|                                    | running on remote hosts,       |          |        | FIGHT                             |
 |                                    | including those that may be    |          |        |                                   |
 |                                    | vulnerable to remote software  |          |        |                                   |
 |                                    | exploitation.                  |          |        |                                   |
 +------------------------------------+--------------------------------+----------+--------+-----------------------------------+
 | knoxuser-5g-sample-latest-remote-  | Adversaries may use Valid      | 3        | Audit  | MITRE                             |
-| services.yaml                      | Accounts to log into a service |          |        | 5G                                |
+| services.yaml                      | Accounts to log into a service |          |        | FIGHT                             |
 |                                    | specifically designed to       |          |        | FGT1021                           |
 |                                    | accept remote connections,     |          |        |                                   |
 |                                    | such as telnet, SSH, and VNC.  |          |        |                                   |
