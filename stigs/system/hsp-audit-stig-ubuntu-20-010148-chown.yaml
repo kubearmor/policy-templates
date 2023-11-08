@@ -1,0 +1,21 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-audit-stig-ubuntu-20-010148-chown
+spec:
+  severity: 5 
+  tags:  ["STIG", "Ubuntu, "UBTU-20-010148", "SysCalls"] 
+  message: "Alert! chown syscalls was detected" 
+  syscalls:
+    matchSyscalls:
+    - syscall:
+       - chown
+       - fchown
+       - fchownat
+       - lchown
+  action:
+      Audit
