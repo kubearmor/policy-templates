@@ -12,6 +12,6 @@ spec:
   message: "Alert! chcon binary execution detected" 
   process:
     matchPaths:
-    - path: usr/bin/chcon
+    - path: /usr/bin/chcon
     action:
       Audit
