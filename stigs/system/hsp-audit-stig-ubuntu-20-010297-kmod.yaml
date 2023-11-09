@@ -1,0 +1,17 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-audit-stig-ubuntu-20-010297-kmod
+spec:
+  tags: ["STIG", "Ubuntu", "UBTU-20-010297", "kmod"]
+  message: "Alert! Execution of kmod detected"
+  process:
+    severity: 1
+    matchPaths:
+    - path: /usr/bin/kmod
+    - path: /bin/kmod
+  action: Audit

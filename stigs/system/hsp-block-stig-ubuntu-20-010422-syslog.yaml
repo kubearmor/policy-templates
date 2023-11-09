@@ -1,0 +1,17 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind:KubeArmorHostPolicy
+metadata:
+  name: hsp-block-stig-ubuntu-20-010422-syslog
+spec:
+  tags: ["STIG", "Ubuntu", "UBTU-20-010422", "syslog"]
+  message: "Block Alert! Non owner tried accessing /var/log/syslog directory"
+  process:
+    severity: 1
+    matchPaths:
+    - path: /var/log/syslog
+      ownerOnly: true
+    action: Block

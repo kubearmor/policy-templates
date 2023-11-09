@@ -1,0 +1,24 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-block-stig-ubuntu-20-010427-lib
+spec:
+  tags: ["STIG", "Ubuntu", "UBTU-20-010427", "less-permissive-dir"]
+  message: "Block Alert! Non owner tried accessing lib directory"
+  process:
+    severity: 1
+    matchDirectories:
+    - dir: /lib/
+      recursive: true
+      ownerOnly: true
+    - dir: /usr/lib/
+      recursive: true
+      ownerOnly: true
+    - dir: /lib64/
+      recursive: true
+      ownerOnly: true
+    action: Block

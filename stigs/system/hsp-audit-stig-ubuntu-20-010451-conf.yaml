@@ -1,0 +1,46 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-audit-stig-ubuntu-20-010451-conf
+spec:
+  tags: ["STIG", "Ubuntu", "UBTU-20-010451", "baseline"] 
+  message: "Alert! Config files are accessed! Possible violation of controls."
+  file:
+    severity: 1
+    matchDirectories:
+    - dir: /etc/ssh/
+    - dir: /etc/apparmor.d/
+    matchPaths:
+    - path: /etc/resolv.conf
+    - path: /etc/bash.bashrc
+    - path: /etc/profile
+    - path: /etc/dhcp/dhclient.conf
+    - path: /etc/fstab
+    - path: /etc/hostname
+    - path: /etc/hosts
+    - path: /etc/hosts.deny
+    - path: /etc/mime.type
+    - path: /etc/timezone
+    - path: /etc/sudoers
+    - path: /etc/httpd/conf
+    - path: /etc/httpd.conf.d
+    - path: /etc/default/grub
+    - path: /boot/grub/grub.cfg
+    - path: /boot/grub/grub.cfg
+    - path: /etc/default/grub
+    matchPatterns:
+    - pattern: /home/**/.config
+    - pattern: /home/**/.xinitrc
+    - pattern: /home/**/.vimrc
+    - pattern: /home/**/.bashrc
+    - pattern: /home/**/.editor
+    - pattern: /home/**/.gitconfig
+    - pattern: /home/**/.profile
+    - pattern: /home/**/.ssh/config
+    - pattern: /etc/**/*.conf 
+    - pattern: /etc/**/*.cfg
+    action: Audit
