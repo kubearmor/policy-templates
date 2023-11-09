@@ -12,6 +12,6 @@ spec:
   message: "Alert! sudoedit binary execution detected" 
   process:
     matchPaths:
-    - path: usr/bin/sudoedit
+    - path: /usr/bin/sudoedit
     action:
       Audit
