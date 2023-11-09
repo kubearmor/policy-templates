@@ -12,6 +12,6 @@ spec:
   message: "Alert! unix_update command executed" 
   process:
     matchPaths:
-    - path: sbin/unix_update
+    - path: /sbin/unix_update
     action:
       Audit
