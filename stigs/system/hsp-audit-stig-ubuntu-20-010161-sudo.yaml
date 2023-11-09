@@ -12,7 +12,7 @@ spec:
   message: "Alert! sudo execution was detected" 
   process:
     matchPaths:
-    - path: usr/bin/sudo
+    - path: /usr/bin/sudo
     - path: /bin/sudo
     action:
       Audit
