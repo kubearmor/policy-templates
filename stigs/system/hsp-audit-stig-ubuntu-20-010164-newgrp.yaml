@@ -12,6 +12,6 @@ spec:
   message: "Alert! newgrp binary execution detected" 
   process:
     matchPaths:
-    - path: usr/bin/newgrp
+    - path: /usr/bin/newgrp
     action:
       Audit
