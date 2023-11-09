@@ -12,6 +12,6 @@ spec:
   message: "Alert! chsh binary execution detected" 
   process:
     matchPaths:
-    - path: usr/bin/chsh
+    - path: /usr/bin/chsh
     action:
       Audit
