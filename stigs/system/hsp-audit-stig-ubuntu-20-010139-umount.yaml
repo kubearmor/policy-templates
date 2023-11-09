@@ -5,13 +5,13 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
-  name: hsp-audit-stig-ubuntu-20-010139-unmount
+  name: hsp-audit-stig-ubuntu-20-010139-umount
 spec:
   severity: 5 
-  tags: ["STIG", "Ubuntu",  "UBTU-20-010139", "audit", "unmount"]
-  message: "Alert! unmount command execution detected" 
+  tags: ["STIG", "Ubuntu",  "UBTU-20-010139", "audit", "umount"]
+  message: "Alert! umount command execution detected" 
   process:
     matchPaths:
-    - path: /usr/bin/unmount
+    - path: /usr/bin/umount
     action:
       Audit
