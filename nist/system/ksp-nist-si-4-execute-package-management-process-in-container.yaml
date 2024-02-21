@@ -20,6 +20,7 @@ spec:
     - path: /usr/bin/apt-get
     - path: /bin/apt-get
     - path: /bin/apt
+    - path: /sbin/apk
     - path: /usr/bin/dpkg
     - path: /bin/dpkg
     - path: /usr/bin/gdebi
