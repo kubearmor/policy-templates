@@ -1,0 +1,68 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/ 
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-mitre-prevent-crypto-miners
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+      
+  action: Block
+  process:
+    matchDirectories:
+    - dir: /tmp/
+      recursive: true
+    
+    matchPaths:
+    # do not allow execution of xmrig (xmrig.com)
+    - execname: xmrig
+    
+    # prevent execution of Dero miner
+    - execname: dero
+    - execname: dero-miner-linux-amd64
+    - execname: dero-wallet-cli-linux-amd64
+    - execname: derod-linux-amd64
+
+    # do not allow execution of masscan/zgrab2/nmap used for recon 
+    - execname: zgrab2
+    - execname: masscan
+    - execname: nmap
+    
+    # do not allow package management tools execution
+    - execname: apt
+    - execname: apk
+    
+    # time sync is important for miners. typically ntpdate is used.
+    - execname: ntpdate
+  
+  # Do not allow overwriting system binaries
+  file:
+    matchDirectories:
+    - dir: /usr/local/bin/
+      readOnly: true
+      recursive: true
+    - dir: /sbin/
+      readOnly: true
+      recursive: true
+    - dir: /bin/
+      readOnly: true
+      recursive: true
+    - dir: /usr/bin/
+      readOnly: true
+      recursive: true
+    - dir: /var/local/bin/
+      readOnly: true
+      recursive: true
+    - dir: /boot/
+      readOnly: true
+      recursive: true
+    
+  message: cryptominer detected and blocked
+  severity: 10
+  tags: 
+    - cryptominer
+    - MITRE_T1496_resource_hijacking
