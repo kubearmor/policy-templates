@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-mitre-5g-remote-services
+  name: ksp-mitre-remote-services
   namespace: default    # Change your namespace
 spec:
-  tags: ["MITRE", "FIGHT", "FGT1021"]
+  tags: ["MITRE", "FIGHT", "FGT1021","5G"]
   message: "Warning! access sensitive files detected"
   selector:
     matchLabels: 

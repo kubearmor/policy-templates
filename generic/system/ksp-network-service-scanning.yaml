@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-5g-network-service-scanning
+  name: ksp-network-service-scanning
   namespace: default # Change your namespace
 spec:
-  tags: ["MITRE", "FGT1046","FIGHT"]
+  tags: ["MITRE", "FGT1046","FIGHT","5G"]
   message: "Network service has been scanned!"
   selector:
     matchLabels:
