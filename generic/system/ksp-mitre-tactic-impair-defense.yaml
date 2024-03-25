@@ -5,10 +5,10 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-mitre-5g-tactic-impair-defense
+  name: ksp-mitre-tactic-impair-defense
   namespace: default  #change with your namespace
 spec:
-  tags: ["MITRE", "FGT1562","FIGHT"]
+  tags: ["MITRE", "FGT1562","FIGHT","5G"]
   message: "Selinux Files Accessed by Unknown Process"
   selector:
     matchLabels:
