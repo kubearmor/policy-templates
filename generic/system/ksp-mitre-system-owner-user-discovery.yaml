@@ -16,8 +16,9 @@ spec:
   severity: 3
   process:
     matchPaths:
-      - path: /usr/bin/who
-      - path: /usr/bin/w
-      - path: /usr/bin/id
-      - path: /usr/bin/whoami
+     # do not allow execution of system owner discovery commands
+    - execname: who
+    - execname: w
+    - execname: id
+    - execname: whoami
   action: Block
