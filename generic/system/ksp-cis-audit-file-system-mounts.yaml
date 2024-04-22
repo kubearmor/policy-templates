@@ -9,10 +9,9 @@ spec:
   action: Audit
   process:
     matchPaths:
-    - path: /bin/mount
-    - path: /usr/bin/mount
-    - path: /bin/umount
-    - path: /usr/bin/umount
+    # audit file system mount commands
+    - execname: mount
+    - execname: umount
   message: Alert! file system mount detected
   severity: 5
   tags: 
