@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: ksp-deny-k8s-client-tool-execution-inside container
+  name: ksp-deny-k8s-client-tool-execution-inside-container
   namespace: wordpress-mysql
 spec:
   action: Block
