@@ -7,13 +7,11 @@ spec:
   action: Block
   process:
     matchPaths:
-    - path: /usr/local/bin/kubectl
-    - path: /usr/bin/kubectl
-    - path: /usr/local/bin/docker
-    - path: /usr/bin/docker
-    - path: /usr/local/bin/crictl
-    - path: /usr/bin/crictl
-  message: Alert! k8s client tool executed inside container.
+    # prevent execution of k8s client tools
+    - execname: kubectl
+    - execname: docker
+    - execname: crictl
+  message: Alert! k8s client tool executed inside the container.
   selector:
     matchLabels:
       app: wordpress
