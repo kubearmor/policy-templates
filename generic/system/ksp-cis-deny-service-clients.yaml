@@ -9,10 +9,9 @@ spec:
   action: Block
   process:
     matchPaths:
-    - path: /usr/bin/talk
-    - path: /usr/bin/telnet
-    - path: /bin/talk
-    - path: /bin/telnet
+    # prevent execution of service client binaries
+    - execname: talk
+    - execname: telnet
   message: Alert! insecure service client binaries invoked
   severity: 5
   tags: 
