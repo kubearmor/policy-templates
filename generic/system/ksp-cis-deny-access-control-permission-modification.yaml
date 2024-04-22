@@ -9,7 +9,7 @@ spec:
   action: Block
   process:
     matchPaths:
-    # do not allow execution of chmod and chown
+    # Do not allow execution of chmod and chown
     - execname: chmod
     - execname: chown
   message: Alert! access control permission modification detected
