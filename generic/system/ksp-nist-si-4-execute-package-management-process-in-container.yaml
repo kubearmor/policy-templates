@@ -16,35 +16,18 @@ spec:
   severity: 5
   process:
     matchPaths:
-    - path: /usr/bin/apt
-    - path: /usr/bin/apt-get
-    - path: /bin/apt-get
-    - path: /sbin/apk
-    - path: /bin/apt
-    - path: /usr/bin/dpkg
-    - path: /bin/dpkg
-    - path: /usr/bin/gdebi
-    - path: /bin/gdebi
-    - path: /usr/bin/make
-    - path: /bin/make
-    - path: /usr/bin/yum
-    - path: /bin/yum
-    - path: /usr/bin/rpm
-    - path: /bin/rpm
-    - path: /usr/bin/dnf
-    - path: /bin/dnf
-    - path: /usr/bin/pacman
-    - path: /usr/sbin/pacman
-    - path: /bin/pacman
-    - path: /sbin/pacman
-    - path: /usr/bin/makepkg
-    - path: /usr/sbin/makepkg
-    - path: /bin/makepkg
-    - path: /sbin/makepkg
-    - path: /usr/bin/yaourt
-    - path: /usr/sbin/yaourt
-    - path: /bin/yaourt
-    - path: /sbin/yaourt
-    - path: /usr/bin/zypper
-    - path: /bin/zypper
+    # Do not allow execution of the package management process
+    - execname: apt
+    - execname: apt-get
+    - execname: apk
+    - execname: dpkg
+    - execname: gdebi
+    - execname: make
+    - execname: yum
+    - execname: rpm
+    - execname: dnf
+    - execname: pacman
+    - execname: makepkg
+    - execname: yaourt
+    - execname: zypper
   action: Block

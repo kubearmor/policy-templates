@@ -9,10 +9,9 @@ spec:
   action: Block
   process:
     matchPaths:
-    - path: /usr/bin/chmod
-    - path: /usr/bin/chown
-    - path: /bin/chmod
-    - path: /bin/chown
+    # Do not allow execution of chmod and chown
+    - execname: chmod
+    - execname: chown
   message: Alert! access control permission modification detected
   severity: 5
   tags: 

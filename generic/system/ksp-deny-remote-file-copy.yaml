@@ -7,12 +7,9 @@ spec:
   action: Block
   process:
     matchPaths:
-    - path: /usr/bin/rsync
-    - path: /bin/rsync
-    - path: /usr/bin/scp
-    - path: /bin/scp
-    - path: /usr/bin/scp
-    - path: /bin/scp
+    # prevent execution of remote file copy commands
+    - execname: rsync
+    - execname: scp
   message: Alert! remote file copy tools execution prevented.
   severity: 5
   tags:
