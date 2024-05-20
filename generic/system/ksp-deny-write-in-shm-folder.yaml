@@ -13,5 +13,5 @@ spec:
   message: Alert! write to /dev/shm folder prevented. 
   severity: 5
   tags:
-  - MITRE_Execution
+  - MITRE_TA0002_Execution
   - MITRE
