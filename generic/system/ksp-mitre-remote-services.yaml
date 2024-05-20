@@ -8,7 +8,7 @@ metadata:
   name: ksp-mitre-remote-services
   namespace: default    # Change your namespace
 spec:
-  tags: ["MITRE", "FIGHT", "FGT1021","5G"]
+  tags: ["MITRE", "FIGHT", "FGT1021", "5G", "MITRE_T1021_Remote_Services"]
   message: "Warning! access sensitive files detected"
   selector:
     matchLabels: 
