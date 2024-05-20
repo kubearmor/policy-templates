@@ -127,7 +127,7 @@ policyRules:
       - https://attack.mitre.org/techniques/T1609/
     tldr: Prevent execution of container administration tools within a container
     detailed: Adversaries may abuse a container administration service to execute commands within a container. A container administration service such as the Docker daemon, the Kubernetes API server, or the kubelet may allow remote management of containers within an environment.
-  yaml: ksp-deny-k8s-client-tool-execution-inside container.yaml
+  yaml: ksp-deny-k8s-client-tool-execution-inside-container.yaml
 - name: remote-file-copy
   precondition: 
   - /usr/bin/rsync
