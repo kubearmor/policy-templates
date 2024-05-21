@@ -77,7 +77,7 @@ policyRules:
     - name: NIST-SI-4
       url:
       - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
-    tldr: Audit file events in the /dev/ directory, for enhanced security
+    tldr: Audit device directory for enhanced security
     detailed: System monitoring includes external and internal monitoring. External monitoring
       includes the observation of events occurring at system boundaries. Internal monitoring
       includes the observation of events occurring within the system. Organizations monitor systems,
