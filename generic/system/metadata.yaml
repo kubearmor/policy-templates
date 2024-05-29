@@ -9,7 +9,7 @@ policyRules:
     - name: MITRE-TTP
       url:
       - https://attack.mitre.org/techniques/T1553/
-    tldr: Restrict access to maintenance tools (apk, mii-tool, ...)
+    tldr: Restrict or limit maintenance tool usage
     detailed: Container images might contain maintenance tools which should ideally
       never be used in prod env, or if used, should be used only in certain time frames.
       Examples include, dynamic package management tools, mii-tool, iptables etc
@@ -24,7 +24,7 @@ policyRules:
       url:
       - https://attack.mitre.org/techniques/T1553/
       - https://fight.mitre.org/techniques/FGT1555
-    tldr: Restrict access to trusted certificated bundles in the OS image
+    tldr: Prevent certificate bundle tampering
     detailed: Operating systems maintain a list of trusted certificates (often called
       trust bundles) in file system. These bundles decides which authorities are trusted.
       Subverting these trust controls would essentially allow an adversary to operate
@@ -46,28 +46,28 @@ policyRules:
     - name: MITRE-TTP-T1082
       url:
       - https://attack.mitre.org/techniques/T1082/
-    tldr: System Information Discovery - block system owner discovery commands
+    tldr: Limit adversaries from gathering system information
     detailed: An adversary may attempt to get detailed information about the operating system and hardware, including
       version, patches, hotfixes, service packs, and architecture. Adversaries may use the information from System
       Information Discovery during automated discovery to shape follow-on behaviors, including whether or not the
       adversary fully infects the target and/or attempts specific actions.
   yaml: ksp-mitre-system-owner-user-discovery.yaml
-- name: write-under-bin-dir
-  precondition: 
-  - /bin/*
-  - OPTSCAN
-  description:
-    refs:
-    - name: NIST-SI-4
-      url:
-      - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
-    tldr: System and Information Integrity - System Monitoring make directory under /bin/
-    detailed: System monitoring includes external and internal monitoring. External monitoring
-      includes the observation of events occurring at system boundaries. Internal monitoring
-      includes the observation of events occurring within the system. Organizations monitor systems,
-      for example, by observing audit activities in real time or by observing other system aspects 
-      such as access patterns, characteristics of access, and other actions.
-  yaml: ksp-nist-si-4-mkdir-bin-dir.yaml
+#- name: write-under-bin-dir
+#  precondition: 
+#  - /bin/*
+#  - OPTSCAN
+#  description:
+#    refs:
+#    - name: NIST-SI-4
+#      url:
+#      - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
+#    tldr: System and Information Integrity - System Monitoring make directory under /bin/
+#    detailed: System monitoring includes external and internal monitoring. External monitoring
+#      includes the observation of events occurring at system boundaries. Internal monitoring
+#      includes the observation of events occurring within the system. Organizations monitor systems,
+#      for example, by observing audit activities in real time or by observing other system aspects 
+#      such as access patterns, characteristics of access, and other actions.
+#  yaml: ksp-nist-si-4-mkdir-bin-dir.yaml
 - name: write-under-dev-dir
   precondition: 
   - /dev/*
@@ -77,7 +77,7 @@ policyRules:
     - name: NIST-SI-4
       url:
       - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
-    tldr: System and Information Integrity - System Monitoring make files under /dev/
+    tldr: Audit device directory for enhanced security
     detailed: System monitoring includes external and internal monitoring. External monitoring
       includes the observation of events occurring at system boundaries. Internal monitoring
       includes the observation of events occurring within the system. Organizations monitor systems,
@@ -93,7 +93,7 @@ policyRules:
     - name: NIST-SI-4
       url:
       - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
-    tldr: System and Information Integrity - System Monitoring Detect access to cronjob files
+    tldr: Audit access to cronjob files as a part of system monitoring for better integrity
     detailed: System monitoring includes external and internal monitoring. External monitoring
       includes the observation of events occurring at system boundaries. Internal monitoring
       includes the observation of events occurring within the system. Organizations monitor systems,
@@ -109,7 +109,7 @@ policyRules:
     - name: NIST-CM-7-5
       url:
       - https://csf.tools/reference/nist-sp-800-53/r5/cm/cm-7/cm-7-5/
-    tldr: System and Information Integrity - Least Functionality deny execution of package manager process in container
+    tldr: Prohibit package manager process execution in containers to maintain system integrity and limit authorized software versions and sources.
     detailed: Authorized software programs can be limited to specific versions or from a specific source. To facilitate
       a comprehensive authorized software process and increase the strength of protection for attacks that bypass
       application level authorized software, software programs may be decomposed into and monitored at different 
@@ -125,9 +125,9 @@ policyRules:
     - name: MITRE_T1609_container_administration_command
       url:
       - https://attack.mitre.org/techniques/T1609/
-    tldr: Adversaries may abuse a container administration service to execute commands within a container.
+    tldr: Prevent execution of container administration tools within a container
     detailed: Adversaries may abuse a container administration service to execute commands within a container. A container administration service such as the Docker daemon, the Kubernetes API server, or the kubelet may allow remote management of containers within an environment.
-  yaml: ksp-deny-k8s-client-tool-execution-inside container.yaml
+  yaml: ksp-deny-k8s-client-tool-execution-inside-container.yaml
 - name: remote-file-copy
   precondition: 
   - /usr/bin/rsync
@@ -137,7 +137,7 @@ policyRules:
     - name: MITRE_TA0010_exfiltration
       url:
       - https://attack.mitre.org/tactics/TA0010/
-    tldr: The adversary is trying to steal data.
+    tldr: Prevent data exfiltration attempts using utility tooling
     detailed: Exfiltration consists of techniques that adversaries may use to steal data from your network. Once they’ve collected data, adversaries often package it to avoid detection while removing it. This can include compression and encryption. Techniques for getting data out of a target network typically include transferring it over their command and control channel or an alternate channel and may also include putting size limits on the transmission.
   yaml: ksp-deny-remote-file-copy.yaml
 - name: write-in-shm-dir
@@ -149,7 +149,7 @@ policyRules:
     - name: MITRE_execution
       url:
       - https://attack.mitre.org/tactics/TA0002/
-    tldr: The adversary is trying to write under shm folder
+    tldr: Restrict adversaries from writing malicious code under the shm folder
     detailed: The adversary is trying to run malicious code. Execution consists of techniques that result in adversary-controlled code running on a local or remote system. Techniques that run malicious code are often paired with techniques from all other tactics to achieve broader goals, like exploring a network or stealing data.
   yaml: ksp-deny-write-in-shm-folder.yaml
 - name: write-etc-dir
@@ -161,7 +161,7 @@ policyRules:
     - name: MITRE_TA0005_defense_evasion
       url:
       - https://attack.mitre.org/tactics/TA0005/
-    tldr: The adversary is trying to avoid being detected.
+    tldr: Prevent concealment of adversarial processes
     detailed: Defense Evasion consists of techniques that adversaries use to avoid detection throughout their compromise. Techniques used for defense evasion include uninstalling/disabling security software or obfuscating/encrypting data and scripts. Adversaries also leverage and abuse trusted processes to hide and masquerade their malware. Other tactics’ techniques are cross-listed here when those techniques include the added benefit of subverting defenses.
   yaml: ksp-deny-write-under-etc-directory.yaml
 # - name: shell-history-mod
@@ -312,7 +312,7 @@ policyRules:
     - name: MITRE_T1565_data_manipulation
       url:
       - https://attack.mitre.org/techniques/T1565/
-    tldr: File Integrity Monitoring
+    tldr: File Integrity Monitoring/Protection
     detailed: Adversaries may insert, delete, or manipulate data in order to influence external outcomes or hide
       activity, thus threatening the integrity of the data. By manipulating data, adversaries may attempt to affect a
       business process, organizational understanding, or decision making.
@@ -330,7 +330,7 @@ policyRules:
     - name: tactic-impair-defense
       url:
       - https://fight.mitre.org/techniques/FGT1562
-    tldr: Adversaries may maliciously modify components of a victim environment in order to hinder or disable defensive mechanisms.
+    tldr: Audit defense control points to detect defense impairments
     detailed: Adversaries may maliciously modify components of a victim environment in order to hinder or 
       disable defensive mechanisms. This not only involves impairing preventative defenses, such as firewalls 
       and anti-virus, but also detection capabilities that defenders can use to audit activity and identify 
@@ -346,7 +346,7 @@ policyRules:
     - name: tactic-network-service-scanning
       url:
       - https://fight.mitre.org/techniques/FGT1046
-    tldr: Adversaries may attempt to get a listing of services running on remote hosts, including those that may be vulnerable to remote software exploitation.
+    tldr: Audit execution of network service scanning tools
     detailed: Adversaries may attempt to get a listing of services running on remote hosts and local 
       network infrastructure devices, including those that may be vulnerable to remote software exploitation. 
       Common methods to acquire this information include port and/or vulnerability scans using tools that are
@@ -361,7 +361,7 @@ policyRules:
     - name: tactic-remote-services
       url:
       - https://fight.mitre.org/techniques/FGT1021
-    tldr: Adversaries may use Valid Accounts to log into a service specifically designed to accept remote connections, such as telnet, SSH, and VNC.
+    tldr: Audit remote access services
     detailed: Legitimate applications (such as Software Deployment Tools and other administrative programs) 
       may utilize Remote Services to access remote hosts. For example, Apple Remote Desktop (ARD) on macOS 
       is native software used for remote management. ARD leverages a blend of protocols, including VNC to 
@@ -376,6 +376,6 @@ policyRules:
     - name: MITRE_T1496_resource_hijacking
       url:
       - https://attack.mitre.org/techniques/T1496/
-    tldr: Adversaries may leverage the resources of co-opted systems to complete resource-intensive tasks, which may impact system and/or hosted service availability.
+    tldr: Cryptojacking, Crypto mining, Malware protection
     detailed: One common purpose for Resource Hijacking is to validate transactions of cryptocurrency networks and earn virtual currency. Adversaries may consume enough system resources to negatively impact and/or cause affected machines to become unresponsive. Servers and cloud-based systems are common targets because of the high potential for available resources.
   yaml: ksp-prevent-crypto-miners.yaml

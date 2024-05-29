@@ -11,6 +11,7 @@ spec:
   tags: 
     - PCI_DSS
     - MITRE
+    - MITRE_T1553_Subvert_Trust_Controls
   severity: 1
   process:
       matchDirectories:
