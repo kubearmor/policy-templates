@@ -1,0 +1,38 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: open5gs-udr-zero-trust
+  namespace: open5gs
+spec:
+  action: Allow
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /open5gs/
+      recursive: true
+      action: Block
+      severity: 10
+      message: unauthorized access to open5GS data
+    - dir: /open5gs/
+      recursive: true
+      fromSource:
+      - path: /usr/bin/open5gs-udrd
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /usr/bin/open5gs-udrd
+      protocol: raw
+    - fromSource:
+      - path: /usr/bin/open5gs-udrd
+      protocol: udp
+    - fromSource:
+      - path: /usr/bin/open5gs-udrd
+      protocol: tcp
+  process:
+    matchPaths:
+    - path: /usr/bin/open5gs-udrd
+  selector:
+    matchLabels:
+      epc-mode: udr
+  severity: 1

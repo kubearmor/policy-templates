@@ -1,0 +1,41 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: open5gs-bsf-zero-trust
+  namespace: open5gs
+spec:
+  action: Allow
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /open5gs/
+      recursive: true
+      action: Block
+      severity: 10
+      message: unauthorized access to open5GS data
+    - dir: /open5gs/
+      recursive: true
+      fromSource:
+      - path: /usr/bin/open5gs-bsfd
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /usr/bin/open5gs-bsfd
+      protocol: icmp
+    - fromSource:
+      - path: /usr/bin/open5gs-bsfd
+      protocol: raw
+    - fromSource:
+      - path: /usr/bin/open5gs-bsfd
+      protocol: tcp
+    - fromSource:
+      - path: /usr/bin/open5gs-bsfd
+      protocol: udp
+  process:
+    matchPaths:
+    - path: /usr/bin/open5gs-bsfd
+  selector:
+    matchLabels:
+      epc-mode: bsf
+  severity: 1

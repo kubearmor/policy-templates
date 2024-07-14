@@ -1,0 +1,39 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: open5gs-smf-zero-trust
+  namespace: open5gs
+spec:
+  action: Allow
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /open5gs/
+      recursive: true
+      action: Block
+      severity: 10
+      message: unauthorized access to open5GS data
+    - dir: /open5gs/
+      recursive: true
+      fromSource:
+      - path: /usr/bin/open5gs-smfd
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /usr/bin/open5gs-smfd
+      protocol: raw
+    - fromSource:
+      - path: /usr/bin/open5gs-smfd
+      protocol: tcp
+    - fromSource:
+      - path: /usr/bin/open5gs-smfd
+      protocol: udp
+  process:
+    matchPaths:
+    - path: /usr/bin/open5gs-smfd
+  selector:
+    matchLabels:
+      epc-mode: smf
+      epc-prom: enabled
+  severity: 1

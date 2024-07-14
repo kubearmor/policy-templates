@@ -1,0 +1,73 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: open5gs-amf-zero-trust
+  namespace: open5gs
+spec:
+  action: Allow
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /open5gs/
+      recursive: true
+      action: Block
+      severity: 10
+      message: unauthorized access to open5GS data
+    - dir: /open5gs/
+      recursive: true
+      fromSource:
+      - path: /usr/bin/open5gs-amfd
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /usr/bin/open5gs-amfd
+      - path: /usr/bin/perl
+      - path: /usr/lib/apt/methods/http
+      - path: /usr/lib/apt/methods/https
+      - path: /usr/lib/apt/methods/store
+      - path: /usr/sbin/usermod
+      protocol: raw
+    - fromSource:
+      - path: /usr/bin/open5gs-amfd
+      - path: /usr/bin/perl
+      - path: /usr/lib/apt/methods/http
+      - path: /usr/lib/apt/methods/https
+      - path: /usr/lib/apt/methods/store
+      - path: /usr/sbin/usermod
+      protocol: tcp
+    - fromSource:
+      - path: /usr/bin/open5gs-amfd
+      - path: /usr/bin/perl
+      - path: /usr/lib/apt/methods/https
+      - path: /usr/lib/apt/methods/store
+      - path: /usr/sbin/usermod
+      protocol: icmp
+    - fromSource:
+      - path: /usr/bin/open5gs-amfd
+      - path: /usr/bin/perl
+      - path: /usr/lib/apt/methods/https
+      - path: /usr/lib/apt/methods/store
+      - path: /usr/sbin/usermod
+      protocol: udp
+  process:
+    matchPaths:
+    - path: /bin/sh
+    - path: /usr/bin/containerd-shim-runc-v2
+    - path: /usr/bin/dash
+    - path: /usr/bin/dirname
+    - path: /usr/bin/dpkg
+    - path: /usr/bin/gpgv
+    - path: /usr/bin/mktemp
+    - path: /usr/bin/open5gs-amfd
+    - path: /usr/bin/perl
+    - path: /usr/bin/sh
+    - path: /usr/lib/apt/methods/http
+    - path: /usr/lib/apt/methods/https
+    - path: /usr/lib/apt/methods/store
+    - path: /usr/sbin/usermod
+  selector:
+    matchLabels:
+      epc-mode: amf-1
+      epc-prom: enabled
+  severity: 1
