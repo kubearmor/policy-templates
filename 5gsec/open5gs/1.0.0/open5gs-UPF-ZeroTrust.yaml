@@ -1,0 +1,42 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: open5gs-upf-zero-trust
+  namespace: open5gs
+spec:
+  action: Allow
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /open5gs/
+      recursive: true
+      action: Block
+      severity: 10
+      message: unauthorized access to open5GS data
+    - dir: /open5gs/
+      recursive: true
+      fromSource:
+      - path: /usr/bin/open5gs-upfd
+  process:
+    matchDirectories:
+    - dir: /usr/bin/
+      recursive: true
+    - dir: /usr/sbin/
+      recursive: true
+    - dir: /bin/
+      recursive: true
+    - dir: /sbin/
+      recursive: true
+    matchPaths:
+    - path: /usr/lib/apt/methods/gpgv
+    - path: /usr/lib/apt/methods/http
+    - path: /usr/lib/apt/methods/https
+    - path: /usr/lib/apt/methods/store
+    - path: /var/lib/dpkg/info/libc-bin.postinst
+    - path: /var/lib/dpkg/tmp.ci/preinst
+  selector:
+    matchLabels:
+      epc-mode: upf
+      epc-prom: enabled
+  severity: 1

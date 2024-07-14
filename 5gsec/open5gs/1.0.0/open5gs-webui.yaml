@@ -1,0 +1,36 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: open5gs-weubui-zero-trust
+  namespace: open5gs
+spec:
+  action: Allow
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /bin/bash
+      - path: /usr/local/bin/node
+      protocol: icmp
+    - fromSource:
+      - path: /bin/bash
+      - path: /usr/local/bin/node
+      protocol: udp
+    - fromSource:
+      - path: /usr/local/bin/node
+      protocol: raw
+    - fromSource:
+      - path: /bin/bash
+      - path: /usr/local/bin/node
+      protocol: tcp
+  process:
+    matchPaths:
+    - path: /bin/bash
+    - path: /usr/local/bin/node
+  selector:
+    matchLabels:
+      epc-mode: webui
+  severity: 1

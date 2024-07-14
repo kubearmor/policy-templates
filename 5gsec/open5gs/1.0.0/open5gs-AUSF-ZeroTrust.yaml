@@ -1,0 +1,44 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: open5gs-ausf-zero-trust
+  namespace: open5gs
+spec:
+  action: Allow
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /open5gs/
+      recursive: true
+      action: Block
+      severity: 10
+      message: unauthorized access to open5GS data
+    - dir: /open5gs/
+      recursive: true
+      fromSource:
+      - path: /usr/bin/open5gs-ausfd
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /usr/bin/open5gs-ausfd
+      protocol: icmp
+    - fromSource:
+      - path: /usr/bin/open5gs-ausfd
+      protocol: raw
+    - fromSource:
+      - path: /usr/bin/open5gs-ausfd
+      protocol: tcp
+    - fromSource:
+      - path: /usr/bin/open5gs-ausfd
+      protocol: udp
+  process:
+    matchPaths:
+    - path: /usr/bin/containerd-shim-runc-v2
+    - path: /usr/bin/open5gs-ausfd
+    - path: /usr/local/bin/wait_for.sh
+    - path: /usr/local/sbin/sh
+  selector:
+    matchLabels:
+      epc-mode: ausf
+  severity: 1
