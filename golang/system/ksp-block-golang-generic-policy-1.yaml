@@ -19,6 +19,9 @@ spec:
     - path: /sbin/ldconfig
       fromSource:
       - path: /usr/bin/python2.7
+    - path: /usr/sbin/ldconfig
+      fromSource:
+      - path: /usr/bin/python2.7
     - path: /usr/bin/whoami
       fromSource:
       - path: /bin/dash

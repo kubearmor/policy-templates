@@ -19,5 +19,6 @@ spec:
     - path: /bin/bash
     - path: /bin/sh
     - path: /sbin/sh
+    - path: /usr/sbin/sh
     - path: /bin/csh
   action: Audit

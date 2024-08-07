@@ -33,6 +33,9 @@ spec:
     - path: /bin/rpm
     - path: /usr/bin/dnf
     - path: /bin/dnf
+    - path: /usr/bin/dnf-3
+    - path: /usr/bin/dnf5
+    - path: /usr/bin/microdnf
     - path: /usr/bin/pacman
     - path: /usr/sbin/pacman
     - path: /bin/pacman

@@ -20,6 +20,9 @@ spec:
     matchPaths:
     - path: /usr/sbin/alternatives  
     - path: /usr/bin/dnf
+    - path: /usr/bin/dnf-3
+    - path: /usr/bin/dnf5
+    - path: /usr/bin/microdnf
     - path: /usr/bin/rpm
     - path: /usr/bin/yum
     - path: /usr/bin/rpmkeys

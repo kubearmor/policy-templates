@@ -28,4 +28,5 @@ spec:
     - path: /bin/lsblk
     - path: /usr/bin/lspci
     - path: /sbin/fdisk
+    - path: /usr/sbin/fdisk
     action: Block
