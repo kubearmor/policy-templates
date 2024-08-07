@@ -42,6 +42,12 @@ spec:
       ownerOnly: true
     - path: /usr/bin/dnf
       ownerOnly: true
+    - path: /usr/bin/dnf-3
+      ownerOnly: true
+    - path: /usr/bin/dnf5
+      ownerOnly: true
+    - path: /usr/bin/microdnf
+      ownerOnly: true
     - path: /bin/dnf
       ownerOnly: true
     - path: /usr/bin/pacman
