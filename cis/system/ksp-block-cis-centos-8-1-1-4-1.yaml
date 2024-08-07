@@ -21,4 +21,5 @@ spec:
       - path: /usr/bin/auditd
       - path: /bin/auditd
       - path: /sbin/auditd
+      - path: /usr/sbin/auditd
     action: Block

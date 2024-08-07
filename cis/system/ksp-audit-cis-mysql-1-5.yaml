@@ -18,4 +18,5 @@ spec:
     matchPaths:
     - path: /bin/false
     - path: /sbin/nologin
+    - path: /usr/sbin/nologin
     action: Audit

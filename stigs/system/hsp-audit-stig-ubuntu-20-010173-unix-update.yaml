@@ -13,5 +13,6 @@ spec:
   process:
     matchPaths:
     - path: /sbin/unix_update
+    - path: /usr/sbin/unix_update
     action:
       Audit

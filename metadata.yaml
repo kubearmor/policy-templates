@@ -18,6 +18,8 @@ policyRules:
       matchDirectories:
       - dir: /sbin/
         recursive: true
+      - dir: /usr/sbin/
+        recursive: true
     message: restricted maintenance tool access attempted
     selector:
       matchLabels:
