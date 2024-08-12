@@ -26,6 +26,9 @@ spec:
     - execname: yum
     - execname: rpm
     - execname: dnf
+    - execname: dnf5
+    - execname: dnf-3
+    - execname: microdnf
     - execname: pacman
     - execname: makepkg
     - execname: yaourt
