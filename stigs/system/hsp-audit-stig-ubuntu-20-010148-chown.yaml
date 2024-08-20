@@ -8,7 +8,7 @@ metadata:
   name: hsp-audit-stig-ubuntu-20-010148-chown
 spec:
   severity: 5 
-  tags:  ["STIG", "Ubuntu, "UBTU-20-010148", "SysCalls"] 
+  tags:  ["STIG", "Ubuntu", "UBTU-20-010148", "SysCalls"] 
   message: "Alert! chown syscalls was detected" 
   syscalls:
     matchSyscalls:
