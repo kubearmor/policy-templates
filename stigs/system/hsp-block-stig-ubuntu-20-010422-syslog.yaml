@@ -3,7 +3,7 @@
 # https://www.accuknox.com/kubearmor/ 
 
 apiVersion: security.kubearmor.com/v1
-kind:KubeArmorHostPolicy
+kind: KubeArmorHostPolicy
 metadata:
   name: hsp-block-stig-ubuntu-20-010422-syslog
 spec:
