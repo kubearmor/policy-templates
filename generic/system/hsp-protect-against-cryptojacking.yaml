@@ -1,0 +1,29 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-mitre-prevent-crypto-miners
+spec:
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  action: Block
+  process:
+    matchDirectories:
+    - dir: /tmp/
+      recursive: true
+    matchPaths:
+    - execname: xmrig
+    - execname: dero
+    - execname: dero-miner-linux-amd64
+    - execname: dero-wallet-cli-linux-amd64
+    - execname: derod-linux-amd64
+    - execname: zgrab2
+    - execname: masscan
+    - execname: nmap
+    - execname: ntpdate
+  message: "WARN! Cryptominer detected and blocked"
+  severity: 10
+  tags:
+    - cryptominer
+    - MITRE_T1496_resource_hijacking
+    - MITRE
