@@ -1,0 +1,43 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-protect-system-config
+spec:
+  action: Audit
+  file:
+    matchPaths:
+    - path: /etc/sudoers
+      readOnly: true
+    - path: /etc/sudo.conf
+      readOnly: true
+    - path: /etc/fstab
+      readOnly: true
+    - path: /etc/bash.bashrc
+      readOnly: true
+    - path: /etc/default/grub
+      readOnly: true
+    matchDirectories:
+    - dir: /etc/sudoers.d/
+      recursive: true
+      readOnly: true
+    - dir: /etc/ssh/
+      recursive: true
+      readOnly: true
+    - dir: /etc/pam.d/
+      recursive: true
+      readOnly: true
+    - dir: /boot/
+      recursive: true
+      readOnly: true
+  message: "WARN! System configuration file modified."
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  severity: 5
+  tags:
+    - "NIST"
+    - "CM-6-1"
+    - "NIST_SA"
+    - "NIST_SA-20"
+    - "NIST_SA-20-Customized Development of Critical Components"
+    - "sensitive asset"

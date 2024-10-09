@@ -1,0 +1,34 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-restrict-process-execution
+spec:
+  action: Allow
+  file:
+    Directories:
+    - dir: /
+      recursive: true
+  process:
+    matchDirectories:
+    - dir: /
+      recursive: true
+      action: Block
+    - dir: /bin/
+      recursive: true
+    - dir: /sbin/
+      recursive: true
+    - dir: /usr/bin/
+      recursive: true
+    - dir: /usr/sbin/
+      recursive: true
+    - dir: /usr/local/bin/
+      recursive: true
+    - dir: /usr/local/sbin/
+      recursive: true
+    - dir: /opt/
+      recursive: true
+  message: "ALERT! Blocked process execution outside of allow list."
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  severity: 1
