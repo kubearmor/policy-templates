@@ -379,3 +379,18 @@ policyRules:
     tldr: Cryptojacking, Crypto mining, Malware protection
     detailed: One common purpose for Resource Hijacking is to validate transactions of cryptocurrency networks and earn virtual currency. Adversaries may consume enough system resources to negatively impact and/or cause affected machines to become unresponsive. Servers and cloud-based systems are common targets because of the high potential for available resources.
   yaml: ksp-prevent-crypto-miners.yaml
+  - name: audit-shell-executions
+  precondition: 
+  - /bin/*
+  - OPTSCAN
+  description:
+    refs:
+    - name: Audit-Shell-Executions
+      url:
+      - https://attack.mitre.org/tactics/TA0002/
+      - https://attack.mitre.org/techniques/T1059/
+      - https://attack.mitre.org/tactics/TA0003/
+      - https://attack.mitre.org/tactics/TA0004/
+    tldr: Audit Shell Executions
+    detailed: This policy audits the execution of various Unix shells (bash, zsh, sh, etc.) within Kubernetes workloads, helping to detect potential misuse or malicious activity. It aligns with the MITRE ATT&CK tactics for Execution (TA0002), where adversaries may use shells to run malicious commands, Persistence (TA0003), by inserting commands in shell configuration files for continued access, and Privilege Escalation (TA0004), where shell commands may be used to gain elevated privileges.
+  yaml: ksp-audit-shell-executions.yaml
