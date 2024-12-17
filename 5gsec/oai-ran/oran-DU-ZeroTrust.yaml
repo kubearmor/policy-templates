@@ -1,0 +1,51 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: oran-cuup-zero-trust
+  namespace: oai-ran-du
+spec:
+  action: Allow
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /opt/oai-gnb/etc/
+      recursive: true
+      action: Block
+    - dir: /opt/oai-gnb/etc/
+      recursive: true
+      fromSource:
+      - path: /opt/oai-gnb/bin/nr-softmodem
+    - dir: /run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /opt/oai-gnb/bin/nr-softmodem
+    matchPath:
+    - path: /opt/oai-gnb/etc/gnb.conf
+      action: Block
+    - path: /opt/oai-gnb/etc/gnb.conf
+      fromSource:
+      - path: /opt/oai-gnb/bin/nr-softmodem
+      
+      
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /opt/oai-gnb/bin/nr-softmodem
+      protocol: raw
+    - fromSource:
+      - path: /opt/oai-gnb/bin/nr-softmodem
+      protocol: tcp
+    - fromSource:
+      - path: /opt/oai-gnb/bin/nr-softmodem
+      protocol: udp
+  process:
+    matchPaths:
+    - path: /opt/oai-gnb/bin/nr-softmodem
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: oai-gnb-du
+  severity: 1
