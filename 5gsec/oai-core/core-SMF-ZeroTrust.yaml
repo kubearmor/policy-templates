@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: oran-cuup-zero-trust
+  name: core-smf-zero-trust
   namespace: oai-ran-du
 spec:
   action: Allow
@@ -9,36 +9,43 @@ spec:
     matchDirectories:
     - dir: /
       recursive: true
+    - dir: /openair-smf/etc/
+      recursive: true
+      action: Block
+    - dir: /openair-smf/etc/
+      recursive: true
+      fromSource:
+      - path: /openair-smf/bin/oai_smf
     - dir: /run/secrets/kubernetes.io/serviceaccount/
       action: Block
       message: unauthorized access to kubernetes service account
     - dir: /run/secrets/kubernetes.io/serviceaccount/
       action: Allow
       fromSource:
-      - path: /opt/oai-gnb/bin/nr-softmodem
+      - path: /openair-smf/bin/oai_smf
     matchPath:
-    - path: /opt/oai-gnb/etc/gnb.conf
+    - path: /openair-smf/etc/smf.yaml
       action: Block
-    - path: /opt/oai-gnb/etc/gnb.conf
+    - path: /openair-smf/etc/smf.yaml
       fromSource:
-      - path: /opt/oai-gnb/bin/nr-softmodem
+      - path: /openair-smf/bin/oai_smf
       
       
   network:
     matchProtocols:
     - fromSource:
-      - path: /opt/oai-gnb/bin/nr-softmodem
+      - path: /openair-smf/bin/oai_smf
       protocol: raw
     - fromSource:
-      - path: /opt/oai-gnb/bin/nr-softmodem
+      - path: /openair-smf/bin/oai_smf
       protocol: tcp
     - fromSource:
-      - path: /opt/oai-gnb/bin/nr-softmodem
+      - path: /openair-smf/bin/oai_smf
       protocol: udp
   process:
     matchPaths:
-    - path: /opt/oai-gnb/bin/nr-softmodem
+    - path: /openair-smf/bin/oai_smf
   selector:
     matchLabels:
-      app.kubernetes.io/name: oai-gnb-du
+      workload.nephio.org/oai: smf
   severity: 1

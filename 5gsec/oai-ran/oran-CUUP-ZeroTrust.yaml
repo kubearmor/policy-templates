@@ -9,13 +9,6 @@ spec:
     matchDirectories:
     - dir: /
       recursive: true
-    - dir: /opt/oai-gnb/etc/
-      recursive: true
-      action: Block
-    - dir: /opt/oai-gnb/etc/
-      recursive: true
-      fromSource:
-      - path: /opt/oai-gnb/bin/nr-cuup
     - dir: /run/secrets/kubernetes.io/serviceaccount/
       action: Block
       message: unauthorized access to kubernetes service account
@@ -28,9 +21,7 @@ spec:
       action: Block
     - path: /opt/oai-gnb/etc/gnb.conf
       fromSource:
-      - path: /opt/oai-gnb/bin/nr-cuup
-      
-      
+      - path: /opt/oai-gnb/bin/nr-cuup      
   network:
     matchProtocols:
     - fromSource:
