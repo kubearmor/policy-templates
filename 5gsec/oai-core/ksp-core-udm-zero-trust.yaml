@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: core-smf-zero-trust
+  name: ksp-core-udm-zero-trust
   namespace: oai-ran-du
 spec:
   action: Allow
@@ -9,43 +9,43 @@ spec:
     matchDirectories:
     - dir: /
       recursive: true
-    - dir: /openair-smf/etc/
+    - dir: /openair-udm/etc/
       recursive: true
       action: Block
-    - dir: /openair-smf/etc/
+    - dir: /openair-udm/etc/
       recursive: true
       fromSource:
-      - path: /openair-smf/bin/oai_smf
+      - path: /openair-udm/bin/oai_udm
     - dir: /run/secrets/kubernetes.io/serviceaccount/
       action: Block
       message: unauthorized access to kubernetes service account
     - dir: /run/secrets/kubernetes.io/serviceaccount/
       action: Allow
       fromSource:
-      - path: /openair-smf/bin/oai_smf
+      - path: /openair-udm/bin/oai_udm
     matchPath:
-    - path: /openair-smf/etc/smf.yaml
+    - path: /openair-udm/etc/udm.yaml
       action: Block
-    - path: /openair-smf/etc/smf.yaml
+    - path: /openair-udm/etc/udm.yaml
       fromSource:
-      - path: /openair-smf/bin/oai_smf
+      - path: /openair-udm/bin/oai_udm
       
       
   network:
     matchProtocols:
     - fromSource:
-      - path: /openair-smf/bin/oai_smf
+      - path: /openair-udm/bin/oai_udm
       protocol: raw
     - fromSource:
-      - path: /openair-smf/bin/oai_smf
+      - path: /openair-udm/bin/oai_udm
       protocol: tcp
     - fromSource:
-      - path: /openair-smf/bin/oai_smf
+      - path: /openair-udm/bin/oai_udm
       protocol: udp
   process:
     matchPaths:
-    - path: /openair-smf/bin/oai_smf
+    - path: /openair-udm/bin/oai_udm
   selector:
     matchLabels:
-      workload.nephio.org/oai: smf
+      workload.nephio.org/oai: udm
   severity: 1

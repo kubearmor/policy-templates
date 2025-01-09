@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: core-ausf-zero-trust
+  name: ksp-core-ausf-zero-trust
   namespace: oai-ran-du
 spec:
   action: Allow

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-core-udr
+  namespace: oai-core
+spec:
+  podSelector:
+    matchLabels: 
+      workload.nephio.org/oai: udr 
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          workload.nephio.org/oai: udm 
+    ports:
+    - protocol: TCP
+      port: 80  # Example port (e.g., HTTP)
