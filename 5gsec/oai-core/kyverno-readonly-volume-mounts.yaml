@@ -1,0 +1,21 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: enforce-readonly-volume-mounts
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: check-readonly-volumes
+      match:
+        resources:
+          kinds:
+            - Pod
+          namespaces:
+            - oai-core
+      validate:
+        message: "All volume mounts must be read-only."
+        pattern:
+          spec:
+            containers:
+              - volumeMounts:
+                  - readOnly: true
