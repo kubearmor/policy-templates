@@ -23,7 +23,7 @@ spec:
       action: Allow
       fromSource:
       - path: /openair-amf/bin/oai_amf
-    matchPath:
+    matchPaths:
     - path: /openair-amf/etc/amf.yaml
       action: Block
     - path: /openair-amf/etc/amf.yaml

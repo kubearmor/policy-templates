@@ -16,7 +16,7 @@ spec:
       action: Allow
       fromSource:
       - path: /opt/oai-gnb/bin/nr-cuup
-    matchPath:
+    matchPaths:
     - path: /opt/oai-gnb/etc/gnb.conf
       action: Block
     - path: /opt/oai-gnb/etc/gnb.conf
