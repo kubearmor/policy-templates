@@ -1,8 +1,8 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: oran-cuup-zero-trust
-  namespace: oai-ran-cuup
+  name: ksp-oran-du-zero-trust
+  namespace: oai-ran-du
 spec:
   action: Allow
   file:
@@ -15,28 +15,30 @@ spec:
     - dir: /run/secrets/kubernetes.io/serviceaccount/
       action: Allow
       fromSource:
-      - path: /opt/oai-gnb/bin/nr-cuup
+      - path: /opt/oai-gnb/bin/nr-softmodem
     matchPaths:
     - path: /opt/oai-gnb/etc/gnb.conf
       action: Block
     - path: /opt/oai-gnb/etc/gnb.conf
       fromSource:
-      - path: /opt/oai-gnb/bin/nr-cuup      
+      - path: /opt/oai-gnb/bin/nr-softmodem
+      
+      
   network:
     matchProtocols:
     - fromSource:
-      - path: /opt/oai-gnb/bin/nr-cuup
+      - path: /opt/oai-gnb/bin/nr-softmodem
       protocol: raw
     - fromSource:
-      - path: /opt/oai-gnb/bin/nr-cuup
+      - path: /opt/oai-gnb/bin/nr-softmodem
       protocol: tcp
     - fromSource:
-      - path: /opt/oai-gnb/bin/nr-cuup
+      - path: /opt/oai-gnb/bin/nr-softmodem
       protocol: udp
   process:
     matchPaths:
-    - path: /opt/oai-gnb/bin/nr-cuup
+    - path: /opt/oai-gnb/bin/nr-softmodem
   selector:
     matchLabels:
-      app.kubernetes.io/name: oai-gnb-cu-up
+      app.kubernetes.io/name: oai-gnb-du
   severity: 1
