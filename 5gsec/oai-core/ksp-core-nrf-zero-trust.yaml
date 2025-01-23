@@ -23,7 +23,7 @@ spec:
       action: Allow
       fromSource:
       - path: /openair-nrf/bin/oai_amf
-    matchPath:
+    matchPaths:
     - path: /openair-nrf/etc/nrf.yaml
       action: Block
     - path: /openair-nrf/etc/nrf.yaml

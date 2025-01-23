@@ -23,7 +23,7 @@ spec:
       action: Allow
       fromSource:
       - path: /openair-udm/bin/oai_udm
-    matchPath:
+    matchPaths:
     - path: /openair-udm/etc/udm.yaml
       action: Block
     - path: /openair-udm/etc/udm.yaml

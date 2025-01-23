@@ -23,7 +23,7 @@ spec:
       action: Allow
       fromSource:
       - path: /openair-upf/bin/oai_upf
-    matchPath:
+    matchPaths:
     - path: /openair-upf/etc/upf.yaml
       action: Block
     - path: /openair-upf/etc/upf.yaml

@@ -23,7 +23,7 @@ spec:
       action: Allow
       fromSource:
       - path: /openair-smf/bin/oai_smf
-    matchPath:
+    matchPaths:
     - path: /openair-smf/etc/smf.yaml
       action: Block
     - path: /openair-smf/etc/smf.yaml

@@ -23,7 +23,7 @@ spec:
       action: Allow
       fromSource:
       - path: /openair-ausf/bin/oai_ausf
-    matchPath:
+    matchPaths:
     - path: /openair-ausf/etc/ausf.yaml
       action: Block
     - path: /openair-ausf/etc/ausf.yaml
@@ -74,7 +74,7 @@ spec:
       action: Allow
       fromSource:
       - path: /openair-ausf/bin/oai_ausf
-    matchPath:
+    matchPaths:
     - path: /openair-ausf/etc/ausf.yaml
       action: Block
     - path: /openair-ausf/etc/ausf.yaml
