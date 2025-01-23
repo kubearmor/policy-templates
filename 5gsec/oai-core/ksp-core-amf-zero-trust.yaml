@@ -2,7 +2,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: ksp-core-amf-zero-trust
-  namespace: oai-ran-du
+  namespace: oai-core
 spec:
   action: Allow
   file:
