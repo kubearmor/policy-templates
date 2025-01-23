@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: enforce-readonly-volume-mounts
+  name: kyverno-core-readonly-volume-mounts
 spec:
   validationFailureAction: enforce
   rules:
