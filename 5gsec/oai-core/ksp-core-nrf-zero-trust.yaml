@@ -15,36 +15,36 @@ spec:
     - dir: /openair-nrf/etc/
       recursive: true
       fromSource:
-      - path: /openair-nrf/bin/oai_amf
+      - path: /openair-nrf/bin/oai_nrf
     - dir: /run/secrets/kubernetes.io/serviceaccount/
       action: Block
       message: unauthorized access to kubernetes service account
     - dir: /run/secrets/kubernetes.io/serviceaccount/
       action: Allow
       fromSource:
-      - path: /openair-nrf/bin/oai_amf
+      - path: /openair-nrf/bin/oai_nrf
     matchPaths:
     - path: /openair-nrf/etc/nrf.yaml
       action: Block
     - path: /openair-nrf/etc/nrf.yaml
       fromSource:
-      - path: /openair-nrf/bin/oai_amf
+      - path: /openair-nrf/bin/oai_nrf
       
       
   network:
     matchProtocols:
     - fromSource:
-      - path: /openair-nrf/bin/oai_amf
+      - path: /openair-nrf/bin/oai_nrf
       protocol: raw
     - fromSource:
-      - path: /openair-nrf/bin/oai_amf
+      - path: /openair-nrf/bin/oai_nrf
       protocol: tcp
     - fromSource:
-      - path: /openair-nrf/bin/oai_amf
+      - path: /openair-nrf/bin/oai_nrf
       protocol: udp
   process:
     matchPaths:
-    - path: /openair-nrf/bin/oai_amf
+    - path: /openair-nrf/bin/oai_nrf
   selector:
     matchLabels:
       workload.nephio.org/oai: nrf
