@@ -1,0 +1,51 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-core-upf-zero-trust
+  namespace: oai-core
+spec:
+  action: Allow
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /openair-upf/etc/
+      recursive: true
+      action: Block
+    - dir: /openair-upf/etc/
+      recursive: true
+      fromSource:
+      - path: /openair-upf/bin/oai_upf
+    - dir: /run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /openair-upf/bin/oai_upf
+    matchPaths:
+    - path: /openair-upf/etc/upf.yaml
+      action: Block
+    - path: /openair-upf/etc/upf.yaml
+      fromSource:
+      - path: /openair-upf/bin/oai_upf
+      
+      
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /openair-upf/bin/oai_upf
+      protocol: raw
+    - fromSource:
+      - path: /openair-upf/bin/oai_upf
+      protocol: tcp
+    - fromSource:
+      - path: /openair-upf/bin/oai_upf
+      protocol: udp
+  process:
+    matchPaths:
+    - path: /openair-upf/bin/oai_upf
+  selector:
+    matchLabels:
+      workload.nephio.org/oai: upf
+  severity: 1

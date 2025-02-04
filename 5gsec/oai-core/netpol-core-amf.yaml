@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-core-amf
+  namespace: oai-core
+spec:
+  podSelector:
+    matchLabels: 
+      workload.nephio.org/oai: amf # Applies to pods with label 'app=pod1'
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          workload.nephio.org/oai: ausf # Allows traffic to pods with label 'app=pod2'
+    ports:
+    - protocol: TCP
+      port: 80
+    - protocol: SCTP
+      port: 38412  # Example port (e.g., HTTP)

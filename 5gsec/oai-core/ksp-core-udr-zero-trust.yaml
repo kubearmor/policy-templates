@@ -1,0 +1,51 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-core-udr-zero-trust
+  namespace: oai-core
+spec:
+  action: Allow
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /openair-udr/etc/
+      recursive: true
+      action: Block
+    - dir: /openair-udr/etc/
+      recursive: true
+      fromSource:
+      - path: /openair-udr/bin/oai_udr
+    - dir: /run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /openair-udr/bin/oai_udr
+    matchPaths:
+    - path: /openair-udr/etc/udr.yaml
+      action: Block
+    - path: /openair-udr/etc/udr.yaml
+      fromSource:
+      - path: /openair-udr/bin/oai_udr
+      
+      
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /openair-udr/bin/oai_udr
+      protocol: raw
+    - fromSource:
+      - path: /openair-udr/bin/oai_udr
+      protocol: tcp
+    - fromSource:
+      - path: /openair-udr/bin/oai_udr
+      protocol: udp
+  process:
+    matchPaths:
+    - path: /openair-udr/bin/oai_udr
+  selector:
+    matchLabels:
+      workload.nephio.org/oai: udr
+  severity: 1

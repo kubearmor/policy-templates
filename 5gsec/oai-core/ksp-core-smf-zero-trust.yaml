@@ -1,0 +1,51 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-core-smf-zero-trust
+  namespace: oai-core
+spec:
+  action: Allow
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /openair-smf/etc/
+      recursive: true
+      action: Block
+    - dir: /openair-smf/etc/
+      recursive: true
+      fromSource:
+      - path: /openair-smf/bin/oai_smf
+    - dir: /run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /openair-smf/bin/oai_smf
+    matchPaths:
+    - path: /openair-smf/etc/smf.yaml
+      action: Block
+    - path: /openair-smf/etc/smf.yaml
+      fromSource:
+      - path: /openair-smf/bin/oai_smf
+      
+      
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /openair-smf/bin/oai_smf
+      protocol: raw
+    - fromSource:
+      - path: /openair-smf/bin/oai_smf
+      protocol: tcp
+    - fromSource:
+      - path: /openair-smf/bin/oai_smf
+      protocol: udp
+  process:
+    matchPaths:
+    - path: /openair-smf/bin/oai_smf
+  selector:
+    matchLabels:
+      workload.nephio.org/oai: smf
+  severity: 1
