@@ -1,0 +1,17 @@
+# KubeArmor is an open source software that enables you to protect your cloud workload at run-time.
+# To learn more about KubeArmor visit: 
+# https://www.accuknox.com/kubearmor/
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-block-cis-linux-1-1-5
+spec:
+  severity: 5
+  tags: ["CIS", "Linux", "Distro-Independent-Linux", "Block", "CIS-1.1.5"]
+  message: "Alert! binary execution attempted inside /tmp"
+  process:
+    matchDirectories:
+    - dir: /tmp/
+      recursive: true
+      action: Block
