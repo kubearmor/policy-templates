@@ -1,0 +1,36 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: network-service-scanning
+spec:
+  action: Audit
+  message: Network service has been scanned!
+  process:
+    matchPaths:
+    - path: /bin/ip
+    - path: /bin/netstat
+    - path: /sbin/arp
+    - path: /sbin/ethtool
+    - path: /sbin/ifconfig
+    - path: /sbin/ip
+    - path: /sbin/iw
+    - path: /sbin/iwconfig
+    - path: /usr/bin/ip
+    - path: /usr/bin/netstat
+    - path: /usr/sbin/arp
+    - path: /usr/sbin/ethtool
+    - path: /usr/sbin/ifconfig
+    - path: /usr/sbin/ip
+    - path: /usr/sbin/iw
+    - path: /usr/sbin/iwconfig
+  selector:
+    matchExpressions:
+    - key: namespace
+      operator: NotIn
+      values:
+      - kube-system
+  severity: 5
+  tags:
+  - FGT1046
+  - FIGHT
+  - MITRE

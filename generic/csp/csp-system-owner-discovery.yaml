@@ -1,0 +1,23 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: system-owner-discovery
+spec:
+  action: Block
+  message: System owner discovery command execution denied
+  process:
+    matchPaths:
+    - path: /usr/bin/id
+    - path: /usr/bin/w
+    - path: /usr/bin/who
+    - path: /usr/bin/whoami
+  selector:
+    matchExpressions:
+    - key: namespace
+      operator: NotIn
+      values:
+      - kube-system
+  severity: 3
+  tags:
+  - MITRE
+  - MITRE_T1082_system_information_discovery

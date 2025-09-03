@@ -1,0 +1,27 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: remote-services
+spec:
+  action: Audit
+  file:
+    matchDirectories:
+    - dir: /etc/ssh/
+    matchPaths:
+    - path: /etc/passwd
+    - path: /etc/shadow
+    - path: /var/log/auth.log
+    - path: /var/log/wtmp
+    - path: /var/run/utmp
+  message: Warning! access sensitive files detected
+  selector:
+    matchExpressions:
+    - key: namespace
+      operator: NotIn
+      values:
+      - kube-system
+  severity: 3
+  tags:
+  - FGT1021
+  - FIGHT
+  - MITRE

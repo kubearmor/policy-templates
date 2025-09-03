@@ -1,0 +1,22 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: write-in-shm-dir
+spec:
+  action: Block
+  file:
+    matchDirectories:
+    - dir: /dev/shm/
+      readOnly: true
+      recursive: true
+  message: Alert! write to /dev/shm folder prevented.
+  selector:
+    matchExpressions:
+    - key: namespace
+      operator: NotIn
+      values:
+      - kube-system
+  severity: 5
+  tags:
+  - MITRE
+  - MITRE_execution

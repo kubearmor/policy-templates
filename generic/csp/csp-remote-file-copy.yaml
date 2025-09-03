@@ -1,0 +1,32 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: remote-file-copy
+spec:
+  action: Block
+  message: Alert! remote file copy tools execution prevented.
+  process:
+    matchPaths:
+    - path: /bin/rsync
+    - path: /bin/scp
+    - path: /bin/scp
+    - path: /usr/bin/rsync
+    - path: /usr/bin/scp
+    - path: /usr/bin/scp
+  selector:
+    matchExpressions:
+    - key: namespace
+      operator: NotIn
+      values:
+      - kube-system
+  severity: 5
+  tags:
+  - MITRE
+  - MITRE_T1552_unsecured_credentials
+  - MITRE_TA0006_credential_access
+  - MITRE_TA0008_lateral_movement
+  - MITRE_TA0010_exfiltration
+  - NIST
+  - NIST_800-53
+  - NIST_800-53_SC-4
+  - NIST_800-53_SI-4(18)

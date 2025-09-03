@@ -1,0 +1,26 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: impair-defense
+spec:
+  action: Audit
+  file:
+    matchDirectories:
+    - dir: /etc/apparmor.d/
+      recursive: true
+    - dir: /etc/sysconfig/selinux/
+      recursive: true
+    matchPaths:
+    - path: /etc/selinux/semanage.conf
+  message: Selinux Files Accessed by Unknown Process
+  selector:
+    matchExpressions:
+    - key: namespace
+      operator: NotIn
+      values:
+      - kube-system
+  severity: 6
+  tags:
+  - FGT1562
+  - FIGHT
+  - MITRE

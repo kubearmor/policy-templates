@@ -1,0 +1,34 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: crypto-miners
+spec:
+  action: Block
+  message: cryptominer detected and blocked
+  process:
+    matchDirectories:
+    - dir: /tmp/
+      recursive: true
+    matchPaths:
+    - execname: apk
+    - execname: apt
+    - execname: dero-miner-linux-amd64
+    - execname: dero-wallet-cli-linux-amd64
+    - execname: dero
+    - execname: derod-linux-amd64
+    - execname: masscan
+    - execname: nmap
+    - execname: ntpdate
+    - execname: xmrig
+    - execname: zgrab2
+  selector:
+    matchExpressions:
+    - key: namespace
+      operator: NotIn
+      values:
+      - kube-system
+  severity: 10
+  tags:
+  - MITRE
+  - MITRE_T1496_resource_hijacking
+  - cryptominer

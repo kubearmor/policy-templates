@@ -1,0 +1,53 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: pkg-mngr-exec
+spec:
+  action: Block
+  message: Alert! Execution of package management process inside container is denied
+  process:
+    matchPaths:
+    - path: /bin/apt-get
+    - path: /bin/apt
+    - path: /bin/dnf
+    - path: /bin/dpkg
+    - path: /bin/gdebi
+    - path: /bin/make
+    - path: /bin/makepkg
+    - path: /bin/pacman
+    - path: /bin/rpm
+    - path: /bin/yaourt
+    - path: /bin/yum
+    - path: /bin/zypper
+    - path: /sbin/apk
+    - path: /sbin/makepkg
+    - path: /sbin/pacman
+    - path: /sbin/yaourt
+    - path: /usr/bin/apt-get
+    - path: /usr/bin/apt
+    - path: /usr/bin/dnf
+    - path: /usr/bin/dpkg
+    - path: /usr/bin/gdebi
+    - path: /usr/bin/make
+    - path: /usr/bin/makepkg
+    - path: /usr/bin/pacman
+    - path: /usr/bin/rpm
+    - path: /usr/bin/yaourt
+    - path: /usr/bin/yum
+    - path: /usr/bin/zypper
+    - path: /usr/sbin/makepkg
+    - path: /usr/sbin/pacman
+    - path: /usr/sbin/yaourt
+  selector:
+    matchExpressions:
+    - key: namespace
+      operator: NotIn
+      values:
+      - kube-system
+  severity: 5
+  tags:
+  - NIST
+  - NIST_800-53_CM-7(4)
+  - NIST_800-53_SI-4
+  - SI-4
+  - process
