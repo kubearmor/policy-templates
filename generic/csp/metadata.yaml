@@ -10,7 +10,7 @@ policyRules:
       - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
     tldr: Audit access to cronjob files as a part of system monitoring for better integrity
     detailed: System monitoring includes external and internal monitoring. External monitoring includes the observation of events occurring at system boundaries. Internal monitoring includes the observation of events occurring within the system. Organizations monitor systems, for example, by observing audit activities in real time or by observing other system aspects such as access patterns, characteristics of access, and other actions.
-  yaml: csp-cronjob-cfg.yaml
+  yaml: cronjob-cfg.yaml
 - name: crypto-miners
   precondition:
   - OPTSCAN
@@ -21,7 +21,7 @@ policyRules:
       - https://attack.mitre.org/techniques/T1496/
     tldr: Cryptojacking, Crypto mining, Malware protection
     detailed: One common purpose for Resource Hijacking is to validate transactions of cryptocurrency networks and earn virtual currency. Adversaries may consume enough system resources to negatively impact and/or cause affected machines to become unresponsive. Servers and cloud-based systems are common targets because of the high potential for available resources.
-  yaml: csp-crypto-miners.yaml
+  yaml: crypto-miners.yaml
 - name: file-integrity-monitoring
   precondition:
   - OPTSCAN
@@ -32,7 +32,7 @@ policyRules:
       - https://attack.mitre.org/techniques/T1565/
     tldr: File Integrity Monitoring/Protection
     detailed: Adversaries may insert, delete, or manipulate data in order to influence external outcomes or hide activity, thus threatening the integrity of the data. By manipulating data, adversaries may attempt to affect a business process, organizational understanding, or decision making. The type of modification and the impact it will have depends on the target application and process as well as the goals and objectives of the adversary. For complex systems, an adversary would likely need special expertise and possibly access to specialized software related to the system that would typically be gained through a prolonged information gathering campaign in order to have the desired impact.
-  yaml: csp-file-integrity-monitoring.yaml
+  yaml: file-integrity-monitoring.yaml
 - name: impair-defense
   precondition:
   - OPTSCAN
@@ -43,7 +43,7 @@ policyRules:
       - https://fight.mitre.org/techniques/FGT1562
     tldr: Audit defense control points to detect defense impairments
     detailed: Adversaries may maliciously modify components of a victim environment in order to hinder or disable defensive mechanisms. This not only involves impairing preventative defenses, such as firewalls and anti-virus, but also detection capabilities that defenders can use to audit activity and identify malicious behavior. This may also span both native defenses as well as supplemental capabilities installed by users and administrators.
-  yaml: csp-impair-defense.yaml
+  yaml: impair-defense.yaml
 - name: k8s-client-tool-exec
   precondition:
   - OPTSCAN
@@ -54,7 +54,7 @@ policyRules:
       - https://attack.mitre.org/techniques/T1609/
     tldr: Prevent execution of container administration tools within a container
     detailed: Adversaries may abuse a container administration service to execute commands within a container. A container administration service such as the Docker daemon, the Kubernetes API server, or the kubelet may allow remote management of containers within an environment.
-  yaml: csp-k8s-client-tool-exec.yaml
+  yaml: k8s-client-tool-exec.yaml
 - name: maint-tools-access
   precondition:
   - OPTSCAN
@@ -66,7 +66,7 @@ policyRules:
       - https://attack.mitre.org/techniques/T1553/
     tldr: Restrict or limit maintenance tool usage
     detailed: Container images might contain maintenance tools which should ideally never be used in prod env, or if used, should be used only in certain time frames. Examples include, dynamic package management tools, mii-tool, iptables etc
-  yaml: csp-maint-tools-access.yaml
+  yaml: maint-tools-access.yaml
 - name: network-service-scanning
   precondition:
   - OPTSCAN
@@ -77,7 +77,7 @@ policyRules:
       - https://fight.mitre.org/techniques/FGT1046
     tldr: Audit execution of network service scanning tools
     detailed: Adversaries may attempt to get a listing of services running on remote hosts and local network infrastructure devices, including those that may be vulnerable to remote software exploitation. Common methods to acquire this information include port and/or vulnerability scans using tools that are brought onto a system.
-  yaml: csp-network-service-scanning.yaml
+  yaml: network-service-scanning.yaml
 - name: pkg-mngr-exec
   precondition:
   - OPTSCAN
@@ -88,7 +88,7 @@ policyRules:
       - https://csf.tools/reference/nist-sp-800-53/r5/cm/cm-7/cm-7-5/
     tldr: Prohibit package manager process execution in containers to maintain system integrity and limit authorized software versions and sources.
     detailed: Authorized software programs can be limited to specific versions or from a specific source. To facilitate a comprehensive authorized software process and increase the strength of protection for attacks that bypass application level authorized software, software programs may be decomposed into and monitored at different levels of detail. These levels include applications, application programming interfaces, application modules, scripts, system processes, system services, kernel functions, registries, drivers, and dynamic link libraries.
-  yaml: csp-pkg-mngr-exec.yaml
+  yaml: pkg-mngr-exec.yaml
 - name: remote-file-copy
   precondition:
   - OPTSCAN
@@ -99,7 +99,7 @@ policyRules:
       - https://attack.mitre.org/tactics/TA0010/
     tldr: Prevent data exfiltration attempts using utility tooling
     detailed: Exfiltration consists of techniques that adversaries may use to steal data from your network. Once they have collected data, adversaries often package it to avoid detection while removing it. This can include compression and encryption. Techniques for getting data out of a target network typically include transferring it over their command and control channel or an alternate channel and may also include putting size limits on the transmission.
-  yaml: csp-remote-file-copy.yaml
+  yaml: remote-file-copy.yaml
 - name: remote-services
   precondition:
   - OPTSCAN
@@ -110,7 +110,7 @@ policyRules:
       - https://fight.mitre.org/techniques/FGT1021
     tldr: Audit remote access services
     detailed: Legitimate applications (such as Software Deployment Tools and other administrative programs) may utilize Remote Services to access remote hosts. For example, Apple Remote Desktop (ARD) on macOS is native software used for remote management. ARD leverages a blend of protocols, including VNC to send the screen and control buffers and SSH for secure file transfer.
-  yaml: csp-remote-services.yaml
+  yaml: remote-services.yaml
 - name: system-owner-discovery
   precondition:
   - OPTSCAN
@@ -121,7 +121,7 @@ policyRules:
       - https://attack.mitre.org/techniques/T1082/
     tldr: Limit adversaries from gathering system information
     detailed: An adversary may attempt to get detailed information about the operating system and hardware, including version, patches, hotfixes, service packs, and architecture. Adversaries may use the information from System Information Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.
-  yaml: csp-system-owner-discovery.yaml
+  yaml: system-owner-discovery.yaml
 - name: trusted-cert-mod
   precondition:
   - OPTSCAN
@@ -133,7 +133,7 @@ policyRules:
       - https://fight.mitre.org/techniques/FGT1555
     tldr: Prevent certificate bundle tampering
     detailed: Operating systems maintain a list of trusted certificates (often called trust bundles) in file system. These bundles decides which authorities are trusted. Subverting these trust controls would essentially allow an adversary to operate as a trusted entity. Adversaries may undermine security controls that will either warn users of untrusted activity or prevent execution of untrusted programs. Operating systems and security products may contain mechanisms to identify programs or websites as possessing some level of trust. Examples of such features would include a program being allowed to run because it is signed by a valid code signing certificate, a program prompting the user with a warning because it has an attribute set from being downloaded from the Internet, or getting an indication that you are about to connect to an untrusted site.
-  yaml: csp-trusted-cert-mod.yaml
+  yaml: trusted-cert-mod.yaml
 - name: write-etc-dir
   precondition:
   - OPTSCAN
@@ -144,7 +144,7 @@ policyRules:
       - https://attack.mitre.org/tactics/TA0005/
     tldr: Prevent concealment of adversarial processes
     detailed: Defense Evasion consists of techniques that adversaries use to avoid detection throughout their compromise. Techniques used for defense evasion include uninstalling/disabling security software or obfuscating/encrypting data and scripts. Adversaries also leverage and abuse trusted processes to hide and masquerade their malware. Other tactics’ techniques are cross-listed here when those techniques include the added benefit of subverting defenses.
-  yaml: csp-write-etc-dir.yaml
+  yaml: write-etc-dir.yaml
 - name: write-in-shm-dir
   precondition:
   - OPTSCAN
@@ -155,7 +155,7 @@ policyRules:
       - https://attack.mitre.org/tactics/TA0002/
     tldr: Restrict adversaries from writing malicious code under the shm folder
     detailed: The adversary is trying to run malicious code. Execution consists of techniques that result in adversary-controlled code running on a local or remote system. Techniques that run malicious code are often paired with techniques from all other tactics to achieve broader goals, like exploring a network or stealing data.
-  yaml: csp-write-in-shm-dir.yaml
+  yaml: write-in-shm-dir.yaml
 - name: write-under-dev-dir
   precondition:
   - OPTSCAN
@@ -166,4 +166,4 @@ policyRules:
       - https://csf.tools/reference/nist-sp-800-53/r5/si/si-4/
     tldr: Audit device directory for enhanced security
     detailed: System monitoring includes external and internal monitoring. External monitoring includes the observation of events occurring at system boundaries. Internal monitoring includes the observation of events occurring within the system. Organizations monitor systems, for example, by observing audit activities in real time or by observing other system aspects such as access patterns, characteristics of access, and other actions.
-  yaml: csp-write-under-dev-dir.yaml
+  yaml: write-under-dev-dir.yaml

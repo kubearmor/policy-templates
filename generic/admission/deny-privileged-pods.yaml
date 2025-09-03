@@ -1,0 +1,11 @@
+apiVersion: admission.accuknox.com/v1
+kind: AdmissionPolicy
+metadata:
+  labels:
+    app.kubernetes.io/name: admission-controller
+  name: deny-privileged-pods
+spec:
+  denyPrivilegedPod:
+    action: Block
+    ignoreNamespaces:
+    - kube-system

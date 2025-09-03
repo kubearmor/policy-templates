@@ -1,0 +1,9 @@
+version: v0.2.3
+policyRules:
+- name: deny-privileged-pods
+  precondition:
+  - OPTSCAN
+  description:
+    tldr: Deny deployment of privileged pods across the cluster
+    detailed: This policy denies the deployment of privileged pods across the cluster to enforce security best practices and prevent privilege escalation risks. The kube-system namespace is excluded from this policy to avoid disruption of critical system components such as CoreDNS, Kube Proxy, and other essential Kubernetes services that may require privileged access.
+  yaml: deny-privileged-pods.yaml
