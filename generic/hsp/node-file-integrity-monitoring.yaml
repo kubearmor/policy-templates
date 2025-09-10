@@ -1,0 +1,38 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: node-file-integrity-monitoring
+spec:
+  action: Audit
+  file:
+    matchDirectories:
+    - dir: /bin/
+      readOnly: true
+      recursive: true
+    - dir: /boot/
+      readOnly: true
+      recursive: true
+    - dir: /sbin/
+      readOnly: true
+      recursive: true
+    - dir: /usr/bin/
+      readOnly: true
+      recursive: true
+    - dir: /usr/lib/
+      readOnly: true
+      recursive: true
+    - dir: /usr/sbin/
+      readOnly: true
+      recursive: true
+  message: Detected and prevented compromise File integrity
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  severity: 1
+  tags:
+  - MITRE
+  - MITRE_T1036_masquerading
+  - MITRE_T1565_data_manipulation
+  - NIST
+  - NIST_800-53_AU-2
+  - NIST_800-53_SI-4

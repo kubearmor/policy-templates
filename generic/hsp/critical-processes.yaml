@@ -1,0 +1,23 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: critical-processes
+spec:
+  action: Audit
+  message: critical process execution
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  process:
+    matchPaths:
+    - execname: at
+    - execname: chflag
+    - execname: clang
+    - execname: g++
+    - execname: gcc
+    - execname: history
+    - execname: import
+    - execname: iptables
+    - execname: llvm
+    - execname: pfctl
+  severity: 4

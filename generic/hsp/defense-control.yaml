@@ -1,0 +1,31 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: defense-control
+spec:
+  action: Audit
+  file:
+    matchPaths:
+    - path: /etc/systemd/system/multi-user.target.wants/kubearmor-vm-adapter.service
+    - path: /etc/systemd/system/multi-user.target.wants/kubearmor.service
+  message: Runtime security files/processes accessed.
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  process:
+    matchPaths:
+    - execname: aa-audit
+    - execname: aa-cleanprof
+    - execname: aa-disable
+    - execname: chacl
+    - execname: chcon
+    - execname: setfacl
+  severity: 4
+  tags:
+  - FIGHT
+  - MITRE
+  - MITRE_T1562_Impair_Defenses
+  - STIG
+  - T1562
+  - UBTU-20-010168
+  - Ubuntu

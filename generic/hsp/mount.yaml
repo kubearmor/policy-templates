@@ -1,0 +1,24 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: mount
+spec:
+  action: Audit
+  message: Attempt to mount/umount detected.
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  process:
+    matchPaths:
+    - execname: mount
+    - execname: umount
+  severity: 2
+  syscalls:
+    matchSyscalls:
+    - syscall:
+      - mount
+      - mount2
+  tags:
+  - CM-3(5)
+  - CONFIGURATION CHANGE CONTROL
+  - NIST

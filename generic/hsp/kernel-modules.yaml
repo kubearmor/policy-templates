@@ -1,0 +1,30 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: kernel-modules
+spec:
+  action: Audit
+  file:
+    matchDirectories:
+    - dir: /etc/modprobe.d/
+      readOnly: true
+      recursive: true
+    - dir: /etc/modules-load.d/
+      readOnly: true
+      recursive: true
+    matchPaths:
+    - path: /etc/modules
+      readOnly: true
+  message: modification of Kernel modules
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  process:
+    matchPaths:
+    - execname: kmod
+  severity: 1
+  tags:
+  - MITRE
+  - STIG
+  - T1547.006
+  - UBTU-20-010297

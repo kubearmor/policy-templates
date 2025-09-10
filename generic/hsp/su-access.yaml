@@ -1,0 +1,18 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: su-access
+spec:
+  action: Audit
+  message: Privilege escalation through use of su/sudo
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  process:
+    matchPaths:
+    - execname: su
+  severity: 8
+  tags:
+  - MITRE
+  - STIG
+  - T1548.003

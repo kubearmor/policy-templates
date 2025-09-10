@@ -1,0 +1,86 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: system-config
+spec:
+  action: Audit
+  file:
+    matchDirectories:
+    - dir: /boot/
+      readOnly: true
+      recursive: true
+    - dir: /etc/cups/
+      readOnly: true
+      recursive: true
+    - dir: /etc/cupshelpers/
+      readOnly: true
+      recursive: true
+    - dir: /etc/default/
+      readOnly: true
+      recursive: true
+    - dir: /etc/ld.so.conf.d/
+      readOnly: true
+      recursive: true
+    - dir: /etc/pam.d/
+      readOnly: true
+      recursive: true
+    - dir: /etc/security/
+      readOnly: true
+      recursive: true
+    - dir: /etc/ssh/
+      readOnly: true
+      recursive: true
+    - dir: /etc/sudoers.d/
+      readOnly: true
+      recursive: true
+    - dir: /etc/systemd/
+      readOnly: true
+      recursive: true
+    matchPaths:
+    - path: /etc/adduser.conf
+      readOnly: true
+    - path: /etc/bash.bashrc
+      readOnly: true
+    - path: /etc/default/grub
+      readOnly: true
+    - path: /etc/fstab
+      readOnly: true
+    - path: /etc/ld.so.conf
+      readOnly: true
+    - path: /etc/ld.so.preload
+      readOnly: true
+    - path: /etc/profile
+      readOnly: true
+    - path: /etc/sudo.conf
+      readOnly: true
+    - path: /etc/sudoers
+      readOnly: true
+    - path: /etc/sysctl.conf
+      readOnly: true
+    - path: /root/.bash_profile
+      readOnly: true
+    - path: /root/.bashrc
+      readOnly: true
+    - path: /root/.profile
+      readOnly: true
+    - path: /root/.shrc
+      readOnly: true
+    - path: /usr/local/etc/sudoers
+      readOnly: true
+  message: System configuration file modified
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  severity: 6
+  tags:
+  - CA-9
+  - CM-6-1
+  - MITRE
+  - NIST
+  - NIST-800-53
+  - NIST_SA
+  - NIST_SA-20
+  - STIG
+  - T1552.003
+  - UBTU-20-010451
+  - sensitive asset

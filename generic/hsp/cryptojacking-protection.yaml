@@ -1,0 +1,24 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: cryptojacking-protection
+spec:
+  action: Block
+  message: Cryptominer detected and blocked
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  process:
+    matchPaths:
+    - execname: dero-miner-linux-amd64
+    - execname: dero-wallet-cli-linux-amd64
+    - execname: dero
+    - execname: derod-linux-amd64
+    - execname: masscan
+    - execname: xmrig
+    - execname: zgrab2
+  severity: 1
+  tags:
+  - MITRE
+  - MITRE_T1496_resource_hijacking
+  - cryptominer

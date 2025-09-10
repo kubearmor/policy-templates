@@ -1,0 +1,40 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: account-mgmt-operations
+spec:
+  action: Audit
+  message: linux user modification operation detected
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  process:
+    matchPaths:
+    - execname: chage
+    - execname: chgpasswd
+    - execname: chpasswd
+    - execname: gpasswd
+    - execname: groupadd
+    - execname: groupdel
+    - execname: groupmems
+    - execname: groupmod
+    - execname: newgrp
+    - execname: newusers
+    - execname: sudoedit
+    - execname: useradd
+    - execname: userdel
+    - execname: usermod
+    - execname: visudo
+    - path: /usr/bin/passwd
+  severity: 5
+  tags:
+  - AC-2(4)
+  - MITRE
+  - NIST
+  - NIST-800-53
+  - NIST_SA
+  - NIST_SA-20
+  - S-Bit
+  - STIG
+  - T1136
+  - T1548

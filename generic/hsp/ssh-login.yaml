@@ -1,0 +1,22 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: ssh-login
+spec:
+  action: Audit
+  message: Login/Execution through SSH detected
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  process:
+    matchPaths:
+    - fromSource:
+      - path: /usr/sbin/sshd
+      path: /bin/bash
+    - fromSource:
+      - path: /usr/sbin/sshd
+      path: /bin/dash
+    - fromSource:
+      - path: /usr/sbin/sshd
+      path: /bin/sh
+  severity: 6

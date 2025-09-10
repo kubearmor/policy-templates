@@ -1,0 +1,115 @@
+version: v0.2.3
+policyRules:
+- name: account-mgmt-operations
+  precondition:
+  - OPTSCAN
+  description:
+    tldr: Audit modification of linux users
+  yaml: account-mgmt-operations.yaml
+- name: critical-processes
+  precondition:
+  - OPTSCAN
+  description:
+    tldr: Audit execution of critical processes
+  yaml: critical-processes.yaml
+- name: crypto-jacking-protection
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: MITRE_T1496_resource_hijacking
+      url:
+      - https://attack.mitre.org/techniques/T1496/
+    tldr: Cryptojacking, Crypto mining, Malware protection
+    detailed: One common purpose for Resource Hijacking is to validate transactions of cryptocurrency networks and earn virtual currency. Adversaries may consume enough system resources to negatively impact and/or cause affected machines to become unresponsive. Servers and cloud-based systems are common targets because of the high potential for available resources.
+  yaml: crypto-jacking-protection.yaml
+- name: defense-control
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: impair-defense
+      url:
+      - https://fight.mitre.org/techniques/FGT1562
+    tldr: Audit defense control points to detect defense impairments
+    detailed: Adversaries may maliciously modify components of a victim environment in order to hinder or disable defensive mechanisms. This not only involves impairing preventative defenses, such as firewalls and anti-virus, but also detection capabilities that defenders can use to audit activity and identify malicious behavior. This may also span both native defenses as well as supplemental capabilities installed by users and administrators.- name: account-mgmt-operations
+  yaml: defese-control.yaml
+- name: kernel-modules
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: Boot or Logon Autostart Execution
+    tldr: Audit loading of kernel modules at boot/system operation
+    detailed: Adversaries may install kernel modules or extensions that will load at boot or during system operation. This allows them to maintain persistence (since the code executes every boot), potentially escalate privileges (kernel-level execution) and hook system calls/hide processes/intercept network traffic.
+  yaml: kernel-modules.yaml
+- name: mount
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: Configuration change control
+    tldr: Audit mount/unmount of filesystem
+    detailed: Detect unauthorized configuration changes (e.g., registry edits, firewall rule changes, cloud IAM policy modifications).Use automated tools to respond/remediate (rollback, alert, block, quarantine).
+  yaml: mount.yaml
+- name: net-tools
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: System Network Connections Discovery
+    tldr: Audit use of network tools
+    detailed: Adversaries query system-level network connection information to identify active connections, listening ports, and running services.This helps them understand how a system communicates internally/externally, which services are exposed, and where to pivot.
+  yaml: net-tools.yaml
+- name: node-file-integrity-monitoring
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: MITRE_T1565_data_manipulation
+      url:
+      - https://attack.mitre.org/techniques/T1565/
+    tldr: File Integrity Monitoring/Protection
+    detailed: Adversaries may insert, delete, or manipulate data in order to influence external outcomes or hide activity, thus threatening the integrity of the data. By manipulating data, adversaries may attempt to affect a business process, organizational understanding, or decision making. The type of modification and the impact it will have depends on the target application and process as well as the goals and objectives of the adversary. For complex systems, an adversary would likely need special expertise and possibly access to specialized software related to the system that would typically be gained through a prolonged information gathering campaign in order to have the desired impact.
+  yaml: node-file-integrity-monitoring.yaml
+- name: package-management-tools
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: Package manager execution
+    tldr: Audit execution of package management tools
+    detailed: Authorized software programs can be limited to specific versions or from a specific source. To facilitate a comprehensive authorized software process and increase the strength of protection for attacks that bypass application level authorized software, software programs may be decomposed into and monitored at different levels of detail. These levels include applications, application programming interfaces, application modules, scripts, system processes, system services, kernel functions, registries, drivers, and dynamic link libraries.
+  yaml: package-management-tools.yaml
+- name: ssh-login
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: Secure-Shell login
+    tldr: Audit use of ssh from sh/bash/dash
+  yaml: ssh-login.yaml
+- name: su-access
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: Abuse Elevation Control Mechanism: Sudo and Sudo Caching
+    tldr: Audit privilege escalation through use of su/sudo
+    detailed: On Unix/Linux/macOS systems, adversaries may abuse sudo (superuser do) to run commands as another user, typically root.If they obtain valid credentials, they can run privileged commands directly, exploit sudoers misconfigurations (e.g., NOPASSWD entries) and abuse sudo token caching (the default grace period after entering a password).
+  yaml: su-access.yaml
+- name: system-config
+  precondition:
+  - OPTSCAN
+  description:
+    tldr: Audit system configuration files
+  yaml: system-config.yaml
+- name: system-credentials
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: Unsecured Credentials
+    tldr: Audit credential modification
+    detailed: Adversaries search for credentials stored insecurely on a system.These might include plaintext usernames/passwords, tokens, keys, or hashes left in files, registries, scripts, configs, or memory.
+  yaml: system-credentials.yaml

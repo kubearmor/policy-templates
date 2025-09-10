@@ -1,0 +1,25 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: net-tools
+spec:
+  action: Audit
+  message: Use of network tools detected
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  process:
+    matchPath:
+    - execname: dig
+    - execname: mitmproxy
+    - execname: ngrep
+    - execname: nmap
+    - execname: tcpdump
+    - execname: tshark
+    - execname: zmap
+  severity: 2
+  tags:
+  - MITRE
+  - NIST
+  - SI-4
+  - T1049

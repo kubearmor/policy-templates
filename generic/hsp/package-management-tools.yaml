@@ -1,0 +1,27 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: package-management-tools
+spec:
+  action: Audit
+  message: pkg management tool execution
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  process:
+    matchPaths:
+    - execname: apk
+    - execname: apt
+    - execname: make
+    - execname: makepkg
+    - execname: rpm
+    - execname: yum
+  severity: 8
+  tags:
+  - CM-6-1
+  - MITRE
+  - NIST
+  - NIST_SA
+  - NIST_SA-20
+  - T1059.004
+  - sensitive asset
