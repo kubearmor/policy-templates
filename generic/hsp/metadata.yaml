@@ -12,7 +12,7 @@ policyRules:
   description:
     tldr: Audit execution of critical processes
   yaml: critical-processes.yaml
-- name: crypto-jacking-protection
+- name: cryptojacking-protection
   precondition:
   - OPTSCAN
   description:
@@ -22,7 +22,7 @@ policyRules:
       - https://attack.mitre.org/techniques/T1496/
     tldr: Cryptojacking, Crypto mining, Malware protection
     detailed: One common purpose for Resource Hijacking is to validate transactions of cryptocurrency networks and earn virtual currency. Adversaries may consume enough system resources to negatively impact and/or cause affected machines to become unresponsive. Servers and cloud-based systems are common targets because of the high potential for available resources.
-  yaml: crypto-jacking-protection.yaml
+  yaml: cryptojacking-protection.yaml
 - name: defense-control
   precondition:
   - OPTSCAN
@@ -94,7 +94,7 @@ policyRules:
   - OPTSCAN
   description:
     refs:
-    - name: Abuse Elevation Control Mechanism: Sudo and Sudo Caching
+    - name: Abuse Elevation Control Mechanism - Sudo and Sudo Caching
     tldr: Audit privilege escalation through use of su/sudo
     detailed: On Unix/Linux/macOS systems, adversaries may abuse sudo (superuser do) to run commands as another user, typically root.If they obtain valid credentials, they can run privileged commands directly, exploit sudoers misconfigurations (e.g., NOPASSWD entries) and abuse sudo token caching (the default grace period after entering a password).
   yaml: su-access.yaml
