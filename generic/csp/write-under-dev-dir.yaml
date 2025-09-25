@@ -3,7 +3,7 @@ kind: KubeArmorClusterPolicy
 metadata:
   annotations:
     app.accuknox.com/type: harden
-  name: harden-write-under-dev-dir
+  name: write-under-dev-dir
 spec:
   action: Audit
   file:

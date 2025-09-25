@@ -13,7 +13,7 @@ spec:
       - key: namespace
         operator: NotIn
         values:
-          - kube-system   # exclude system namespace
+          - kube-system   
   process:
     matchPaths:
       - execname: mount
