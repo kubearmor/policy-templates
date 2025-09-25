@@ -30,4 +30,4 @@ spec:
           - kube-system   # exempt system namespace
   tags:
     - MITRE
-    - MITRE_T1562_impair_defenses
+    - MITRE_T1562_IMPAIR_DEFENSE
