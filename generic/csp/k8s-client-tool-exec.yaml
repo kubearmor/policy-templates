@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
-  name: harden-k8s-client-tool-exec
+  name: k8s-client-tool-exec
   annotations:
     app.accuknox.com/type: harden
 spec:
