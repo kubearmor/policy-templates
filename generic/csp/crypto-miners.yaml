@@ -33,4 +33,3 @@ spec:
   tags:
     - MITRE
     - MITRE_T1496_resource_hijacking
-    - cryptominer
