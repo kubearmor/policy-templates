@@ -24,4 +24,3 @@ spec:
     - MITRE
     - MITRE_T1074_data_staged
     - tmp-directory
-    - audit
