@@ -1,0 +1,36 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: harden-crypto-miners
+spec:
+  action: Block
+  severity: 3
+  message: "Blocked Cryptominer"
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system   
+  process:
+    matchPaths:
+      # DERO cryptominers
+      - execname: dero-miner-linux-amd64
+      - execname: dero-wallet-cli-linux-amd64
+      - execname: dero
+      - execname: derod-linux-amd64
+
+      # Monero CPU/GPU miners
+      - execname: xmrig
+      - execname: xmrig-stak
+      - execname: minerd
+      - execname: mminerd
+      - execname: cpuminer
+      - execname: sgminer
+      - execname: ccminer
+  tags:
+    - MITRE
+    - MITRE_T1496_resource_hijacking
+    - cryptominer

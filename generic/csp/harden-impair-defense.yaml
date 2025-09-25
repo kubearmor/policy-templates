@@ -1,0 +1,30 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: harden-impair-defense
+  annotations:
+    app.accuknox.com/type: harden
+spec:
+  action: Block
+  file:
+    matchDirectories:
+      - dir: /etc/apparmor.d/
+        recursive: true
+        readOnly: true
+      - dir: /etc/sysconfig/selinux/
+        recursive: true
+        readOnly: true
+    matchPaths:
+      - path: /etc/selinux/semanage.conf
+        readOnly: true
+  message: "Detected unauthorized attempt to modify SELinux/AppArmor policy files"
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kubearmor
+          - agents
+  severity: 6
+  tags:
+    - FGT1562

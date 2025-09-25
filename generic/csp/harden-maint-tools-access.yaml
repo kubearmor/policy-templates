@@ -1,0 +1,29 @@
+# CHANGE LOG: Added additional admin directories (/usr/sbin, /usr/local/sbin)
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: harden-maint-tools-access
+spec:
+  action: Audit
+  message: "Detected restricted maintenance tool access attempt"
+  process:
+    matchDirectories:
+      - dir: /sbin/
+        recursive: true
+      - dir: /usr/sbin/
+        recursive: true
+      - dir: /usr/local/sbin/
+        recursive: true
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 1
+  tags:
+    - MITRE
+    - PCI_DSS
