@@ -3,7 +3,7 @@ kind: KubeArmorClusterPolicy
 metadata:
   annotations:
     app.accuknox.com/type: harden
-  name: harden-network-service-scanning
+  name: network-service-scanning
 spec:
   action: Audit
   message: "Detected execution of network interface/service enumeration utilities"
