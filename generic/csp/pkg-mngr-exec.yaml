@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
-  name: harden-pkg-mngr-exec
+  name: pkg-mngr-exec
   annotations:
     app.accuknox.com/type: harden
 spec:
