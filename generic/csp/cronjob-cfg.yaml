@@ -41,8 +41,8 @@ spec:
           - kube-system
   tags:
     - CIS
-    - CIS_5.1_Configure_Cron
-    - CIS_Linux
+    - CIS_5.1_CONFIGURE_CRON
+    - CIS_LINUX
     - NIST
     - NIST_800-53_SI-4
     - SI-4
