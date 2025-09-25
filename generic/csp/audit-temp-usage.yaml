@@ -22,4 +22,4 @@ spec:
     - CIS
     - CIS_CM
     - MITRE
-    - MITRE_T1074_data_staged
+    - MITRE_T1074_DATA_STAGED
