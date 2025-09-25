@@ -29,4 +29,4 @@ spec:
     - FGT1555
     - FIGHT
     - MITRE
-    - MITRE_T1552_unsecured_credentials
+    - MITRE_T1552_UNSECURED_CREDENTIALS
