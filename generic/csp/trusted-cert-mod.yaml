@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
-  name: harden-trusted-cert-mod
+  name: trusted-cert-mod
   annotations:
     app.accuknox.com/type: harden
 spec:
