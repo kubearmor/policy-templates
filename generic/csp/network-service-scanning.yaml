@@ -28,4 +28,4 @@ spec:
     - FGT1046
     - FIGHT
     - MITRE
-    - MITRE_T1046_network_service_discovery
+    - MITRE_T1046_NETWORK_SERVICE_DISCOVERY
