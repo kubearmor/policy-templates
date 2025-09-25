@@ -23,4 +23,3 @@ spec:
     - CIS_CM
     - MITRE
     - MITRE_T1074_data_staged
-    - tmp-directory
