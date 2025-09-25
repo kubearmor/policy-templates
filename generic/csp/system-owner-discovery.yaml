@@ -32,4 +32,4 @@ spec:
           - kube-system
   tags:
     - MITRE
-    - MITRE_T1033_system_owner_user_discovery
+    - MITRE_T1033_SYSTEM_OWNER_USER_DISCOVERY
