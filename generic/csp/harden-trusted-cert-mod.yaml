@@ -1,0 +1,32 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: harden-trusted-cert-mod
+  annotations:
+    app.accuknox.com/type: harden
+spec:
+  action: Audit
+  severity: 2
+  message: "Detected attempt to modify trusted certificates"
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  file:
+    matchDirectories:
+      - dir: /etc/pki/
+        recursive: true
+        readOnly: true
+      - dir: /etc/ssl/
+        recursive: true
+        readOnly: true
+      - dir: /usr/local/share/ca-certificates/
+        recursive: true
+        readOnly: true
+  tags:
+    - FGT1555
+    - FIGHT
+    - MITRE
+    - MITRE_T1552_unsecured_credentials

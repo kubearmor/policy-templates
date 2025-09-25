@@ -1,0 +1,37 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: audit-external-device
+  annotations:
+    app.accuknox.com/type: harden
+spec:
+  action: Audit
+  severity: 3
+  message: "Detected modification of external device access"
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system   # exclude system namespace
+  process:
+    matchPaths:
+      - execname: mount
+      - execname: umount
+      - execname: fdisk
+      - execname: cfdisk
+      - execname: sfdisk
+      - execname: parted
+      - execname: mkfs
+      - execname: fsck
+      - execname: lsblk
+      - execname: blkid
+      - execname: losetup
+      - execname: kpartx
+      - execname: qemu-nbd
+      - execname: mountpoint
+  tags:
+    - MITRE
+    - MITRE_T1091_replication_through_removable_media
+    - external-device
+    - device-management

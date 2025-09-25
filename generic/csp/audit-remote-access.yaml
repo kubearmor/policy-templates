@@ -1,0 +1,32 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: audit-remote-services
+  annotations:
+    app.accuknox.com/type: harden
+spec:
+  action: Audit
+  severity: 5
+  message: "Detected Access to sensitive remote access files"
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  file:
+    matchDirectories:
+      - dir: /etc/ssh/
+        recursive: true
+      - dir: /root/.ssh/
+        recursive: true
+    matchPaths:
+      - path: /etc/sudoers
+      - path: /etc/hosts.allow
+      - path: /etc/hosts.deny
+  tags:
+    - FGT1021
+    - FIGHT
+    - MITRE
+    - remote-access
+    - audit

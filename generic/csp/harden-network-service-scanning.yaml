@@ -1,0 +1,31 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: harden-network-service-scanning
+spec:
+  action: Audit
+  message: "Detected execution of network interface/service enumeration utilities"
+  process:
+    matchPaths:
+      - execname: ip
+      - execname: netstat
+      - execname: iw
+      - execname: iwconfig
+      - execname: ifconfig
+      - execname: arp
+      - execname: ethtool
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - calico-system
+          - kube-system
+  severity: 5
+  tags:
+    - FGT1046
+    - FIGHT
+    - MITRE
+    - MITRE_T1046_network_service_discovery

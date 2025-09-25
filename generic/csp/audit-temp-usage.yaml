@@ -1,0 +1,27 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: audit-tmp-usage
+spec:
+  action: Audit
+  severity: 3
+  message: "Detected /tmp directory access"
+  file:
+    matchDirectories:
+      - dir: /tmp/
+        recursive: true
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  tags:
+    - CIS
+    - CIS_CM
+    - MITRE
+    - MITRE_T1074_data_staged
+    - tmp-directory
+    - audit

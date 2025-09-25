@@ -1,0 +1,40 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: harden-pkg-mngr-exec
+  annotations:
+    app.accuknox.com/type: harden
+spec:
+  action: Audit
+  message: "Detected package manager/build tool execution outside kube-system namespace"
+  selector:
+    matchExpressions:
+    - key: namespace
+      operator: NotIn
+      values:
+      - kube-system
+  process:
+    matchPaths:
+      # Debian / Ubuntu
+      - execname: apt
+      - execname: apt-get
+      - execname: dpkg
+      - execname: gdebi
+      # RHEL / Fedora / CentOS
+      - execname: dnf
+      - execname: rpm
+      - execname: yum
+      # SUSE
+      - execname: zypper
+      # Alpine
+      - execname: apk
+      # Arch / Manjaro
+      - execname: pacman
+      - execname: makepkg
+      - execname: yaourt
+  severity: 5
+  tags:
+    - NIST
+    - NIST_800-53_CM-7(4)
+    - NIST_800-53_SI-4
+    - process
