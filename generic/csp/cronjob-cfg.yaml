@@ -3,7 +3,7 @@ kind: KubeArmorClusterPolicy
 metadata:
   annotations:
     app.accuknox.com/type: harden
-  name: harden-cronjob-cfg
+  name: cronjob-cfg
 spec:
   action: Audit
   severity: 5
