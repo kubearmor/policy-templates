@@ -31,5 +31,3 @@ spec:
     - MITRE
     - MITRE_T1046_network_service_scanning
     - MITRE_T1110_brute_force
-    - recon
-    - pentest
