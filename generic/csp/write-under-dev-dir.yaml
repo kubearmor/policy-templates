@@ -21,7 +21,7 @@ spec:
   severity: 5
   tags:
   - MITRE
-  - MITRE_T1036_masquerading
+  - MITRE_T1036_MASQUERADING
   - NIST
   - NIST_800-53_AU-2
   - NIST_800-53_SI-4
