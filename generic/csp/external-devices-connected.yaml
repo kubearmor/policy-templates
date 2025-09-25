@@ -33,5 +33,3 @@ spec:
   tags:
     - MITRE
     - MITRE_T1091_replication_through_removable_media
-    - external-device
-    - device-management
