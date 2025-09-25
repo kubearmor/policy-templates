@@ -5,7 +5,7 @@ kind: KubeArmorClusterPolicy
 metadata:
   annotations:
     app.accuknox.com/type: harden
-  name: harden-system-owner-discovery
+  name: system-owner-discovery
 spec:
   action: Audit
   severity: 3
