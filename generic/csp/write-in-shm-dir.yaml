@@ -23,5 +23,3 @@ spec:
     - MITRE
     - MITRE_T1059_command_and_scripting_interpreter
     - MITRE_T1543_create_or_modify_system_process
-    - shm-protection
-    - harden
