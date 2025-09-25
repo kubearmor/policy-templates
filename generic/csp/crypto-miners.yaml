@@ -32,4 +32,4 @@ spec:
       - execname: ccminer
   tags:
     - MITRE
-    - MITRE_T1496_resource_hijacking
+    - MITRE_T1496_RESOURCE_HIJACKING
