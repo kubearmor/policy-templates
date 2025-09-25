@@ -167,3 +167,47 @@ policyRules:
     tldr: Audit device directory for enhanced security
     detailed: System monitoring includes external and internal monitoring. External monitoring includes the observation of events occurring at system boundaries. Internal monitoring includes the observation of events occurring within the system. Organizations monitor systems, for example, by observing audit activities in real time or by observing other system aspects such as access patterns, characteristics of access, and other actions.
   yaml: write-under-dev-dir.yaml
+- name: audit-network-packet
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: MITRE_T1562_IMPAIR_DEFENSE
+      url:
+      - https://attack.mitre.org/techniques/T1562/004/
+    tldr: Disable or modify system firewall
+    detailed: Adversaries may modify or disable a system firewall to enable command and control (C2) communications, lateral movement, and data exfiltration that would otherwise be blocked.
+  yaml: audit-network-packet.yaml
+  - name: audit-pen-test-recon
+  precondition:
+  - OPTSCAN
+  description: Adversaries may attempt to get a listing of services running on remote hosts and local network devices, using port, vulnerability, or wordlist scans to identify potential attack surfaces.
+    refs:
+    - name: MITRE_T1046_NETWORK_SERVICE_SCANNING
+      url:
+      - https://attack.mitre.org/techniques/T1046/
+    tldr: Discover network services and hosts
+    detailed: Adversaries may attempt to get a listing of services running on remote hosts and local network devices, using port, vulnerability, or wordlist scans to identify potential attack surfaces.
+  yaml: audit-pen-test-recon.yaml
+  - name: audit-temp-usage 
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: MITRE_T1074_DATA_STAGED
+      url:
+      - https://attack.mitre.org/techniques/T1074/001/
+    tldr: Stage collected data locally
+    detailed: Adversaries may stage collected data in a central local location before exfiltration. This may involve combining files or using archive utilities to prepare data for later movement.
+  yaml: audit-temp-usage.yaml
+  - name: external-devices-connected
+  precondition:
+  - OPTSCAN
+  description:
+    refs:
+    - name: MITRE_T1091_REPLICATION_THROUGH_REMOVABLE_MEDIA
+      url:
+      - https://attack.mitre.org/techniques/T1091/
+    tldr: Replicate via removable media
+    detailed: Adversaries may copy malware onto removable media to spread to other systems, including air-gapped networks, often using autorun or tricking users into executing malicious files.
+  yaml: external-devices-connected.yaml

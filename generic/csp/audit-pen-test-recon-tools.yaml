@@ -1,0 +1,33 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: audit-pen-test-recon-tools
+  annotations:
+    app.accuknox.com/type: harden
+spec:
+  action: Block
+  severity: 3
+  message: "Blocked Reconnaissance or Penetration Testing tool execution"
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system   
+  process:
+    matchPaths:
+      # Recon & Network Scanners
+      - execname: nmap
+      - execname: masscan
+      - execname: zmap
+     
+      # Password / Hash Crackers
+      - execname: hydra
+      - execname: john        
+      - execname: hashcat
+      - execname: medusa
+      - execname: patator
+  tags:
+    - MITRE
+    - MITRE_T1046_NETWORK_SERVICE_SCANNING
+    - MITRE_T1110_BRUTE_FORCE

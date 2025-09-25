@@ -1,32 +1,32 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
+  annotations:
+    app.accuknox.com/type: harden
   name: remote-file-copy
 spec:
   action: Block
-  message: Alert! remote file copy tools execution prevented.
+  message: "Blocked Remote file copy utility execution"
   process:
     matchPaths:
-    - path: /bin/rsync
-    - path: /bin/scp
-    - path: /bin/scp
-    - path: /usr/bin/rsync
-    - path: /usr/bin/scp
-    - path: /usr/bin/scp
+      - execname: scp
+      - execname: rsync
+      - execname: sftp
+      - execname: ftp
   selector:
     matchExpressions:
-    - key: namespace
-      operator: NotIn
-      values:
-      - kube-system
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
   severity: 5
   tags:
-  - MITRE
-  - MITRE_T1552_unsecured_credentials
-  - MITRE_TA0006_credential_access
-  - MITRE_TA0008_lateral_movement
-  - MITRE_TA0010_exfiltration
-  - NIST
-  - NIST_800-53
-  - NIST_800-53_SC-4
-  - NIST_800-53_SI-4(18)
+    - MITRE
+    - MITRE_T1552_UNSECURED_CREDENTIALS
+    - MITRE_TA0006_CREDENTIAL_ACCESS
+    - MITRE_TA0008_LATERAL_MOVEMENT
+    - MITRE_TA0010_EXFILTRATION
+    - NIST
+    - NIST_800-53
+    - NIST_800-53_SC-4
+    - NIST_800-53_SI
