@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
-  name: audit-remote-services
+  name: remote-services
   annotations:
     app.accuknox.com/type: harden
 spec:
