@@ -31,4 +31,3 @@ spec:
   tags:
     - MITRE
     - MITRE_T1562_impair_defenses
-    - network-packet-tools
