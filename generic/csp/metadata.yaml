@@ -199,6 +199,8 @@ policyRules:
       - https://attack.mitre.org/techniques/T1074/001/
     tldr: Stage collected data locally
     detailed: Adversaries may stage collected data in a central local location before exfiltration. This may involve combining files or using archive utilities to prepare data for later movement.
+  yaml: audit-temp-usage.yaml
+  - name: external-devices-connected
   precondition:
   - OPTSCAN
   description:
