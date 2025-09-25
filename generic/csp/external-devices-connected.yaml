@@ -32,4 +32,4 @@ spec:
       - execname: mountpoint
   tags:
     - MITRE
-    - MITRE_T1091_replication_through_removable_media
+    - MITRE_T1091_REPLICATION_THROUGH_REMOVABLE_MEDIA
