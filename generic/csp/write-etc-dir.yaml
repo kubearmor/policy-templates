@@ -5,7 +5,7 @@ kind: KubeArmorClusterPolicy
 metadata:
   annotations:
     app.accuknox.com/type: harden
-  name: harden-write-etc-dir
+  name: write-etc-dir
 spec:
   action: Audit
   file:
