@@ -5,7 +5,7 @@ kind: KubeArmorClusterPolicy
 metadata:
   annotations:
     app.accuknox.com/type: harden
-  name: harden-maint-tools-access
+  name: maint-tools-access
 spec:
   action: Audit
   message: "Detected restricted maintenance tool access attempt"
