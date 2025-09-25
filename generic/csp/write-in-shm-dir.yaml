@@ -1,7 +1,7 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
-  name: harden-restrict-write-shm
+  name: write-in-shm-dir
   annotations:
     app.accuknox.com/type: harden
 spec:
