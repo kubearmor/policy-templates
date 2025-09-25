@@ -21,5 +21,5 @@ spec:
   severity: 7
   tags:
     - MITRE
-    - MITRE_T1059_command_and_scripting_interpreter
-    - MITRE_T1543_create_or_modify_system_process
+    - MITRE_T1059_COMMAND_AND_SCRIPTING_INTERPRETER
+    - MITRE_T1543_CREATE_OR_MODIFY_SYSTEM_PROCESS
