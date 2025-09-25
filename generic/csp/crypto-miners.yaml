@@ -3,7 +3,7 @@ kind: KubeArmorClusterPolicy
 metadata:
   annotations:
     app.accuknox.com/type: harden
-  name: harden-crypto-miners
+  name: crypto-miners
 spec:
   action: Block
   severity: 3
