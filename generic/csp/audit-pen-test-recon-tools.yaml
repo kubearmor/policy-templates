@@ -29,5 +29,5 @@ spec:
       - execname: patator
   tags:
     - MITRE
-    - MITRE_T1046_network_service_scanning
-    - MITRE_T1110_brute_force
+    - MITRE_T1046_NETWORK_SERVICE_SCANNING
+    - MITRE_T1110_BRUTE_FORCE
