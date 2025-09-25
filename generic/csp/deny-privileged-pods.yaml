@@ -5,7 +5,7 @@ metadata:
     app.accuknox.com/type: harden
   labels:
     app.kubernetes.io/name: admission-controller
-    name: harden-deny-privileged-pods
+    name: deny-privileged-pods
 spec:
   denyPrivilegedPod:
     action: Audit
