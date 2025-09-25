@@ -3,7 +3,7 @@ kind: KubeArmorClusterPolicy
 metadata:
   annotations:
     app.accuknox.com/type: harden
-  name: harden-remote-file-copy
+  name: remote-file-copy
 spec:
   action: Block
   message: "Blocked Remote file copy utility execution"
