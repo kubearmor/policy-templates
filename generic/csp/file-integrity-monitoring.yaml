@@ -3,7 +3,7 @@ kind: KubeArmorClusterPolicy
 metadata:
   annotations:
     app.accuknox.com/type: harden
-  name: harden-file-integrity-monitoring
+  name: file-integrity-monitoring
 spec:
   action: Audit
   message: "Detected attempted modification of core system binary/library directories (file integrity)"
