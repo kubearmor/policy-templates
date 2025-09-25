@@ -33,8 +33,8 @@ spec:
   severity: 1
   tags:
     - MITRE
-    - MITRE_T1036_masquerading
-    - MITRE_T1565_data_manipulation
+    - MITRE_T1036_MASQUERADING
+    - MITRE_T1565_DATA_MANIPULATION
     - NIST
     - NIST_800-53_AU-2
-    - NIST_800-53_SI-
+    - NIST_800-53_SI
