@@ -4,21 +4,26 @@ metadata:
   name: cryptojacking-protection
 spec:
   action: Block
-  message: Cryptominer detected and blocked
+  message: "Blocked Cryptominer"
   nodeSelector:
     matchLabels:
       kubearmor.io/hostname: '*'
   process:
     matchPaths:
+    - execname: apk
+    - execname: apt
     - execname: dero-miner-linux-amd64
     - execname: dero-wallet-cli-linux-amd64
     - execname: dero
     - execname: derod-linux-amd64
     - execname: masscan
+    - execname: nmap
+    - execname: ntpdate
     - execname: xmrig
     - execname: zgrab2
   severity: 1
   tags:
-  - MITRE
-  - MITRE_T1496_resource_hijacking
-  - cryptominer
+  - MITRE_T1496_RESOURCE_HIJACKING
+  - MITRE_T1499_ENDPOINT_DOS
+  - NIST_SI-4
+  - PCI_DSS_10.5.1

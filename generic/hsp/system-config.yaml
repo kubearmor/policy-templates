@@ -4,6 +4,10 @@ metadata:
   name: system-config
 spec:
   action: Audit
+  message: "Detected modification attempt of system configuration files"
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
   file:
     matchDirectories:
     - dir: /boot/
@@ -67,20 +71,10 @@ spec:
       readOnly: true
     - path: /usr/local/etc/sudoers
       readOnly: true
-  message: System configuration file modified
-  nodeSelector:
-    matchLabels:
-      kubearmor.io/hostname: '*'
   severity: 6
   tags:
-  - CA-9
-  - CM-6-1
-  - MITRE
-  - NIST
-  - NIST-800-53
-  - NIST_SA
-  - NIST_SA-20
-  - STIG
-  - T1552.003
-  - UBTU-20-010451
-  - sensitive asset
+  - MITRE_T1492_MODIFY_SYSTEM_IMAGE
+  - NIST_CM-6
+  - PCI_DSS_2.2.4
+
+  

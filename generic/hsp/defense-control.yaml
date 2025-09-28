@@ -4,28 +4,37 @@ metadata:
   name: defense-control
 spec:
   action: Audit
+  message: "Detected attempt to access or modify runtime security files/processes"
+  nodeSelector:
+    matchLabels:
+      kubearmar.io/hostname: '*'
   file:
     matchPaths:
     - path: /etc/systemd/system/multi-user.target.wants/kubearmor-vm-adapter.service
     - path: /etc/systemd/system/multi-user.target.wants/kubearmor.service
-  message: Runtime security files/processes accessed.
-  nodeSelector:
-    matchLabels:
-      kubearmor.io/hostname: '*'
   process:
     matchPaths:
-    - execname: aa-audit
-    - execname: aa-cleanprof
-    - execname: aa-disable
-    - execname: chacl
-    - execname: chcon
-    - execname: setfacl
+    - execname: aa-audit          
+    - execname: aa-cleanprof      
+    - execname: aa-disable        
+    - execname: apparmor_parser  
+    - execname: semanage         
+    - execname: setenforce        
+    - execname: chcon             
+    - execname: chacl             
+    - execname: setfacl          
+    - execname: auditctl         
+    - execname: augenrules       
+    - execname: ausearch          
+    - execname: systemctl         
+    - execname: modprobe          
+    - execname: kmod              
+    - execname: chattr            
+    - execname: chown             
+    - execname: chgrp             
   severity: 4
   tags:
-  - FIGHT
-  - MITRE
-  - MITRE_T1562_Impair_Defenses
-  - STIG
-  - T1562
-  - UBTU-20-010168
-  - Ubuntu
+   - MITRE_T1562_IMPAIR_DEFENSES
+   - MITRE_T1562.001_DISABLE_SECURITY_TOOLS
+   - NIST_SI-4
+   - STIG_UBTU-20-010168

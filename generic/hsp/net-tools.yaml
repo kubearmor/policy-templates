@@ -4,22 +4,25 @@ metadata:
   name: net-tools
 spec:
   action: Audit
-  message: Use of network tools detected
+  message: "Detected execution of network monitoring or scanning tools"
   nodeSelector:
     matchLabels:
       kubearmor.io/hostname: '*'
   process:
     matchPath:
-    - execname: dig
     - execname: mitmproxy
-    - execname: ngrep
     - execname: nmap
     - execname: tcpdump
     - execname: tshark
     - execname: zmap
-  severity: 2
+    - execname: nc        
+    - execname: socat     
+    - execname: masscan   
+    - execname: bettercap 
+  severity: 5
   tags:
-  - MITRE
-  - NIST
-  - SI-4
-  - T1049
+  - MITRE_T1049_SYSTEM_NETWORK_CONNECTIONS_DISCOVERY
+  - MITRE_T1040_NETWORK_SNIFFING
+  - NIST_SI-4
+  - PCI_DSS_11.4
+
