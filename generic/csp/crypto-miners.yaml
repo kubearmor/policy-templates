@@ -1,34 +1,35 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
+  annotations:
+    app.accuknox.com/type: harden
   name: crypto-miners
 spec:
   action: Block
-  message: cryptominer detected and blocked
-  process:
-    matchDirectories:
-    - dir: /tmp/
-      recursive: true
-    matchPaths:
-    - execname: apk
-    - execname: apt
-    - execname: dero-miner-linux-amd64
-    - execname: dero-wallet-cli-linux-amd64
-    - execname: dero
-    - execname: derod-linux-amd64
-    - execname: masscan
-    - execname: nmap
-    - execname: ntpdate
-    - execname: xmrig
-    - execname: zgrab2
+  severity: 3
+  message: "Blocked Cryptominer"
   selector:
     matchExpressions:
-    - key: namespace
-      operator: NotIn
-      values:
-      - kube-system
-  severity: 10
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system   
+  process:
+    matchPaths:
+      # DERO cryptominers
+      - execname: dero-miner-linux-amd64
+      - execname: dero-wallet-cli-linux-amd64
+      - execname: dero
+      - execname: derod-linux-amd64
+
+      # Monero CPU/GPU miners
+      - execname: xmrig
+      - execname: xmrig-stak
+      - execname: minerd
+      - execname: mminerd
+      - execname: cpuminer
+      - execname: sgminer
+      - execname: ccminer
   tags:
-  - MITRE
-  - MITRE_T1496_resource_hijacking
-  - cryptominer
+    - MITRE
+    - MITRE_T1496_RESOURCE_HIJACKING

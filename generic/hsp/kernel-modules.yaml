@@ -4,6 +4,7 @@ metadata:
   name: kernel-modules
 spec:
   action: Audit
+  message: "Detected attempt to modify or load/unload kernel modules"
   file:
     matchDirectories:
     - dir: /etc/modprobe.d/
@@ -15,16 +16,15 @@ spec:
     matchPaths:
     - path: /etc/modules
       readOnly: true
-  message: modification of Kernel modules
   nodeSelector:
     matchLabels:
       kubearmor.io/hostname: '*'
   process:
     matchPaths:
     - execname: kmod
-  severity: 1
+  severity: 4
   tags:
-  - MITRE
-  - STIG
-  - T1547.006
-  - UBTU-20-010297
+   - MITRE_T1547.006_KERNEL_MODULE_PERSISTENCE
+   - MITRE_T1200_HARDWARE_FIRMWARE
+   - NIST_SI-7
+   - STIG_UBTU-20-010297

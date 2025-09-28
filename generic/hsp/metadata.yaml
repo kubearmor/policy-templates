@@ -17,7 +17,7 @@ policyRules:
   - OPTSCAN
   description:
     refs:
-    - name: MITRE_T1496_resource_hijacking
+    - name: MITRE_T1496_RESOURCE_HIJACKING
       url:
       - https://attack.mitre.org/techniques/T1496/
     tldr: Cryptojacking, Crypto mining, Malware protection

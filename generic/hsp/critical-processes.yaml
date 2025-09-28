@@ -4,7 +4,7 @@ metadata:
   name: critical-processes
 spec:
   action: Audit
-  message: critical process execution
+  message: "Detected execution of critical processes"
   nodeSelector:
     matchLabels:
       kubearmor.io/hostname: '*'
@@ -20,4 +20,15 @@ spec:
     - execname: iptables
     - execname: llvm
     - execname: pfctl
+    - execname: passwd
+    - execname: chown
+    - execname: chmod
+    - execname: mount
+    - execname: crontab
   severity: 4
+  tags:
+  - MITRE_T1059_COMMAND_INTERPRETER
+  - MITRE_T1543_CREATE_MODIFY_SYSTEM_PROCESS
+  - NIST_AU-2
+  - PCI_DSS_10.2.2
+

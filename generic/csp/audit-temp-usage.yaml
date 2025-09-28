@@ -1,21 +1,16 @@
-# CHANGE LOG: Added additional admin directories (/usr/sbin, /usr/local/sbin)
-
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
   annotations:
     app.accuknox.com/type: harden
-  name: maint-tools-access
+  name: audit-tmp-usage
 spec:
   action: Audit
-  message: "Detected restricted maintenance tool access attempt"
-  process:
+  severity: 3
+  message: "Detected /tmp directory access"
+  file:
     matchDirectories:
-      - dir: /sbin/
-        recursive: true
-      - dir: /usr/sbin/
-        recursive: true
-      - dir: /usr/local/sbin/
+      - dir: /tmp/
         recursive: true
   selector:
     matchExpressions:
@@ -23,7 +18,8 @@ spec:
         operator: NotIn
         values:
           - kube-system
-  severity: 1
   tags:
+    - CIS
+    - CIS_CM
     - MITRE
-    - PCI_DSS
+    - MITRE_T1074_DATA_STAGED

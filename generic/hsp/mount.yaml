@@ -4,7 +4,7 @@ metadata:
   name: mount
 spec:
   action: Audit
-  message: Attempt to mount/umount detected.
+  message: "Detected attempt to mount or unmount a filesystem"
   nodeSelector:
     matchLabels:
       kubearmor.io/hostname: '*'
@@ -12,13 +12,22 @@ spec:
     matchPaths:
     - execname: mount
     - execname: umount
-  severity: 2
+    - execname: mount
+    - execname: umount
+    - execname: findmnt
+    - execname: swapon
+    - execname: swapoff
+    - execname: losetup
+    - execname: mount.nfs
+    - execname: mount.cifs
   syscalls:
     matchSyscalls:
     - syscall:
       - mount
       - mount2
+  severity: 2
   tags:
-  - CM-3(5)
-  - CONFIGURATION CHANGE CONTROL
-  - NIST
+  - MITRE_T1547.009_BOOT_OR_LOGON_AUTOSTART
+  - MITRE_T1078_VALID_ACCOUNTS
+  - NIST_CM-3(5)
+  - PCI_DSS_10.2.7
