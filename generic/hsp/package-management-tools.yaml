@@ -13,9 +13,6 @@ spec:
     - execname: apk
     - execname: apt
     - execname: make
-    - execname: makepkg
-    - execname: rpm
-    - execname: yum
     - execname: gdebi
       # RHEL / Fedora / CentOS
     - execname: dnf
