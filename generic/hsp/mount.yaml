@@ -12,8 +12,8 @@ spec:
     matchPaths:
     - execname: mount
     - execname: umount
-    - execname: mount
-    - execname: umount
+    - execname: mount2
+    - execname: umount2
     - execname: findmnt
     - execname: swapon
     - execname: swapoff
