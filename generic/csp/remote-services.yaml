@@ -2,26 +2,29 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
   name: remote-services
+  annotations:
+    app.accuknox.com/type: harden
 spec:
   action: Audit
-  file:
-    matchDirectories:
-    - dir: /etc/ssh/
-    matchPaths:
-    - path: /etc/passwd
-    - path: /etc/shadow
-    - path: /var/log/auth.log
-    - path: /var/log/wtmp
-    - path: /var/run/utmp
-  message: Warning! access sensitive files detected
+  severity: 5
+  message: "Detected Access to sensitive remote access files"
   selector:
     matchExpressions:
-    - key: namespace
-      operator: NotIn
-      values:
-      - kube-system
-  severity: 3
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  file:
+    matchDirectories:
+      - dir: /etc/ssh/
+        recursive: true
+      - dir: /root/.ssh/
+        recursive: true
+    matchPaths:
+      - path: /etc/sudoers
+      - path: /etc/hosts.allow
+      - path: /etc/hosts.deny
   tags:
-  - FGT1021
-  - FIGHT
-  - MITRE
+    - FGT1021
+    - FIGHT
+    - MITRE

@@ -4,37 +4,31 @@ metadata:
   name: account-mgmt-operations
 spec:
   action: Audit
-  message: linux user modification operation detected
+  message: "Detected Linux user or group account modification operation"
   nodeSelector:
     matchLabels:
       kubearmor.io/hostname: '*'
   process:
     matchPaths:
-    - execname: chage
-    - execname: chgpasswd
-    - execname: chpasswd
-    - execname: gpasswd
-    - execname: groupadd
-    - execname: groupdel
-    - execname: groupmems
-    - execname: groupmod
-    - execname: newgrp
-    - execname: newusers
-    - execname: sudoedit
-    - execname: useradd
-    - execname: userdel
-    - execname: usermod
-    - execname: visudo
-    - path: /usr/bin/passwd
+      - execname: chage
+      - execname: chgpasswd
+      - execname: chpasswd
+      - execname: gpasswd
+      - execname: groupadd
+      - execname: groupdel
+      - execname: groupmems
+      - execname: groupmod
+      - execname: newgrp
+      - execname: newusers
+      - execname: sudoedit
+      - execname: useradd
+      - execname: userdel
+      - execname: usermod
+      - execname: visudo
+      - path: /usr/bin/passwd
   severity: 5
   tags:
-  - AC-2(4)
-  - MITRE
-  - NIST
-  - NIST-800-53
-  - NIST_SA
-  - NIST_SA-20
-  - S-Bit
-  - STIG
-  - T1136
-  - T1548
+  - MITRE_T1136_CREATE_ACCOUNT
+  - MITRE_T1548_ABUSE_ELEVATION_CONTROL
+  - NIST_AC-2(4)
+  - STIG_RHEL-07-010200

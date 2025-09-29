@@ -4,7 +4,7 @@ metadata:
   name: package-management-tools
 spec:
   action: Audit
-  message: pkg management tool execution
+  message: "Detected execution of package management tools"
   nodeSelector:
     matchLabels:
       kubearmor.io/hostname: '*'
@@ -13,15 +13,20 @@ spec:
     - execname: apk
     - execname: apt
     - execname: make
-    - execname: makepkg
+    - execname: gdebi
+      # RHEL / Fedora / CentOS
+    - execname: dnf
     - execname: rpm
     - execname: yum
+      # SUSE
+    - execname: zypper
+      # Arch / Manjaro
+    - execname: pacman
+    - execname: makepkg
+    - execname: yaourt
   severity: 8
   tags:
-  - CM-6-1
-  - MITRE
-  - NIST
-  - NIST_SA
-  - NIST_SA-20
-  - T1059.004
-  - sensitive asset
+   - MITRE_T1072_SOFTWARE_DEPLOYMENT_TOOLS
+   - NIST_CM-6
+   - PCI_DSS_6.2
+ 

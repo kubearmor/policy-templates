@@ -2,21 +2,24 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
   name: write-in-shm-dir
+  annotations:
+    app.accuknox.com/type: harden
 spec:
-  action: Block
+  action: Audit
   file:
     matchDirectories:
-    - dir: /dev/shm/
-      readOnly: true
-      recursive: true
-  message: Alert! write to /dev/shm folder prevented.
+      - dir: /dev/shm/
+        readOnly: true
+        recursive: true
+  message: "Detected attempt to write to /dev/shm folder"
   selector:
     matchExpressions:
-    - key: namespace
-      operator: NotIn
-      values:
-      - kube-system
-  severity: 5
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 7
   tags:
-  - MITRE
-  - MITRE_execution
+    - MITRE
+    - MITRE_T1059_COMMAND_AND_SCRIPTING_INTERPRETER
+    - MITRE_T1543_CREATE_OR_MODIFY_SYSTEM_PROCESS

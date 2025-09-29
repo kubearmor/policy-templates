@@ -4,7 +4,7 @@ metadata:
   name: ssh-login
 spec:
   action: Audit
-  message: Login/Execution through SSH detected
+  message: "Detected login/execution through SSH"
   nodeSelector:
     matchLabels:
       kubearmor.io/hostname: '*'
@@ -20,3 +20,8 @@ spec:
       - path: /usr/sbin/sshd
       path: /bin/sh
   severity: 6
+  tags:
+  - MITRE_T1078_VALID_ACCOUNTS
+  - NIST_IA-2
+  - PCI_DSS_8.2
+  

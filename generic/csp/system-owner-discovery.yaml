@@ -1,23 +1,35 @@
+#Added Audit mode for /usr/bin/id
+
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
+  annotations:
+    app.accuknox.com/type: harden
   name: system-owner-discovery
 spec:
-  action: Block
-  message: System owner discovery command execution denied
+  action: Audit
+  severity: 3
+  message: "Detected System Owner/User enumeration command execution"
   process:
     matchPaths:
-    - path: /usr/bin/id
-    - path: /usr/bin/w
-    - path: /usr/bin/who
-    - path: /usr/bin/whoami
+    - execname: id
+    - execname: w
+    - execname: who
+    - execname: whoami
+    - execname: logname
+    - execname: groups
+    - execname: last
+    - execname: users
+    - execname: getent
+  file:
+    matchPaths:
+      - path: /etc/group
   selector:
     matchExpressions:
-    - key: namespace
-      operator: NotIn
-      values:
-      - kube-system
-  severity: 3
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
   tags:
-  - MITRE
-  - MITRE_T1082_system_information_discovery
+    - MITRE
+    - MITRE_T1033_SYSTEM_OWNER_USER_DISCOVERY

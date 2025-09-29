@@ -4,7 +4,7 @@ metadata:
   name: su-access
 spec:
   action: Audit
-  message: Privilege escalation through use of su/sudo
+  message: "Detected potential privilege escalation via su or sudo command"
   nodeSelector:
     matchLabels:
       kubearmor.io/hostname: '*'
@@ -13,6 +13,6 @@ spec:
     - execname: su
   severity: 8
   tags:
-  - MITRE
-  - STIG
-  - T1548.003
+   - MITRE_T1548.003_ABUSE_ELEVATION_CONTROL
+   - NIST_AC-6
+   - PCI_DSS_7.2

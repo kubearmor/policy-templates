@@ -1,15 +1,19 @@
+#Added Audit action
+
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
+  annotations:
+    app.accuknox.com/type: harden
   name: write-etc-dir
 spec:
-  action: Block
+  action: Audit
   file:
     matchDirectories:
     - dir: /etc/
       readOnly: true
       recursive: true
-  message: Alert! File creation under /etc/ directory detected.
+  message: "Detected File creation under /etc/ directory"
   selector:
     matchExpressions:
     - key: namespace
@@ -19,11 +23,11 @@ spec:
   severity: 5
   tags:
   - MITRE
-  - MITRE_T1036.005_match_legitimate_name_or_location
-  - MITRE_T1036_masquerading
-  - MITRE_T1562.001_disable_or_modify_tools
-  - MITRE_TA0003_persistence
-  - MITRE_TA0005_defense_evasion
+  - MITRE_T1036.005_MATCH_LEGITIMATE_NAME_OR_LOCATION
+  - MITRE_T1036_MASQUERADING
+  - MITRE_T1562.001_DISABLE_OR_MODIFY_TOOLS
+  - MITRE_TA0003_PERSISTENCE
+  - MITRE_TA0005_DEFENSE_EVASION
   - NIST
   - NIST_800-53
   - NIST_800-53_SI-4

@@ -1,41 +1,40 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
+  annotations:
+    app.accuknox.com/type: harden
   name: file-integrity-monitoring
 spec:
-  action: Block
+  action: Audit
+  message: "Detected attempted modification of core system binary/library directories (file integrity)"
   file:
     matchDirectories:
-    - dir: /bin/
-      readOnly: true
-      recursive: true
-    - dir: /boot/
-      readOnly: true
-      recursive: true
-    - dir: /sbin/
-      readOnly: true
-      recursive: true
-    - dir: /usr/bin/
-      readOnly: true
-      recursive: true
-    - dir: /usr/lib/
-      readOnly: true
-      recursive: true
-    - dir: /usr/sbin/
-      readOnly: true
-      recursive: true
-  message: Detected and prevented compromise to File integrity
+      - dir: /bin/
+        recursive: true
+        readOnly: true
+      - dir: /sbin/
+        recursive: true
+        readOnly: true
+      - dir: /usr/bin/
+        recursive: true
+        readOnly: true
+      - dir: /usr/sbin/
+        recursive: true
+        readOnly: true
+      - dir: /boot/
+        recursive: true
+        readOnly: true
   selector:
     matchExpressions:
-    - key: namespace
-      operator: NotIn
-      values:
-      - kube-system
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
   severity: 1
   tags:
-  - MITRE
-  - MITRE_T1036_masquerading
-  - MITRE_T1565_data_manipulation
-  - NIST
-  - NIST_800-53_AU-2
-  - NIST_800-53_SI-4
+    - MITRE
+    - MITRE_T1036_MASQUERADING
+    - MITRE_T1565_DATA_MANIPULATION
+    - NIST
+    - NIST_800-53_AU-2
+    - NIST_800-53_SI
