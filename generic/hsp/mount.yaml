@@ -1,4 +1,4 @@
-apiVersion: security.kubearmor.com/v1
+\apiVersion: security.kubearmor.com/v1
 kind: KubeArmorHostPolicy
 metadata:
   name: mount
@@ -12,8 +12,6 @@ spec:
     matchPaths:
     - execname: mount
     - execname: umount
-    - execname: mount2
-    - execname: umount2
     - execname: findmnt
     - execname: swapon
     - execname: swapoff
@@ -25,6 +23,8 @@ spec:
     - syscall:
       - mount
       - mount2
+      - umount
+      - umount2
   severity: 2
   tags:
   - MITRE_T1547.009_BOOT_OR_LOGON_AUTOSTART
