@@ -15,8 +15,7 @@ spec:
           - kube-system
   process:
     matchPaths:  
-    - path: /bin/tar        
-    - path: /usr/bin/tar    
+    - execname: tar  
   severity: 7
   tags:
     - MITRE_T1105
