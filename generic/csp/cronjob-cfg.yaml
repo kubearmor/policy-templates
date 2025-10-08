@@ -40,9 +40,6 @@ spec:
         values:
           - kube-system
   tags:
-    - CIS
-    - CIS_5.1_CONFIGURE_CRON
-    - CIS_LINUX
-    - NIST
+    - MITRE_T1053_SCHEDULED_TASK   
     - NIST_800-53_SI-4
-    - SI-4
+    - PCI_DSS_6.4   

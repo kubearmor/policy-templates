@@ -27,4 +27,6 @@ spec:
           - agents
   severity: 6
   tags:
-    - FGT1562
+    - MITRE_T1562_001_IMPAIR_DEFENSES
+    - NIST_RS.MI-1
+    - PCI_DSS_11.5.1

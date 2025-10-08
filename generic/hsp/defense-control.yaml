@@ -7,7 +7,7 @@ spec:
   message: "Detected attempt to access or modify runtime security files/processes"
   nodeSelector:
     matchLabels:
-      kubearmar.io/hostname: '*'
+      kubearmor.io/hostname: '*'
   file:
     matchPaths:
     - path: /etc/systemd/system/multi-user.target.wants/kubearmor-vm-adapter.service

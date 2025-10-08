@@ -31,5 +31,6 @@ spec:
       - execname: qemu-nbd
       - execname: mountpoint
   tags:
-    - MITRE
     - MITRE_T1091_REPLICATION_THROUGH_REMOVABLE_MEDIA
+    - NIST_DE.CM-1
+    - PCI_DSS_10.2.3

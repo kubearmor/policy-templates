@@ -1,0 +1,34 @@
+# #This policy requires some additional configuration to work
+
+# kubectl edit kubearmorconfig -n kubearmor
+
+# kubearmorImage:
+#     args:
+#     - -untrackedNs=kubearmor
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  name: no-shell-exec-kube-system
+  annotations:
+    app.accuknox.com/type: harden
+spec:
+  action: Block
+  message: "Blocked shell execution inside kube-system namespace"
+  selector:
+    matchExpressions:
+    - key: namespace
+      operator: In
+      values:
+      - kube-system
+  process:
+    matchPaths:
+      - execname: bash
+      - execname: sh
+      - execname: dash
+      - execname: zsh
+  severity: 3
+  tags:
+    - MITRE_T1059          
+    - NIST_CM-7
+    - PCI_DSS_10.2.6
