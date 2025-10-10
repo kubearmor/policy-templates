@@ -25,7 +25,6 @@ spec:
           - kube-system
   severity: 5
   tags:
-    - FGT1046
-    - FIGHT
-    - MITRE
     - MITRE_T1046_NETWORK_SERVICE_DISCOVERY
+    - NIST_PR.PT-1
+    - PCI_DSS_10.2.3

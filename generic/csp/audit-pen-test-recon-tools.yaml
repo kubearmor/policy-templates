@@ -28,6 +28,6 @@ spec:
       - execname: medusa
       - execname: patator
   tags:
-    - MITRE
-    - MITRE_T1046_NETWORK_SERVICE_SCANNING
     - MITRE_T1110_BRUTE_FORCE
+    - NIST_SI-4   
+    - PCI_DSS_11.5 

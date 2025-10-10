@@ -31,5 +31,6 @@ spec:
         values:
           - kube-system
   tags:
-    - MITRE
     - MITRE_T1033_SYSTEM_OWNER_USER_DISCOVERY
+    - NIST_PR.AC-1 
+    - PCI_DSS_7.2.1

@@ -1,0 +1,23 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/source: KubeArmor Operator
+    app.accuknox.com/type: preset
+  name: preset-proc-env
+spec:
+  message: "Blocked unauthorized env var access"
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  presets:
+  - action: Block
+    name: protectEnv
+  severity: 5
+  tags:
+    - MITRE_T1059           
+    - NIST_CM-7             
+    - PCI_DSS_10.2.6  

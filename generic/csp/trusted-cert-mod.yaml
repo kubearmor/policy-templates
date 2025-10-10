@@ -26,7 +26,6 @@ spec:
         recursive: true
         readOnly: true
   tags:
-    - FGT1555
-    - FIGHT
-    - MITRE
     - MITRE_T1552_UNSECURED_CREDENTIALS
+    - NIST_PR.PT-1
+    - PCI_DSS_10.5.5

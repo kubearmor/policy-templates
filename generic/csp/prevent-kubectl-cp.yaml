@@ -1,24 +1,24 @@
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorClusterPolicy
 metadata:
+  name: prevent-kubectl-cp
   annotations:
     app.accuknox.com/type: harden
-  name: audit-tmp-usage
 spec:
-  action: Audit
-  severity: 3
-  message: "Detected /tmp directory access"
-  file:
-    matchDirectories:
-      - dir: /tmp/
-        recursive: true
+  action: Block
+  message: "Blocked tar execution (kubectl cp or other file transfer)"
   selector:
     matchExpressions:
       - key: namespace
         operator: NotIn
         values:
           - kube-system
+  process:
+    matchPaths:  
+    - execname: tar  
+  severity: 7
   tags:
-    - MITRE_T1074_DATA_STAGED
-    - NIST_AU-6  
-    - PCI_DSS_10.2.6 
+    - MITRE_T1105
+    - NIST_CM-7
+    - PCI_DSS_10.2.6
+   

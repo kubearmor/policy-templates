@@ -20,6 +20,6 @@ spec:
           - kube-system
   severity: 7
   tags:
-    - MITRE
-    - MITRE_T1059_COMMAND_AND_SCRIPTING_INTERPRETER
     - MITRE_T1543_CREATE_OR_MODIFY_SYSTEM_PROCESS
+    - NIST_PR.AC-4
+    - PCI_DSS_11.5.1 

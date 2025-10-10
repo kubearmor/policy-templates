@@ -21,12 +21,6 @@ spec:
           - kube-system
   severity: 5
   tags:
-    - MITRE
     - MITRE_T1552_UNSECURED_CREDENTIALS
-    - MITRE_TA0006_CREDENTIAL_ACCESS
-    - MITRE_TA0008_LATERAL_MOVEMENT
-    - MITRE_TA0010_EXFILTRATION
-    - NIST
-    - NIST_800-53
-    - NIST_800-53_SC-4
     - NIST_800-53_SI
+    - PCI_DSS_4.1

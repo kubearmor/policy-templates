@@ -25,6 +25,6 @@ spec:
       - path: /etc/hosts.allow
       - path: /etc/hosts.deny
   tags:
-    - FGT1021
-    - FIGHT
-    - MITRE
+    - MITRE_T1021_REMOTE_SERVICES
+    - NIST_PR.DS-1
+    - PCI_DSS_10.2.3

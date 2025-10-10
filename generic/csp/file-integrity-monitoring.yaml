@@ -32,9 +32,6 @@ spec:
           - kube-system
   severity: 1
   tags:
-    - MITRE
     - MITRE_T1036_MASQUERADING
-    - MITRE_T1565_DATA_MANIPULATION
-    - NIST
     - NIST_800-53_AU-2
-    - NIST_800-53_SI
+    - PCI_DSS_11.5.1

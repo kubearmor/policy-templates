@@ -34,6 +34,6 @@ spec:
       - execname: yaourt
   severity: 5
   tags:
-    - NIST
-    - NIST_800-53_CM-7(4)
-    - NIST_800-53_SI-4
+    - MITRE_T1543_CREATE_MODIFY_SYSTEM_PROCESS
+    - NIST_PR.DS-8 
+    - PCI_DSS_6.3.2

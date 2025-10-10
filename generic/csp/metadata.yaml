@@ -308,3 +308,38 @@ policyRules:
         systems, including air-gapped networks, often using autorun or tricking
         users into executing malicious files.
     yaml: external-devices-connected.yaml
+  - name: prevent-kubectl-cp
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name:  MITRE_T1105
+          url:
+            - https://attack.mitre.org/techniques/T1105/
+      tldr: Block kubectl cp for security
+      detailed: Adversaries may transfer tools or other files from an external system into a compromised environment. Tools or files may be copied from an external adversary-controlled system to the victim network through the command and control channel or through alternate protocols such as ftp. Once present, adversaries may also transfer/spread tools between victim devices within a compromised environment
+    yaml: prevent-kubectl-cp.yaml
+  - name: prevent-shell-exec
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1059    
+          url:
+            - https://attack.mitre.org/techniques/T1059/
+      tldr: Prevent shell execution in kube-system namespace
+      detailed: Adversaries may abuse command and script interpreters to execute commands, scripts, or binaries. These interfaces and languages provide ways of interacting with computer systems and are a common feature across many different platforms. Most systems come with some built-in command-line interface and scripting capabilities.
+    yaml: prevent-shell-exec.yaml
+  - name: env-preset
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1059    
+          url:
+            - https://attack.mitre.org/techniques/T1059/
+      tldr: Block unauthorized environment variable access.
+      detailed: Adversaries may abuse command and script interpreters to execute commands, scripts, or binaries. These interfaces and languages provide ways of interacting with computer systems and are a common feature across many different platforms. Most systems come with some built-in command-line interface and scripting capabilities.
+    yaml: env-preset.yaml
+  
+   
