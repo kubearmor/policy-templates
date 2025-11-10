@@ -5,8 +5,8 @@ metadata:
     app.accuknox.com/type: harden
   name: remote-file-copy
 spec:
-  action: Block
-  message: "Blocked Remote file copy utility execution"
+  action: Audit
+  message: "Detected Remote file copy utility execution"
   process:
     matchPaths:
       - execname: scp

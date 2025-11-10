@@ -3,12 +3,12 @@ kind: KubeArmorClusterPolicy
 metadata:
   annotations:
     app.accuknox.com/type: harden
-  name: audit-tmp-usage
+  name: audit-process-exec-in-tmp
 spec:
   action: Audit
   severity: 3
   message: "Detected /tmp directory access"
-  file:
+  process:
     matchDirectories:
       - dir: /tmp/
         recursive: true
