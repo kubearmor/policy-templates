@@ -13,6 +13,7 @@ spec:
       - execname: rsync
       - execname: sftp
       - execname: ftp
+      - execname: netkit-ftp
   selector:
     matchExpressions:
       - key: namespace
