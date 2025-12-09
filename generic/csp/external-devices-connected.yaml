@@ -8,12 +8,6 @@ spec:
   action: Audit
   severity: 3
   message: "Detected modification of external device access"
-  selector:
-    matchExpressions:
-      - key: namespace
-        operator: NotIn
-        values:
-          - kube-system   
   process:
     matchPaths:
       - execname: mount
