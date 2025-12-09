@@ -8,12 +8,6 @@ spec:
   action: Block
   severity: 3
   message: "Blocked Cryptominer"
-  selector:
-    matchExpressions:
-      - key: namespace
-        operator: NotIn
-        values:
-          - kube-system   
   process:
     matchPaths:
       # DERO cryptominers
