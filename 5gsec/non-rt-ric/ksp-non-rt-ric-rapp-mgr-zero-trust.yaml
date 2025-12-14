@@ -1,0 +1,60 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-non-rt-ric-rapp-mgr-zero-trust
+  namespace: nonrt-sec-plat
+spec:
+  action: Allow  
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: rapp-manager
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /etc/
+      recursive: true
+      action: Audit
+    - dir: /rappmanager/
+      recursive: true
+      action: Block
+    - dir: /rappmanager/
+      recursive: true
+      fromSource:
+      - path: /rappmanager/rappmanager
+    - dir: /data/
+      recursive: true
+      action: Block
+    - dir: /data/
+      recursive: true
+      fromSource:
+      - path: /rappmanager/rappmanager
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /rappmanager/rappmanager
+  process:
+    matchDirectories:
+    - dir: /
+      recursive: true
+      action: Audit
+    matchPaths:
+    - path: /usr/bin/containerd-shim-runc-v2
+    - path: /rappmanager/rappmanager
+    - path: /bin/sh
+    - path: /bin/dash
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /rappmanager/rappmanager
+      protocol: raw
+    - fromSource:
+      - path: /rappmanager/rappmanager
+      protocol: udp
+    - fromSource:
+      - path: /rappmanager/rappmanager
+      protocol: tcp
+  severity: 1

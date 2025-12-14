@@ -1,0 +1,58 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: kyverno-least-privileges
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: Non-root containers
+    match:
+      resources:
+        kinds:
+          - Pod
+        namespaces:
+          - nonrt-sec-plat   
+          - nearrt-sec-plat
+          - nearrt-sec-xapp
+    validate:
+      message: "Containers must not run as root and must drop all capabilities."
+      pattern:
+        spec:
+          containers:
+          - securityContext:
+              runAsNonRoot: true
+              capabilities:
+                drop: ["ALL"]
+  - name: immutable-container-filesystem
+    match:
+      resources:
+        kinds:
+          - Pod
+        namespaces:
+          - nonrt-sec-plat 
+    validate:
+      message: "Root filesystem must be read-only."
+      pattern:
+        spec:
+          containers:
+          - securityContext:
+              readOnlyRootFilesystem: true
+  - name: Privilege escalation prevention
+    match:
+      resources:
+        kinds:
+          - Pod
+        namespaces:
+          - nonrt-sec-plat 
+    validate:
+      message: "Privilege escalation must be prevented."
+      pattern:
+        spec:
+          containers:
+          - securityContext:
+              allowPrivilegeEscalation: false
+              privileged: false
+              
+              
+  

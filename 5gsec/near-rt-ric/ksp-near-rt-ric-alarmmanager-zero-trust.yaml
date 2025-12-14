@@ -1,0 +1,80 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-near-rt-ric-alarmmanager-zero-trust
+  namespace: nearrt-sec-plat
+spec:
+  selector:
+    matchLabels:
+      app: nearrt-sec-plat-alarmmanager
+
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /etc/ 
+      recursive: true
+      action: Audit 
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /alarm-manager
+    - dir: /mnt/pv-nearrt-sec-plat-alarmmanager
+      action: Block
+      message: unauthorized access to alarmmanager persistent volume 
+    - dir: /mnt/pv-nearrt-sec-plat-alarmmanager
+      action: Allow
+      fromSource:
+      - path: /alarm-manager
+
+    matchPaths:
+    - path: /cfg/config-file.json
+      action: Block
+    - path: /cfg/config-file.json
+      fromSource:
+      - path: /alarm-manager
+
+    - path: /perf-alarm-definition.json
+      action: Block
+    - path: /perf-alarm-definition.json
+      fromSource:
+      - path: /alarm-manager
+
+    - path: /perf-alarm-object.json
+      action: Block
+    - path: /perf-alarm-object.json
+      fromSource:
+      - path: /alarm-manager
+
+    - path: /alarm-definition.json
+      action: Block
+    - path: /alarm-definition.json
+      fromSource:
+      - path: /alarm-manager
+  process:
+    matchDirectories:
+    - dir: /
+      recursive: true
+      action: Audit
+    matchPaths:
+    - path: /usr/bin/containerd-shim-runc-v2
+    - path: /bin/sh
+    - path: /usr/bin/dash
+    - path: /usr/bin/env
+    - path: /alarmmanager
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /alarmmanager
+      protocol: raw
+    - fromSource:
+      - path: /alarmmanager
+      protocol: udp
+    - fromSource:
+      - path: /alarmmanager
+      protocol: tcp
+  action: Allow
+  severity: 1

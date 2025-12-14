@@ -1,0 +1,28 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: kyverno-require-resource-limits
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: require-requests-limits
+    match:
+      resources:
+        kinds:
+          - Pod
+        namespaces:
+          - nonrt-sec-plat
+          - nearrt-sec-plat
+          - nearrt-sec-xapp
+    validate:
+      message: "Non-RT RIC pods must declare cpu/memory requests and limits."
+      pattern:
+        spec:
+          containers:
+          - resources:
+              requests:
+                cpu: "?*"
+                memory: "?*"
+              limits:
+                cpu: "?*"
+                memory: "?*"

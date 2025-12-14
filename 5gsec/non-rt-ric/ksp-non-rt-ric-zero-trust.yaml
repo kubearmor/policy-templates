@@ -1,0 +1,20 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-non-rt-ric-zero-trust
+  namespace: nonrt-sec-plat
+spec:
+  severity: 5
+  message: "Critical file and process access denied!"
+  action: Block  
+  file:
+    matchPaths:
+    - path: /etc/shadow
+    - path: /etc/passwd
+    - path: /root/.ssh/*
+  process:
+    matchPaths:
+      - path: /usr/bin/chroot
+      - path: /usr/bin/nsenter
+      - path: /usr/bin/mount
+      - path: /usr/bin/umount

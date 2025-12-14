@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: netpol-near-rt-ric-e2mgr
+  namespace: nearrt-sec-plat
+spec:
+  podSelector:
+    matchLabels: 
+      app: nearrt-sec-plat-e2mgr
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: kong 
+    ports:
+    - protocol: TCP
+      port: 8000
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: kong
+    ports:
+    - protocol: TCP
+      port: 8000

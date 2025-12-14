@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: xapp-egress-through-kong
+  namespace: nearrt-sec-xapp
+spec:
+  podSelector:
+    matchLabels:
+      app: nearrt-sec-xapp-kpimon-go
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: nearrt-sec-plat  
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/instance: ric-kong
+          app.kubernetes.io/name: kong
+    ports:
+    - protocol: TCP
+      port: 8080   # Kong targetPort

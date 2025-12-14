@@ -1,0 +1,54 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-near-rt-ric-dmscli-zero-trust
+  namespace: nearrt-sec-plat
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: dms-cli
+
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /etc/ 
+      recursive: true
+      action: Audit 
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /chartmuseum
+    - dir: /charts
+      recursive: true
+      action: Block
+    - dir: /charts
+      recursive: true
+      fromSource:
+      - path: /chartmuseum
+  process:
+    matchDirectories:
+    - dir: /
+      recursive: true
+      action: Audit
+    matchPaths:
+    - path: /usr/bin/containerd-shim-runc-v2
+    - path: /chartmuseum
+    - path: /usr/bin/sh
+    - path: /usr/bin/dash
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /chartmuseum
+      protocol: raw
+    - fromSource:
+      - path: /chartmuseum
+      protocol: udp
+    - fromSource:
+      - path: /chartmuseum
+      protocol: tcp
+  action: Allow
+  severity: 1

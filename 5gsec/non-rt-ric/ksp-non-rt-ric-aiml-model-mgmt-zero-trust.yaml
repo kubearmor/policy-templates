@@ -1,0 +1,60 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-non-rt-ric-aiml-model-mgmt-zero-trust
+  namespace: nonrt-sec-plat
+spec:
+  action: Allow  
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: aiml-model-mgmt
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /etc/
+      recursive: true
+      action: Audit
+    - dir: /aimlmodelmgmt/app/
+      recursive: true
+      action: Block
+    - dir: /aimlmodelmgmt/app/
+      recursive: true
+      fromSource:
+      - path: /aimlmodelmgmt/aimlmodelmgmt
+    - dir: /data/
+      recursive: true
+      action: Block
+    - dir: /data/
+      recursive: true
+      fromSource:
+      - path: /aimlmodelmgmt/aimlmodelmgmt
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /aimlmodelmgmt/aimlmodelmgmt
+  process:
+    matchDirectories:
+    - dir: /
+      recursive: true
+      action: Audit
+    matchPaths:
+    - path: /usr/bin/containerd-shim-runc-v2
+    - path: /aimlmodelmgmt/aimlmodelmgmt
+    - path: /bin/sh
+    - path: /bin/dash
+  network:
+    matchProtocols:
+      - fromSource:
+        - path: /aimlmodelmgmt/aimlmodelmgmt
+        protocol: raw
+      - fromSource:
+        - path: /aimlmodelmgmt/aimlmodelmgmt
+        protocol: udp
+      - fromSource:
+        - path: /aimlmodelmgmt/aimlmodelmgmt
+        protocol: tcp
+  severity: 1

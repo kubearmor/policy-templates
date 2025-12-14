@@ -1,0 +1,55 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-near-rt-ric-influxdb-zero-trust
+  namespace: nearrt-sec-plat
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: influxdb
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /etc/
+      recursive: true
+      action: Audit
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /usr/local/bin/influxd
+    - dir: /var/lib/influxdb2/
+      recursive: true
+      action: Block
+    - dir: /var/lib/influxdb2/
+      recursive: true
+      fromSource:
+      - path: /usr/local/bin/influxd
+  process:
+    matchDirectories:
+    - dir: /
+      recursive: true
+      action: Audit
+    matchPaths:
+    - path: /bin/bash
+    - path: /usr/bin/containerd-shim-runc-v2
+    - path: /usr/local/bin/influxd
+    - path: /entrypoint.sh
+    - path: /usr/bin/sh
+    - path: /usr/bin/dash
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /usr/local/bin/influxd
+      protocol: raw
+    - fromSource:
+      - path: /usr/local/bin/influxd
+      protocol: udp
+    - fromSource:
+      - path: /usr/local/bin/influxd
+      protocol: tcp
+  action: Allow
+  severity: 1

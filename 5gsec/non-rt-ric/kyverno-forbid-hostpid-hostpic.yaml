@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: kyverno-forbid-hostpid-hostipc
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: disallow-hostpid-hostipc
+    match:
+      resources:
+        kinds:
+          - Pod
+        namespaces:
+          - nonrt-sec-plat
+          - nearrt-sec-plat
+          - nearrt-sec-xapp
+    validate:
+      message: "hostPID and hostIPC must be false."
+      pattern:
+        spec:
+          =(hostPID): false
+          =(hostIPC): false

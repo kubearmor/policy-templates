@@ -1,0 +1,60 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-near-rt-ric-a1-mediator-zero-trust
+  namespace: nearrt-sec-plat
+spec:
+  action: Allow  
+  selector:
+    matchLabels:
+      app: nearrt-sec-plat-a1mediator
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /etc/
+      recursive: true
+      action: Audit
+    - dir: /opt/a1cert/
+      recursive: true
+      action: Block
+    - dir: /opt/a1cert/
+      recursive: true
+      fromSource:
+      - path: /opt/a1-mediator/a1
+    - dir: /opt/a1-mediator/
+      recursive: true
+      action: Block
+    - dir: /opt/a1-mediator/
+      recursive: true
+      fromSource:
+      - path: /opt/a1-mediator/a1
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /opt/a1-mediator/a1
+  process:
+    matchDirectories:
+    - dir: /
+      recursive: true
+      action: Audit
+    matchPaths:
+    - path: /usr/bin/containerd-shim-runc-v2
+    - path: /opt/a1-mediator/a1
+    - path: /bin/sh
+    - path: /bin/dash
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /opt/a1-mediator/a1
+      protocol: raw
+    - fromSource:
+      - path: /opt/a1-mediator/a1
+      protocol: udp
+    - fromSource:
+      - path: /opt/a1-mediator/a1
+      protocol: tcp
+  severity: 1

@@ -1,0 +1,23 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: kyverno-readonly-volume-mounts
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: check-readonly-volumes
+      match:
+        resources:
+          kinds:
+            - Pod
+          namespaces:
+            - nonrt-sec-plat
+            - nearrt-sec-plat
+            - nearrt-sec-xapp
+      validate:
+        message: "All volume mounts must be read-only."
+        pattern:
+          spec:
+            containers:
+              - volumeMounts:
+                  - readOnly: true

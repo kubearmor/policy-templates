@@ -1,0 +1,60 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-non-rt-ric-cdmf-zero-trust
+  namespace: nonrt-sec-plat
+spec:
+  action: Allow  
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cdm-framework
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /etc/
+      recursive: true
+      action: Audit
+    - dir: /opt/ric/
+      recursive: true
+      action: Block
+    - dir: /opt/ric/
+      recursive: true
+      fromSource:
+      - path: /cdm-framework/cdm-framework
+    - dir: /data/
+      recursive: true
+      action: Block
+    - dir: /data/
+      recursive: true
+      fromSource:
+      - path: /cdm-framework/cdm-framework
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /cdm-framework/cdm-framework
+  process:
+    matchDirectories:
+    - dir: /
+      recursive: true
+      action: Audit
+    matchPaths:
+    - path: /usr/bin/containerd-shim-runc-v2
+    - path: /cdm-framework/cdm-framework
+    - path: /bin/sh
+    - path: /bin/dash
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /cdm-framework/cdm-framework
+      protocol: raw
+    - fromSource:
+      - path: /cdm-framework/cdm-framework
+      protocol: udp
+    - fromSource:
+      - path: /cdm-framework/cdm-framework
+      protocol: tcp
+  severity: 1

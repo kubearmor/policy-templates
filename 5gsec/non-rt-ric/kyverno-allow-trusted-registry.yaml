@@ -1,0 +1,23 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: allow-only-trusted-registry
+spec:
+  validationFailureAction: Audit 
+  background: true
+  rules:
+    - name: validate-image-registry
+      match:
+        resources:
+          kinds:
+            - Pod
+          namespaces:
+            - nonrt-sec-plat 
+            - nearrt-sec-plat
+            - nearrt-sec-xapp
+      validate:
+        message: "Only images from jfrog.rsym-cicd.blr.rsicdcdns.lab are allowed."
+        pattern:
+          spec:
+            containers:
+              - image: "jfrog.rsym-cicd.blr.rsicdcdns.lab/*"

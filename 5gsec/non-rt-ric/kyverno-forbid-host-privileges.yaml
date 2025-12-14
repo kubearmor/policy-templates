@@ -1,0 +1,28 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: kyverno-forbid-host-privileges
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: no-privileged-hostnetwork-hostpath
+    match:
+      resources:
+        kinds:
+          - Pod
+        namespaces:
+          - nonrt-sec-plat
+          - nearrt-sec-plat
+          - nearrt-sec-xapp
+    validate:
+      message: "Disallowed host privileges for Non-RT RIC pods"
+      deny:
+        conditions:
+          any:
+          - key: "{{request.object.spec.hostNetwork}}"
+            operator: Equals
+            value: true
+          - key: "{{request.object.spec.volumes[*].hostPath}}"
+            operator: NotEquals
+            value: null

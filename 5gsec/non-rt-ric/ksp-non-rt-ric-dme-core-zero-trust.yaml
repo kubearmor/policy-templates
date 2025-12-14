@@ -1,0 +1,60 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-non-rt-ric-dme-core-zero-trust
+  namespace: nonrt-sec-plat
+spec:
+  action: Allow  
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: dme-core
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /etc/
+      recursive: true
+      action: Audit
+    - dir: /opt/
+      recursive: true
+      action: Block
+    - dir: /opt/
+      recursive: true
+      fromSource:
+      - path: /dmecore
+    - dir: /data/
+      recursive: true
+      action: Block
+    - dir: /data/
+      recursive: true
+      fromSource:
+      - path: /dmecore
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /dmecore
+  process:
+    matchDirectories:
+    - dir: /
+      recursive: true
+      action: Audit
+    matchPaths:
+    - path: /usr/bin/containerd-shim-runc-v2
+    - path: /dmecore
+    - path: /bin/sh
+    - path: /bin/dash
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /dmecore
+      protocol: raw
+    - fromSource:
+      - path: /dmecore
+      protocol: udp
+    - fromSource:
+      - path: /dmecore
+      protocol: tcp
+  severity: 1

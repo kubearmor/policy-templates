@@ -1,0 +1,60 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-non-rt-ric-a1pm-zero-trust
+  namespace: nonrt-sec-plat
+spec:
+  action: Allow  
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: a1-policymanagement
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /etc/
+      recursive: true
+      action: Audit
+    - dir: /opt/ric/
+      recursive: true
+      action: Block
+    - dir: /opt/ric/
+      recursive: true
+      fromSource:
+      - path: /home/ricuser/a1pm
+    - dir: /data/
+      recursive: true
+      action: Block
+    - dir: /data/
+      recursive: true
+      fromSource:
+      - path: /home/ricuser/a1pm
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /home/ricuser/a1pm
+  process:
+    matchDirectories:
+    - dir: /
+      recursive: true
+      action: Audit
+    matchPaths:
+    - path: /usr/bin/containerd-shim-runc-v2
+    - path: /home/ricuser/a1pm
+    - path: /bin/sh
+    - path: /bin/dash
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /home/ricuser/a1pm
+      protocol: raw
+    - fromSource:
+      - path: /home/ricuser/a1pm
+      protocol: udp
+    - fromSource:
+      - path: /home/ricuser/a1pm
+      protocol: tcp
+  severity: 1

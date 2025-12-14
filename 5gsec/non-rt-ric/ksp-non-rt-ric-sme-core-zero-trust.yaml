@@ -1,0 +1,61 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-non-rt-ric-sme-core-zero-trust
+  namespace: nonrt-sec-plat
+spec:
+  action: Allow  
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sme-core
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /etc/
+      recursive: true
+      action: Audit
+    - dir: /smecore/
+      recursive: true
+      action: Block
+    - dir: /smecore/
+      recursive: true
+      fromSource:
+      - path: /smecore/smecore
+    - dir: /data/
+      recursive: true
+      action: Block
+    - dir: /data/
+      recursive: true
+      fromSource:
+      - path: /smecore/smecore
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /smecore/smecore
+  process:
+    matchDirectories:
+    - dir: /
+      recursive: true
+      action: Audit
+    matchPaths:
+    - path: /usr/bin/containerd-shim-runc-v2
+    - path: /smecore/smecore
+    - path: /bin/sh
+    - path: /bin/dash
+  network:
+    matchProtocols:
+      - fromSource:
+        - path: /smecore/smecore
+        protocol: raw
+      - fromSource:
+        - path: /smecore/smecore
+        protocol: udp
+      - fromSource:
+        - path: /smecore/smecore
+        protocol: tcp
+    
+  severity: 1

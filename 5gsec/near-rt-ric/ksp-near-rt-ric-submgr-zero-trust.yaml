@@ -1,0 +1,52 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-near-rt-ric-submgr-zero-trust
+  namespace: nearrt-sec-plat
+spec:
+  selector:
+    matchLabels:
+      app: nearrt-sec-plat-submgr
+  file:
+    matchDirectories:
+    - dir: /
+      recursive: true
+    - dir: /etc/
+      recursive: true
+      action: Audit
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Block
+      message: unauthorized access to kubernetes service account
+    - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+      action: Allow
+      fromSource:
+      - path: /submgr
+    - dir: /cfg
+      recursive: true
+      action: Block
+    - dir: /cfg
+      recursive: true
+      fromSource:
+      - path: /submgr
+  process:
+    matchDirectories:
+    - dir: /
+      recursive: true
+      action: Audit
+    matchPaths:
+    - path: /submgr
+    - path: /usr/bin/sh
+    - path: /usr/bin/dash
+  network:
+    matchProtocols:
+    - fromSource:
+      - path: /submgr
+      protocol: raw
+    - fromSource:
+      - path: /submgr
+      protocol: udp
+    - fromSource:
+      - path: /submgr
+      protocol: tcp
+  action: Allow
+  severity: 1
