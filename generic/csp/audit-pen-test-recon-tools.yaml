@@ -5,9 +5,9 @@ metadata:
   annotations:
     app.accuknox.com/type: harden
 spec:
-  action: Block
+  action: audit
   severity: 3
-  message: "Blocked Reconnaissance or Penetration Testing tool execution"  
+  message: "Detected Penetration Testing tool execution"  
   process:
     matchPaths:
       # Recon & Network Scanners
