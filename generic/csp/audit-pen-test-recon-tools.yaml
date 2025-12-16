@@ -5,7 +5,7 @@ metadata:
   annotations:
     app.accuknox.com/type: harden
 spec:
-  action: audit
+  action: Audit
   severity: 3
   message: "Detected Penetration Testing tool execution"  
   process:
