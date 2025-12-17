@@ -5,15 +5,9 @@ metadata:
   annotations:
     app.accuknox.com/type: harden
 spec:
-  action: Block
+  action: Audit
   severity: 3
-  message: "Blocked Reconnaissance or Penetration Testing tool execution"
-  selector:
-    matchExpressions:
-      - key: namespace
-        operator: NotIn
-        values:
-          - kube-system   
+  message: "Detected Penetration Testing tool execution"  
   process:
     matchPaths:
       # Recon & Network Scanners
