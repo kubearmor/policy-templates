@@ -167,22 +167,6 @@ policyRules:
         including VNC to send the screen and control buffers and SSH for secure
         file transfer.
     yaml: remote-services.yaml
-  - name: system-owner-discovery
-    precondition:
-      - OPTSCAN
-    description:
-      refs:
-        - name: MITRE-TTP-T1082
-          url:
-            - https://attack.mitre.org/techniques/T1082/
-      tldr: Limit adversaries from gathering system information
-      detailed: An adversary may attempt to get detailed information about the
-        operating system and hardware, including version, patches, hotfixes,
-        service packs, and architecture. Adversaries may use the information
-        from System Information Discovery during automated discovery to shape
-        follow-on behaviors, including whether or not the adversary fully
-        infects the target and/or attempts specific actions.
-    yaml: system-owner-discovery.yaml
   - name: trusted-cert-mod
     precondition:
       - OPTSCAN
