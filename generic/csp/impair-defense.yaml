@@ -5,7 +5,7 @@ metadata:
   annotations:
     app.accuknox.com/type: harden
 spec:
-  action: Block
+  action: Audit
   file:
     matchDirectories:
       - dir: /etc/apparmor.d/
