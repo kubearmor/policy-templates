@@ -1,10 +1,10 @@
 version: v0.2.3
 policyRules:
-  - name: deny-pod-privilege-and-escalation
+  - name: priv-escalation-and-deny-priv-pod
     precondition:
       - OPTSCAN
     description:
       tldr: Block privileged pods and privilege escalation in workloads
       detailed: This policy blocks privileged pods and privilege escalation to reduce the risk of container escape and enforce least-privilege security across the cluster, while excluding the kube-system namespace to avoid impacting
           critical Kubernetes components.
-    yaml: deny-pod-privilege-and-escalation.yaml
+    yaml: priv-escalation-and-deny-priv-pod.yaml

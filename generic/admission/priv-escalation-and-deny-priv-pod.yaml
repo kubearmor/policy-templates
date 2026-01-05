@@ -4,7 +4,7 @@ metadata:
   annotations:
     app.accuknox.com/source: policy-manager
     app.accuknox.com/type: harden
-  name: harden-deny-priv-esc
+  name: priv-escalation-and-deny-priv-pod
 spec:
   privilegedPod:
     action: Block
