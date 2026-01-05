@@ -1,9 +1,10 @@
 version: v0.2.3
 policyRules:
-- name: deny-privileged-pods
-  precondition:
-  - OPTSCAN
-  description:
-    tldr: Deny deployment of privileged pods across the cluster
-    detailed: This policy denies the deployment of privileged pods across the cluster to enforce security best practices and prevent privilege escalation risks. The kube-system namespace is excluded from this policy to avoid disruption of critical system components such as CoreDNS, Kube Proxy, and other essential Kubernetes services that may require privileged access.
-  yaml: deny-privileged-pods.yaml
+  - name: priv-escalation-and-deny-priv-pod
+    precondition:
+      - OPTSCAN
+    description:
+      tldr: Block privileged pods and privilege escalation in workloads
+      detailed: This policy blocks privileged pods and privilege escalation to reduce the risk of container escape and enforce least-privilege security across the cluster, while excluding the kube-system namespace to avoid impacting
+          critical Kubernetes components.
+    yaml: priv-escalation-and-deny-priv-pod.yaml

@@ -1,0 +1,16 @@
+apiVersion: admission.accuknox.com/v1
+kind: AdmissionPolicy
+metadata:
+  annotations:
+    app.accuknox.com/source: policy-manager
+    app.accuknox.com/type: harden
+  name: priv-escalation-and-deny-priv-pod
+spec:
+  privilegedPod:
+    action: Block
+    ignoreNamespaces:
+    - kube-system
+  privilegeEscalation:
+    action: Block
+    ignoreNamespaces:
+    - kube-system
