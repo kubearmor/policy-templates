@@ -1,6 +1,6 @@
 version: v0.2.3
 policyRules:
-  - name: priv-escalation-and-deny-priv-pod
+  - name: privpod-privesc-deny
     precondition:
       - OPTSCAN
     description:
