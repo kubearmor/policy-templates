@@ -25,6 +25,9 @@ spec:
           - kube-system
   severity: 5
   tags:
-    - MITRE_T1046_NETWORK_SERVICE_DISCOVERY
+    - MITRE_TA0007_T1046
+    - MITRE_TA0007_T1016
+    - MITRE_TA0007_T1018
+    - MITRE
     - NIST_PR.PT-1
     - PCI_DSS_10.2.3
