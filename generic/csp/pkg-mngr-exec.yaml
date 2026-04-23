@@ -34,6 +34,9 @@ spec:
       - execname: yaourt
   severity: 5
   tags:
-    - MITRE_T1543_CREATE_MODIFY_SYSTEM_PROCESS
+    - MITRE_TA0003_T1505
+    - MITRE_TA0005_T1601
+    - MITRE_TA0002_T1105
+    - MITRE
     - NIST_PR.DS-8 
     - PCI_DSS_6.3.2

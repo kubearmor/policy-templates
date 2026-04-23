@@ -40,6 +40,9 @@ spec:
         values:
           - kube-system
   tags:
-    - MITRE_T1053_SCHEDULED_TASK   
+    - MITRE_TA0003_T1053.003
+    - MITRE_TA0004_T1053.003
+    - MITRE_TA0005_T1564.001
+    - MITRE
     - NIST_800-53_SI-4
     - PCI_DSS_6.4   

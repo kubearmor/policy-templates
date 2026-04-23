@@ -27,6 +27,9 @@ spec:
       - execname: nerdctl
       - execname: podman
   tags:
-    - MITRE_T1609_CONTAINER_ADMINISTRATION_COMMAND  
+    - MITRE_TA0002_T1609
+    - MITRE_TA0008_T1021
+    - MITRE_TA0003_T1505.003
+    - MITRE
     - NIST_800-53_AU-2
     - PCI_DSS_7.2.1

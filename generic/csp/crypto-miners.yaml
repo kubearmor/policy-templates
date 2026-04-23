@@ -25,6 +25,9 @@ spec:
       - execname: sgminer
       - execname: ccminer
   tags:
-    - MITRE_T1496_RESOURCE_HIJACKING
+    - MITRE_TA0040_T1496
+    - MITRE_TA0002_T1204.002
+    - MITRE
+    - MITRE_TA0003_T1053.003
     - NIST_CM-7
     - PCI_DSS_6.2

@@ -27,6 +27,9 @@ spec:
           - agents
   severity: 6
   tags:
-    - MITRE_T1562_001_IMPAIR_DEFENSES
+    - MITRE_TA0005_T1562.001
+    - MITRE_TA0005_T1601
+    - MITRE_TA0004_T1068
+    - MITRE
     - NIST_RS.MI-1
     - PCI_DSS_11.5.1

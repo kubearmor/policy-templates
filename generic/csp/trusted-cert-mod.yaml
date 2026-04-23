@@ -26,6 +26,9 @@ spec:
         recursive: true
         readOnly: true
   tags:
-    - MITRE_T1552_UNSECURED_CREDENTIALS
+    - MITRE_TA0005_T1562
+    - MITRE_TA0006_T1557
+    - MITRE_TA0005_T1553.004
+    - MITRE
     - NIST_PR.PT-1
     - PCI_DSS_10.5.5

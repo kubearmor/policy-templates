@@ -19,6 +19,9 @@ spec:
         values:
           - kube-system
   tags:
-    - MITRE_T1074_DATA_STAGED
+    - MITRE_TA0002_T1059.004
+    - MITRE_TA0009_T1074
+    - MITRE_TA0005_T1036.005
+    - MITRE
     - NIST_AU-6  
     - PCI_DSS_10.2.6 

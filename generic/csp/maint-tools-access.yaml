@@ -25,6 +25,9 @@ spec:
           - kube-system
   severity: 1
   tags:
-    - MITRE_T1543_003_CREATE_MODIFY_SYSTEM_PROCESS
+    - MITRE_TA0003_T1543.002
+    - MITRE_TA0004_T1548
+    - MITRE_TA0007_T1082
+    - MITRE
     - NIST_RS.AN-1
     - PCI_DSS_2.2.2
