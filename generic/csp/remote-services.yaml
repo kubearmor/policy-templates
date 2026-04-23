@@ -25,6 +25,9 @@ spec:
       - path: /etc/hosts.allow
       - path: /etc/hosts.deny
   tags:
-    - MITRE_T1021_REMOTE_SERVICES
+    - MITRE_TA0006_T1552.004
+    - MITRE_TA0008_T1021
+    - MITRE_TA0004_T1548
+    - MITRE
     - NIST_PR.DS-1
     - PCI_DSS_10.2.3
