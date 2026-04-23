@@ -18,6 +18,9 @@ spec:
     name: protectEnv
   severity: 5
   tags:
-    - MITRE_T1059           
+    - MITRE_TA0006_T1555.003
+    - MITRE_TA0007_T1082
+    - MITRE_TA0009_T1005
+    - MITRE
     - NIST_CM-7             
     - PCI_DSS_10.2.6  
