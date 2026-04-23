@@ -29,6 +29,9 @@ spec:
         values:
           - kube-system   # exempt system namespace
   tags:
-    - MITRE_T1562_IMPAIR_DEFENSE
+    - MITRE_TA0005_T1562.004
+    - MITRE_TA0005_T1601
+    - MITRE_TA0003_T1543
+    - MITRE
     - NIST_CM-7
     - PCI_DSS_10.2.6
