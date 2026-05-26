@@ -11,6 +11,7 @@ spec:
   process:
     matchPaths:
     - execname: su
+    - execname: sudo
   severity: 8
   tags:
    - MITRE_T1548.003_ABUSE_ELEVATION_CONTROL
