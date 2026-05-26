@@ -9,7 +9,7 @@ spec:
     matchLabels:
       kubearmor.io/hostname: '*'
   process:
-    matchPath:
+    matchPaths:
     - execname: mitmproxy
     - execname: nmap
     - execname: tcpdump
