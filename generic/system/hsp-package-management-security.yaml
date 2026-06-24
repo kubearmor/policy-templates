@@ -1,0 +1,46 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-package-management-security
+spec:
+  action: Block
+  process:
+    matchPaths:
+    - execname: apt
+    - execname: dpkg
+    - execname: dnf-3
+    - execname: yum
+    - execname: rpm
+    - execname: apk
+    - execname: gdebi
+    - execname: make
+    - execname: makepkg
+    - execname: pacman
+    - execname: yaourt
+    - execname: zypper
+  file:
+    matchDirectories:
+    - dir: /etc/apt/
+      recursive: true
+      readOnly: true
+    - dir: /etc/dnf/
+      recursive: true
+      readOnly: true
+    - dir: /etc/yum.repos.d/
+      recursive: true
+      readOnly: true
+    - dir: /etc/apk/
+      recursive: true
+      readOnly: true
+  message: "ALERT! Blocked attempt to modify system packages."
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  severity: 5
+  tags:
+    - "NIST"
+    - "CM-6-1"
+    - "NIST_SA"
+    - "NIST_SA-20"
+    - "NIST_SA-20-Customized Development of Critical Components"
+    - "sensitive asset"

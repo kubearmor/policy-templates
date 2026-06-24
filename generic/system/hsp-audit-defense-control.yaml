@@ -1,0 +1,36 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-audit-defense-control
+spec:
+  action: Audit
+  process:
+    - execname: aa-enforce
+    - execname: aa-audit
+    - execname: aa-cleanprof
+    - execname: aa-disable
+    - execname: apparmor_parser
+  file:
+    matchDirectories:
+    - dir: /etc/apparmor.d/
+      recursive: true
+    - dir: /etc/apparmor/
+      recursive: true
+    - dir: /etc/sysconfig/selinux/
+      recursive: true
+    - dir: /opt/kubearmor/
+      recursive: true
+      fromSource:
+        - path: /opt/kubearmor/kubearmor
+    matchPaths:
+    - path: /etc/selinux/semanage.conf
+  message: "WARN! Runtime security files/processes accessed."
+  nodSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  severity: 5
+  tags:
+  - FGT1562
+  - FIGHT
+  - MITRE
+  - MITRE_T1562_Impair _Defenses

@@ -1,0 +1,28 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorHostPolicy
+metadata:
+  name: hsp-monitor-kernel-modules
+spec:
+  action: Audit
+  process:
+    matchPaths:
+    - execname: kmod
+  file:
+    matchPaths:
+    - path: /etc/modules
+      readOnly: true
+    matchDirectories:
+    - dir: /etc/modprobe.d/
+      recursive: true
+      readOnly: true
+    - dir: /etc/modules-load.d/
+      recursive: true
+      readOnly: true
+  message: "WARN! Detected modification of Kernel modules."
+  nodeSelector:
+    matchLabels:
+      kubearmor.io/hostname: '*'
+  severity: 5
+  tags:
+    - "STIG"
+    - "UBTU-20-010297"
