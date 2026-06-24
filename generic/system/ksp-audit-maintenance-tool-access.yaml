@@ -17,4 +17,6 @@ spec:
       matchDirectories:
       - dir: /sbin/
         recursive: true
+      - dir: /usr/sbin/
+        recursive: true
   action: Audit
