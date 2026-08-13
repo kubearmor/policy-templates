@@ -1,0 +1,12 @@
+Version: "2012-10-17"
+Statement:
+  - Sid: DenyDirectRootAccessKeyCreation
+    Effect: Deny
+    Action:
+      - iam:CreateAccessKey
+    Resource: "*"
+    Condition:
+      ArnLike:
+        aws:PrincipalArn: arn:aws:iam::*:root
+      "Null":
+        aws:AssumedRoot: "true"

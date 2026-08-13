@@ -1,0 +1,149 @@
+Version: "2012-10-17"
+Statement:
+  - Sid: DenyLeavingOrganization
+    Effect: Deny
+    Action:
+      - organizations:LeaveOrganization
+    Resource: "*"
+  - Sid: DenyMemberAccountClosure
+    Effect: Deny
+    Action:
+      - account:CloseAccount
+    Resource: "*"
+  - Sid: DenyDirectRootUserActivity
+    Effect: Deny
+    Action: "*"
+    Resource: "*"
+    Condition:
+      ArnLike:
+        aws:PrincipalArn: arn:aws:iam::*:root
+      "Null":
+        aws:AssumedRoot: "true"
+  - Sid: DenyInsecureTransport
+    Effect: Deny
+    Action: "*"
+    Resource: "*"
+    Condition:
+      Bool:
+        aws:SecureTransport: "false"
+        aws:PrincipalIsAWSService: "false"
+  - Sid: DenyDisablingEbsEncryptionByDefault
+    Effect: Deny
+    Action:
+      - ec2:DisableEbsEncryptionByDefault
+    Resource: "*"
+  - Sid: DenyDisablingSnapshotBlockPublicAccess
+    Effect: Deny
+    Action:
+      - ec2:DisableSnapshotBlockPublicAccess
+    Resource: "*"
+  - Sid: DenyDisablingAmiBlockPublicAccess
+    Effect: Deny
+    Action:
+      - ec2:DisableImageBlockPublicAccess
+    Resource: "*"
+  - Sid: DenyMakingEbsSnapshotsPublic
+    Effect: Deny
+    Action:
+      - ec2:ModifySnapshotAttribute
+    Resource: "*"
+    Condition:
+      StringEquals:
+        ec2:Add/group: all
+  - Sid: RequireOrganizationOnlyNewResourceShares
+    Effect: Deny
+    Action:
+      - ram:CreateResourceShare
+    Resource: "*"
+    Condition:
+      BoolIfExists:
+        ram:RequestedAllowsExternalPrincipals: "true"
+  - Sid: DenyEnablingExternalPrincipalsOnResourceShares
+    Effect: Deny
+    Action:
+      - ram:UpdateResourceShare
+    Resource: "*"
+    Condition:
+      Bool:
+        ram:RequestedAllowsExternalPrincipals: "true"
+  - Sid: DenyRemovingS3PublicAccessBlocks
+    Effect: Deny
+    Action:
+      - s3:DeleteAccountPublicAccessBlock
+      - s3:DeleteBucketPublicAccessBlock
+    Resource: "*"
+  - Sid: DenyPublicS3CannedAcls
+    Effect: Deny
+    Action:
+      - s3:PutBucketAcl
+      - s3:PutObjectAcl
+    Resource: "*"
+    Condition:
+      StringEquals:
+        s3:x-amz-acl:
+          - public-read
+          - public-read-write
+          - authenticated-read
+  - Sid: DenyPublicS3ReadGrantAcls
+    Effect: Deny
+    Action:
+      - s3:PutBucketAcl
+      - s3:PutObjectAcl
+    Resource: "*"
+    Condition:
+      StringLike:
+        s3:x-amz-grant-read:
+          - "*http://acs.amazonaws.com/groups/global/AllUsers*"
+          - "*http://acs.amazonaws.com/groups/global/AuthenticatedUsers*"
+  - Sid: DenyPublicS3WriteGrantAcls
+    Effect: Deny
+    Action:
+      - s3:PutBucketAcl
+      - s3:PutObjectAcl
+    Resource: "*"
+    Condition:
+      StringLike:
+        s3:x-amz-grant-write:
+          - "*http://acs.amazonaws.com/groups/global/AllUsers*"
+          - "*http://acs.amazonaws.com/groups/global/AuthenticatedUsers*"
+  - Sid: DenyPublicS3ReadAcpGrantAcls
+    Effect: Deny
+    Action:
+      - s3:PutBucketAcl
+      - s3:PutObjectAcl
+    Resource: "*"
+    Condition:
+      StringLike:
+        s3:x-amz-grant-read-acp:
+          - "*http://acs.amazonaws.com/groups/global/AllUsers*"
+          - "*http://acs.amazonaws.com/groups/global/AuthenticatedUsers*"
+  - Sid: DenyPublicS3WriteAcpGrantAcls
+    Effect: Deny
+    Action:
+      - s3:PutBucketAcl
+      - s3:PutObjectAcl
+    Resource: "*"
+    Condition:
+      StringLike:
+        s3:x-amz-grant-write-acp:
+          - "*http://acs.amazonaws.com/groups/global/AllUsers*"
+          - "*http://acs.amazonaws.com/groups/global/AuthenticatedUsers*"
+  - Sid: DenyPublicS3FullControlGrantAcls
+    Effect: Deny
+    Action:
+      - s3:PutBucketAcl
+      - s3:PutObjectAcl
+    Resource: "*"
+    Condition:
+      StringLike:
+        s3:x-amz-grant-full-control:
+          - "*http://acs.amazonaws.com/groups/global/AllUsers*"
+          - "*http://acs.amazonaws.com/groups/global/AuthenticatedUsers*"
+  - Sid: RequireSecretsManagerBlockPublicPolicy
+    Effect: Deny
+    Action:
+      - secretsmanager:PutResourcePolicy
+    Resource: "*"
+    Condition:
+      BoolIfExists:
+        secretsmanager:BlockPublicPolicy: "false"

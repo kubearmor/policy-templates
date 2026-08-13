@@ -1,0 +1,172 @@
+---
+version: v0.1.0
+policyRules:
+  - name: default-baseline
+    precondition:
+      - AWS_ORGANIZATIONS
+    description:
+      refs:
+        - name: AWS service control policy examples
+          url:
+            - https://github.com/aws-samples/service-control-policy-examples
+        - name: AWS Organizations SCP documentation
+          url:
+            - https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html
+      tldr: Apply a combined strict opt-in hardening policy after customer validation.
+      detailed: >-
+        Combines universal, conditional, and strict controls into one SCP:
+        organization membership and account-closure protection, direct root-user
+        restriction, secure transport, storage public-access protections, EBS
+        encryption-setting protection, organization-only AWS RAM sharing, and
+        validation of Secrets Manager resource policies. Treat this combined policy
+        as strict opt-in because it denies all direct member-account root activity.
+    yaml: default-baseline.yaml
+  - name: deny-root-user-activity
+    precondition:
+      - AWS_ORGANIZATIONS
+    description:
+      refs:
+        - name: AWS SCP example - prevent root credentials management
+          url:
+            - https://github.com/aws-samples/service-control-policy-examples/blob/main/Privileged-access-controls/Prevent-root-credentials-management-in-member-accounts-in-AWS-Organizations.json
+      tldr: Deny direct use of the root user in member accounts.
+      detailed: >-
+        Denies all requests made directly with member-account root credentials.
+        The aws:AssumedRoot condition keeps AWS Organizations short-term root
+        sessions outside this deny statement.
+    yaml: deny-root-user-activity.yaml
+  - name: protect-ebs-encryption-default
+    precondition:
+      - AWS_ORGANIZATIONS
+      - AWS_EC2
+    description:
+      refs:
+        - name: Amazon EBS encryption by default
+          url:
+            - https://docs.aws.amazon.com/ebs/latest/userguide/encryption-by-default.html
+      tldr: Prevent accounts from disabling EBS encryption by default.
+      detailed: >-
+        Denies the regional action that disables EBS encryption by default. This
+        guardrail preserves an enabled setting but does not enable the setting;
+        enable EBS encryption by default in every governed Region during onboarding.
+    yaml: protect-ebs-encryption-default.yaml
+  - name: prevent-public-ebs-snapshots
+    precondition:
+      - AWS_ORGANIZATIONS
+      - AWS_EC2
+    description:
+      refs:
+        - name: Amazon EC2 service authorization reference
+          url:
+            - https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonec2.html
+      tldr: Prevent EBS snapshots from being made public.
+      detailed: >-
+        Denies disabling the regional snapshot Block Public Access setting and
+        denies adding the public group to an EBS snapshot's create-volume
+        permissions. Private account-to-account snapshot sharing remains available.
+    yaml: prevent-public-ebs-snapshots.yaml
+  - name: protect-ami-public-access
+    precondition:
+      - AWS_ORGANIZATIONS
+      - AWS_EC2
+    description:
+      refs:
+        - name: Amazon EC2 Block Public Access for AMIs
+          url:
+            - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-to-amis.html
+      tldr: Prevent accounts from disabling AMI Block Public Access.
+      detailed: >-
+        Denies the regional action that disables Block Public Access for AMIs. The
+        guardrail preserves the setting but does not enable it or remediate existing
+        public AMIs; enable it in every governed Region during onboarding.
+    yaml: protect-ami-public-access.yaml
+  - name: protect-s3-public-access
+    precondition:
+      - AWS_ORGANIZATIONS
+      - AWS_S3
+    description:
+      refs:
+        - name: Amazon S3 Block Public Access
+          url:
+            - https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html
+      tldr: Preserve S3 public-access blocks and deny public ACL grants.
+      detailed: >-
+        Prevents deletion of account- and bucket-level S3 Block Public Access
+        configurations and denies common public canned ACLs and public read/write
+        grants. Enable all four Block Public Access settings during onboarding;
+        organization-level S3 policies provide stronger centralized enforcement.
+    yaml: protect-s3-public-access.yaml
+  - name: prevent-public-secrets-resource-policies
+    precondition:
+      - AWS_ORGANIZATIONS
+      - AWS_SECRETS_MANAGER
+    description:
+      refs:
+        - name: AWS Secrets Manager best practices
+          url:
+            - https://docs.aws.amazon.com/secretsmanager/latest/userguide/best-practices.html
+      tldr: Require validation that secret resource policies do not grant broad access.
+      detailed: >-
+        Denies PutResourcePolicy unless the request enables BlockPublicPolicy, which
+        uses Secrets Manager automated reasoning to reject policies that grant broad
+        access. Principals can still create appropriately scoped resource policies.
+    yaml: prevent-public-secrets-resource-policies.yaml
+  - name: prevent-external-ram-sharing
+    precondition:
+      - AWS_ORGANIZATIONS
+      - AWS_RAM
+    description:
+      refs:
+        - name: AWS RAM service authorization reference
+          url:
+            - https://docs.aws.amazon.com/service-authorization/latest/reference/list_ram.html
+      tldr: Prevent AWS RAM resource shares from allowing external principals.
+      detailed: >-
+        Requires new resource shares to explicitly disable external principals and
+        denies updates that enable them. Sharing resources with accounts, OUs, and
+        principals inside the organization remains available.
+    yaml: prevent-external-ram-sharing.yaml
+  - name: protect-cloudtrail
+    precondition:
+      - AWS_ORGANIZATIONS
+      - AWS_CLOUDTRAIL
+    description:
+      refs:
+        - name: AWS SCP example - protect CloudTrail trails
+          url:
+            - https://github.com/aws-samples/service-control-policy-examples/blob/main/Deny-changes-to-security-services/Deny-modifications-to-specific-CloudTrail-trails.json
+      tldr: Prevent member accounts from stopping or weakening CloudTrail logging.
+      detailed: >-
+        Denies destructive and configuration-changing CloudTrail actions across
+        trails and event data stores. Apply after central CloudTrail configuration
+        is established because member accounts cannot perform these operations.
+    yaml: protect-cloudtrail.yaml
+  - name: protect-security-monitoring
+    precondition:
+      - AWS_ORGANIZATIONS
+    description:
+      refs:
+        - name: AWS SCP examples - deny changes to security services
+          url:
+            - https://github.com/aws-samples/service-control-policy-examples/tree/main/Deny-changes-to-security-services
+      tldr: Prevent disabling or deleting core AWS security monitoring controls.
+      detailed: >-
+        Protects AWS Config, GuardDuty, Security Hub, and IAM Access Analyzer from
+        common disablement, deletion, and disassociation actions in member accounts.
+        Centralize administration before attaching this guardrail broadly.
+    yaml: protect-security-monitoring.yaml
+  - name: protect-kms-keys
+    precondition:
+      - AWS_ORGANIZATIONS
+      - AWS_KMS
+    description:
+      refs:
+        - name: AWS KMS permissions reference
+          url:
+            - https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+      tldr: Prevent disabling or scheduling deletion of KMS keys.
+      detailed: >-
+        Denies the two KMS operations that make customer-managed keys unavailable
+        or schedule their destruction. Use a narrower exception-based policy if
+        member accounts must manage the full key lifecycle.
+    yaml: protect-kms-keys.yaml

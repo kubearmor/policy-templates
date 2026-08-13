@@ -1,0 +1,18 @@
+Version: "2012-10-17"
+Statement:
+  - Sid: RequireOrganizationOnlyNewResourceShares
+    Effect: Deny
+    Action:
+      - ram:CreateResourceShare
+    Resource: "*"
+    Condition:
+      BoolIfExists:
+        ram:RequestedAllowsExternalPrincipals: "true"
+  - Sid: DenyEnablingExternalPrincipalsOnResourceShares
+    Effect: Deny
+    Action:
+      - ram:UpdateResourceShare
+    Resource: "*"
+    Condition:
+      Bool:
+        ram:RequestedAllowsExternalPrincipals: "true"

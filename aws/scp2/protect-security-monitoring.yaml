@@ -1,0 +1,37 @@
+Version: "2012-10-17"
+Statement:
+  - Sid: DenyConfigTampering
+    Effect: Deny
+    Action:
+      - config:DeleteConfigurationAggregator
+      - config:DeleteConfigurationRecorder
+      - config:DeleteDeliveryChannel
+      - config:DeleteOrganizationConfigRule
+      - config:DeleteOrganizationConformancePack
+      - config:DeleteRetentionConfiguration
+      - config:StopConfigurationRecorder
+    Resource: "*"
+  - Sid: DenyGuardDutyTampering
+    Effect: Deny
+    Action:
+      - guardduty:DeleteDetector
+      - guardduty:DeleteMembers
+      - guardduty:DisassociateFromAdministratorAccount
+      - guardduty:DisassociateMembers
+      - guardduty:StopMonitoringMembers
+      - guardduty:UpdateDetector
+    Resource: "*"
+  - Sid: DenySecurityHubTampering
+    Effect: Deny
+    Action:
+      - securityhub:DeleteMembers
+      - securityhub:DisableImportFindingsForProduct
+      - securityhub:DisableSecurityHub
+      - securityhub:DisassociateFromAdministratorAccount
+      - securityhub:DisassociateMembers
+    Resource: "*"
+  - Sid: DenyAccessAnalyzerDeletion
+    Effect: Deny
+    Action:
+      - access-analyzer:DeleteAnalyzer
+    Resource: "*"

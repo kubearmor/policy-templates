@@ -1,0 +1,7 @@
+Version: "2012-10-17"
+Statement:
+  - Sid: DenyDisablingEbsEncryptionByDefault
+    Effect: Deny
+    Action:
+      - ec2:DisableEbsEncryptionByDefault
+    Resource: "*"

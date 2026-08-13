@@ -1,0 +1,75 @@
+Version: "2012-10-17"
+Statement:
+  - Sid: DenyRemovingS3PublicAccessBlocks
+    Effect: Deny
+    Action:
+      - s3:DeleteAccountPublicAccessBlock
+      - s3:DeleteBucketPublicAccessBlock
+    Resource: "*"
+  - Sid: DenyPublicCannedAcls
+    Effect: Deny
+    Action:
+      - s3:PutBucketAcl
+      - s3:PutObjectAcl
+    Resource: "*"
+    Condition:
+      StringEquals:
+        s3:x-amz-acl:
+          - public-read
+          - public-read-write
+          - authenticated-read
+  - Sid: DenyPublicReadGrantAcls
+    Effect: Deny
+    Action:
+      - s3:PutBucketAcl
+      - s3:PutObjectAcl
+    Resource: "*"
+    Condition:
+      StringLike:
+        s3:x-amz-grant-read:
+          - "*http://acs.amazonaws.com/groups/global/AllUsers*"
+          - "*http://acs.amazonaws.com/groups/global/AuthenticatedUsers*"
+  - Sid: DenyPublicWriteGrantAcls
+    Effect: Deny
+    Action:
+      - s3:PutBucketAcl
+      - s3:PutObjectAcl
+    Resource: "*"
+    Condition:
+      StringLike:
+        s3:x-amz-grant-write:
+          - "*http://acs.amazonaws.com/groups/global/AllUsers*"
+          - "*http://acs.amazonaws.com/groups/global/AuthenticatedUsers*"
+  - Sid: DenyPublicReadAcpGrantAcls
+    Effect: Deny
+    Action:
+      - s3:PutBucketAcl
+      - s3:PutObjectAcl
+    Resource: "*"
+    Condition:
+      StringLike:
+        s3:x-amz-grant-read-acp:
+          - "*http://acs.amazonaws.com/groups/global/AllUsers*"
+          - "*http://acs.amazonaws.com/groups/global/AuthenticatedUsers*"
+  - Sid: DenyPublicWriteAcpGrantAcls
+    Effect: Deny
+    Action:
+      - s3:PutBucketAcl
+      - s3:PutObjectAcl
+    Resource: "*"
+    Condition:
+      StringLike:
+        s3:x-amz-grant-write-acp:
+          - "*http://acs.amazonaws.com/groups/global/AllUsers*"
+          - "*http://acs.amazonaws.com/groups/global/AuthenticatedUsers*"
+  - Sid: DenyPublicFullControlGrantAcls
+    Effect: Deny
+    Action:
+      - s3:PutBucketAcl
+      - s3:PutObjectAcl
+    Resource: "*"
+    Condition:
+      StringLike:
+        s3:x-amz-grant-full-control:
+          - "*http://acs.amazonaws.com/groups/global/AllUsers*"
+          - "*http://acs.amazonaws.com/groups/global/AuthenticatedUsers*"
