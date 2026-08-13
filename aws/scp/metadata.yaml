@@ -1,0 +1,110 @@
+---
+version: v0.5.0
+policyRules:
+  - name: deny-leaving-organization
+    kind: aws-scp
+    apiVersion: "2012-10-17"
+    precondition:
+      - AWS_ORGANIZATIONS
+    description:
+      refs:
+        - name: AWS SCP example - deny leaving the organization
+          url:
+            - https://github.com/aws-samples/service-control-policy-examples/blob/main/Privileged-access-controls/Deny-member-accounts-from-leaving-your-AWS-organization.json
+      tldr: Prevent member accounts from leaving the AWS organization.
+      detailed: >-
+        Denies the Organizations LeaveOrganization action so that member accounts
+        cannot remove themselves from centrally managed governance and guardrails.
+    spec:
+      generic:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DenyLeavingOrganization
+            Effect: Deny
+            Action:
+              - organizations:LeaveOrganization
+            Resource: "*"
+  - name: prevent-account-closure
+    kind: aws-scp
+    apiVersion: "2012-10-17"
+    precondition:
+      - AWS_ORGANIZATIONS
+    description:
+      refs:
+        - name: AWS Organizations default security controls
+          url:
+            - https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html
+      tldr: Prevent member accounts from closing themselves.
+      detailed: >-
+        Denies the member-account CloseAccount operation, preventing accidental or
+        unauthorized closure and the eventual deletion of resources. The organization
+        management account remains able to manage account lifecycle because SCPs do
+        not restrict management-account principals.
+    spec:
+      generic:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DenyMemberAccountClosure
+            Effect: Deny
+            Action:
+              - account:CloseAccount
+            Resource: "*"
+  - name: prevent-root-access-key-creation
+    kind: aws-scp
+    apiVersion: "2012-10-17"
+    precondition:
+      - AWS_ORGANIZATIONS
+    description:
+      refs:
+        - name: AWS IAM root-user credential best practices
+          url:
+            - https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-best-practices.html
+        - name: AWS IAM centralized root access
+          url:
+            - https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-enable-root-access.html
+      tldr: Prevent direct root users from creating long-lived access keys.
+      detailed: >-
+        Denies CreateAccessKey when called directly with member-account root
+        credentials while leaving access-key update and deletion operations
+        available for remediation. AWS Organizations short-term root sessions are
+        outside this deny.
+    spec:
+      generic:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DenyDirectRootAccessKeyCreation
+            Effect: Deny
+            Action:
+              - iam:CreateAccessKey
+            Resource: "*"
+            Condition:
+              ArnLike:
+                aws:PrincipalArn: arn:aws:iam::*:root
+              "Null":
+                aws:AssumedRoot: "true"
+  - name: require-secure-transport
+    kind: aws-scp
+    apiVersion: "2012-10-17"
+    precondition:
+      - AWS_ORGANIZATIONS
+    description:
+      refs:
+        - name: AWS global condition context keys
+          url:
+            - https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html
+      tldr: Deny AWS API requests sent over insecure transport.
+      detailed: >-
+        Denies requests when aws:SecureTransport is false while exempting direct
+        AWS service-principal calls to avoid disrupting service-to-service traffic.
+    spec:
+      generic:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Action: "*"
+            Resource: "*"
+            Condition:
+              Bool:
+                aws:SecureTransport: "false"
+                aws:PrincipalIsAWSService: "false"

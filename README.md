@@ -1,5 +1,13 @@
 # Hardening policies
 
+Reusable AWS Organizations service control policy templates in
+[`aws/scp`](aws/scp) contain universal hardening controls. These
+deny-list guardrails are designed for attachment to member accounts or
+organizational units after testing in a non-production OU.
+
+The rationale for classifying the four universal controls is documented in
+[`docs/AWS-UNIVERSAL-HARDENING-SCPS.md`](docs/AWS-UNIVERSAL-HARDENING-SCPS.md).
+
 How to get hardening policies for workloads that are deployed in k8s cluster?
 
 [kubearmor-client](https://github.com/kubearmor/kubearmor-client) has this recommendation feature. `karmor recommend` will scan the workloads deployed in our cluster and recommend policies based on container image, k8s manifest or the actual runtime environment. 
