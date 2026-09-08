@@ -1,0 +1,7 @@
+Version: "2012-10-17"
+Statement:
+  - Sid: DenyMemberAccountClosure
+    Effect: Deny
+    Action:
+      - account:CloseAccount
+    Resource: "*"
