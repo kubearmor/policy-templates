@@ -1,0 +1,46 @@
+---
+version: v0.1.0
+policyRules:
+  - name: require-storage-secure-transfer
+    kind: azure-policy
+    severity: 5
+    apiVersion: "2023-04-01"
+    precondition:
+      - AZURE_POLICY
+      - AZURE_STORAGE
+    description:
+      refs:
+        - name: Require secure transfer for Azure Storage
+          url:
+            - https://learn.microsoft.com/azure/storage/common/storage-require-secure-transfer
+        - name: Azure Policy built-ins for Storage
+          url:
+            - https://learn.microsoft.com/azure/storage/common/policy-reference
+      tldr: Deny Azure Storage accounts that permit insecure transport.
+      detailed: >-
+        Requires the secure-transfer property on every Azure Storage account.
+        The control is portable across subscriptions and management groups and
+        requires no resource names, locations, identities, networks, or workload
+        history. Azure enables this setting by default for new storage accounts.
+    spec:
+      generic:
+        properties:
+          displayName: Require secure transfer for Azure Storage accounts
+          policyType: Custom
+          mode: Indexed
+          description: >-
+            Denies creation or update of Azure Storage accounts that do not
+            require secure transport for supported data-plane protocols.
+          metadata:
+            version: 1.0.0
+            category: Storage
+            deploymentTier: Universal
+          policyRule:
+            if:
+              allOf:
+                - field: type
+                  equals: Microsoft.Storage/storageAccounts
+                - field: Microsoft.Storage/storageAccounts/supportsHttpsTrafficOnly
+                  notEquals: true
+            then:
+              effect: deny

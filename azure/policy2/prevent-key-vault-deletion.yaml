@@ -1,0 +1,22 @@
+properties:
+  displayName: Prevent deletion of Azure Key Vault resources
+  policyType: Custom
+  mode: Indexed
+  description: >-
+    Blocks direct and resource-group-cascade deletion of Azure Key Vault
+    resources in the assigned scope.
+  metadata:
+    version: 1.0.0
+    category: Key Vault
+    deploymentTier: Strict opt-in
+  policyRule:
+    if:
+      field: type
+      equals: Microsoft.KeyVault/vaults
+    then:
+      effect: denyAction
+      details:
+        actionNames:
+          - delete
+        cascadeBehaviors:
+          resourceGroup: deny

@@ -1,0 +1,20 @@
+properties:
+  displayName: Require purge protection for Azure Key Vault
+  policyType: Custom
+  mode: Indexed
+  description: >-
+    Denies creation or update of Key Vault resources unless purge protection is
+    enabled.
+  metadata:
+    version: 1.0.0
+    category: Key Vault
+    deploymentTier: Conditional
+  policyRule:
+    if:
+      allOf:
+        - field: type
+          equals: Microsoft.KeyVault/vaults
+        - field: Microsoft.KeyVault/vaults/enablePurgeProtection
+          notEquals: true
+    then:
+      effect: deny

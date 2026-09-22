@@ -1,0 +1,282 @@
+---
+version: v0.1.0
+policyRules:
+  - name: prevent-public-blob-access
+    kind: azure-policy
+    severity: 5
+    apiVersion: "2023-04-01"
+    precondition:
+      - AZURE_POLICY
+      - AZURE_STORAGE
+    description:
+      refs:
+        - name: Prevent anonymous read access to Azure Storage data
+          url:
+            - https://learn.microsoft.com/azure/storage/blobs/anonymous-read-access-prevent
+      tldr: Prevent Storage accounts from permitting anonymous blob access.
+      detailed: >-
+        Denies Storage account creation or updates unless anonymous blob access is
+        disabled. Confirm that no public website, public dataset, or anonymous
+        download workflow depends on blob access before assignment.
+    spec:
+      generic:
+        properties:
+          displayName: Prevent anonymous public blob access on Storage accounts
+          policyType: Custom
+          mode: Indexed
+          description: >-
+            Denies creation or update of Azure Storage accounts unless
+            account-level anonymous blob access is explicitly disabled.
+          metadata:
+            version: 1.0.0
+            category: Storage
+            deploymentTier: Conditional
+          policyRule:
+            if:
+              allOf:
+                - field: type
+                  equals: Microsoft.Storage/storageAccounts
+                - field: Microsoft.Storage/storageAccounts/allowBlobPublicAccess
+                  notEquals: false
+            then:
+              effect: deny
+  - name: require-storage-tls12
+    kind: azure-policy
+    severity: 5
+    apiVersion: "2023-04-01"
+    precondition:
+      - AZURE_POLICY
+      - AZURE_STORAGE
+    description:
+      refs:
+        - name: Enforce a minimum TLS version for Azure Storage
+          url:
+            - https://learn.microsoft.com/azure/storage/common/transport-layer-security-configure-minimum-version
+      tldr: Require TLS 1.2 as the minimum version for Storage accounts.
+      detailed: >-
+        Denies Storage account creation or updates unless the minimum TLS version
+        is TLS 1.2. Validate legacy clients before assignment because clients that
+        support only TLS 1.0 or 1.1 will stop connecting.
+    spec:
+      generic:
+        properties:
+          displayName: Require TLS 1.2 for Azure Storage accounts
+          policyType: Custom
+          mode: Indexed
+          description: >-
+            Denies creation or update of Azure Storage accounts whose minimum TLS
+            version is not TLS 1.2.
+          metadata:
+            version: 1.0.0
+            category: Storage
+            deploymentTier: Conditional
+          policyRule:
+            if:
+              allOf:
+                - field: type
+                  equals: Microsoft.Storage/storageAccounts
+                - field: Microsoft.Storage/storageAccounts/minimumTlsVersion
+                  notEquals: TLS1_2
+            then:
+              effect: deny
+  - name: require-app-service-https
+    kind: azure-policy
+    severity: 5
+    apiVersion: "2023-04-01"
+    precondition:
+      - AZURE_POLICY
+      - AZURE_APP_SERVICE
+    description:
+      refs:
+        - name: Azure App Service security recommendations
+          url:
+            - https://learn.microsoft.com/azure/app-service/overview-security
+      tldr: Require HTTPS-only access for App Service and function applications.
+      detailed: >-
+        Denies Microsoft.Web sites that don't enable HTTPS-only access. Validate
+        clients, probes, callbacks, custom domains, and redirect behavior before
+        assignment. Deployment slots require separate evaluation.
+    spec:
+      generic:
+        properties:
+          displayName: Require HTTPS-only access for App Service applications
+          policyType: Custom
+          mode: Indexed
+          description: >-
+            Denies creation or update of App Service applications, including
+            function applications, when HTTPS-only access is not enabled.
+          metadata:
+            version: 1.0.0
+            category: App Service
+            deploymentTier: Conditional
+          policyRule:
+            if:
+              allOf:
+                - field: type
+                  equals: Microsoft.Web/sites
+                - field: Microsoft.Web/sites/httpsOnly
+                  notEquals: true
+            then:
+              effect: deny
+  - name: disable-nic-ip-forwarding
+    kind: azure-policy
+    severity: 5
+    apiVersion: "2023-04-01"
+    precondition:
+      - AZURE_POLICY
+      - AZURE_NETWORK
+    description:
+      refs:
+        - name: Azure network interface IP forwarding
+          url:
+            - https://learn.microsoft.com/azure/virtual-network/virtual-network-network-interface#enable-or-disable-ip-forwarding
+      tldr: Prevent IP forwarding on ordinary Azure network interfaces.
+      detailed: >-
+        Denies network interfaces with IP forwarding enabled. Exclude approved
+        network virtual appliances, firewalls, routers, and other forwarding
+        workloads from the assignment scope.
+    spec:
+      generic:
+        properties:
+          displayName: Prevent IP forwarding on network interfaces
+          policyType: Custom
+          mode: Indexed
+          description: >-
+            Denies network interfaces that enable IP forwarding unless they are
+            excluded from the policy assignment scope.
+          metadata:
+            version: 1.0.0
+            category: Network
+            deploymentTier: Conditional
+          policyRule:
+            if:
+              allOf:
+                - field: type
+                  equals: Microsoft.Network/networkInterfaces
+                - field: Microsoft.Network/networkInterfaces/enableIPForwarding
+                  equals: true
+            then:
+              effect: deny
+  - name: prevent-public-ip-on-network-interfaces
+    kind: azure-policy
+    severity: 5
+    apiVersion: "2023-04-01"
+    precondition:
+      - AZURE_POLICY
+      - AZURE_NETWORK
+    description:
+      refs:
+        - name: Azure Policy built-ins for Azure Virtual Network
+          url:
+            - https://learn.microsoft.com/azure/virtual-network/policy-reference
+      tldr: Prevent direct public IP association with network interfaces.
+      detailed: >-
+        Denies network interfaces whose IP configurations reference a public IP.
+        Confirm the intended ingress and egress architecture and exclude approved
+        internet-facing or appliance workloads before assignment.
+    spec:
+      generic:
+        properties:
+          displayName: Prevent public IP addresses on network interfaces
+          policyType: Custom
+          mode: Indexed
+          description: >-
+            Denies network interfaces that directly associate a public IP
+            address.
+          metadata:
+            version: 1.0.0
+            category: Network
+            deploymentTier: Conditional
+          policyRule:
+            if:
+              allOf:
+                - field: type
+                  equals: Microsoft.Network/networkInterfaces
+                - count:
+                    field: Microsoft.Network/networkInterfaces/ipconfigurations[*]
+                    where:
+                      field: Microsoft.Network/networkInterfaces/ipconfigurations[*].publicIpAddress.id
+                      exists: true
+                  greater: 0
+            then:
+              effect: deny
+  - name: require-key-vault-purge-protection
+    kind: azure-policy
+    severity: 5
+    apiVersion: "2023-04-01"
+    precondition:
+      - AZURE_POLICY
+      - AZURE_KEY_VAULT
+    description:
+      refs:
+        - name: Azure Key Vault recovery management
+          url:
+            - https://learn.microsoft.com/azure/key-vault/general/key-vault-recovery
+      tldr: Require purge protection for Azure Key Vault resources.
+      detailed: >-
+        Denies vault creation or updates without purge protection. Confirm the
+        retention and recovery operating model first because purge protection
+        prevents permanent deletion until the retention period expires.
+    spec:
+      generic:
+        properties:
+          displayName: Require purge protection for Azure Key Vault
+          policyType: Custom
+          mode: Indexed
+          description: >-
+            Denies creation or update of Key Vault resources unless purge
+            protection is enabled.
+          metadata:
+            version: 1.0.0
+            category: Key Vault
+            deploymentTier: Conditional
+          policyRule:
+            if:
+              allOf:
+                - field: type
+                  equals: Microsoft.KeyVault/vaults
+                - field: Microsoft.KeyVault/vaults/enablePurgeProtection
+                  notEquals: true
+            then:
+              effect: deny
+  - name: prevent-key-vault-deletion
+    kind: azure-policy
+    severity: 5
+    apiVersion: "2023-04-01"
+    precondition:
+      - AZURE_POLICY
+      - AZURE_KEY_VAULT
+    description:
+      refs:
+        - name: Azure Policy denyAction effect
+          url:
+            - https://learn.microsoft.com/azure/governance/policy/concepts/effect-deny-action
+      tldr: Block direct and cascading deletion of Key Vault resources.
+      detailed: >-
+        Uses denyAction to block Key Vault deletion, including deletion caused by
+        removal of the containing resource group. This is strict opt-in because
+        legitimate retirement requires a policy exemption or assignment change.
+    spec:
+      generic:
+        properties:
+          displayName: Prevent deletion of Azure Key Vault resources
+          policyType: Custom
+          mode: Indexed
+          description: >-
+            Blocks direct and resource-group-cascade deletion of Azure Key Vault
+            resources in the assigned scope.
+          metadata:
+            version: 1.0.0
+            category: Key Vault
+            deploymentTier: Strict opt-in
+          policyRule:
+            if:
+              field: type
+              equals: Microsoft.KeyVault/vaults
+            then:
+              effect: denyAction
+              details:
+                actionNames:
+                  - delete
+                cascadeBehaviors:
+                  resourceGroup: deny

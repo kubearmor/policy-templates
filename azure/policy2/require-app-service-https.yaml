@@ -1,0 +1,20 @@
+properties:
+  displayName: Require HTTPS-only access for App Service applications
+  policyType: Custom
+  mode: Indexed
+  description: >-
+    Denies creation or update of App Service applications, including function
+    applications, when HTTPS-only access is not enabled.
+  metadata:
+    version: 1.0.0
+    category: App Service
+    deploymentTier: Conditional
+  policyRule:
+    if:
+      allOf:
+        - field: type
+          equals: Microsoft.Web/sites
+        - field: Microsoft.Web/sites/httpsOnly
+          notEquals: true
+    then:
+      effect: deny

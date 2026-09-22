@@ -1,0 +1,20 @@
+properties:
+  displayName: Prevent IP forwarding on network interfaces
+  policyType: Custom
+  mode: Indexed
+  description: >-
+    Denies network interfaces that enable IP forwarding unless they are excluded
+    from the policy assignment scope.
+  metadata:
+    version: 1.0.0
+    category: Network
+    deploymentTier: Conditional
+  policyRule:
+    if:
+      allOf:
+        - field: type
+          equals: Microsoft.Network/networkInterfaces
+        - field: Microsoft.Network/networkInterfaces/enableIPForwarding
+          equals: true
+    then:
+      effect: deny

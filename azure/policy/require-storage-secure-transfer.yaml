@@ -1,0 +1,20 @@
+properties:
+  displayName: Require secure transfer for Azure Storage accounts
+  policyType: Custom
+  mode: Indexed
+  description: >-
+    Denies creation or update of Azure Storage accounts that do not require
+    secure transport for supported data-plane protocols.
+  metadata:
+    version: 1.0.0
+    category: Storage
+    deploymentTier: Universal
+  policyRule:
+    if:
+      allOf:
+        - field: type
+          equals: Microsoft.Storage/storageAccounts
+        - field: Microsoft.Storage/storageAccounts/supportsHttpsTrafficOnly
+          notEquals: true
+    then:
+      effect: deny

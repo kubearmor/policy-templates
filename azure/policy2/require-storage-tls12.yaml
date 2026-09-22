@@ -1,0 +1,20 @@
+properties:
+  displayName: Require TLS 1.2 for Azure Storage accounts
+  policyType: Custom
+  mode: Indexed
+  description: >-
+    Denies creation or update of Azure Storage accounts whose minimum TLS version
+    is not TLS 1.2.
+  metadata:
+    version: 1.0.0
+    category: Storage
+    deploymentTier: Conditional
+  policyRule:
+    if:
+      allOf:
+        - field: type
+          equals: Microsoft.Storage/storageAccounts
+        - field: Microsoft.Storage/storageAccounts/minimumTlsVersion
+          notEquals: TLS1_2
+    then:
+      effect: deny

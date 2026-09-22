@@ -1,0 +1,20 @@
+properties:
+  displayName: Prevent anonymous public blob access on Storage accounts
+  policyType: Custom
+  mode: Indexed
+  description: >-
+    Denies creation or update of Azure Storage accounts unless account-level
+    anonymous blob access is explicitly disabled.
+  metadata:
+    version: 1.0.0
+    category: Storage
+    deploymentTier: Conditional
+  policyRule:
+    if:
+      allOf:
+        - field: type
+          equals: Microsoft.Storage/storageAccounts
+        - field: Microsoft.Storage/storageAccounts/allowBlobPublicAccess
+          notEquals: false
+    then:
+      effect: deny
