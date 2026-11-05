@@ -305,3 +305,150 @@ policyRules:
     yaml: env-preset.yaml
   
    
+  - name: service-mgmt-exec
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1543_create_or_modify_system_process
+          url:
+            - https://attack.mitre.org/techniques/T1543/
+      tldr: Audit service management tools (systemctl, systemd, init, chkconfig, update-
+        rc.d) running in containers
+      detailed: Containers do not normally manage system services. Adversaries may create or
+        modify system services to run malicious code or keep access. This policy
+        audits execution of service management tools inside containers.
+    yaml: service-mgmt-exec.yaml
+  - name: cron-exec
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1053.003_cron
+          url:
+            - https://attack.mitre.org/techniques/T1053/003/
+      tldr: Audit execution of cron schedulers (crontab, cron, crond, anacron) in
+        containers
+      detailed: Adversaries may use cron to schedule malicious tasks or keep access. This
+        policy audits execution of cron programs inside containers. It complements
+        cronjob-cfg, which watches the cron configuration files.
+    yaml: cron-exec.yaml
+  - name: privilege-switch-exec
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1548.003_sudo_and_sudo_caching
+          url:
+            - https://attack.mitre.org/techniques/T1548/003/
+      tldr: Audit user-switching tools (su, sudo, login, newgrp, gosu and others) in
+        containers
+      detailed: Adversaries may switch users to gain higher privileges. Containers rarely
+        need to switch users at runtime. This policy audits execution of user-
+        switching and login tools inside containers.
+    yaml: privilege-switch-exec.yaml
+  - name: account-mgmt-exec
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1136.001_create_local_account
+          url:
+            - https://attack.mitre.org/techniques/T1136/001/
+      tldr: Audit password, user, group and shadow-file tools in containers
+      detailed: Adversaries may create or change accounts and passwords to keep access. This
+        policy audits execution of account management tools (passwd, useradd,
+        groupadd, chage, vipw and others) inside containers.
+    yaml: account-mgmt-exec.yaml
+  - name: shell-mgmt-exec
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1546.004_unix_shell_configuration_modification
+          url:
+            - https://attack.mitre.org/techniques/T1546/004/
+      tldr: Audit changes to the list of allowed login shells (add-shell, remove-shell)
+      detailed: Adversaries may change shell settings to keep access. This policy audits
+        execution of add-shell and remove-shell inside containers.
+    yaml: shell-mgmt-exec.yaml
+  - name: setuid-binaries-exec
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1548.001_setuid_and_setgid
+          url:
+            - https://attack.mitre.org/techniques/T1548/001/
+      tldr: Audit execution of common SetUID programs in containers
+      detailed: Programs with the SetUID bit run with the owner's privileges and can be
+        abused to gain higher privileges. This policy audits execution of common
+        SetUID programs (ping, bwrap, start-stop-daemon and others) inside
+        containers.
+    yaml: setuid-binaries-exec.yaml
+  - name: compiler-exec
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1027.004_compile_after_delivery
+          url:
+            - https://attack.mitre.org/techniques/T1027/004/
+      tldr: Audit compilers and build tools running in containers
+      detailed: Adversaries may build tools from source inside a running container to avoid
+        detection. Production containers rarely need compilers. This policy audits
+        execution of compilers and build tools (gcc, clang, make, cmake, llvm tools)
+        inside containers.
+    yaml: compiler-exec.yaml
+  - name: java-spawns-shell
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1059.004_unix_shell
+          url:
+            - https://attack.mitre.org/techniques/T1059/004/
+      tldr: Audit shells started by a Java process
+      detailed: A Java application starting a shell can be a sign of remote code execution,
+        for example through a vulnerable library. This policy audits shells (sh,
+        bash, dash, zsh, csh) started by a Java process inside containers.
+    yaml: java-spawns-shell.yaml
+  - name: remote-access-server-exec
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1021.004_ssh
+          url:
+            - https://attack.mitre.org/techniques/T1021/004/
+      tldr: Audit SSH servers (sshd, dropbear) running in containers
+      detailed: Containers rarely need an SSH server. Adversaries may start one to get
+        remote access. This policy audits execution of SSH server programs inside
+        containers.
+    yaml: remote-access-server-exec.yaml
+  - name: blockchain-node-exec
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1496_resource_hijacking
+          url:
+            - https://attack.mitre.org/techniques/T1496/
+      tldr: Audit Ethereum node (geth) execution in containers
+      detailed: geth can be used for mining but is also a normal Ethereum node, so it is
+        audited instead of blocked. This policy audits execution of geth inside
+        containers.
+    yaml: blockchain-node-exec.yaml
+  - name: sa-token-access
+    precondition:
+      - OPTSCAN
+    description:
+      refs:
+        - name: MITRE_T1528_steal_application_access_token
+          url:
+            - https://attack.mitre.org/techniques/T1528/
+      tldr: Audit reads of the Kubernetes service account token
+      detailed: Adversaries may read the service account token to call the Kubernetes API.
+        This policy audits reads of the service account token directory inside
+        containers.
+    yaml: sa-token-access.yaml

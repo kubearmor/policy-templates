@@ -19,11 +19,31 @@ spec:
       # Monero CPU/GPU miners
       - execname: xmrig
       - execname: xmrig-stak
+      - execname: xmr-stak
       - execname: minerd
       - execname: mminerd
       - execname: cpuminer
+      - execname: cpuminer-multi
+      - execname: xmrminer
       - execname: sgminer
       - execname: ccminer
+
+      # Bitcoin / multi-coin miners
+      - execname: cgminer
+      - execname: bfgminer
+
+      # Ethereum / GPU miners
+      - execname: ethminer
+      - execname: t-rex
+      - execname: nbminer
+      - execname: lolminer
+      - execname: gminer
+      - execname: nanominer
+      - execname: teamredminer
+      - execname: phoenixminer
+
+      # Mining clients
+      - execname: minergate-cli
   tags:
     - MITRE_TA0040_T1496
     - MITRE_TA0002_T1204.002

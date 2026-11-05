@@ -1,0 +1,38 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: compiler-exec
+spec:
+  action: Audit
+  message: "Detected compiler or build tool execution inside a container"
+  process:
+    matchPaths:
+      - execname: gcc
+      - execname: g++
+      - execname: cc
+      - execname: c++
+      - execname: cc1
+      - execname: cc1plus
+      - execname: clang
+      - execname: clang++
+      - execname: llc
+      - execname: llvm-as
+      - execname: llvm-link
+      - execname: llvm-ar
+      - execname: llvm-mc
+      - execname: llvm-objcopy
+      - execname: make
+      - execname: cmake
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 5
+  tags:
+    - MITRE_TA0005_T1027.004
+    - MITRE
+    - NIST_CM-7

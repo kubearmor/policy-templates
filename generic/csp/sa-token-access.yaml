@@ -1,0 +1,26 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: sa-token-access
+spec:
+  action: Audit
+  message: "Detected access to the Kubernetes service account token"
+  file:
+    matchDirectories:
+      - dir: /run/secrets/kubernetes.io/serviceaccount/
+        recursive: true
+      - dir: /var/run/secrets/kubernetes.io/serviceaccount/
+        recursive: true
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 3
+  tags:
+    - MITRE_TA0006_T1528
+    - MITRE
+    - NIST_AC-6

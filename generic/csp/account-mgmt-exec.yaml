@@ -1,0 +1,60 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: account-mgmt-exec
+spec:
+  action: Audit
+  message: "Detected user, group, password or shadow utility execution inside a container"
+  process:
+    matchPaths:
+      # Password tools
+      - execname: passwd
+      - execname: chpasswd
+      - execname: chgpasswd
+      - execname: chage
+      - execname: gpasswd
+      - execname: chsh
+      - execname: chfn
+      - execname: expiry
+      # User management
+      - execname: useradd
+      - execname: adduser
+      - execname: newusers
+      - execname: usermod
+      - execname: userdel
+      - execname: deluser
+      # Group management
+      - execname: groupadd
+      - execname: addgroup
+      - execname: groupmod
+      - execname: groupdel
+      - execname: delgroup
+      - execname: groupmems
+      # Shadow file utilities
+      - execname: shadowconfig
+      - execname: pwck
+      - execname: grpck
+      - execname: pwconv
+      - execname: pwunconv
+      - execname: grpconv
+      - execname: grpunconv
+      - execname: vipw
+      - execname: vigr
+      - execname: cppw
+      - execname: cpgr
+      - execname: unix_chkpwd
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 3
+  tags:
+    - MITRE_TA0003_T1136.001
+    - MITRE_TA0003_T1098
+    - MITRE_TA0006_T1003.008
+    - MITRE
+    - NIST_AC-2

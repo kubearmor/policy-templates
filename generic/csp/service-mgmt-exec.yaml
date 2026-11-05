@@ -1,0 +1,30 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: service-mgmt-exec
+spec:
+  action: Audit
+  message: "Detected service manager or init tool execution inside a container"
+  process:
+    matchPaths:
+      # systemd service control
+      - execname: systemctl
+      - execname: systemd
+      - execname: init
+      # SysV service boot configuration
+      - execname: chkconfig
+      - execname: update-rc.d
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 5
+  tags:
+    - MITRE_TA0003_T1543.002
+    - MITRE_TA0003_T1037
+    - MITRE
+    - NIST_CM-7

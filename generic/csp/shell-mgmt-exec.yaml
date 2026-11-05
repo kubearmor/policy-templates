@@ -1,0 +1,24 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: shell-mgmt-exec
+spec:
+  action: Audit
+  message: "Detected change to the list of login shells inside a container"
+  process:
+    matchPaths:
+      - execname: add-shell
+      - execname: remove-shell
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 5
+  tags:
+    - MITRE_TA0003_T1546.004
+    - MITRE
+    - NIST_CM-7

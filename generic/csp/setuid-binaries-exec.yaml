@@ -1,0 +1,35 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: setuid-binaries-exec
+spec:
+  action: Audit
+  message: "Detected execution of a known SetUID program inside a container"
+  process:
+    matchPaths:
+      # sshd is covered by remote-access-server-exec
+      - execname: ping
+      - execname: ping6
+      - execname: bwrap
+      - execname: dbus-daemon-launch-helper
+      - execname: start-stop-daemon
+      - execname: critical-stack-intel
+      - execname: pmmcli
+      - execname: filemng
+      - execname: PassengerAgent
+      - execname: osdetect
+      - execname: nginxmng
+      - execname: sw-engine-fpm
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 5
+  tags:
+    - MITRE_TA0004_T1548.001
+    - MITRE
+    - NIST_AC-6
