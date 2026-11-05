@@ -1,0 +1,55 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-container-sock-mounts
+  annotations:
+    policies.kyverno.io/title: Disallow Container Runtime Socket Mounts
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/description: >-
+      Mounting the container runtime socket (Docker, containerd or CRI-O) lets a pod
+      control other containers on the node. This policy flags pods that mount it.
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+    - name: validate-docker-sock-mount
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "Mounting the Docker socket is not allowed."
+        pattern:
+          spec:
+            =(volumes):
+              - =(hostPath):
+                  path: "!/var/run/docker.sock & !/run/docker.sock"
+    - name: validate-containerd-sock-mount
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "Mounting the containerd socket is not allowed."
+        pattern:
+          spec:
+            =(volumes):
+              - =(hostPath):
+                  path: "!/var/run/containerd/containerd.sock & !/run/containerd/containerd.sock"
+    - name: validate-crio-sock-mount
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "Mounting the CRI-O socket is not allowed."
+        pattern:
+          spec:
+            =(volumes):
+              - =(hostPath):
+                  path: "!/var/run/crio/crio.sock & !/run/crio/crio.sock"
