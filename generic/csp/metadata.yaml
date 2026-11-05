@@ -313,8 +313,7 @@ policyRules:
         - name: MITRE_T1543_create_or_modify_system_process
           url:
             - https://attack.mitre.org/techniques/T1543/
-      tldr: Audit service management tools (systemctl, systemd, init, chkconfig, update-
-        rc.d) running in containers
+      tldr: Audit service management tools (systemctl, systemd, init, chkconfig, update-rc.d) running in containers
       detailed: Containers do not normally manage system services. Adversaries may create or
         modify system services to run malicious code or keep access. This policy
         audits execution of service management tools inside containers.
@@ -344,8 +343,8 @@ policyRules:
       tldr: Audit user-switching tools (su, sudo, login, newgrp, gosu and others) in
         containers
       detailed: Adversaries may switch users to gain higher privileges. Containers rarely
-        need to switch users at runtime. This policy audits execution of user-
-        switching and login tools inside containers.
+        need to switch users at runtime. This policy audits execution of
+        user-switching and login tools inside containers.
     yaml: privilege-switch-exec.yaml
   - name: account-mgmt-exec
     precondition:
