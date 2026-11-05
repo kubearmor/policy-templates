@@ -20,6 +20,11 @@ spec:
           - resources:
               kinds:
                 - Pod
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - kube-system
       validate:
         message: "Mounting the Docker socket is not allowed."
         pattern:
@@ -33,6 +38,11 @@ spec:
           - resources:
               kinds:
                 - Pod
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - kube-system
       validate:
         message: "Mounting the containerd socket is not allowed."
         pattern:
@@ -46,6 +56,11 @@ spec:
           - resources:
               kinds:
                 - Pod
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - kube-system
       validate:
         message: "Mounting the CRI-O socket is not allowed."
         pattern:
