@@ -303,8 +303,6 @@ policyRules:
       tldr: Block unauthorized environment variable access.
       detailed: Adversaries may abuse command and script interpreters to execute commands, scripts, or binaries. These interfaces and languages provide ways of interacting with computer systems and are a common feature across many different platforms. Most systems come with some built-in command-line interface and scripting capabilities.
     yaml: env-preset.yaml
-  
-   
   - name: service-mgmt-exec
     precondition:
       - OPTSCAN
