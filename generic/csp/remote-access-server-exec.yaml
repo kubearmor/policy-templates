@@ -1,0 +1,25 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: remote-access-server-exec
+spec:
+  action: Audit
+  message: "Detected SSH server execution inside a container"
+  process:
+    matchPaths:
+      - execname: sshd
+      - execname: dropbear
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 3
+  tags:
+    - MITRE_TA0008_T1021.004
+    - MITRE_TA0003_T1098.004
+    - MITRE
+    - NIST_AC-17

@@ -1,0 +1,25 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: blockchain-node-exec
+spec:
+  action: Audit
+  message: "Detected blockchain node (geth) execution inside a container"
+  process:
+    matchPaths:
+      # geth (Go Ethereum) can mine, but it is also a legitimate
+      # Ethereum node, so it is audited instead of blocked.
+      - execname: geth
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 5
+  tags:
+    - MITRE_TA0040_T1496
+    - MITRE
+    - NIST_CM-7

@@ -22,6 +22,7 @@ spec:
       - execname: gdebi
       # RHEL / Fedora / CentOS
       - execname: dnf
+      - execname: microdnf
       - execname: rpm
       - execname: yum
       # SUSE

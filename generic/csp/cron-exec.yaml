@@ -1,0 +1,27 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: cron-exec
+spec:
+  action: Audit
+  message: "Detected job scheduler execution inside a container"
+  process:
+    matchPaths:
+      - execname: crontab
+      - execname: cron
+      - execname: crond
+      - execname: anacron
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 5
+  tags:
+    - MITRE_TA0003_T1053.003
+    - MITRE_TA0002_T1053.003
+    - MITRE
+    - NIST_CM-7

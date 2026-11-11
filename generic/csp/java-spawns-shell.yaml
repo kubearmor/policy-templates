@@ -1,0 +1,78 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: java-spawns-shell
+spec:
+  action: Audit
+  message: "Detected shell started by a Java process (possible remote code execution)"
+  process:
+    matchPaths:
+      - execname: sh
+        fromSource:
+          - path: /usr/bin/java
+          - path: /opt/java/openjdk/bin/java
+          - path: /usr/lib/jvm/default-java/bin/java
+          - path: /usr/lib/jvm/jre/bin/java
+          - path: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+          - path: /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+          - path: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+          - path: /usr/local/openjdk-11/bin/java
+          - path: /usr/local/openjdk-17/bin/java
+      - execname: bash
+        fromSource:
+          - path: /usr/bin/java
+          - path: /opt/java/openjdk/bin/java
+          - path: /usr/lib/jvm/default-java/bin/java
+          - path: /usr/lib/jvm/jre/bin/java
+          - path: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+          - path: /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+          - path: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+          - path: /usr/local/openjdk-11/bin/java
+          - path: /usr/local/openjdk-17/bin/java
+      - execname: dash
+        fromSource:
+          - path: /usr/bin/java
+          - path: /opt/java/openjdk/bin/java
+          - path: /usr/lib/jvm/default-java/bin/java
+          - path: /usr/lib/jvm/jre/bin/java
+          - path: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+          - path: /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+          - path: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+          - path: /usr/local/openjdk-11/bin/java
+          - path: /usr/local/openjdk-17/bin/java
+      - execname: zsh
+        fromSource:
+          - path: /usr/bin/java
+          - path: /opt/java/openjdk/bin/java
+          - path: /usr/lib/jvm/default-java/bin/java
+          - path: /usr/lib/jvm/jre/bin/java
+          - path: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+          - path: /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+          - path: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+          - path: /usr/local/openjdk-11/bin/java
+          - path: /usr/local/openjdk-17/bin/java
+      - execname: csh
+        fromSource:
+          - path: /usr/bin/java
+          - path: /opt/java/openjdk/bin/java
+          - path: /usr/lib/jvm/default-java/bin/java
+          - path: /usr/lib/jvm/jre/bin/java
+          - path: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+          - path: /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+          - path: /usr/lib/jvm/java-21-openjdk-amd64/bin/java
+          - path: /usr/local/openjdk-11/bin/java
+          - path: /usr/local/openjdk-17/bin/java
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 2
+  tags:
+    - MITRE_TA0001_T1190
+    - MITRE_TA0002_T1059.004
+    - MITRE
+    - NIST_SI-4

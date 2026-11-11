@@ -1,0 +1,35 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorClusterPolicy
+metadata:
+  annotations:
+    app.accuknox.com/type: harden
+  name: privilege-switch-exec
+spec:
+  action: Audit
+  message: "Detected login or user switching tool execution inside a container"
+  process:
+    matchPaths:
+      - execname: su
+      - execname: sudo
+      - execname: login
+      - execname: newgrp
+      - execname: sg
+      - execname: runuser
+      - execname: doas
+      - execname: gosu
+      - execname: nologin
+      - execname: faillog
+      - execname: lastlog
+      - execname: systemd-logind
+  selector:
+    matchExpressions:
+      - key: namespace
+        operator: NotIn
+        values:
+          - kube-system
+  severity: 3
+  tags:
+    - MITRE_TA0004_T1548.003
+    - MITRE_TA0004_T1548
+    - MITRE
+    - NIST_AC-6

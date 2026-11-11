@@ -16,6 +16,12 @@ spec:
       - execname: ifconfig
       - execname: arp
       - execname: ethtool
+      - execname: route
+      - execname: ifrename
+      - execname: ipmaddr
+      - execname: iptunnel
+      - execname: nameif
+      - execname: mii-tool
   selector:
     matchExpressions:
       - key: namespace
